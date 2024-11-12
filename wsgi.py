@@ -43,8 +43,8 @@ application = get_wsgi_application()
 ### NOTE: You have to use gunicorn `--preload` option to share the lock
 ### between all workers
 ### Only first worker will succeesfully acquire the lock.
-lock = multiprocessing.Lock()
-is_first_worker = lock.acquire(False)
+# lock = multiprocessing.Lock()
+# is_first_worker = lock.acquire(False)
 
 
 #try:
