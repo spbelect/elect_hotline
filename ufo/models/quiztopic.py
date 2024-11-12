@@ -82,7 +82,7 @@ class QuizTopic(Model):
             if count == 0:
                 errors.append(checks.Warning(
                     f'Не найдено ни одного тематического раздела анкеты',
-                    hint="Запустите ./scripts/2020_ankey.py",
+                    hint="Запустите ./scripts/2020_ankety.py",
                     id='ufo.QuizTopic.W001',
                     obj=QuizTopic
                 ))

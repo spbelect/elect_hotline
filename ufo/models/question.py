@@ -108,7 +108,7 @@ class Question(Model):
         if count == 0:
             errors.append(checks.Warning(
                 f'Не найдено ни одного вопроса анкеты',
-                hint="Запустите ./scripts/2020_ankey.py",
+                hint="Запустите ./scripts/2020_ankety.py",
                 id='ufo.Question.W001',
                 obj=Question
             ))
