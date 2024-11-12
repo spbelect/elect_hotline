@@ -327,8 +327,8 @@ if server_urls:
 
 SUBMIT_GOOGLE_PROTO = env.bool('SUBMIT_GOOGLE_PROTO', default=False)
 
-AWS_SECRET_KEY = env('AWS_SECRET_KEY')
-AWS_ACCESS_KEY = env('AWS_ACCESS_KEY')
+AWS_SECRET_KEY = env('DJANGO_AWS_SECRET_KEY', default='')
+AWS_ACCESS_KEY = env('DJANGO_AWS_ACCESS_KEY', default='')
 
 
 from loguru import logger
