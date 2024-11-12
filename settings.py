@@ -154,12 +154,12 @@ LANGUAGE_CODE = 'en-us'
 
 LOCALE_PATHS = [SRC_DIR('locale')]
 
-# No idea why python requires this
-import locale
-try:
-    locale.setlocale(locale.LC_ALL, 'ru_RU.UTF8')
-except Exception as e:
-    print(f"Can't set locale.LC_ALL='ru_RU.UTF8':\n{e}")
+# # No idea why python requires this
+# import locale
+# try:
+#     locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
+# except Exception as e:
+#     print(f"Can't set locale.LC_ALL='en_US.UTF8':\n{e}")
 
 TIME_ZONE = 'UTC'
 #TIME_ZONE = 'Europe/Moscow'
