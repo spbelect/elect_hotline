@@ -38,7 +38,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
         #time.sleep(2.5)
 
 application = get_wsgi_application()
-
+app = application
 
 ### NOTE: You have to use gunicorn `--preload` option to share the lock
 ### between all workers
