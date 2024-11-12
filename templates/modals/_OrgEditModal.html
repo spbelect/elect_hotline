@@ -1,0 +1,50 @@
+
+<div class="ui modal tiny" id="OrgEditModal{{org.id}}">
+  <div class="header">Редактировать организацию</div>
+  
+  <div class="content">
+    <form class="ui form autovalidate" method='patch' action="/api/internal/orgs/{{org.id}}/"
+      onSubmit="ufo.client.submit(this).done(() => location.reload() ); return false;"
+    >
+      
+      <div class="field">
+        <label>Название</label>
+        <input required=true class="name" rules="minLength[3]" type=text name="name" placeholder="Название организации" value="{{org.name}}"/>
+        <small class="form-text text-muted">
+          Например: "Штаб Сидорова" или "Наблюдатели Петербурга"
+        </small>
+      </div>
+      
+      <div class="field">
+        <label>Регионы</label>
+        <select id="org_edit_regions" rules='empty' name="regions[]" 
+          class="ui mini fluid search dropdown auto selection very long" multiple=""
+          value="{{','.join(org.regions.values_list('pk', flat=True))}}"
+          params="({placeholder: 'Регион не выбран', fullTextSearch: 'exact'})"
+        >
+          # for region in user.country.regions.all()
+            <option value="{{region.id}}">{{region.name}}</option>
+          # endfor
+        </select>
+      </div>
+      
+      <div class="result"></div>
+      
+      <div bp='padding-top--sm'>
+        <button class="ui negative button" type="button"
+          onClick="
+            if (!window.confirm('Вы уверены что вы хотите удалить организацию?')) { return }
+            $(this).closest('form').attr('method', 'delete').submit()
+          "
+        >
+          Удалить организацию
+        </button>
+      </div>
+    </form>
+  </div>
+          
+  <div class="actions">
+    <button class="ui primary approve button" > OK </button>
+    <div class="ui cancel button">Закрыть</div>
+  </div>
+</div> 

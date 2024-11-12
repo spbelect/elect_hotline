@@ -1,0 +1,392 @@
+[
+  {
+    "model": "ufo.tik",
+    "pk": "30abd06b-8be7-4af2-a599-c01ba58f36c2",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№27",
+      "email": "letterik27@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1367, 1421]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "33d6a967-f36a-4e0f-884c-c670e75ad926",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№26",
+      "email": "letterik26@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1145, 1219]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "35b6a431-bef2-46b0-a493-381312327bfe",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№24",
+      "email": "letterik24@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1545, 1611]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "372f2113-9c4e-4096-b40c-601dc83346bf",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№4",
+      "email": "letterik04@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[901, 972]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "3a6f9e8b-93fb-48b9-8823-37cf33f76fc2",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№7",
+      "email": "letterik07@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[633, 644], [757, 825]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "40804081-d1bf-456e-86f4-c2a0ef02a3bf",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№10",
+      "email": "letterik10@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[199, 251]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "5bcd5121-6d4f-437c-930d-6a7dfa2215ca",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№6",
+      "email": "letterik06@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1058, 1138]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "6336dfc4-098e-4fc4-af34-cdb18f403652",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№18",
+      "email": "letterik18@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1612, 1673]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "6516fc3e-6bb4-4d83-adf0-b7e75d20cbf0",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№1",
+      "email": "letterik01@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1, 103]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "6922dbcc-b9bd-4513-aa66-95d5f49832df",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№2",
+      "email": "letterik02@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[104, 198]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "6d4652b1-538c-482f-9cb0-b8a3364f5b03",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№20",
+      "email": "letterik20@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1949, 2034]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "6eeb1712-66cb-413a-92ea-81e62fca505c",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№8",
+      "email": "letterik08@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1674, 1723]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "79d20b6a-356d-4680-851f-293b420a086e",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№5",
+      "email": "letterik05@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1422, 1544]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "88675426-f853-4050-859d-80e14132fc71",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№29",
+      "email": "letterik29@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[2104, 2179]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "9093d701-84f4-436f-ba04-a087cbe7eee5",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№9",
+      "email": "letterik09@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1793, 1866]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "93d18ad8-2d71-401f-8097-02fb638fe08e",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№3",
+      "email": "letterik03@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[576, 632], [645, 756]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "9a467e48-bba7-4474-9a85-e341ea79fecc",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№22",
+      "email": "letterik22@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[330, 413]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "b67b3119-0634-4d57-b3c7-6a0cc3e7f5cf",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№28",
+      "email": "letterik28@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1867, 1948]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "b90fc6d9-e484-44ee-a12b-6fac4502d553",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№19",
+      "email": "letterik19@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1279, 1366]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "c36e3002-e047-452b-a106-b3eff1105669",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№17",
+      "email": "letterik17@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[512, 575], [2283, 2285]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "c55cfbb0-c870-4bb2-bb7f-3d5883891efd",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№15",
+      "email": "letterik15@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1220, 1238], [2293, 2295]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "c5e30a04-d3c3-4637-9170-5184f006c53a",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№12",
+      "email": "letterik12@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1724, 1792]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "cf5ca75f-1737-4d88-a9ac-85a1f1c4aaed",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№13",
+      "email": "letterik13@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[1239, 1278]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "cf6f4965-a34d-4b51-9193-09d90108d007",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№11",
+      "email": "letterik11@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[414, 511]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "d4e1ff54-8a11-4e1c-8a5c-7dc0436e9e3d",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№25",
+      "email": "letterik25@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[973, 1058]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "d6bb6f2e-97bc-45a6-aa6a-f13a0a6e0eed",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№16",
+      "email": "letterik16@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[2180, 2232]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "e636ea90-e674-4bc4-85ef-1f1a7d1e97e7",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№14",
+      "email": "letterik14@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[252, 312]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "ee8a8f21-075c-4ad8-84d6-a02623397a47",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№21",
+      "email": "letterik21@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[826, 894]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "ef526bea-f0e6-4d75-9ff2-f0b7b17d179f",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№30",
+      "email": "letterik30@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[2233, 2271]]"
+    }
+  },
+  {
+    "model": "ufo.tik",
+    "pk": "fc0c75ec-aeb4-4b64-ac05-ae7ca96eca16",
+    "fields": {
+      "region": "ru_78",
+      "district": null,
+      "name": "№23",
+      "email": "letterik23@spbik.spb.ru",
+      "phone": null,
+      "address": null,
+      "uik_ranges": "[[2035, 2103]]"
+    }
+  }
+]

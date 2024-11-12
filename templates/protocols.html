@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+
+{% block title %} протоколы {% endblock %}
+
+{% block extra_head %}
+
+<style>
+div.table {display:table}
+div.row {display:table-row}
+div.cell {
+    display:table-cell;
+    border: 1px solid #999999;
+    padding: 1px;}
+</style>
+ <script type="text/javascript" >
+        $(function(){
+            $("table").tablesorter();
+            /*var options = {
+                valueNames: [ 'app_id', ]
+            };
+
+            var hackerList = new List('my', options);*/
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <div id="main">
+        <div>Всего протоколов: {{protocols.count}}</div>
+        <table>
+
+            <thead>
+                <tr>
+                    <th class='cell'>Изменен</th>
+                    <th class='cell'>app_id</th>
+                    <th class='cell'>ФИО</th>
+                    <th class='cell'>Телефон</th>
+                    <th class='cell'>УИК</th>
+                    <th class='cell'>Регион</th>
+                    <th class='cell'>Выборы</th>
+                    <th class='cell'>Заполнен</th>
+                    <th class='cell'>Строк</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for proto in protocols %}
+                <tr>
+                    <td class='cell'>
+                        <a href="{% url 'protocol' proto.id %}">
+                            {{proto.modified|date:"SHORT_DATETIME_FORMAT"}}</a>
+                    </td>
+                    <td class='cell'>{{proto.app_id}}</td>
+                    <td class='cell'>{{proto.fio}}</td>
+                    <td class='cell'>+7{{proto.phone}}</td>
+                    <td class='cell'>{{proto.uik}}</td>
+                    <td class='cell'>{{proto.region.external_id}}</td>
+                    <td class='cell'>{{proto.appform.name}}</td>
+                    <td class='cell'>{{proto.complete}}</td>
+                    <td class='cell'>{{proto.data|length}}/{{proto.appform.inputs.all|length}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+<!--     { render_bundle "main" } -->
+{% endblock %}

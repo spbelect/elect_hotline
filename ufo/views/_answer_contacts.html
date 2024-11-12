@@ -1,0 +1,49 @@
+# if answer.appuser_id in request.user.disclosed_appusers
+
+    ## Мобильный ID разрешен к показу этому оператору
+
+    <i>
+        <a class="ui popclick" style="color: gray; cursor:pointer;">
+            {{answer.appuser.last_name}} {{answer.appuser.first_name}}
+        </a>
+
+        <div class="ui special popup" style="display:none">
+            <div>
+            {% if answer.appuser.telegram %}
+            <a href="https://t.me/{{answer.appuser.telegram}}">
+                <img  width=24 height=24 src="/static/Telegram_alternative_logo.png"/>
+                {{answer.appuser.telegram}}
+            </a><br/>
+            {% endif %}
+            <a>
+                <img  width=24 height=24 src="/static/Phone_32.png"/>
+                +7 {{answer.appuser.phone}}
+            </a><br/>
+            <a href="mailto:{{answer.appuser.email}}" >
+                <img  width=24 height=24 src="/static/mail-icon.png"/>
+                {{answer.appuser.email}}
+            </a>
+            </div>
+            <!--<div>
+            <a class="dropdown-item" href="#">Добавить пользователя в игнор-лист</a>
+            </div>-->
+        </div>, {{answer.role}}.
+    </i>
+
+# else
+
+    ## Мобильный ID запрещен к показу этому оператору
+
+    <a class="ui pop" style="cursor:pointer;"> ФИО скрыто </a>
+    <div class="ui special popup" style="display:none; text-align: left">
+        <div>
+            Недостаточно прав для просмотра контактов пользователя.
+        </div>
+    <div> Координаторы: </div>
+    {% for org in answer.appuser.disclosed_to_orgs() %}
+        <div> {{org}} </div>
+    {% else %}
+        Нет
+    {% endfor %}
+    </div>
+# endif

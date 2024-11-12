@@ -1,0 +1,140 @@
+
+<!--<div class="message alert {% if answer.revoked %}alert-light{% elif answer.is_incident %}alert-warning{% else %}alert-secondary{% endif %}" role="alert">-->
+<section class="card card-body bg-base-200 shadow-xl mb-2">
+    <!--<div>
+      <a class="alert-link" style="margin-right: 10px" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">⋯</a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Добавить метку</a>
+        <a class="dropdown-item" href="#">Скрыть все события этого типа</a>
+      </div>
+
+      <div class="badge badge-warning">Комиссия в черном списке</div>
+      <div class="badge badge-secondary">Передано в районную группу</div>
+    </div>-->
+
+    # if not filters.uik
+      <h1 class="text-xl text-center">
+          {{answer.region.name}}
+          <a href='?region_id__in=["{{answer.region_id}}"]&uik={{answer.uik}}'>
+            {{_('UIK')}} {{answer.uik}}
+          </a>
+      </h1>
+    # endif
+<!--           <span ></span> -->
+
+
+    <div class="text-center">
+      <p>
+        <time style="margin: 0 5px;" title="">
+          ## Time given in timezone of the region where voting station reside
+          {{ answer.timestamp.astimezone(answer.region.tz).strftime('%d %b %Y, <b>%H:%M</b>')|safe }}
+        </time>
+
+<!--      <div class="ui special popup" style="display:none; text-align: left; ">
+        <div style="width: max-content;">
+          <small style="color: gray;">
+            {{answer.timestamp.astimezone(answer.region.tz).strftime('%d %b %Y, <b>%H:%M</b>')|safe}}
+          </small> &nbsp;
+          {{answer.region.name}} (UTC{{'{x:+}'.format(x=answer.region.utc_offset)}})
+        </div>
+        </div>-->
+
+        # if answer.revoked
+          <span class="badge badge-neutral">{{_('Revoked')}}</span>
+        # endif
+
+        <span class="{{'line-through' if answer.revoked else ''}}">
+          {{answer.question.label}}:
+
+          # if answer.is_incident and not answer.revoked
+            <span class="badge badge-error">
+              <strong> {{answer.get_value()}} </strong>
+            </span>
+          # else
+            <strong> {{answer.get_value()}} </strong>.
+          # endif
+        </span>
+
+      </p>
+
+
+      <p>
+        {% if answer.operator_id %}
+            ## Ответ добален оператором
+
+            {{_('Added by')}}
+            <span class="italic" style="color: gray;">
+              {{_('assistant')}}
+              # if answer.operator.last_name or answer.operator.first_name
+                {{answer.operator.last_name}} {{answer.operator.first_name}}
+              # else
+                {{answer.operator.email}}
+              # endif
+            </span>
+
+    <!--        <div class="user-popover" style="display:none">
+              <div>
+                <a href=# data-toggle="tooltip" data-placement="top" title="http://t.me/spbelect">
+                  <img width=24 height=24 src="/static/Telegram_alternative_logo.png"/>
+                  t.me/spbelect
+                </a>
+                <a href=# data-toggle="tooltip" data-placement="top" title="user@example.org">
+                  <img width=24 height=24 src="/static/mail-icon.png"/>
+                  user@example.org
+                </a>
+              </div>
+              <div>
+                <a class="dropdown-item" href="#">Добавить пользователя в игнор-лист</a>
+              </div>
+            </div>-->
+
+        {% else %}
+            ## Ответ добален пользователем мобильного приложения
+
+            # if not request.user.pk
+                ## Незалогиненым не показываетм контакты
+                <span style="color: gray; cursor:pointer;">
+                  <a class="login" href=#>Войдите</a> чтобы видеть контакты пользователя.
+                </span>
+            # else
+                ## Оператор залогинен
+                {% include "views/_answer_contacts.html" %}
+            # endif
+
+        {% endif %}
+      </p>
+
+    </div>
+
+    {% if answer.is_incident and answer.appuser_id in request.user.disclosed_appusers %}
+    <div style="margin: 10px 0">
+      <small>
+        <div style="text-align: center;" >
+          Жалоба
+        </div>
+        <div style="text-align: center;" >
+          УИК:
+          {% if answer.uik_images() %}
+            <a class="alert-link view-images" href="#" data-title="УИК {{answer.uik}} Фото" data-images="{{','.join(answer.uik_images())}}">
+          {% endif %}
+            {{answer.get_uik_complaint_status_display() or 'Жалоба не подавалась'}}.
+          {% if answer.uik_images() %} <img width=20 height=20 src="/static/Antu_folder-camera40.png"></a> {% endif %}
+        </div>
+        <div style="text-align: center;" >
+          ТИК:
+          {% if answer.tik_complaint_text %}
+            <a class="alert-link view-images" href="#" data-title="УИК {{answer.uik}} Фото" data-images="{{','.join(answer.tik_images())}}">
+          {% endif %}
+          {{answer.get_tik_complaint_status_display() or 'Жалоба не подавалась'}}.
+          {% if answer.tik_images() %} <img width=20 height=20 src="/static/Antu_folder-camera40.png">{% endif %}
+          {% if answer.tik_complaint_text %} </a> {% endif %}
+
+          <pre style="display: none">{{answer.tik_complaint_text}}</pre>
+
+        </div>
+      </small>
+    </div>
+    {% endif %}
+
+</section>

@@ -1,0 +1,46 @@
+# Make a copy of this file, named env-local for local development
+
+#DJANGO_DEBUG=True
+DJANGO_DEBUG=False
+
+DEBUG_TOOLBAR=False
+#DJANGO_SECRET_KEY=123
+
+#DATABASE_URL=sqlite://:memory:
+#DATABASE_URL=sqlite:///{SRC_DIR}/db.sqlite
+
+AWS_SECRET_KEY=25717735715
+AWS_ACCESS_KEY=13357357257247
+
+#GOOGLE_OAUTH2_CLIENT_ID=12345678-agaspgaspgi.apps.googleusercontent.com
+#GOOGLE_OAUTH2_CLIENT_SECRET=GKEPE1-11Q_HSEGsKNhL88KgSg73JsB9
+
+# If you use sendgrid to send emails, uncomment following two lines, and
+# set your SENDGRID_API_KEY variable.
+#
+#EMAIL_BACKEND=anymail.backends.sendgrid.EmailBackend
+#SENDGRID_API_KEY="68248246824682468"
+
+
+# Fake sending emails
+#EMAIL_BACKEND=django.core.mail.backends.locmem.EmailBackend
+
+# If you use regular smtp server to send emails, uncomment following two lines, and
+# set your EMAIL_HOST_PASSWORD variable.
+#
+#EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+#EMAIL_HOST_PASSWORD=mypassword
+
+
+# EMAIL_HOST_USER is default email source address
+EMAIL_HOST_USER=noreply@uik.info
+
+
+TIK_EMAIL_MODERATION=1
+SEND_TIK_EMAILS=0
+ADMIN_EMAIL="someuniquename@gmail.com"
+
+
+# Set this to the domain of the server
+#
+#DOMAIN_NAME='uik-info.herokuapp.com'

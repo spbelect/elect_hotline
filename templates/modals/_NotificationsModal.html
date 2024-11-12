@@ -1,0 +1,20 @@
+
+<div class="ui modal mini" id="NotificationsModal" aria-hidden="true" 
+  onVisible="$.post('/api/internal/profile/wipe_notifications/')"
+>
+  <div class="header">Уведомления</div>
+  <div class="ui content list divided">
+    {% for message in notifications %}
+      <div class="ui item"><div>
+        <i class="mail icon"></i>
+        {{message|safe}}
+      </div></div>
+    {% endfor %}
+  </div>
+  
+  <div class="actions">
+    <!--<div class="ui approve button">Approve</div>
+    <div class="ui button">Neutral</div>-->
+    <div class="ui cancel button">Закрыть</div>
+  </div>
+</div> 

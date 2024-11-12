@@ -1,0 +1,129 @@
+
+<style>
+/*  span.org-edit button {opacity: 0.5}
+  span.org-edit:hover button {opacity: 1}*/
+  a.item:hover {text-decoration: none}
+</style>
+
+<script>
+  $(function(){
+    $('#topleftmenu').dropdown({action: 'hide'});
+    
+    # if not region and not uik
+      $('#topleftmenu a.item').each(function(){
+        if($(this).attr('href') == "{{request.path}}") {
+          $('#topleftmenu div.text').html($(this).html());
+          //$('#topleftmenu').dropdown('set text', $(this).html())
+        }
+      })
+    # endif
+    
+  })
+</script>
+
+<div id="topleftmenu" class="ui dropdown">
+  <i aria-label="Меню" class="bars icon"></i>
+  <div aria-label="Меню" class="text">
+    {% if uik %}
+      Лента УИК {{uik}} {{region.name[:21]}}
+    {% elif region %}
+      Лента {{region.name[:21]}}
+    {% elif munokrug %}
+      Лента {{munokrug.name[:21]}}
+    {% else %}
+      Меню
+    {% endif %}
+  </div> 
+  
+  <div class="menu">
+    <a class="item feed" href="/old/html/feed/answers/"> Лента все регионы</a>
+    # for region in menu.actual_regions
+      <a class="item feed" href="/old/html/feed/answers/?region={{region.id}}">
+        Лента {{region.name}} 
+      </a>
+    # endfor
+    
+    <a class="item" href="/history">История</a>
+
+    {% if user.pk and user.organizations.exists() %}
+      <a class="item feed" href="/old/html/feed/tik_complaints/"> Проверка жалоб в ТИК </a>
+    {% endif %}
+    
+    {% if user.pk and user.organizations.exists() %}
+      <a class="item" href="/old/html/users/"> Пользователи </a>
+    {% endif %}
+    
+    <a class="item" href="/old/html/history/" data-toggle="tooltip" data-placement="right"
+      title="Архив событий, экспорт в файл"
+    >
+      Поиск / Архив
+    </a>
+    
+    # if user.pk
+      <a class="item" href="/old/html/organizations/" data-toggle="tooltip" data-placement="right"
+        title="Подать/отозвать заявку на вступление в координирующую организацию"
+      >
+        Организации
+      </a>
+
+      # for org in user.managed_orgs.all()
+        <div class="divider"></div>
+        
+        <div style="font-weight: bold" class="header" >
+          # if org.creator == user
+            <a href=# class="org-edit" style="color:black;" 
+              onClick="$('#OrgEditModal{{org.id}}').modal('show'); return true;"
+            >
+              <i class="edit icon"></i>  {{org.name}}
+            </a>
+          # else
+            {{org.name}}
+          # endif
+        </div>
+        
+        <a class="item" href="/old/html/organizations/manage/{{org.id}}/campaigns/"
+          data-toggle="tooltip" data-placement="right" 
+          title="Изменить контакты организации и кампании по наблюдению на выборах."
+          aria-label="Управление кампаниями"
+        >
+          Кампании
+        </a>
+        
+        <a class="item" href="/old/html/organizations/manage/{{org.id}}/staff/"
+          data-toggle="tooltip" data-placement="right" 
+          title="Назначить администраторов, операторов или модераторов"
+        >
+          Персонал
+        </a>
+        
+        <a class="item" href="/old/html/organizations/manage/{{org.id}}/tik_emails/"
+          data-toggle="tooltip" data-placement="right" 
+          title="Назначить получателей копий жалоб"
+        >
+          Настройки жалоб в ТИК
+        </a>
+      # endfor
+    # endif
+    
+    # if not user.pk
+      <a class="item" href="#" onClick="$('#LoginModal').modal('show')"> Вoйти </a>
+    # endif
+    
+    # if user.pk
+      <div class="divider"></div>
+      
+      <span class="header">
+<!--         <img src="/static/Antu_im-invisible-user.svg" width=24 height=24 ></img> -->
+        <i class="user circle outline icon"></i>
+        {{user.email}}
+      </span>
+      <a class="item" href="/old/html/auth/logout/"> Выйти </a>
+    # endif
+    
+    <a class="item" style="text-align: right" onclick="$('#SettingsModal').modal('show')">
+      UTC{{'{x:+}'.format(x=user.utc_offset)}} &nbsp;
+      <i class="{{request.session.get('country')}} flag"></i>
+    </a>
+  </div>
+</div>
+  

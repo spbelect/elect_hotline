@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+
+
+{% block title %} Email запросы {% endblock %}
+
+{% block extra_head %}
+
+
+<!--
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/css/lightbox.min.css"  crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.0/js/lightbox.min.js" crossorigin="anonymous"></script>-->
+  
+  
+  <style>
+    #PhotosModal div.modal-body {
+      display: flex;
+    }
+    #PhotosModal div.modal-body img {
+      max-height: 200px;
+      max-width: 300px;
+    }
+    div.flex-right {
+      display:flex; 
+      flex-direction: row-reverse;
+    }
+    div.flex-right > div {
+      margin: 0 5px;
+    }
+    div.flex-right > div:first-child {
+      margin: 0 0px;
+    }
+    pre {
+      background: #eee;
+      white-space: pre-wrap;
+    }
+    .popover {
+      max-width: 576px;
+    }
+/*     footer img {width: 16px; height:16px} */
+    div.user-popover img {width: 24px; height: 24px}
+    div.table {display:table}
+    div.row {display:table-row}
+    div.cell {
+        display:table-cell;
+        border: 1px solid #999999;
+        padding: 1px;}
+    
+    @media only screen and (min-width: 600px) {
+      #main {
+        padding: 0 10px;
+      }
+    } 
+  </style>
+  
+  <script type="text/javascript" >
+    $(function(){
+        let searchParams = new URLSearchParams(window.location.search);
+        $('#status').dropdown({values: [
+            {name: 'Все', value: 'any'},
+            {name: 'Новые', value: 'new'},
+            {name: 'Отправленные', value: 'sent'},
+            {name: 'Отклоненные', value: 'denied'},
+        ],})
+        $('#status').dropdown('set selected', "{{request.GET.get('status') or 'any'}}")
+        $('#status').dropdown({onChange: function (val) {
+          searchParams.set('status', val)
+          window.location.search = searchParams.toString()
+        }})
+        
+
+        $('body').on('click', 'a.view-images', function(e){
+          html = ''
+          $(this).data('images').split(',').forEach(function(x, n){
+//             
+          html += `<div>
+          <a target=blank href="https://s3.eu-central-1.amazonaws.com/ekc-uploads/`+x+`" data-lightbox="image-1" data-title="My caption"><img class="img-thumbnail" src="https://s3.eu-central-1.amazonaws.com/ekc-uploads/`+x+`"/></a>
+            </div>`
+          })
+          $('#PhotosModal div.modal-body').html(html);
+          $('#PhotosModalLongTitle').html($(this).data('title'));
+          $('#PhotosModal').modal({})
+        })
+        
+        $('body').on('click', 'button.send_email', function(e) {
+          $.post('/api/internal/email/outbox/tik_complaints/', {id: $(this).data('id')}, function(response) {
+            alert(JSON.stringify(response));
+          }).fail(function(response) {
+            alert(JSON.stringify(response));
+          })
+          return false;
+        })
+        
+    });
+  </script>
+  
+{% endblock %}
+
+
+{% block header %}
+  Email запросов получено: {{answers.count()}}
+{% endblock %}
+
+{% block main %}
+
+  <div bp="grid" style="padding: 5px 0;">
+    <div bp="4 text-center"></div>
+    <div bp="4 text-center">
+      <div class=''>
+          <div class="ui dropdown" id='status'>
+            <div class="text">Все</div> <i class="dropdown icon"></i>
+          </div>
+      </div>
+    </div>
+  </div>
+    
+  <div bp="grid" style="padding: 5px 0;">
+    <div bp="10@lg offset-2@lg text-center">
+      {{',  '.join(shown_locations)}}
+    </div>
+  </div>
+  
+  <div id='feed'>
+    {% include "_tik_email_requests.html" %}
+    {% if not answers %}
+      <div style="text-align: center; padding: 2em; background: #eee;">
+            Нет заявлений с таким фильторм.
+      </div>
+    {% endif %}
+  </div>
+
+  {% include "_photos.html" %}
+  
+{% endblock %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+  lang="{{ LANGUAGE_CODE }}"
+  xml:lang="{{ LANGUAGE_CODE }}"
+  {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}
+
+  data-theme="{{user.theme}}"  ## Daisyui theme
+>
+  <head>
+    <style>
+      @view-transition {
+        navigation: auto;
+        types: slide, forwards;
+      }
+    </style>
+
+    <title>
+      {% block title %} {{ title }} {% endblock %} | uik.info
+    </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    
+<!--     <link rel="shortcut icon" type="image/png" href="/static/ufo/favicon.png" /> -->
+
+<!--     <link rel="stylesheet" type="text/css" href="/static/ufo/base.css" /> -->
+    {% if LANGUAGE_BIDI %}
+      <link rel="stylesheet" type="text/css" href="{{ static('admin/css/rtl.css') }}" />
+    {% endif %}
+
+    ## Country flags
+<!--     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" /> -->
+
+    <script defer src="https://cdn.jsdelivr.net/npm/@imacrayon/alpine-ajax@0.9.0/dist/cdn.js"></script>
+<!--     <script defer src="/static/alpine-ajax.js"></script> -->
+    <script defer src="{{ static('ufo2.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ static('main.css') }}" />
+<!--     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" /> -->
+<!--     <script src="https://cdn.tailwindcss.com?plugins=typography"></script> -->
+<!--     <link rel="stylesheet" type="text/css" href="{{ static('daisy-fix.css') }}" /> -->
+
+<!--     <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+
+      });
+// window.addEventListener('popstate', (e) => {
+// // log(e, e.state)
+//   // if (!e.state || !e.state.__ajax) return
+// log(123)
+//   // window.location.reload(true)
+// })
+    </script>
+    
+    {% block extra_head %}{% endblock %}
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.js"></script>
+
+
+  </head>
+  <body>
+
+    <header x-sync x-data id="navbar" class="navbar bg-base-100" >
+      <template>{% block header %} {% endblock %}</template>
+      {% set header = self.header() %}
+      {% include "views/_navbar.html" %}
+    </header>
+
+    <div id="messages" class="m-4" x-sync >
+      {% for message in messages %}
+      <div id="message" class="alert {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger
+  {% else %}alert-info{% endif %}" role="alert">
+        {{ message }}</div>
+      {% endfor %}
+    </div>
+
+    <div id="errors" x-sync class="">
+      {% block errors %}{% endblock %}
+    </div>
+
+    <div id="main" >
+      {% block main %}{% endblock %}
+    </div>
+
+    {% block modal %}
+<!--      <dialog x-data id="modal" class="modal modal-bottom sm:modal-middle"
+        @popstate.window="log($event); $el.close()">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">{{_('Sign in')}}</h3>
+          <p class="py-4">Press ESC key or click the button below to close</p>
+          <div class="modal-action">
+            <form method="dialog">
+              ## if there is a button in form, it will close the modal
+              <button class="btn">{{_('Close')}}</button>
+            </form>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>-->
+    {% endblock %}
+
+  </body>
+</html>

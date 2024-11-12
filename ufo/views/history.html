@@ -1,0 +1,259 @@
+{% extends "views/base.html" %}
+
+{% block title %} Архив {% endblock %}
+
+{% block extra_head %}
+  <style>
+    /*label:has(input:checked[name=complaint]) {
+      background-color: rgb(42, 45, 47);
+      color: rgb(209, 205, 199);
+    }*/
+  </style>
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/base.min.css" /> -->
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css" /> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/choices.js@11.0.2/public/assets/scripts/choices.min.js"></script>
+
+<!-- <link rel="stylesheet" href="https://unpkg.com/better-nice-select@1.0.0/dist/css/better-nice-select.min.css"> -->
+<!-- <script src="https://unpkg.com/better-nice-select@1.0.0/dist/js/better-nice-select.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
+
+  <script>
+   //document.addEventListener(`keypress`, handle);
+
+    // function handle(evt) {
+    //   console.log(evt.target)
+    //   const form = evt.target.closest(`form`);
+    //   if (form) {
+    //
+    //       if (evt.key === `Enter`) {
+    //         log('prevent')
+    //         evt.preventDefault();
+    //         return false;
+    //       }
+    //       return true;
+    //   }
+    // }
+  </script>
+    
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.js"></script>
+{% endblock %}
+
+{% block header %}
+  {{_('History')}}
+{% endblock %}
+
+{% block main %}
+
+<div
+  x-data="{
+    query: {{filters.model_dump_json()}},
+    last_submitted: null,
+
+    submit() {
+      //log(this.query, this.last_submitted, equal(this.query, this.last_submitted));
+      if(!equal(this.query, this.last_submitted)) {
+        $ajax('', {target: 'list_replace errors', body: this.query, sync: true})
+        this.last_submitted = { ...this.query }
+      }
+    }
+  }"
+
+  @ajax:after="(event) => {
+    window.history.replaceState(null, null, event.detail.response.url)
+  }"
+>
+
+  <form x-ref="form"
+    class="grid grid-cols-2 gap-x-8 gap-y-4 px-2 lg:px-4 mb-4"
+    @submit.prevent
+    @change.debounce="submit()"
+    @keyup.enter.debounce="submit()"
+  >
+
+      <fieldset class="col-span-2 md:col-span-1 text-center md:text-right align-middle">
+
+        {{_('from')}} <input type="date" x-model="query.date__gt" @change.stop @blur="submit()">
+
+        <select name="time__gt" class="select" x-model="query.time__gt">
+          # for hour in range(24)
+            <option value="{{'{:02}:00'.format(hour)}}"
+              {{ 'selected' if hour == filters.time__gt.hour else '' }}
+              >{{'%02d' % hour}}:00</option>
+          # endfor
+        </select>
+      </fieldset>
+
+
+      <fieldset class="col-span-2 md:col-span-1 text-center md:text-left align-middle">
+
+        {{_('to')}} <input type="date" x-model="query.date__lt" @change.stop @blur="submit()">
+
+        <select name="time__lt" class="select" value="{{filters.time__lt}}">
+          # for hour in range(24)
+            <option value="{{'{:02}:00'.format(hour)}}"
+              {{ 'selected' if hour == filters.time__lt.hour else '' }}
+              >{{'%02d' % hour}}:00</option>
+          # endfor
+        </select>
+      </fieldset>
+
+<!--
+      <fieldset bp="4@lg text-center text-left@lg">
+        <div aria-label="Фильтр инцидентов" class="ui dropdown auto"
+          value='{{request.GET.priority or "any"}}'>
+          <div class="text"></div> <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" aria-label="Инцидент не важен" data-value="any">
+              Все ответы</div>
+            <div class="item" aria-label="Только инциденты" data-value="incident">
+              Все инциденты</div>
+            <div class="item" aria-label="Приоритетные инциденты" data-value="urgent">
+              Приоритетные инциденты</div>
+          </div>
+        </div>
+      </fieldset>-->
+
+      <fieldset class="text-center col-span-2 md:text-right md:col-span-1 align-middle"
+        @click="() => {
+          // close choices dropdown on the second click
+          //log()
+          if($event.target.className.search(/choices__inner/g) >= 0)
+            $refs.regions.choices.hideDropdown();
+        }"
+      >
+
+        <select multiple
+          x-ref="regions"
+          x-init="$el.choices = new Choices(
+            $el, {removeItemButton: true, classNames: ufo.daisyChoices}
+          )"
+          class="select hidden w-full max-w-xs"
+
+          @change="query.region_id__in = $el.choices.getValue(true)"
+
+          x-effect="() => {
+            var text = (query.region_id__in && query.region_id__in.length) ? '' : '{{_('Region: all')}}'
+
+            if(text != $el.dataset.placeholder) {
+              $el.dataset.placeholder = text;
+              $el.choices.destroy();
+              $el.choices = new Choices($el,
+                {removeItemButton: true, classNames: ufo.daisyChoices}
+              );
+            }
+          }"
+        >
+<!-- <option placeholder x-show="false" x-text="`Регион: все`">zxc</option> -->
+<!--           <option value="null">Регион: все</option> -->
+          # for region in user.country.regions.all()
+            <option value="{{region.id}}"
+              {{ 'selected' if region.id in (filters.region_id__in or []) else '' }}
+            > {{region.name}} </option>
+          # endfor
+        </select>
+
+      </fieldset>
+
+
+      <fieldset x-data="{ oneregion: false }"
+        class="text-center col-span-2 md:text-left md:m-0 m-auto inline-flex items-center md:col-span-1 align-middle"
+        :class="oneregion ? '' : 'opacity-50'"
+      >
+
+        <label class="px-2">{{_('UIK')}}</label>
+
+        <input type=number min="1" onwheel="this.blur()"
+          class="input w-full max-w-xs"
+          :class="oneregion ? 'placeholder:text-base-content' : 'placeholder:text-base-100'"
+          x-effect="() => {
+            if(query.region_id__in && query.region_id__in.length == 1)
+            { oneregion = true; }
+            else
+            { oneregion = false; query.uik = 'null' }
+          }"
+          :disabled="!oneregion"
+          x-model.lazy="query.uik" placeholder="{{_('all')}}" class=""
+        />
+      </fieldset>
+
+
+      <fieldset aria-label="Complaint Filter"
+        class="md:ml-auto col-span-2 md:col-span-1 flex text-center flex-wrap md:flex-nowrap items-center align-middle"
+      >
+
+        <span class="px-2 text-center w-full md:w-auto">{{_('Complaint')}}</span>
+
+        <div class="join flex items-center justify-center md:w-auto w-full">
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="no"
+            aria-label="{{_('No')}}" />
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="any"
+            aria-label="{{_('Any')}}" />
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="yes"
+            aria-label="{{_('Yes')}}" />
+        </div>
+
+      </fieldset>
+
+      <fieldset aria-label="Filter revoked"
+        class="text-center col-span-2 md:text-left md:m-0 m-auto inline-flex items-center md:col-span-1 align-middle"
+      >
+        <label class="px-2 label cursor-pointer">
+           <span class="label-text pr-2"> {{_('Include revoked')}} </span>
+          <input type="checkbox" class="checkbox checkbox-sm" x-model="query.include_revoked"/>
+        </label>
+      </fieldset>
+
+  </form>
+  
+
+  <div id="total" x-sync class="px-2 lg:px-4 py-2" >
+    # if page.paginator.count
+      <span class="text-content">
+        {{_('Found')}}: {{page.paginator.count}} {{ngettext('answer', 'answers', page.paginator.count)}}
+      </span>
+      # if user.is_authenticated
+        <a href="/history/export-csv?{{request.GET.urlencode()}}" class="text-info ml-2" >
+          {{_('Download')}} csv
+        </a>
+      # endif
+    # else
+      {{_('No answers with given filter')}}
+    # endif
+  </div>
+
+
+  <div id='list_replace' x-merge="replace" class="px-2 lg:px-4" >
+    <div id='list_append' x-merge="append">
+      # for answer in page
+          {% include "views/_answer.html" %}
+      # endfor
+      <br/>
+      # if page|length and not page.has_next()
+          <div class="text-center"> {{_('End of list')}} </div>
+      # endif
+
+    </div>
+  </div>
+
+
+  <div id="pagination" x-sync
+      # if page.has_next()
+          x-intersect.once="setTimeout(async function() {
+                await $nextTick();
+                //log('{{page.next_page_number()}}');
+                $ajax('', {
+                    target: 'list_append pagination',
+                    headers: {page: '{{page.next_page_number()}}'},
+                    body: query,
+                })
+          }, 100)"
+      # endif
+  ></div>
+
+
+</div>
+
+{% endblock %}

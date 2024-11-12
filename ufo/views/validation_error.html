@@ -1,0 +1,41 @@
+{% extends "views/base.html" %}
+
+
+
+{% block title %}  {% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block errors %}
+  # if request.headers.get('X-Alpine-Request') == 'true'
+    # for error in errors
+      <template x-teleport="fieldset:has([name={{error.loc[-1]}}])">
+          <div class="alert alert-error max-w-xs inline-block px-2 py-1">
+            {{error.ctx.reason or error.msg}}
+          </div>
+      </template>
+    # endfor
+  # else
+    <div role="alert" class="alert alert-error">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 shrink-0 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      # for error in errors
+        <span>{{_('Error:')}} {{error}}</span>
+      # endfor
+    </div>
+  # endif
+{% endblock %}

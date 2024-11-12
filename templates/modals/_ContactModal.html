@@ -1,0 +1,35 @@
+
+<div class="ui modal tiny" id="ContactModal{{campaign.id or ''}}" >
+  <div class="header">Добавить контакт</div>
+  
+  <div class="content">
+    
+    <form class="ui form autovalidate" method=post action='/api/internal/contacts/'
+      onSubmit="ufo.client.submit(this).done(()=> location.reload() ); return false;"
+    >
+      <input type='hidden' name="organization_id" value='{{organization.id}}'/>
+      <input type='hidden' name="campaign_id:null" value='{{campaign.id or ""}}'/>
+      <div class="field">
+        <label>Название</label>
+        <input type=text name="name" placeholder="Название контакта" rules='empty'
+          value="{{contact.name or ''}}"/>
+        <small id=contactname_help class="form-text text-muted"> Например: "Колл-центр" или "Чат наблюдатетей"</small>
+      </div>
+      <div class="field">
+        <label>Номер телефона или ссылка</label>
+        <input type=text name="value" placeholder="Номер телефона или ссылка" rules='empty'
+          value="{{contact.value or ''}}"/>
+        <small id=contactval_help class="form-text text-muted"> Например: +79081234567 или https://telegram.me/spbelect_mobile</small>
+      </div>
+      
+<!--       <div class="ui error message"></div> -->
+      <div class="result"></div>
+    </form>
+  </div>
+  
+  <div class="actions">
+    <button class="ui primary approve button">OK</button>
+    <div class="ui cancel button">Закрыть</div>
+  </div>
+</div> 
+ 

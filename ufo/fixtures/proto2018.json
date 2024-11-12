@@ -1,0 +1,447 @@
+[
+  {
+    "model": "npserver.elections",
+    "pk": "f20f0e05-f6f3-4d00-a2c0-a36f30be1658",
+    "fields": {
+      "created": "2018-03-16T09:18:59.676Z",
+      "modified": "2018-03-16T09:18:59.676Z",
+      "date": "2018-03-18",
+      "uiks": null,
+      "region": null,
+      "name": "Выборы Президента РФ"
+    }
+  },
+  {
+    "model": "npserver.appform",
+    "pk": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+    "fields": {
+      "created": "2018-03-16T09:18:59.687Z",
+      "modified": "2018-03-16T09:18:59.687Z",
+      "name": "Выборы Президента РФ",
+      "elections": "f20f0e05-f6f3-4d00-a2c0-a36f30be1658",
+      "form_type": "FEDERAL",
+      "google_form": null,
+      "order": 0
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "03d376f8-7e8f-4540-bcaa-3b6b7f050fc3",
+    "fields": {
+      "created": "2018-03-16T09:18:59.937Z",
+      "modified": "2018-03-16T09:18:59.937Z",
+      "input_type": "NUMBER",
+      "label": "20 ЯВЛИНСКИЙ Григорий Алексеевич",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "06b3e176-9827-496f-9814-0604cce87f7a",
+    "fields": {
+      "created": "2018-03-16T09:18:59.732Z",
+      "modified": "2018-03-16T09:18:59.732Z",
+      "input_type": "NUMBER",
+      "label": "3 Число избирательных бюллетеней, выданных избирателям, проголосовавшим досрочно",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "0d4647f2-16ec-4dd3-ad29-d3244d293b3b",
+    "fields": {
+      "created": "2018-03-16T09:18:59.924Z",
+      "modified": "2018-03-16T09:18:59.924Z",
+      "input_type": "NUMBER",
+      "label": "19 ТИТОВ Борис Юрьевич",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "10aa67e4-0ca4-42fb-b962-0c572e7dc889",
+    "fields": {
+      "created": "2018-03-16T09:18:59.744Z",
+      "modified": "2018-03-16T09:18:59.744Z",
+      "input_type": "NUMBER",
+      "label": "4 Число избирательных бюллетеней, выданных участковой избирательной комиссией избирателям в помещении для голосования в день голосования",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "1548ef9d-acbc-42e1-b21d-4013f2400ebb",
+    "fields": {
+      "created": "2018-03-16T09:18:59.792Z",
+      "modified": "2018-03-16T09:18:59.792Z",
+      "input_type": "NUMBER",
+      "label": "8 Число избирательных бюллетеней, содержащихся в стационарных ящиках для голосования",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "2c39d939-d1f0-44bf-9783-8e72a110f8a3",
+    "fields": {
+      "created": "2018-03-16T09:18:59.832Z",
+      "modified": "2018-03-16T09:18:59.832Z",
+      "input_type": "NUMBER",
+      "label": "11 Число утраченных избирательных бюллетеней",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "4a5d92e0-283c-4886-b0e6-286db47071b9",
+    "fields": {
+      "created": "2018-03-16T09:18:59.865Z",
+      "modified": "2018-03-16T09:18:59.865Z",
+      "input_type": "NUMBER",
+      "label": "14 ГРУДИНИН Павел Николаевич",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "575dfc24-c9d7-439d-bb47-b429ee775db1",
+    "fields": {
+      "created": "2018-03-16T09:18:59.899Z",
+      "modified": "2018-03-16T09:18:59.899Z",
+      "input_type": "NUMBER",
+      "label": "17 СОБЧАК Ксения Анатольевна",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "71a70cfa-395d-4509-bc0b-25066f78a285",
+    "fields": {
+      "created": "2018-03-16T09:18:59.755Z",
+      "modified": "2018-03-16T09:18:59.755Z",
+      "input_type": "NUMBER",
+      "label": "5 Число избирательных бюллетеней, выданных избирателям, проголосовавшим вне помещения для голосования в день голосования",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "8d7c8c97-4ed4-4d08-8e45-59619c342e3f",
+    "fields": {
+      "created": "2018-03-16T09:18:59.806Z",
+      "modified": "2018-03-16T09:18:59.806Z",
+      "input_type": "NUMBER",
+      "label": "9 Число недействительных избирательных бюллетеней",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "a37d2721-951c-4b42-8539-feda1200594f",
+    "fields": {
+      "created": "2018-03-16T09:18:59.909Z",
+      "modified": "2018-03-16T09:18:59.909Z",
+      "input_type": "NUMBER",
+      "label": "18 СУРАЙКИН Максим Александрович",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "a966e7b1-08ae-43b5-9eeb-6fa11b72534e",
+    "fields": {
+      "created": "2018-03-16T09:18:59.855Z",
+      "modified": "2018-03-16T09:18:59.855Z",
+      "input_type": "NUMBER",
+      "label": "13 БАБУРИН Сергей Николаевич",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "c20c11b1-6ee0-4363-a35e-db89b53d29a7",
+    "fields": {
+      "created": "2018-03-16T09:18:59.768Z",
+      "modified": "2018-03-16T09:18:59.768Z",
+      "input_type": "NUMBER",
+      "label": "6 Число погашенных избирательных бюллетеней",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "c8eea2b8-5c3f-4fd5-a14f-0ec2b891b548",
+    "fields": {
+      "created": "2018-03-16T09:18:59.782Z",
+      "modified": "2018-03-16T09:18:59.782Z",
+      "input_type": "NUMBER",
+      "label": "7 Число избирательных бюллетеней, содержащихся в переносных ящиках для голосования",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "cb0e07a4-287c-4591-acd6-61c9c422c3a9",
+    "fields": {
+      "created": "2018-03-16T09:18:59.819Z",
+      "modified": "2018-03-16T09:18:59.819Z",
+      "input_type": "NUMBER",
+      "label": "10 Число действительных избирательных бюллетеней",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "e4972234-5868-4683-8597-f3620aa04c72",
+    "fields": {
+      "created": "2018-03-16T09:18:59.845Z",
+      "modified": "2018-03-16T09:18:59.845Z",
+      "input_type": "NUMBER",
+      "label": "12 Число избирательных бюллетеней, не учтенных при получении",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "e99c4cd5-7d72-44ae-8ca9-e96ceb2ab436",
+    "fields": {
+      "created": "2018-03-16T09:18:59.889Z",
+      "modified": "2018-03-16T09:18:59.889Z",
+      "input_type": "NUMBER",
+      "label": "16 ПУТИН Владимир Владимирович",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "efd5d3e1-7dc9-4bef-a21a-b523dd9bf735",
+    "fields": {
+      "created": "2018-03-16T09:18:59.695Z",
+      "modified": "2018-03-16T09:18:59.695Z",
+      "input_type": "NUMBER",
+      "label": "1 Число избирателей, включенных в список избирателей на момент окончания голосования",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "f87cc46c-824e-4a3f-a2ca-b7cd36a182d5",
+    "fields": {
+      "created": "2018-03-16T09:18:59.877Z",
+      "modified": "2018-03-16T09:18:59.877Z",
+      "input_type": "NUMBER",
+      "label": "15 ЖИРИНОВСКИЙ Владимир Вольфович",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.input",
+    "pk": "fbcfa015-01f8-4a52-8630-d31496dd38a9",
+    "fields": {
+      "created": "2018-03-16T09:18:59.719Z",
+      "modified": "2018-03-16T09:18:59.719Z",
+      "input_type": "NUMBER",
+      "label": "2 Число избирательных бюллетеней, полученных участковой избирательной комиссией",
+      "help_text": null,
+      "extra_tag": null
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1465,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "efd5d3e1-7dc9-4bef-a21a-b523dd9bf735",
+      "order": 0
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1466,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "fbcfa015-01f8-4a52-8630-d31496dd38a9",
+      "order": 1
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1467,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "06b3e176-9827-496f-9814-0604cce87f7a",
+      "order": 2
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1468,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "10aa67e4-0ca4-42fb-b962-0c572e7dc889",
+      "order": 3
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1469,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "71a70cfa-395d-4509-bc0b-25066f78a285",
+      "order": 4
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1470,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "c20c11b1-6ee0-4363-a35e-db89b53d29a7",
+      "order": 5
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1471,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "c8eea2b8-5c3f-4fd5-a14f-0ec2b891b548",
+      "order": 6
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1472,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "1548ef9d-acbc-42e1-b21d-4013f2400ebb",
+      "order": 7
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1473,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "8d7c8c97-4ed4-4d08-8e45-59619c342e3f",
+      "order": 8
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1474,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "cb0e07a4-287c-4591-acd6-61c9c422c3a9",
+      "order": 9
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1475,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "2c39d939-d1f0-44bf-9783-8e72a110f8a3",
+      "order": 10
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1476,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "e4972234-5868-4683-8597-f3620aa04c72",
+      "order": 11
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1477,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "a966e7b1-08ae-43b5-9eeb-6fa11b72534e",
+      "order": 12
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1478,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "4a5d92e0-283c-4886-b0e6-286db47071b9",
+      "order": 13
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1479,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "f87cc46c-824e-4a3f-a2ca-b7cd36a182d5",
+      "order": 14
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1480,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "e99c4cd5-7d72-44ae-8ca9-e96ceb2ab436",
+      "order": 15
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1481,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "575dfc24-c9d7-439d-bb47-b429ee775db1",
+      "order": 16
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1482,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "a37d2721-951c-4b42-8539-feda1200594f",
+      "order": 17
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1483,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "0d4647f2-16ec-4dd3-ad29-d3244d293b3b",
+      "order": 18
+    }
+  },
+  {
+    "model": "npserver.appforminputs",
+    "pk": 1484,
+    "fields": {
+      "appform": "0ac4ac68-7eab-4170-8041-a2f7fa0743e9",
+      "input": "03d376f8-7e8f-4540-bcaa-3b6b7f050fc3",
+      "order": 19
+    }
+  }
+]

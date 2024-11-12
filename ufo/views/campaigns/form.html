@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+
+{% block title %} ыва {% endblock %}
+
+
+{% block main %}
+<div class="" id="UikRangesModal{{branch.id}}">
+  <div class="header">Диапазоны номеров УИК {{branch.region.name}}</div>
+  
+  <div class="content">
+    <form
+      x-data='{ranges: [
+        # for start, end in branch.uik_ranges or [("", "")]:
+          {id: crypto.randomUUID(), start: "{{start}}", end: "{{end}}" },
+        # endfor
+      ]}'
+      aria-label="Диапазоны номеров УИК {{branch.region.name}}"
+      class="ui form" method='patch'
+      action="/api/internal/org_branches/{{branch.id}}/"
+      onSubmit="
+        ufo.client.submit(this)
+        .done(() => location.reload() ); return false;"
+    >
+    
+      <div class="ui form ranges">
+        <input name="uik_ranges" type="hidden"
+          :value="JSON.stringify(ranges.map((x) => [x.start, x.end]))"/>
+        <template x-for="(range, index) in ranges" :key="range.id">
+          <div class="fields" aria-label="Диапазон">
+            <div class="field">
+              <input x-model="range.start" type="text" rules="integer[1..9999]" placeholder="От">
+            </div>
+            <div class="field">
+              <input x-model="range.end" type="text" rules="integer[1..9999]" placeholder="До">
+            </div>
+            <button class="ui del range basic icon mini circular button" type="button"
+              @click="ranges.splice(index, 1)"
+            >
+              <i class="times icon"></i>
+            </button>
+          </div>
+        </template>
+      </div>
+      
+      <button class="ui button more" type="button" aria-label="Добавить диапазон"
+        @click='ranges.push({id: crypto.randomUUID(), start: "", end: "" })'
+      >
+        Еще
+      </button>
+      
+      <div class="result"></div>
+    </form>
+  </div>
+  
+  <div class="actions">
+    <button class="ui primary approve button"
+      aria-label="Сохранить диапазоны {{branch.region.name}}">OK</button>
+    <div class="ui cancel button">Отмена</div>
+  </div>
+</div>  
+ {% endblock %}

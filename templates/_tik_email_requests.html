@@ -1,0 +1,159 @@
+
+<script>
+  $(function(){
+    $('.popclick').popup({on: 'click', lastResort: 'bottom right'})
+    $('.pophover').popup({on: 'hover', lastResort: 'bottom right'})
+  })
+</script>
+
+
+{% for answer in answers %}
+    <div class="alert 
+    {% if answer.tik_complaint_status == 'email_sent' %}alert-light{% elif answer.tik_complaint_status == 'moderating' %}alert-warning{% else %}alert-secondary{% endif %}" role="alert">
+      
+      <div style="text-align: center">
+        <a data-toggle="tooltip" data-placement="top" title="{{answer.region.name}}" class="alert-link" href="/old/html/uik/{{answer.region_id}}/{{answer.uik}}/">
+        УИК {{answer.uik}}</a>
+      </div>
+<!--           <span ></span> -->
+
+      <div style="text-align: center">
+        <small class="ui pophover" style="margin: 0 5px; color: gray;" 
+          title="">
+          {{answer.timestamp.astimezone(request.user.tz).strftime('%H:%M')}}
+        </small>
+        <div class="ui special popup" style="display:none; text-align: left; ">
+          <div style="width: max-content;">
+            <small style="color: gray;">
+              {{answer.timestamp.astimezone(answer.region.tz).strftime('%d %b %Y, <b>%H:%M</b>')|safe}}
+            </small> &nbsp;
+            {{answer.region.name}} (UTC{{'{x:+}'.format(x=answer.region.utc_offset)}})
+          </div>
+        </div>
+          {% if answer.revoked %}Отозвано <s>{% endif %}
+          
+          {{answer.question.label}}: <strong>{{answer.get_value()}}</strong>.
+          
+          {% if answer.revoked %}</s>{% endif %}
+        <br>
+        
+        {% if answer.operator_id %}
+          <i>"{{answer.operator_comment}}". Добавил оператор 
+            <a class="user" style="color: gray;" href="#" data-toggle="popover" data-placement="top" data-trigger="focus">
+              {{answer.operator.last_name}} {{answer.operator.first_name}}
+            </a>. 
+          </i>
+          <div class="user-popover" style="display:none">
+            <div>
+              <a href=# data-toggle="tooltip" data-placement="top" title="http://t.me/spbelect">
+                <img width=24 height=24 src="/static/Telegram_alternative_logo.png"/>
+                t.me/spbelect
+              </a>
+              <a href=# data-toggle="tooltip" data-placement="top" title="user@example.org">
+                <img width=24 height=24 src="/static/mail-icon.png"/>
+                user@example.org
+              </a>
+            </div>
+            <!--<div>
+              <a class="dropdown-item" href="#">Добавить пользователя в игнор-лист</a>
+            </div>-->
+          </div>
+        
+        {% else %}
+          {% if answer.appuser_id in request.user.disclosed_appusers %}
+          <i>
+            <a class="ui popclick" style="color: gray; cursor:pointer;">
+              {{answer.appuser.last_name}} {{answer.appuser.first_name}}
+            </a>
+            
+            <div class="ui special popup" style="display:none">
+              <div>
+                {% if answer.appuser.telegram %}
+                <a href="https://t.me/{{answer.appuser.telegram}}">
+                  <img  width=24 height=24 src="/static/Telegram_alternative_logo.png"/>
+                  {{answer.appuser.telegram}}
+                </a><br/>
+                {% endif %}
+                <a>
+                  <img  width=24 height=24 src="/static/Phone_32.png"/>
+                  +7 {{answer.appuser.phone}}
+                </a><br/>
+                <a href="mailto:{{answer.appuser.email}}" >
+                  <img  width=24 height=24 src="/static/mail-icon.png"/>
+                  {{answer.appuser.email}}
+                </a>
+              </div>
+            </div>, {{answer.role}}.</i>
+          {% else %}
+            {% if not request.user.pk %}
+              <span style="color: gray; cursor:pointer;">
+                <a class="login" href=#>Войдите</a> чтобы видеть контакты пользователя.
+              </span>
+            {% else %}
+              <a class="ui pop" style="color: gray; cursor:pointer;">
+                ФИО скрыто
+              </a>
+              <div class="ui special popup" style="display:none; text-align: left">
+                <div>
+                  Недостаточно прав для просмотра контактов пользователя. 
+                </div>
+                <div>
+                  Координаторы:
+                </div>
+                {% for org in answer.appuser.disclosed_to_orgs() %}
+                <div>
+                  {{org}}
+                </div>
+                {% else %}
+                  Нет
+                {% endfor %}
+              </div>
+            {% endif %}
+              
+          {% endif %}
+        {% endif %}        
+        
+        <pre>{{answer.tik_complaint_text}}</pre>
+      </div>
+       
+      {% if answer.is_incident and answer.appuser_id in request.user.disclosed_appusers %} 
+      <div style="margin: 10px 0">
+        <small>
+          <div style="text-align: center;" >
+          УИК:  
+           {% if answer.uik_images() %} 
+            <a class="alert-link view-images" href="#" data-title="УИК {{answer.uik}} Фото" data-images="{{','.join(answer.uik_images())}}"> 
+          {% endif %}
+            {{answer.get_uik_complaint_status_display() or 'Жалоба не подавалась'}}. 
+           {% if answer.uik_images() %} <img width=20 height=20 src="/static/Antu_folder-camera40.png"></a> {% endif %}
+          </div>
+          <div style="text-align: center;" >
+          ТИК: 
+           {% if answer.tik_complaint_text %} 
+            <a class="alert-link view-images" href="#" data-title="УИК {{answer.uik}} Фото" data-images="{{','.join(answer.tik_images())}}"> 
+          {% endif %}
+           {{answer.get_tik_complaint_status_display() or 'Жалоба не подавалась'}}.
+           {% if answer.tik_images() %} <img width=20 height=20 src="/static/Antu_folder-camera40.png">{% endif %}
+           {% if answer.tik_complaint_text %} </a> {% endif %}
+           
+           <pre style="display: none">{{answer.tik_complaint_text}}</pre>
+           
+          </div>
+        </small>
+      </div>
+      {% endif %}
+      
+      # if answer.tik and answer.tik.email
+        <div style="text-align: center;" >
+          Кому: {{answer.tik.email}}
+        </div>
+        
+        {% if answer.tik_complaint_status == int16('ожидает модератора') %}
+          <div style="text-align: center;" >
+            <button style="" class="btn btn-sm btn-outline-dark send_email" data-id='{{answer.id}}'>Отправить</button>
+          </div>
+        {% endif %}
+      # endif
+      
+    </div>
+{% endfor %} 

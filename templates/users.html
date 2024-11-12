@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+
+{% block title %}Users{% endblock %}
+
+{% block extra_head %}
+
+  <link href="/static/base.css" rel="stylesheet" />
+  
+  
+
+<!--     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script> -->
+    <style>
+        div.table {display:table}
+/*         table.row {display:table-row} */
+        tr {white-space: nowrap;}
+/*         div.cell { */
+        td.cell {
+/*             display:table-cell; */
+/*             border: 1px solid #999999; */
+/*             padding: 1px; */
+            height: 40px;
+        }
+    </style>
+    <script type="text/javascript" >
+        $(function(){
+            $("table").tablesorter();
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    
+      <div bp="grid" style="padding: 5px 0;">
+        <div bp="12 text-center">пользователей: {{users|length}}</div>
+        
+        <div bp="12">
+          <table id='my' class='table'>
+
+              <thead >
+                  <tr>
+                      <th class='cell'>
+                        Имя
+                      </th>
+                      <th class='cell'>Фамилия</th>
+                      <th class='cell'>telegram</th>
+                      <th class='cell'>email</th>
+                      <th class='cell'>Телефон</th>
+                      <th class='cell'>роль</th>
+                      <th class='cell'>УИК</th>
+                      <th class='cell'>Регион</th>
+                  </tr>
+              </thead>
+              <tbody >
+              {% for user in users %}
+                  <tr height=40>
+                      <td class='cell' data-toggle="tooltip" data-placement="top" title="{{user.app_id}}">
+                        {{user.first_name}}
+                      </td>
+                      <td class='cell'>
+                          <a href="#">
+                              {{user.last_name}}
+                          </a>
+                      </td>
+                      <td class='cell'>
+                        <a href="https://t.me/{{user.tg}}">
+                              {{user.tg}}
+                          </a>
+                      </td>
+                      <td class='cell'>{{user.email}}</td>
+                      <td class='cell'>+7{{user.phone}}</td>
+                      <td class='cell'>{{user.role}}</td>
+                      <td class='cell'>
+                          <a href="/old/html/uik/{{user.region_id}}/{{user.uik}}/">
+                              {{user.uik}}
+                          </a>
+                      </td>
+                      <td class='cell'>{{user.region.name|truncatechars:15}}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+        </div>
+
+      </div>
+{% endblock %}
