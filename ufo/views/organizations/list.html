@@ -4,7 +4,7 @@
 {% block title %} {{_('Organizations')}} {% endblock %}
 
 {% block extra_head %}
-  <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
 {% endblock %}
 
 {% block header %} {{_('Organizations')}} {% endblock %}
@@ -68,38 +68,40 @@
                 {{org.name.capitalize()}}
               </h2>
 
-              # if user in org.members.all()
-                <span class="badge badge-outline">
-                  {{_('You are a member')}}
-                </span>
-              # endif
-
-              <div class="card-actions">
+              # if user.is_authenticated
                 # if user in org.members.all()
-                  # if 'admin' == org.orgmembership_set.get(user=user).role
-                    <a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}">
-                      {{_('Edit')}}
-                    </a>
-                    <!--<a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}/staff">
-                      {{_('Manage Staff')}}
-                    </a>-->
-                  # endif
-                # else
-                  <form action="/organizations/{{org.id}}/join-applications"
-                    x-target.error='errors' method=post
-                  >
-                    # if org.join_requests.filter(user=request.user).exists()
-                      <span id="join-{{org.id}}" class="badge badge-outline">
-                        {{_('Join request sent')}}
-                      </span>
-                    # else
-                      <button x-sync id="join-{{org.id}}" class="btn btn-primary btn-xs">
-                        {{_('Join')}}
-                      </button>
-                    # endif
-                  </form>
+                  <span class="badge badge-outline">
+                    {{_('You are a member')}}
+                  </span>
                 # endif
-              </div>
+
+                <div class="card-actions">
+                  # if user in org.members.all()
+                    # if 'admin' == org.orgmembership_set.get(user=user).role
+                      <a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}">
+                        {{_('Edit')}}
+                      </a>
+                      <!--<a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}/staff">
+                        {{_('Manage Staff')}}
+                      </a>-->
+                    # endif
+                  # else
+                    <form action="/organizations/{{org.id}}/join-applications"
+                      x-target.error='errors' method=post
+                    >
+                      # if org.join_requests.filter(user=request.user).exists()
+                        <span id="join-{{org.id}}" class="badge badge-outline">
+                          {{_('Join request sent')}}
+                        </span>
+                      # else
+                        <button x-sync id="join-{{org.id}}" class="btn btn-primary btn-xs">
+                          {{_('Join')}}
+                        </button>
+                      # endif
+                    </form>
+                  # endif
+                </div>
+              # endif
 
               # if not filters.regions__id
                 <div x-data='{show_regions: false}' >
