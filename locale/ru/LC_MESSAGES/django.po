@@ -4,29 +4,27 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 # SPDX-FileCopyrightText: 2024 u 1
-# SPDX-FileCopyrightText: 2024 u 1
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-13 20:10+0500\n"
+"POT-Creation-Date: 2024-11-13 20:21+0500\n"
 "PO-Revision-Date: 2024-11-13 20:12+0500\n"
 "Last-Translator: u1 <someuniquename@gmail.com>\n"
 "Language: ru\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
-"X-Generator: Lokalize 24.08.3\n"
 
-#: settings.py:148 ufo/models/websiteuser.py:101
+#: settings.py:149 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr "Английский"
 
-#: settings.py:149 ufo/models/websiteuser.py:102
+#: settings.py:150 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr "Русский"
 
@@ -345,3 +343,4 @@ msgstr "Отмена"
 #: ufo/views/organizations/id/edit.py:78
 msgid "Organization {name} successfully created."
 msgstr "Организация {name} успешно создана."
+

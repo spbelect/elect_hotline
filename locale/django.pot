@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-13 20:10+0500\n"
+"POT-Creation-Date: 2024-11-13 20:21+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: settings.py:148 ufo/models/websiteuser.py:101
+#: settings.py:149 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr ""
 
-#: settings.py:149 ufo/models/websiteuser.py:102
+#: settings.py:150 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr ""
 
