@@ -12,35 +12,19 @@ from django.core.checks import register, Tags
 from django.db.models import Max, Q
 # from django.shortcuts import render
 from django.templatetags.static import static
+from django.urls import reverse
 from django.utils import translation
 from jinja2 import Environment
-from jinja2.ext import Extension, nodes
 
 import utils
 
+from ufo.jinja_extensions import LanguageExtension
 from ..models import (
     Answer, Region, WebsiteUser, Munokrug, MobileUser, Election, Campaign, int16, Contact
 )
 from utils.templatetags.utils import plural
 
 
-class LanguageExtension(Extension):
-    tags = {'language'}
-
-    def parse(self, parser):
-        lineno = next(parser.stream).lineno
-        # Parse the language code argument
-        args = [parser.parse_expression()]
-        # Parse everything between the start and end tag:
-        body = parser.parse_statements(['name:endlanguage'], drop_needle=True)
-        # Call the _switch_language method with the given language code and body
-        return nodes.CallBlock(self.call_method('_switch_language', args), [], [], body).set_lineno(lineno)
-
-    def _switch_language(self, language_code, caller):
-        with django.utils.translation.override(language_code):
-            # Temporarily override the active language and render the body
-            output = caller()
-        return output
 
 
 def jinja_env(**kwargs) -> Environment:
@@ -69,6 +53,7 @@ def jinja_env(**kwargs) -> Environment:
         'humanize': django.contrib.humanize.templatetags.humanize,
         'int16': int16,
         'static': static,
+        # 'url': reverse,
     })
     return env
 
