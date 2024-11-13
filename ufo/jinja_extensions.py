@@ -1,5 +1,6 @@
-
+import django.utils.translation
 from jinja2.ext import Extension, nodes
+
 
 class LanguageExtension(Extension):
     tags = {'language'}
