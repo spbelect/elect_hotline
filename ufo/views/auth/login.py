@@ -78,6 +78,6 @@ def login_with_signed_link(request, auth_user: EmailStr):
         _('You have successfully logged in as {user}.').format(user=user)
     )
 
-    return redirect('/newsite')
+    return redirect('/')
 
 
