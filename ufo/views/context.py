@@ -18,7 +18,6 @@ from jinja2 import Environment
 
 import utils
 
-from ufo.jinja_extensions import LanguageExtension
 from ..models import (
     Answer, Region, WebsiteUser, Munokrug, MobileUser, Election, Campaign, int16, Contact
 )
@@ -43,7 +42,7 @@ def jinja_env(**kwargs) -> Environment:
 
     env = Environment(**kwargs)
     env.install_gettext_translations(django.utils.translation)
-    env.add_extension(LanguageExtension)
+    # env.add_extension(LanguageExtension)
 
     # Populate context with Model classes
     env.globals.update({m.__name__: m for m in apps.all_models['ufo'].values()})

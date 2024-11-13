@@ -110,6 +110,7 @@ TEMPLATES = [
             'environment': 'ufo.views.context.jinja_env',
             'extensions': [
                 'jinja2.ext.i18n',
+                'ufo.jinja_extensions.LanguageExtension',
                 #'jdj_tags.extensions.DjangoStatic',
                 # 'jdj_tags.extensions.DjangoI18n',
                 # 'jdj_tags.extensions.DjangoL10n',
