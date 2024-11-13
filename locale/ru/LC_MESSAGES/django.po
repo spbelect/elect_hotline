@@ -4,41 +4,50 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 # SPDX-FileCopyrightText: 2024 u 1
-# SPDX-FileCopyrightText: 2024 u1 <someuniquename@gmail.com>
+# SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u 1
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-31 00:01+0500\n"
-"PO-Revision-Date: 2024-10-30 01:46+0500\n"
+"POT-Creation-Date: 2024-11-13 13:12+0500\n"
+"PO-Revision-Date: 2024-11-13 13:27+0500\n"
 "Last-Translator: u1 <someuniquename@gmail.com>\n"
 "Language: ru\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
-#: settings.py:137 ufo/models/websiteuser.py:101
+#: settings.py:148 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr ""
 
-#: settings.py:138 ufo/models/websiteuser.py:102
+#: settings.py:149 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr ""
 
-#: ufo/admin.py:244
+#: ufo/admin.py:253
 msgid "Personal info"
 msgstr ""
 
-#: ufo/admin.py:245
+#: ufo/admin.py:254
 msgid "Permissions"
 msgstr ""
 
-#: ufo/admin.py:247
+#: ufo/admin.py:256
 msgid "Important dates"
+msgstr ""
+
+#: ufo/models/organization.py:38
+msgid "Name must contain at least 3 characters"
 msgstr ""
 
 #: ufo/models/websiteuser.py:60
@@ -91,21 +100,59 @@ msgstr "Язык"
 msgid "Theme"
 msgstr "Тема"
 
-#: ufo/views/base.html:89 ufo/views/history.html:45
+#: ufo/models/websiteuser.py:109
+msgid "Photo"
+msgstr ""
+
+#: ufo/models/websiteuser.py:152
+msgid "Пользователь {user.email} присоединился к организации {org.name}"
+msgstr ""
+
+#: ufo/views/_answer.html:20 ufo/views/history.html:166
+msgid "UIK"
+msgstr "УИК"
+
+#: ufo/views/_answer.html:44
+msgid "Revoked"
+msgstr "Отозвано"
+
+#: ufo/views/_answer.html:66
+msgid "Added by"
+msgstr "Добавлено"
+
+#: ufo/views/_answer.html:68
+msgid "assistant"
+msgstr "Ассистент"
+
+#: ufo/views/_navbar.html:23
+msgid "Home"
+msgstr "Главная"
+
+#: ufo/views/_navbar.html:24 ufo/views/history.html:45 ufo/views/home.html:30
 msgid "History"
 msgstr "История"
 
-#: ufo/views/base.html:100
+#: ufo/views/_navbar.html:25 ufo/views/home.html:44
+#: ufo/views/organizations/list.html:4 ufo/views/organizations/list.html:10
+msgid "Organizations"
+msgstr "Организации"
+
+#: ufo/views/_navbar.html:36
 msgid "Settings"
 msgstr "Настройки"
 
-#: ufo/views/base.html:113
+#: ufo/views/_navbar.html:44
 msgid "Sign out"
 msgstr "Выйти"
 
-#: ufo/views/base.html:233
+#: ufo/views/_navbar.html:118 ufo/views/auth/login.html:4
+#: ufo/views/base.html:92
 msgid "Sign in"
 msgstr "Войти"
+
+#: ufo/views/base.html:97
+msgid "Close"
+msgstr "Закрыть"
 
 #: ufo/views/history.html:78
 msgid "from"
@@ -115,13 +162,9 @@ msgstr "с"
 msgid "to"
 msgstr "по"
 
-#: ufo/views/history.html:138
+#: ufo/views/history.html:138 ufo/views/organizations/list.html:39
 msgid "Region: all"
 msgstr "Регион: все"
-
-#: ufo/views/history.html:166
-msgid "UIK"
-msgstr "УИК"
 
 #: ufo/views/history.html:178
 msgid "all"
@@ -143,22 +186,157 @@ msgstr "Неважно"
 msgid "Yes"
 msgstr "Есть"
 
-#: ufo/views/history.html:206
+#: ufo/views/history.html:204
+msgid "Include revoked"
+msgstr "Включая отозванные"
+
+#: ufo/views/history.html:215 ufo/views/organizations/list.html:53
 msgid "Found"
 msgstr "Найдено"
 
-#: ufo/views/history.html:206
+#: ufo/views/history.html:215
 msgid "answer"
 msgid_plural "answers"
 msgstr[0] "ответ"
 msgstr[1] "ответа"
 msgstr[2] "ответов"
 
-#: ufo/views/history.html:209
+#: ufo/views/history.html:219
 msgid "Download"
 msgstr "Скачать"
 
-#: ufo/views/history.html:212
+#: ufo/views/history.html:223
 msgid "No answers with given filter"
 msgstr "Нет ответов с таким фильтром"
 
+#: ufo/views/history.html:235 ufo/views/organizations/list.html:134
+msgid "End of list"
+msgstr "Конец списка"
+
+#: ufo/views/home.html:19
+msgid ""
+"Monitor election transparency data submitted by public observers at "
+"voting stations."
+msgstr ""
+"Отслеживайте данные отправляемые наблюдателями из помещений для голосования."
+
+#: ufo/views/home.html:34
+msgid "Filter through answers given during past elections"
+msgstr "История ответов отправленных за предыдущие выборы"
+
+#: ufo/views/home.html:48
+msgid "Become part of a team assisting observers in real time"
+msgstr "Присоединяйтесь к команде для помощи наблюдателям"
+
+#: ufo/views/validation_error.html:37
+msgid "Error:"
+msgstr "Ошибка;"
+
+#: ufo/views/auth/google.py:69 ufo/views/auth/google.py:74
+msgid "Authentication failed"
+msgstr "Ошибка аутентификации"
+
+#: ufo/views/auth/google.py:88
+msgid "Failed to obtain access token from Google."
+msgstr "Не удалось получить токен доступа от Google"
+
+#: ufo/views/auth/login.html:19
+msgid "Sign in with Google"
+msgstr "Войти с помощью Google"
+
+#: ufo/views/auth/login.html:23
+msgid "or"
+msgstr "или"
+
+#: ufo/views/auth/login.html:33
+msgid "Sign in with Email"
+msgstr "Войти с Email"
+
+#: ufo/views/auth/login.html:39
+msgid "Enter email address"
+msgstr "Введите email адрес"
+
+#: ufo/views/auth/login.html:46
+msgid "Send"
+msgstr "Отправить"
+
+#: ufo/views/auth/login.py:53
+msgid "Sign in to Election Hotline"
+msgstr "Вход на Election Hotline"
+
+#: ufo/views/auth/login.py:54
+msgid "Link to sign in: {link}"
+msgstr "Ссылка для входа: {link}"
+
+#: ufo/views/auth/login.py:60
+msgid "Login link sent"
+msgstr "Ссылка для входа отправлена"
+
+#: ufo/views/auth/login.py:78
+msgid "You have successfully logged in as {user}."
+msgstr "Вы успешно вошли как {user}."
+
+#: ufo/views/organizations/id/edit.html:71 ufo/views/organizations/list.html:24
+msgid "Create"
+msgstr "Создать"
+
+#: ufo/views/organizations/list.html:32
+msgid "Find organization"
+msgstr "Найти организацию"
+
+#: ufo/views/organizations/list.html:53
+msgid "organization"
+msgid_plural "organizations"
+msgstr[0] "организация"
+msgstr[1] "организации"
+msgstr[2] "организаций"
+
+#: ufo/views/organizations/list.html:56
+msgid "No organizations with given filter"
+msgstr "Нет организаций с таким фильтром"
+
+#: ufo/views/organizations/list.html:74
+msgid "You are a member"
+msgstr "Вы состоите"
+
+#: ufo/views/organizations/list.html:82
+msgid "Edit"
+msgstr "Редактировать"
+
+#: ufo/views/organizations/list.html:85
+msgid "Manage Staff"
+msgstr "Управление персоналом"
+
+#: ufo/views/organizations/id/join_applications.py:31
+#: ufo/views/organizations/list.html:94
+msgid "Join request sent"
+msgstr "Запрос на вступление отправлен"
+
+#: ufo/views/organizations/list.html:98
+msgid "Join"
+msgstr "Вступить"
+
+#: ufo/views/organizations/id/edit.html:4
+#: ufo/views/organizations/id/edit.html:10
+msgid "Edit organization"
+msgstr "Редактировать организацию"
+
+#: ufo/views/organizations/id/edit.html:29
+msgid "Name"
+msgstr "Название"
+
+#: ufo/views/organizations/id/edit.html:56
+msgid "Regions"
+msgstr "Регион: все"
+
+#: ufo/views/organizations/id/edit.html:71
+msgid "Save"
+msgstr "Сохранить"
+
+#: ufo/views/organizations/id/edit.html:74
+msgid "Cancel"
+msgstr "Отмена"
+
+#: ufo/views/organizations/id/edit.py:78
+msgid "Organization {name} successfully created."
+msgstr "Организация {name} успешно создана."
