@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-13 13:12+0500\n"
+"POT-Creation-Date: 2024-11-13 20:10+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,11 +83,11 @@ msgstr ""
 msgid "date joined"
 msgstr ""
 
-#: ufo/models/websiteuser.py:104
+#: ufo/models/websiteuser.py:104 ufo/views/account.html:51
 msgid "Language"
 msgstr ""
 
-#: ufo/models/websiteuser.py:108
+#: ufo/models/websiteuser.py:108 ufo/views/account.html:76
 msgid "Theme"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: ufo/views/_navbar.html:36
+#: ufo/views/_navbar.html:36 ufo/views/account.html:4 ufo/views/account.html:11
 msgid "Settings"
 msgstr ""
 
@@ -139,6 +139,14 @@ msgstr ""
 #: ufo/views/_navbar.html:118 ufo/views/auth/login.html:4
 #: ufo/views/base.html:92
 msgid "Sign in"
+msgstr ""
+
+#: ufo/views/account.html:21
+msgid "Country"
+msgstr ""
+
+#: ufo/views/account.html:34
+msgid "Timezone"
 msgstr ""
 
 #: ufo/views/base.html:97
