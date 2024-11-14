@@ -24,7 +24,8 @@ def get_form_by_id(request, id: UUID4):
     org = get_object_or_404(Organization, id=id)
 
     if not org.creator == request.user:
-        raise HttpError(status=401)  # Unauthorized
+        # Unauthorized
+        raise HttpError(401, _("You don't have permission to edit this organization."))
 
     return render(request, 'views/organizations/id/edit.html', dict(
         org = org
@@ -60,7 +61,8 @@ def post_form_by_id(request, id: UUID4, data: Form[OrgSchema]):
     org = get_object_or_404(Organization, id=data.id)
 
     if not org.creator == request.user:
-        raise HttpError(status=401)  # Unauthorized
+        # Unauthorized
+        raise HttpError(401, _("You don't have permission to edit this organization."))
 
     org.update(name=data.name)
     org.regions.set(data.regions)

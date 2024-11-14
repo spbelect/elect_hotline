@@ -117,7 +117,8 @@ class DummyStreamWriter():
 @api.html.get('/history/export-csv')
 def export_csv(request, filters: Query[Filters]):
     if not request.user.is_active:
-        raise HttpError(status=401)  # Unauthorized
+        # Unauthorized
+        raise HttpError(401, _("You don't have permission to export."))
 
     def generate_rows() -> Iterator[str]:
         answers = filters(request).select_related('question', 'appuser')
