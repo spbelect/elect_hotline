@@ -11,6 +11,8 @@ import environ
 from django.utils.translation import gettext_lazy as _
 
 
+print(f'{os.environ["DJANGO_SETTINGS_MODULE"]=}')
+
 env = environ.Env()
 
 SRC_DIR = environ.Path(__file__) - 1  # ./

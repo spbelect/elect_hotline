@@ -9,42 +9,32 @@ import traceback
 
 #from os.path import abspath
 from functools import lru_cache
+from pathlib import Path
+from collections import namedtuple
 
 import django
 from requests import get
-from click import Context, confirm, command, option, group, argument, progressbar
+# from click import Context, confirm, command, option, group, argument, progressbar
+from typer import Typer, Option, confirm
+from typing_extensions import Annotated
 
 import click
 import environ
 
 
-Context.get_usage = Context.get_help  # show full help on error
+app = Typer(no_args_is_help=True)
 
 
-env = environ.Env()
-SRCDIR = environ.Path(__file__).path('../..')
-sys.path.insert(0, str(SRCDIR))
-env.read_env(SRCDIR('env-local'))
-os.chdir(str(SRCDIR))
+# Context.get_usage = Context.get_help  # show full help on error
 
-if os.path.exists('../settings_local.py'):
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings_local")
-else:
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
-    
-print(f'Using django settings {os.environ["DJANGO_SETTINGS_MODULE"]}.py')
+
+os.chdir(Path(__file__).joinpath('../..').resolve())  # src dir
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+    "settings_local" if Path('settings_local.py').exists() else "settings"
+)
+
 django.setup()
-
-
-from ufo.models import Region, Country
-
-for id, name in [
-            ('ru', 'Russia'),
-            ('ua', 'Ukraine'),
-            ('bg', 'Belarus'),
-            ('kz', 'Kazakhstan'),
-        ]:
-    Country.objects.update_or_create(id=id, defaults={'name':name})
 
 
 @lru_cache()
@@ -62,9 +52,10 @@ def get_html(url):
     sys.exit(1)
 
             
+TZ = namedtuple('TZ', 'name msk utc')
 
-# взято с http://www.phcode.ru/chasovyie-zonyi-rossii
-tz = [x.split('\t') for x in '''
+# Taken from http://www.phcode.ru/chasovyie-zonyi-rossii
+tz = [TZ(*x.split('\t')) for x in '''
 Калининградское время (1-я часовая зона)
 Калининградская область 	МСК-1	UTC+2:00
 
@@ -178,28 +169,33 @@ tz = [x.split('\t') for x in '''
 Камчатское время (11-я часовая зона)
 Камчатский край 	МСК+9	UTC+12:00
 Чукотский автономный округ 	МСК+9	UTC+12:00
-'''.split('\n') if '	' in x]
+'''.replace(':00', '').replace('UTC+', '').split('\n') if '	' in x]
 
-tz = {x[0].strip(): int(x[-1][4:-3]) for x in tz}
+tz = {x.name.strip(): int(x.utc) for x in tz}
 
- 
-            
-@group()
-def cli(**kw):
-    """ Manage regions. """
-    pass
-    
-    
-@cli.command()
-@option('--delete', '-d', is_flag=True, default=False, help='Delete existing regions.')
-#@argument('index', default='all')
-def populatedb(**kw):
+
+@app.command()
+def populatedb(
+    delete: Annotated[bool, Option(help="Delete existing regions")] = False
+):
     """ Populate django db regions. """
-    
-    if kw.get('delete'):
-        msg = 'This will delete all regions the database!\nAre you sure you want to proceed?'
-        if not click.confirm(msg):
-            return
+
+    if delete:
+        confirm(
+            "This will delete all regions from the database!\n"
+            "Are you sure you want to proceed?", abort=True
+        )
+
+    from ufo.models import Region, Country
+
+    for id, name in [
+                ('ru', 'Russia'),
+                ('ua', 'Ukraine'),
+                ('bg', 'Belarus'),
+                ('kz', 'Kazakhstan'),
+            ]:
+        Country.objects.update_or_create(id=id, defaults={'name':name})
+
         
     cik_regions = json.load(open('scripts/cik_regions.json'))
     #print(cik_regions)
@@ -212,7 +208,7 @@ def populatedb(**kw):
         print(f'Регионы отсутствуют в списке timezones: {sorted(set(cik_regions.values()) - set(tz))}')
         sys.exit(1)
         
-    if kw.get('delete'):
+    if delete:
         Region.objects.all().delete()
         
     for id, name in cik_regions.items():
@@ -226,7 +222,7 @@ def populatedb(**kw):
     print('ok')
 
 
-@cli.command()
+@app.command()
 def scrape(**kw):
     """ Парсить регионы с сайта ГАС выборов, сохранить в cik_regions.json"""
     cik_regions = {}
@@ -250,7 +246,7 @@ def scrape(**kw):
     json.dump(cik_regions, open('scripts/cik_regions.json', 'w+'), indent=2, ensure_ascii=False)
     print(f'{len(cik_regions)} regions scraped successfully. Saved to scripts/cik_regions.json')
 
-        
+
 if __name__ == '__main__':
-    cli()
+    app()
     
