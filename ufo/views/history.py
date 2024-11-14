@@ -12,6 +12,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.utils.translation import gettext as _
 from ninja import FilterSchema, Field, Query, Header
 from ninja.errors import HttpError
 from pendulum import now
