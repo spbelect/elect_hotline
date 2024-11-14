@@ -336,7 +336,7 @@ from loguru import logger
 import pydantic
 
 
-def def_exc_handler(exc: Exception, context):
+def drf_exc_handler(exc: Exception, context):
     """ Rest framework exception handler. """
     from rest_framework.views import exception_handler
     from rest_framework.response import Response
@@ -356,7 +356,7 @@ def def_exc_handler(exc: Exception, context):
 
 REST_FRAMEWORK = {
     #'EXCEPTION_HANDLER': lambda *a: None,  # raise validation exceptions.
-    'EXCEPTION_HANDLER': def_exc_handler
+    'EXCEPTION_HANDLER': drf_exc_handler
 }
 
 GOOGLE_OAUTH2_CLIENT_ID = env.str('GOOGLE_OAUTH2_CLIENT_ID')
