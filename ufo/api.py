@@ -22,8 +22,7 @@ html = NinjaAPI(urls_namespace='html')
 @html.exception_handler(ValidationError)
 def validation_errors(request, exc):
     if settings.DEBUG:
-        logging.error(exc)
-    # import ipdb; ipdb.sset_trace()
+        logging.exception(exc)
     return render(
         request, "views/validation_error.html", {'errors': exc.errors}, status=422
     )
@@ -33,6 +32,7 @@ def validation_errors(request, exc):
 def exc_error(request, exc):
     if settings.DEBUG:
         raise exc
+    logging.exception(exc)
     return render(
         request, "views/http_error.html", {'error': exc}, status=500
     )
@@ -41,6 +41,7 @@ def exc_error(request, exc):
 def http_error(request, exc):
     if settings.DEBUG:
         raise exc
+    logging.exception(exc)
     return render(
         request, "views/http_error.html", {'error': exc}, status=exc.status_code
     )
