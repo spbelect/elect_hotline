@@ -12,9 +12,10 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import django
-from requests import get
+from rich.progress import track
 from typer import Typer, Option, confirm
 from typing_extensions import Annotated
+
 
 MSK = ZoneInfo('Europe/Moscow')
 
@@ -66,7 +67,9 @@ def mock(
 
 
     for user in (alice, bob):
-        for question in Question.objects.filter(type='YESNO'):
+        questions = Question.objects.filter(type='YESNO')
+
+        for question in track(questions, description=f"{user}..."):
             if ord(question.id[-1]) % 3:
                 continue  # skip some random questions
 
