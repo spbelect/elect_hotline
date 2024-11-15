@@ -148,10 +148,13 @@
         >
 <!-- <option placeholder x-show="false" x-text="`Регион: все`">zxc</option> -->
 <!--           <option value="null">Регион: все</option> -->
-          # for region in user.country.regions.all()
+          # for region in regions.filter(num_answers__gte=1)
             <option value="{{region.id}}"
               {{ 'selected' if region.id in (filters.region_id__in or []) else '' }}
-            > {{region.name}} </option>
+            >
+              {{region.name}}
+              {{region.num_answers or ''}}
+            </option>
           # endfor
         </select>
 

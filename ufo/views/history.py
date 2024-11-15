@@ -8,7 +8,7 @@ import django
 from django.conf import settings
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
@@ -20,7 +20,7 @@ from pydantic import UUID4, BaseModel, field_validator, computed_field
 from pydantic import conint, conlist, constr, Json
 
 from ufo import api
-from ufo.models import Answer, int16
+from ufo.models import Answer, int16, Region
 import utils
 
 
@@ -102,10 +102,11 @@ class Filters(FilterSchema):
 
 @api.html.get('/history')
 def answers_history(request, filters: Query[Filters], page: Header[int] = 1):
-    paginator = Paginator(filters(request), per_page=2)
+    paginator = Paginator(filters(request), per_page=10)
     return render(request, 'views/history.html', dict(
         page = paginator.get_page(page),
-        filters = filters
+        filters = filters,
+        regions = request.user.country.regions.annotate(num_answers=Count('answer'))
     ))
 
 
