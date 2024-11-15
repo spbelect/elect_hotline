@@ -14,12 +14,8 @@ from collections import namedtuple
 
 import django
 from requests import get
-# from click import Context, confirm, command, option, group, argument, progressbar
 from typer import Typer, Option, confirm
 from typing_extensions import Annotated
-
-import click
-import environ
 
 
 app = Typer(no_args_is_help=True)
