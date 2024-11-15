@@ -4,27 +4,30 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 # SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u 1
+# SPDX-FileCopyrightText: 2024 u1 <someuniquename@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-13 20:21+0500\n"
-"PO-Revision-Date: 2024-11-13 20:12+0500\n"
+"POT-Creation-Date: 2024-11-15 21:18+0500\n"
+"PO-Revision-Date: 2024-11-15 21:20+0500\n"
 "Last-Translator: u1 <someuniquename@gmail.com>\n"
 "Language: ru\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
-#: settings.py:149 ufo/models/websiteuser.py:101
+#: settings.py:151 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr "Английский"
 
-#: settings.py:150 ufo/models/websiteuser.py:102
+#: settings.py:152 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr "Русский"
 
@@ -102,7 +105,7 @@ msgstr "Фото"
 msgid "Пользователь {user.email} присоединился к организации {org.name}"
 msgstr ""
 
-#: ufo/views/_answer.html:20 ufo/views/history.html:166
+#: ufo/views/_answer.html:20 ufo/views/history.html:172
 msgid "UIK"
 msgstr "УИК"
 
@@ -117,6 +120,31 @@ msgstr "Добавлено"
 #: ufo/views/_answer.html:68
 msgid "assistant"
 msgstr "Ассистент"
+
+#: ufo/views/_answer.html:98
+msgctxt "Please"
+msgid "Sign in"
+msgstr "Войдите"
+
+#: ufo/views/_answer.html:98
+msgid "to see users contacts."
+msgstr "чтобы видеть контакты пользователя."
+
+#: ufo/views/_answer_contacts.html:38
+msgid "Contacts hidden"
+msgstr "Контакты скрыты"
+
+#: ufo/views/_answer_contacts.html:42
+msgid "Not authorized to view contacts of this user."
+msgstr "Недостаточно прав для просмотра контактов пользователя."
+
+#: ufo/views/_answer_contacts.html:45
+msgid "Responsible organizations"
+msgstr "Координирующие организации"
+
+#: ufo/views/_answer_contacts.html:50
+msgid "None"
+msgstr "Нет"
 
 #: ufo/views/_navbar.html:23
 msgid "Home"
@@ -156,64 +184,68 @@ msgstr "Часовой пояс"
 msgid "Close"
 msgstr "Закрыть"
 
-#: ufo/views/history.html:78
+#: ufo/views/history.html:81
 msgid "from"
 msgstr "с"
 
-#: ufo/views/history.html:92
+#: ufo/views/history.html:95
 msgid "to"
 msgstr "по"
 
-#: ufo/views/history.html:138 ufo/views/organizations/list.html:39
+#: ufo/views/history.html:141 ufo/views/organizations/list.html:39
 msgid "Region: all"
 msgstr "Регион: все"
 
-#: ufo/views/history.html:178
+#: ufo/views/history.html:184
 msgid "all"
 msgstr "все"
 
-#: ufo/views/history.html:187
+#: ufo/views/history.html:193
 msgid "Complaint"
 msgstr "Жалоба"
 
-#: ufo/views/history.html:191
+#: ufo/views/history.html:197
 msgid "No"
 msgstr "Нет"
 
-#: ufo/views/history.html:193
+#: ufo/views/history.html:199
 msgid "Any"
 msgstr "Неважно"
 
-#: ufo/views/history.html:195
+#: ufo/views/history.html:201
 msgid "Yes"
 msgstr "Есть"
 
-#: ufo/views/history.html:204
+#: ufo/views/history.html:210
 msgid "Include revoked"
 msgstr "Включая отозванные"
 
-#: ufo/views/history.html:215 ufo/views/organizations/list.html:53
+#: ufo/views/history.html:221 ufo/views/organizations/list.html:53
 msgid "Found"
 msgstr "Найдено"
 
-#: ufo/views/history.html:215
+#: ufo/views/history.html:221
 msgid "answer"
 msgid_plural "answers"
 msgstr[0] "ответ"
 msgstr[1] "ответа"
 msgstr[2] "ответов"
 
-#: ufo/views/history.html:219
+#: ufo/views/history.html:225
 msgid "Download"
 msgstr "Скачать"
 
-#: ufo/views/history.html:223
+#: ufo/views/history.html:229
 msgid "No answers with given filter"
 msgstr "Нет ответов с таким фильтром"
 
-#: ufo/views/history.html:235 ufo/views/organizations/list.html:134
+#: ufo/views/history.html:246 ufo/views/organizations/list.html:134
 msgid "End of list"
 msgstr "Конец списка"
+
+#: ufo/views/history.py:123
+msgid "You don't have permission to export."
+msgstr ""
 
 #: ufo/views/home.html:19
 msgid ""
@@ -330,7 +362,7 @@ msgstr "Название"
 
 #: ufo/views/organizations/id/edit.html:56
 msgid "Regions"
-msgstr "Регион: все"
+msgstr "Регионы"
 
 #: ufo/views/organizations/id/edit.html:71
 msgid "Save"
@@ -340,7 +372,10 @@ msgstr "Сохранить"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ufo/views/organizations/id/edit.py:78
+#: ufo/views/organizations/id/edit.py:28 ufo/views/organizations/id/edit.py:65
+msgid "You don't have permission to edit this organization."
+msgstr ""
+
+#: ufo/views/organizations/id/edit.py:80
 msgid "Organization {name} successfully created."
 msgstr "Организация {name} успешно создана."
-

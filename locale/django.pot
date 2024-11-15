@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-13 20:21+0500\n"
+"POT-Creation-Date: 2024-11-15 21:18+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: settings.py:149 ufo/models/websiteuser.py:101
+#: settings.py:151 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr ""
 
-#: settings.py:150 ufo/models/websiteuser.py:102
+#: settings.py:152 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Пользователь {user.email} присоединился к организации {org.name}"
 msgstr ""
 
-#: ufo/views/_answer.html:20 ufo/views/history.html:166
+#: ufo/views/_answer.html:20 ufo/views/history.html:172
 msgid "UIK"
 msgstr ""
 
@@ -113,6 +113,31 @@ msgstr ""
 
 #: ufo/views/_answer.html:68
 msgid "assistant"
+msgstr ""
+
+#: ufo/views/_answer.html:98
+msgctxt "Please"
+msgid "Sign in"
+msgstr ""
+
+#: ufo/views/_answer.html:98
+msgid "to see users contacts."
+msgstr ""
+
+#: ufo/views/_answer_contacts.html:38
+msgid "Contacts hidden"
+msgstr ""
+
+#: ufo/views/_answer_contacts.html:42
+msgid "Not authorized to view contacts of this user."
+msgstr ""
+
+#: ufo/views/_answer_contacts.html:45
+msgid "Responsible organizations"
+msgstr ""
+
+#: ufo/views/_answer_contacts.html:50
+msgid "None"
 msgstr ""
 
 #: ufo/views/_navbar.html:23
@@ -153,62 +178,66 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: ufo/views/history.html:78
+#: ufo/views/history.html:81
 msgid "from"
 msgstr ""
 
-#: ufo/views/history.html:92
+#: ufo/views/history.html:95
 msgid "to"
 msgstr ""
 
-#: ufo/views/history.html:138 ufo/views/organizations/list.html:39
+#: ufo/views/history.html:141 ufo/views/organizations/list.html:39
 msgid "Region: all"
 msgstr ""
 
-#: ufo/views/history.html:178
+#: ufo/views/history.html:184
 msgid "all"
 msgstr ""
 
-#: ufo/views/history.html:187
+#: ufo/views/history.html:193
 msgid "Complaint"
 msgstr ""
 
-#: ufo/views/history.html:191
+#: ufo/views/history.html:197
 msgid "No"
 msgstr ""
 
-#: ufo/views/history.html:193
+#: ufo/views/history.html:199
 msgid "Any"
 msgstr ""
 
-#: ufo/views/history.html:195
+#: ufo/views/history.html:201
 msgid "Yes"
 msgstr ""
 
-#: ufo/views/history.html:204
+#: ufo/views/history.html:210
 msgid "Include revoked"
 msgstr ""
 
-#: ufo/views/history.html:215 ufo/views/organizations/list.html:53
+#: ufo/views/history.html:221 ufo/views/organizations/list.html:53
 msgid "Found"
 msgstr ""
 
-#: ufo/views/history.html:215
+#: ufo/views/history.html:221
 msgid "answer"
 msgid_plural "answers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ufo/views/history.html:219
+#: ufo/views/history.html:225
 msgid "Download"
 msgstr ""
 
-#: ufo/views/history.html:223
+#: ufo/views/history.html:229
 msgid "No answers with given filter"
 msgstr ""
 
-#: ufo/views/history.html:235 ufo/views/organizations/list.html:134
+#: ufo/views/history.html:246 ufo/views/organizations/list.html:134
 msgid "End of list"
+msgstr ""
+
+#: ufo/views/history.py:123
+msgid "You don't have permission to export."
 msgstr ""
 
 #: ufo/views/home.html:19
@@ -333,7 +362,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ufo/views/organizations/id/edit.py:78
+#: ufo/views/organizations/id/edit.py:28 ufo/views/organizations/id/edit.py:65
+msgid "You don't have permission to edit this organization."
+msgstr ""
+
+#: ufo/views/organizations/id/edit.py:80
 msgid "Organization {name} successfully created."
 msgstr ""
 

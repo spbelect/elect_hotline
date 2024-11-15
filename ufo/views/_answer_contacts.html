@@ -34,16 +34,20 @@
 
     ## Мобильный ID запрещен к показу этому оператору
 
-    <a class="ui pop" style="cursor:pointer;"> ФИО скрыто </a>
+    <a class="ui pop" style="cursor:pointer;">
+        {{_('Contacts hidden')}}
+    </a>
     <div class="ui special popup" style="display:none; text-align: left">
         <div>
-            Недостаточно прав для просмотра контактов пользователя.
+            {{_('Not authorized to view contacts of this user.')}}
         </div>
-    <div> Координаторы: </div>
-    {% for org in answer.appuser.disclosed_to_orgs() %}
-        <div> {{org}} </div>
-    {% else %}
-        Нет
-    {% endfor %}
+        <div>
+            {{_('Responsible organizations')}}:
+        </div>
+        {% for org in answer.appuser.disclosed_to_orgs() %}
+            <div> {{org}} </div>
+        {% else %}
+            {{_('None')}}
+        {% endfor %}
     </div>
 # endif

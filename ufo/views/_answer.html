@@ -95,7 +95,7 @@
             # if not request.user.pk
                 ## Незалогиненым не показываетм контакты
                 <span style="color: gray; cursor:pointer;">
-                  <a class="login" href=#>Войдите</a> чтобы видеть контакты пользователя.
+                  <a href='/auth/login'>{{pgettext('Please', 'Sign in')}}</a> {{_('to see users contacts.')}}
                 </span>
             # else
                 ## Оператор залогинен
