@@ -3,6 +3,7 @@
 import csv
 import json
 import os
+import random
 import re
 import sys
 import traceback
@@ -75,14 +76,14 @@ def mock(
 
             Answer.objects.create(
                 question=question,
-                revoked=not bool(ord(question.id[-1]) % 3),
+                revoked=bool(random.choice([0,1])),
                 value_bool=True,
                 is_incident=not bool(ord(question.id[-2:-1]) % 3),
                 appuser=user,
                 region=user.region,
                 uik=user.uik,
                 role=user.role,
-                uik_complaint_status=int16('не подавалась') if ord(question.id[-1]) % 5 else int16('отказ принять жалобу'),
+                uik_complaint_status=int16('не подавалась') if random.choice([0,1]) else int16('отказ принять жалобу'),
                 timestamp=datetime(2024, 9, 9).replace(tzinfo=MSK),
             )
 
