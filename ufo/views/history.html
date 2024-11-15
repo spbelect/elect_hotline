@@ -51,10 +51,12 @@
   x-data="{
     query: {{filters.model_dump_json()}},
     last_submitted: null,
+    waiting: false,
 
     submit() {
       //log(this.query, this.last_submitted, equal(this.query, this.last_submitted));
       if(!equal(this.query, this.last_submitted)) {
+        this.waiting = true;
         $ajax('', {target: 'list_replace errors', body: this.query, sync: true})
         this.last_submitted = { ...this.query }
       }
@@ -62,6 +64,7 @@
   }"
 
   @ajax:after="(event) => {
+    waiting = false;
     window.history.replaceState(null, null, event.detail.response.url)
   }"
 >
@@ -229,6 +232,11 @@
 
 
   <div id='list_replace' x-merge="replace" class="px-2 lg:px-4" >
+    <svg x-show="waiting" class="mx-auto mb-10 animate-spin h-5 w-5 text-white"
+      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
     <div id='list_append' x-merge="append">
       # for answer in page
           {% include "views/_answer.html" %}
