@@ -215,7 +215,7 @@
   </form>
   
 
-  <div id="total" x-sync class="px-2 lg:px-4 py-2" >
+  <div id="total" x-sync x-show="!waiting" class="px-2 lg:px-4 py-2" >
     # if page.paginator.count
       <span class="text-content">
         {{_('Found')}}: {{page.paginator.count}} {{ngettext('answer', 'answers', page.paginator.count)}}
