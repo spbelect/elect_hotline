@@ -23,7 +23,7 @@ python manage.py check --tag email --deploy
 python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn "wsgi:application" --access-logfile - --workers 12 --threads 12 --reload
 ```
 
-## Deply with Neondb
+## Deploy with Neondb
 
 ```
 zypper in postgresql
