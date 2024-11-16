@@ -29,7 +29,7 @@ class Filters(FilterSchema):
 
 @api.html.get('/organizations')
 def get_organizations(request, filters: Query[Filters], page: Header[int] = 1):
-    orgs = filters.filter(Organization.objects.all())
+    orgs = filters.filter(Organization.objects.prefetch_related('regions'))
 
     paginator = Paginator(orgs, per_page=1)
 

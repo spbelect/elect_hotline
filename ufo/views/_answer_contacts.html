@@ -44,7 +44,7 @@
         <div>
             {{_('Responsible organizations')}}:
         </div>
-        {% for org in answer.appuser.disclosed_to_orgs() %}
+        {% for org in answer.appuser.disclosed_to_orgs %}
             <div> {{org}} </div>
         {% else %}
             {{_('None')}}
