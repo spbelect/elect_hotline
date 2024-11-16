@@ -123,7 +123,7 @@ def export_csv(request, filters: Query[Filters]):
         raise HttpError(401, _("You don't have permission to export."))
 
     def generate_rows() -> Iterator[str]:
-        answers = filters(request).select_related('question', 'appuser')
+        answers = filters(request)
         writer = csv.writer(DummyStreamWriter())
 
         yield writer.writerow([

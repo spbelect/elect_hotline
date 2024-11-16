@@ -171,6 +171,7 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
 
     @cached_property
     def disclosed_appusers(self):
+        return set()
         from .mobileuser import MobileUser
         #from .election import Election 
         #from .campaign import Campaign 
