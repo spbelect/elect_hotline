@@ -73,6 +73,8 @@ def context_processor(request) -> dict:
     }]
     """
 
+    return {}
+
     actual_regions = []
 
     if request.user.is_authenticated:
