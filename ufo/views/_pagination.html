@@ -9,6 +9,8 @@
                 body: $data.query | $refs.form,
             })
         }, 100)"
+        ## Don't bubble up ajax:before event as it is used to show form refresh loader.
+        @ajax:before.stop
     # endif
 >
     # if page.has_next()
