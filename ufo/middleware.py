@@ -6,6 +6,7 @@ from django.utils import translation
 
 import django
 from django.contrib.auth import models
+from django.utils.functional import cached_property
 
 from .models import Country
 
@@ -38,7 +39,7 @@ class AnonymousUser(django.contrib.auth.models.AnonymousUser):
     def tz(self):
         return timezone(timedelta(hours=self.utc_offset))
 
-    @property
+    @cached_property
     def country(self):
         return Country.objects.get(id=self.country_id)
 
