@@ -5,6 +5,7 @@ from django.db.models import (
     Model, ForeignKey, DateField, BooleanField, PositiveSmallIntegerField, TextField,
     IntegerField, CharField, SET_NULL, DateTimeField)
 from django.contrib.postgres.fields import ArrayField, JSONField
+from django.utils.functional import cached_property
 from django.utils.timezone import now
 
 import requests
@@ -47,5 +48,7 @@ class MobileUser(Model):
     def __str__(self):
         return 'Юзер %s' % (self.app_id)
     
+    @cached_property
     def disclosed_to_orgs(self):
+        return []
         return Organization.objects.filter(campaigns__election__in=self.elections.all()).distinct()
