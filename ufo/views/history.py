@@ -59,7 +59,7 @@ class Filters(FilterSchema):
             q &= Q(timestamp__lt=dt.replace(tzinfo=request.user.tz))
 
         print(q)
-        return Answer.objects.filter(q)
+        return Answer.objects.filter(q).select_related('region', 'question')
 
     # timestamp__gt: Optional[datetime | Literal[""]] = Field(None, exclude=True)
 
