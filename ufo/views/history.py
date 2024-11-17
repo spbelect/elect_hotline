@@ -127,18 +127,18 @@ def export_csv(request, filters: Query[Filters]):
         writer = csv.writer(DummyStreamWriter())
 
         yield writer.writerow([
-            'Регион',
-            'УИК',
-            'Время',
-            'Фамилия',
-            'Имя',
-            'Email',
-            'Телефон',
-            'Роль',
-            'id Вопроса',
-            'Вопрос',
-            'Ответ',
-            'Отозван',
+            _('Region'),
+            _('UIK'),
+            _('Time'),
+            _('Last name'),
+            _('First name'),
+            _('Email'),
+            _('Phone'),
+            _('Role'),
+            _('Question id'),
+            _('Question'),
+            _('Answer'),
+            _('Revoked'),
         ])
         for answer in answers.iterator(chunk_size=2000):
             authorized = answer.appuser.id in request.user.disclosed_appusers

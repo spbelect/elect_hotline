@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-15 21:18+0500\n"
+"POT-Creation-Date: 2024-11-17 20:05+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 
 #: settings.py:152 ufo/models/websiteuser.py:102
 msgid "Russian"
+msgstr ""
+
+#: urls.py:37
+msgid "Page with given address does not exist"
 msgstr ""
 
 #: ufo/admin.py:253
@@ -99,11 +103,12 @@ msgstr ""
 msgid "Пользователь {user.email} присоединился к организации {org.name}"
 msgstr ""
 
-#: ufo/views/_answer.html:20 ufo/views/history.html:172
+#: ufo/views/_answer.html:20 ufo/views/history.html:170
+#: ufo/views/history.py:131
 msgid "UIK"
 msgstr ""
 
-#: ufo/views/_answer.html:44
+#: ufo/views/_answer.html:44 ufo/views/history.py:141
 msgid "Revoked"
 msgstr ""
 
@@ -140,29 +145,29 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: ufo/views/_navbar.html:23
+#: ufo/views/_navbar.html:24
 msgid "Home"
 msgstr ""
 
-#: ufo/views/_navbar.html:24 ufo/views/history.html:45 ufo/views/home.html:30
+#: ufo/views/_navbar.html:25 ufo/views/history.html:45 ufo/views/home.html:30
 msgid "History"
 msgstr ""
 
-#: ufo/views/_navbar.html:25 ufo/views/home.html:44
+#: ufo/views/_navbar.html:26 ufo/views/home.html:44
 #: ufo/views/organizations/list.html:4 ufo/views/organizations/list.html:10
 msgid "Organizations"
 msgstr ""
 
-#: ufo/views/_navbar.html:36 ufo/views/account.html:4 ufo/views/account.html:11
+#: ufo/views/_navbar.html:37 ufo/views/account.html:4 ufo/views/account.html:11
 msgid "Settings"
 msgstr ""
 
-#: ufo/views/_navbar.html:44
+#: ufo/views/_navbar.html:45
 msgid "Sign out"
 msgstr ""
 
-#: ufo/views/_navbar.html:118 ufo/views/auth/login.html:4
-#: ufo/views/base.html:92
+#: ufo/views/_navbar.html:126 ufo/views/auth/login.html:4
+#: ufo/views/base.html:93
 msgid "Sign in"
 msgstr ""
 
@@ -174,70 +179,110 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: ufo/views/base.html:97
+#: ufo/views/base.html:98
 msgid "Close"
 msgstr ""
 
-#: ufo/views/history.html:81
+#: ufo/views/history.html:79
 msgid "from"
 msgstr ""
 
-#: ufo/views/history.html:95
+#: ufo/views/history.html:93
 msgid "to"
 msgstr ""
 
-#: ufo/views/history.html:141 ufo/views/organizations/list.html:39
+#: ufo/views/history.html:139 ufo/views/organizations/list.html:47
 msgid "Region: all"
 msgstr ""
 
-#: ufo/views/history.html:184
+#: ufo/views/history.html:182
 msgid "all"
 msgstr ""
 
-#: ufo/views/history.html:193
+#: ufo/views/history.html:191
 msgid "Complaint"
 msgstr ""
 
-#: ufo/views/history.html:197
+#: ufo/views/history.html:195
 msgid "No"
 msgstr ""
 
-#: ufo/views/history.html:199
+#: ufo/views/history.html:197
 msgid "Any"
 msgstr ""
 
-#: ufo/views/history.html:201
+#: ufo/views/history.html:199
 msgid "Yes"
 msgstr ""
 
-#: ufo/views/history.html:210
+#: ufo/views/history.html:208
 msgid "Include revoked"
 msgstr ""
 
-#: ufo/views/history.html:221 ufo/views/organizations/list.html:53
+#: ufo/views/history.html:219 ufo/views/organizations/list.html:61
 msgid "Found"
 msgstr ""
 
-#: ufo/views/history.html:221
+#: ufo/views/history.html:219
 msgid "answer"
 msgid_plural "answers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ufo/views/history.html:225
+#: ufo/views/history.html:223
 msgid "Download"
 msgstr ""
 
-#: ufo/views/history.html:229
+#: ufo/views/history.html:227
 msgid "No answers with given filter"
 msgstr ""
 
-#: ufo/views/history.html:246 ufo/views/organizations/list.html:134
+#: ufo/views/history.html:244 ufo/views/organizations/list.html:149
 msgid "End of list"
 msgstr ""
 
 #: ufo/views/history.py:123
 msgid "You don't have permission to export."
+msgstr ""
+
+#: ufo/views/history.py:130
+msgid "Region"
+msgstr ""
+
+#: ufo/views/history.py:132
+msgid "Time"
+msgstr ""
+
+#: ufo/views/history.py:133
+msgid "Last name"
+msgstr ""
+
+#: ufo/views/history.py:134
+msgid "First name"
+msgstr ""
+
+#: ufo/views/history.py:135
+msgid "Email"
+msgstr ""
+
+#: ufo/views/history.py:136
+msgid "Phone"
+msgstr ""
+
+#: ufo/views/history.py:137
+msgid "Role"
+msgstr ""
+
+#: ufo/views/history.py:138
+msgid "Question id"
+msgstr ""
+
+#: ufo/views/history.py:139
+msgid "Question"
+msgstr ""
+
+#: ufo/views/history.py:140
+msgid "Answer"
 msgstr ""
 
 #: ufo/views/home.html:19
@@ -266,23 +311,23 @@ msgstr ""
 msgid "Failed to obtain access token from Google."
 msgstr ""
 
-#: ufo/views/auth/login.html:19
+#: ufo/views/auth/login.html:21
 msgid "Sign in with Google"
 msgstr ""
 
-#: ufo/views/auth/login.html:23
+#: ufo/views/auth/login.html:25
 msgid "or"
 msgstr ""
 
-#: ufo/views/auth/login.html:33
+#: ufo/views/auth/login.html:35
 msgid "Sign in with Email"
 msgstr ""
 
-#: ufo/views/auth/login.html:39
+#: ufo/views/auth/login.html:41
 msgid "Enter email address"
 msgstr ""
 
-#: ufo/views/auth/login.html:46
+#: ufo/views/auth/login.html:49
 msgid "Send"
 msgstr ""
 
@@ -302,7 +347,7 @@ msgstr ""
 msgid "You have successfully logged in as {user}."
 msgstr ""
 
-#: ufo/views/organizations/id/edit.html:71 ufo/views/organizations/list.html:24
+#: ufo/views/organizations/id/edit.html:76 ufo/views/organizations/list.html:24
 msgid "Create"
 msgstr ""
 
@@ -310,34 +355,34 @@ msgstr ""
 msgid "Find organization"
 msgstr ""
 
-#: ufo/views/organizations/list.html:53
+#: ufo/views/organizations/list.html:61
 msgid "organization"
 msgid_plural "organizations"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ufo/views/organizations/list.html:56
+#: ufo/views/organizations/list.html:64
 msgid "No organizations with given filter"
 msgstr ""
 
-#: ufo/views/organizations/list.html:74
+#: ufo/views/organizations/list.html:87
 msgid "You are a member"
 msgstr ""
 
-#: ufo/views/organizations/list.html:82
+#: ufo/views/organizations/list.html:97
 msgid "Edit"
 msgstr ""
 
-#: ufo/views/organizations/list.html:85
+#: ufo/views/organizations/list.html:100
 msgid "Manage Staff"
 msgstr ""
 
 #: ufo/views/organizations/id/join_applications.py:31
-#: ufo/views/organizations/list.html:94
+#: ufo/views/organizations/list.html:109
 msgid "Join request sent"
 msgstr ""
 
-#: ufo/views/organizations/list.html:98
+#: ufo/views/organizations/list.html:113
 msgid "Join"
 msgstr ""
 
@@ -354,11 +399,11 @@ msgstr ""
 msgid "Regions"
 msgstr ""
 
-#: ufo/views/organizations/id/edit.html:71
+#: ufo/views/organizations/id/edit.html:76
 msgid "Save"
 msgstr ""
 
-#: ufo/views/organizations/id/edit.html:74
+#: ufo/views/organizations/id/edit.html:81
 msgid "Cancel"
 msgstr ""
 
