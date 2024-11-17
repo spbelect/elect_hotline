@@ -39,7 +39,7 @@
 
       @ajax:after="(event) => {
         waiting = false;
-        window.history.replaceState(null, null, event.detail.response.url)
+        history.replaceState(null, null, event.detail.response.url)
       }"
     >
       <fieldset class="col-span-2 md:col-span-1 text-center align-middle">

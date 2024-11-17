@@ -54,9 +54,8 @@
     waiting: false,
 
     submit() {
-      //log(this.query, this.last_submitted, equal(this.query, this.last_submitted));
       if(!equal(this.query, this.last_submitted)) {
-        $ajax('', {target: 'list_replace errors', body: this.query, sync: true})
+        $ajax('', {target: 'list_replace', body: this.query, sync: true})
         this.last_submitted = { ...this.query }
       }
     }
@@ -66,17 +65,15 @@
 
   @ajax:after="(event) => {
     waiting = false;
-    window.history.replaceState(null, null, event.detail.response.url)
+    history.replaceState(null, null, event.detail.response.url)
   }"
 >
-
   <form x-ref="form"
     class="grid grid-cols-2 gap-x-8 gap-y-4 px-2 lg:px-4 mb-4"
     @submit.prevent
     @change.debounce="submit()"
     @keyup.enter.debounce="submit()"
   >
-
       <fieldset class="col-span-2 md:col-span-1 text-center md:text-right align-middle">
 
         {{_('from')}} <input type="date" x-model="query.date__gt" @change.stop @blur="submit()">
