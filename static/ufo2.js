@@ -41,6 +41,18 @@ function equal(x, y) {
         return false;
 }
 
+// document.addEventListener('DOMContentLoaded', function(){});
+
+document.addEventListener(`click`, function(event){
+    // Close choices dropdown on second click.
+    if(!event.target.className.search) return;
+    if(event.target.className.search(/choices__inner|is-selected/g) >= 0) {
+        div = event.target.closest('.choices.is-open');
+        if (div) {
+            div.querySelector('select').choices.hideDropdown();
+        }
+    }
+});
 
 daisyChoices = {
     containerOuter: 'choices relative overflow-hidden rounded-lg',

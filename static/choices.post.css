@@ -164,7 +164,7 @@ background-size: 1.1rem;
 }
 
 .choices__list--multiple .choices__item.is-highlighted {
-    @apply badge;
+/*     @apply badge; */
 }
 
 .is-disabled .choices__list--multiple .choices__item {
@@ -196,7 +196,7 @@ background-size: 1.1rem;
 }
 
 .choices__item--choice.is-selected {
-    @apply bg-base-200;
+/*     @apply bg-base-200; */
 }
 
 .choices__list--dropdown .choices__item,.choices__list[aria-expanded] .choices__item {
@@ -235,7 +235,7 @@ background-size: 1.1rem;
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted,.choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
-    @apply bg-base-200;
+/*     @apply bg-base-200; */
 }
 
 .choices__list--dropdown .choices__item--selectable.is-highlighted::after,.choices__list[aria-expanded] .choices__item--selectable.is-highlighted::after {

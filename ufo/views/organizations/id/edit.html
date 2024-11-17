@@ -31,25 +31,15 @@
   </fieldset>
 
 
-  <fieldset class="text-center align-middle"
-    @click="() => {
-      // close choices dropdown on the second click
-      //log()
-      if($event.target.className.search(/choices__inner/g) >= 0)
-        $refs.regions.choices.hideDropdown();
-    }"
-  >
+  <fieldset class="text-center align-middle">
 
     <select multiple
-      x-ref="regions"
       x-init="$el.choices = new Choices($el, {removeItemButton: true})"
       class="select hidden max-w-xs"
       name=regions
-
-      @ccchange="query.region_id__in = $el.choices.getValue(true)"
     >
       <option placeholder>{{_('Regions')}}</option>
-<!--           <option value="null">Регион: все</option> -->
+
       # set selected = org.regions.all()
       # for region in user.country.regions.all()
         <option value="{{region.id}}"
