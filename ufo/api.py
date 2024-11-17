@@ -1,5 +1,6 @@
 import logging
 from django.conf import settings
+from django.http import Http404
 from django.shortcuts import render
 
 # from loguru import logger
@@ -35,6 +36,13 @@ def exc_error(request, exc):
     logging.exception(exc)
     return render(
         request, "views/http_error.html", {'error': exc}, status=500
+    )
+
+@html.exception_handler(Http404)
+def exc_error(request, exc):
+    logging.exception(exc)
+    return render(
+        request, "views/http_error.html", {'error': exc}, status=404
     )
 
 @html.exception_handler(HttpError)
