@@ -126,19 +126,11 @@
         }"
       >
 
-        <style>  ## Hide placeholder when selected
-          .choices__list--multiple:not(:empty) + input::placeholder { opacity: 0; }
-          .choices__list--multiple:not(:empty) + input { min-width: 0 !important; }
-        </style>
-
         <select multiple
           x-ref="regions"
-          x-init="$el.choices = new Choices($el, {removeItemButton: true, classNames: {
-            containerInner: ['choices__inner', '!text-center', 'md:!text-right', '!pe-0', '!ps-0', '!bg-none'],
-            input:  ['choices__input', '!text-center'],
-          }})"
-          class="select hidden w-full max-w-xs"
+          x-init="$el.choices = new Choices($el, {removeItemButton: true})"
           @change="query.region_id__in = $el.choices.getValue(true)"
+          class="select hidden w-full max-w-xs"
         >
           <option placeholder>Регион: все</option>
 

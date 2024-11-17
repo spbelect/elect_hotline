@@ -42,12 +42,7 @@
 
     <select multiple
       x-ref="regions"
-      x-init="$el.choices = new Choices(
-        $el, {removeItemButton: true, classNames: {
-          containerInner: ['choices__inner', '!text-center', '!pe-0', '!ps-0', '!bg-none'],
-          input:  ['choices__input', '!text-center'],
-        }}
-      )"
+      x-init="$el.choices = new Choices($el, {removeItemButton: true})"
       class="select hidden max-w-xs"
       name=regions
 
