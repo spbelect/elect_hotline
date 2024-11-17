@@ -55,12 +55,15 @@
     >
       <option placeholder>{{_('Regions')}}</option>
 <!--           <option value="null">Регион: все</option> -->
+      # set selected = org.regions.all()
       # for region in user.country.regions.all()
         <option value="{{region.id}}"
           # if org
-          {{ 'selected' if region in org.regions.all() else '' }}
+          {{ 'selected' if region in selected else '' }}
           # endif
-        > {{region.name}} </option>
+        >
+          {{region.name}}
+        </option>
       # endfor
     </select>
 
