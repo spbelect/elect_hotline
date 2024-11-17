@@ -91,7 +91,9 @@
                 <div class="card-actions">
                   # if user in org.members.all()
                     # if 'admin' == org.orgmembership_set.get(user=user).role
-                      <a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}">
+                      <a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}"
+                        @click="$el.classList.add('animate-pulse', 'cursor-wait');"
+                      >
                         {{_('Edit')}}
                       </a>
                       <!--<a class="btn btn-primary btn-xs" href="/organizations/{{org.id}}/staff">
