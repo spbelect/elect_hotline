@@ -6220,8 +6220,8 @@ html {
   cursor: default;
 }
 
-.choices__item--selectable {
-  cursor: pointer;
+.choices__inner .choices__item--selectable {
+  cursor: text;
 }
 
 .choices__item--disabled {

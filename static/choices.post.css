@@ -246,8 +246,8 @@ background-size: 1.1rem;
     @apply cursor-default;
 }
 
-.choices__item--selectable {
-    @apply cursor-pointer;
+.choices__inner .choices__item--selectable {
+    @apply cursor-text;
 }
 
 .choices__item--disabled {
