@@ -6465,6 +6465,10 @@ html {
   .md\:text-right {
     text-align: right;
   }
+
+  .md\:\!text-right {
+    text-align: right !important;
+  }
 }
 
 @media (min-width: 1024px) {

@@ -126,29 +126,22 @@
         }"
       >
 
+        <style>  ## Hide placeholder when selected
+          .choices__list--multiple:not(:empty) + input::placeholder { opacity: 0; }
+          .choices__list--multiple:not(:empty) + input { min-width: 0 !important; }
+        </style>
+
         <select multiple
           x-ref="regions"
-          x-init="$el.choices = new Choices(
-            $el, {removeItemButton: true, classNames: ufo.daisyChoices}
-          )"
+          x-init="$el.choices = new Choices($el, {removeItemButton: true, classNames: {
+            containerInner: ['choices__inner', '!text-center', 'md:!text-right', '!pe-0', '!ps-0', '!bg-none'],
+            input:  ['choices__input', '!text-center'],
+          }})"
           class="select hidden w-full max-w-xs"
-
           @change="query.region_id__in = $el.choices.getValue(true)"
-
-          x-effect="() => {
-            var text = (query.region_id__in && query.region_id__in.length) ? '' : '{{_('Region: all')}}'
-
-            if(text != $el.dataset.placeholder) {
-              $el.dataset.placeholder = text;
-              $el.choices.destroy();
-              $el.choices = new Choices($el,
-                {removeItemButton: true, classNames: ufo.daisyChoices}
-              );
-            }
-          }"
         >
-<!-- <option placeholder x-show="false" x-text="`Регион: все`">zxc</option> -->
-<!--           <option value="null">Регион: все</option> -->
+          <option placeholder>Регион: все</option>
+
           # for region in regions.filter(num_answers__gte=1)
             <option value="{{region.id}}"
               {{ 'selected' if region.id in (filters.region_id__in or []) else '' }}
