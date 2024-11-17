@@ -3,6 +3,7 @@ import sys
 from django.contrib import admin
 from django.shortcuts import get_object_or_404, render
 from django.urls import include, path, re_path
+from django.utils.translation import gettext as _
 from rest_framework.urlpatterns import format_suffix_patterns
 
 import debug_toolbar
@@ -32,7 +33,9 @@ def handler403(request, exception):
     return render(request, '403.html')
 
 def handler404(request, exception):
-    return render(request, '403.html')
+    return render(request, 'views/http_error.html', {
+        'error': _("Page with given address does not exist")
+    })
 
 
 urlpatterns = [
