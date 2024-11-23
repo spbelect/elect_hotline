@@ -3770,14 +3770,6 @@ html {
   --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
 }
 
-.alert-warning {
-  border-color: var(--fallback-wa,oklch(var(--wa)/0.2));
-  --tw-text-opacity: 1;
-  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
-  --alert-bg: var(--fallback-wa,oklch(var(--wa)/1));
-  --alert-bg-mix: var(--fallback-b1,oklch(var(--b1)/1));
-}
-
 .alert-error {
   border-color: var(--fallback-er,oklch(var(--er)/0.2));
   --tw-text-opacity: 1;
@@ -5691,10 +5683,6 @@ html {
   text-transform: capitalize;
 }
 
-.italic {
-  font-style: italic;
-}
-
 .tracking-widest {
   letter-spacing: 0.1em;
 }
@@ -5704,13 +5692,41 @@ html {
   color: var(--fallback-in,oklch(var(--in)/var(--tw-text-opacity)));
 }
 
-.text-white {
+.text-primary {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
+.text-base-300 {
+  --tw-text-opacity: 1;
+  color: var(--fallback-b3,oklch(var(--b3)/var(--tw-text-opacity)));
+}
+
+.text-base-200 {
+  --tw-text-opacity: 1;
+  color: var(--fallback-b2,oklch(var(--b2)/var(--tw-text-opacity)));
+}
+
+.text-base-100 {
+  --tw-text-opacity: 1;
+  color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
+}
+
+.text-base-content {
+  --tw-text-opacity: 1;
+  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 .line-through {
   text-decoration-line: line-through;
+}
+
+.decoration-dotted {
+  text-decoration-style: dotted;
 }
 
 .opacity-100 {
@@ -6295,26 +6311,6 @@ html {
     border-bottom-right-radius: var(--rounded-box, 1rem);
     border-bottom-left-radius: var(--rounded-box, 1rem);
   }
-}
-
-.placeholder\:text-base-100::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
-}
-
-.placeholder\:text-base-100::placeholder {
-  --tw-text-opacity: 1;
-  color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
-}
-
-.placeholder\:text-base-content::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-}
-
-.placeholder\:text-base-content::placeholder {
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
 .hover\:bg-primary:hover {

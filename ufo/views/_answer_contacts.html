@@ -38,12 +38,12 @@
         {{_('Contacts hidden')}}
     </a>
     <div class="ui special popup" style="display:none; text-align: left">
-        <div>
+        <p>
             {{_('Not authorized to view contacts of this user.')}}
-        </div>
-        <div>
+        </p>
+        <h3>
             {{_('Responsible organizations')}}:
-        </div>
+        </h3>
         {% for org in answer.appuser.disclosed_to_orgs %}
             <div> {{org}} </div>
         {% else %}
