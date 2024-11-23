@@ -86,6 +86,11 @@ class Filters(FilterSchema):
             return ~Q(uik_complaint_status=int16('не подавалась'))
         return Q()
 
+    def filter_uik(self, value):
+        if self.region_id__in and len(self.region_id__in) == 1:
+            return Q(uik=value)
+        return Q()
+
     def filter_include_revoked(self, value: bool) -> Q:
         if value is False:
             return Q(revoked=False)

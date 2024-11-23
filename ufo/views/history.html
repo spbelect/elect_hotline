@@ -139,25 +139,25 @@
       </fieldset>
 
 
-      <fieldset x-data="{ oneregion: false }"
-        class="text-center col-span-2 md:text-left md:m-0 m-auto inline-flex items-center md:col-span-1 align-middle"
-        :class="oneregion ? '' : 'opacity-50'"
+      # set single_region = filters.region_id__in and filters.region_id__in|length == 1
+
+      <fieldset id="uik_filter" x-sync
+        class="text-center col-span-2 md:text-left md:m-0 m-auto inline-flex items-center md:col-span-1 align-middle {{ '' if single_region else 'opacity-50' }}"
       >
 
-        <label class="px-2">{{_('UIK')}}</label>
+        <label class="px-2">
+          {{_('UIK')}}
+        </label>
 
-        <input type=number min="1" onwheel="this.blur()"
+        <input type=number
+          min="1" max="9999"
+          onwheel="this.blur()"
           class="input w-full max-w-xs"
-          :class="oneregion ? 'placeholder:text-base-content' : 'placeholder:text-base-100'"
-          x-effect="() => {
-            if(query.region_id__in && query.region_id__in.length == 1)
-            { oneregion = true; }
-            else
-            { oneregion = false; query.uik = 'null' }
-          }"
-          :disabled="!oneregion"
-          x-model.lazy="query.uik" placeholder="{{_('all')}}" class=""
+          {{ '' if single_region else 'disabled' }}
+          x-model.lazy="query.uik"
+          placeholder="{{_('all')}}"
         />
+
       </fieldset>
 
 

@@ -13,7 +13,7 @@
       <div class="badge badge-secondary">Передано в районную группу</div>
     </div>-->
 
-    # if not filters.uik
+    # if not (filters.region_id__in and filters.region_id__in|length == 1)
       <h1 class="text-xl text-center">
           {{answer.region.name}}
           <a href='?region_id__in=["{{answer.region_id}}"]&uik={{answer.uik}}'>
