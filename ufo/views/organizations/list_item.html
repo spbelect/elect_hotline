@@ -1,0 +1,70 @@
+<li class="card card-body bg-base-200 shadow-xl mb-4">
+
+    <h2 class="card-title">
+        {{org.name.capitalize()}}
+    </h2>
+
+    # if user.is_authenticated
+        # if user in org.members.all()
+            <span class="badge badge-outline">
+                {{_('You are a member')}}
+            </span>
+        # endif
+
+        <div class="card-actions">
+            # if user in org.members.all()
+                # if 'admin' == org.orgmembership_set.get(user=user).role
+                    <a class="btn btn-primary btn-xs"
+                        href="/organizations/{{org.id}}"
+                        @click="$el.classList.add('animate-pulse', 'cursor-wait');"
+                    >
+                        {{_('Edit')}}
+                    </a>
+                    <!--<a class="btn btn-primary btn-xs"
+                        href="/organizations/{{org.id}}/staff">
+                        {{_('Manage Staff')}}
+                    </a>-->
+                # endif
+            # else
+                <form action="/organizations/{{org.id}}/join-applications"
+                    x-target.error='errors' method=post
+                >
+                    # if org.join_requests.filter(user=request.user).exists()
+                        <span id="join-{{org.id}}" class="badge badge-outline">
+                            {{_('Join request sent')}}
+                        </span>
+                    # else
+                        <button x-sync id="join-{{org.id}}" class="btn btn-primary btn-xs">
+                            {{_('Join')}}
+                        </button>
+                    # endif
+                </form>
+            # endif
+        </div>
+    # endif
+
+    # if not filters.regions__id
+        <div x-data='{show_regions: false}' >
+            <p x-show="!show_regions" >
+                # for region in org.regions.all()[:4]
+                    <span class="badge"> {{region.name}} </span>
+                # endfor
+            </p>
+
+            # if org.regions.all()|length > 4
+                <p x-show="show_regions">
+                    # for region in org.regions.all()
+                        <span class="badge"> {{region.name}} </span>
+                    # endfor
+                </p>
+                <button
+                    class="btn btn-xs tracking-widest"
+                    @click="show_regions=!show_regions"
+                >
+                    ...
+                </button>
+            # endif
+        </div>
+    # endif
+
+</li>
