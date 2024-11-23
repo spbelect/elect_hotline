@@ -12,7 +12,7 @@
 
 {% block main %}
 
-<div x-data class='max-w-md m-auto'>
+<main x-data class='max-w-md m-auto px-2'>
 
   # if user.is_authenticated and not user.managed_orgs
     <div>
@@ -28,9 +28,6 @@
   # endif
 
   <div class="mt-8" x-data="{waiting: false}">
-<!--    <h2 class="text-2xl text-center">
-      {{_('Find organization')}}
-    </h2>-->
     <form method="get" id="form"
       x-target.replace="messages list_replace" x-target.error="errors"
       @change="$el.requestSubmit()"
@@ -156,5 +153,5 @@
     {% include 'views/_pagination.html' %}
 
   </div>
-</div>
+</main>
 {% endblock %}

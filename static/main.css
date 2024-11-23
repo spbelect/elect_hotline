@@ -5621,6 +5621,11 @@ html {
   padding-bottom: 1.5rem;
 }
 
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .pe-10 {
   padding-inline-end: 2.5rem;
 }

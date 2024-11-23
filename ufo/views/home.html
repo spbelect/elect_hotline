@@ -11,42 +11,37 @@
 
 
 {% block main %}
-<div class="hero py-10 ">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-4xl font-bold">Election Hotline</h1>
+<main class="text-center max-w-md m-auto px-2">
+  <section class="py-10">
+      <h1 class="text-4xl font-bold">
+        Election Hotline
+      </h1>
       <p class="py-6">
         {{_('Monitor election transparency data submitted by public observers at voting stations.')}}
       </p>
-    </div>
-  </div>
-</div>
 
-<div class="hero ">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-2xl font-bold">
-        <a href="/history" class="link link-primary link-hover">
-          {{_('History')}}
-        </a>
-      </h1>
+  </section>
 
-      <p>{{_('Filter through answers given during past elections')}}</p>
-    </div>
-  </div>
-</div>
+  <section class="py-8">
+    <h1 class="text-2xl font-bold">
+      <a href="/history" class="link link-primary link-hover">
+        {{_('History')}}
+      </a>
+    </h1>
 
-<div class="hero py-10">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
+    <p> {{_('Filter through answers given during past elections')}} </p>
+
+  </section>
+
+  <section class="py-10">
       <h1 class="text-2xl font-bold">
         <a href="/organizations" class="link link-primary link-hover">
           {{_('Organizations')}}
         </a>
       </h1>
 
-      <p>{{_('Become part of a team assisting observers in real time')}}</p>
-    </div>
-  </div>
-</div>
+      <p> {{_('Become part of a team assisting observers in real time')}} </p>
+
+  </section>
+</main>
 {% endblock %}

@@ -26,8 +26,12 @@
   <input type=hidden name=id value="{{org.id}}" />
 
   <fieldset class="text-center align-middle mb-2">
-    <input type=text class="input text-center input-bordered w-full" name=name placeholder="{{_('Name')}}"
-    value="{{org.name}}"/>
+    <input type=text
+      class="input text-center input-bordered w-full"
+      name=name
+      placeholder="{{_('Name')}}"
+      value="{{org.name}}"
+    />
   </fieldset>
 
 
@@ -55,16 +59,19 @@
   </fieldset>
 
   <div class="mt-8 flex gap-2 justify-center">
+
     <button class="btn btn-primary"
       @click="$el.classList.add('animate-pulse', 'cursor-wait'); submit()"
     >
       {{_('Save') if org else _('Create')}}
     </button>
+
     <a class="btn" href="/organizations"
       @click="$el.classList.add('animate-pulse', 'cursor-wait');"
     >
       {{_('Cancel')}}
     </a>
+
   </div>
 </form>
 
