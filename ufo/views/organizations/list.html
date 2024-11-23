@@ -12,10 +12,10 @@
 
 {% block main %}
 
-<main x-data class='max-w-md m-auto px-2'>
+<main x-data="{waiting: false}" class='max-w-md m-auto px-2'>
 
   # if user.is_authenticated and not user.managed_orgs
-    <div>
+    <div class="pb-12">
       <p>
         You can create your own organization or join existing from the list below.
       </p>
@@ -27,64 +27,64 @@
     </div>
   # endif
 
-  <div class="mt-8" x-data="{waiting: false}">
-    <form method="get" id="form"
-      x-target.replace="messages list_replace" x-target.error="errors"
-      @change="$el.requestSubmit()"
+  <form method="get" id="form"
+    x-target.replace="messages list_replace" x-target.error="errors"
+    @change="$el.requestSubmit()"
 
-      @ajax:before="waiting = true;"
+    @ajax:before="waiting = true;"
 
-      @ajax:after="(event) => {
-        waiting = false;
-        history.replaceState(null, null, event.detail.response.url)
-      }"
-    >
-      <fieldset class="col-span-2 md:col-span-1 text-center align-middle">
-        <select class="select w-full max-w-xs select-bordered" name="regions__id">
-          <option value="">{{_('Region: all')}}</option>
-          # for region in user.country.regions.all()
-            <option value="{{region.id}}">
-              {{region.name}}
-            </option>
-          # endfor
-        </select>
-      </fieldset>
-    </form>
+    @ajax:after="(event) => {
+      waiting = false;
+      history.replaceState(null, null, event.detail.response.url)
+    }"
+  >
 
-
-    <div id="total" x-sync x-show="!waiting" class="px-2 lg:px-4 py-2" >
-      # if page.paginator.count
-        <span class="text-content">
-          {{_('Found')}} {{page.paginator.count}} {{ngettext('organization', 'organizations', page.paginator.count)}}
-        </span>
-      # else
-        {{_('No organizations with given filter')}}
-      # endif
-    </div>
-
-    ## Spinner
-    <svg x-show="waiting" class="mx-auto mb-10 mt-6 animate-spin h-5 w-5 text-primary"
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
-
-    <div id='list_replace' x-merge="replace" class="px-2 lg:px-4">
-      <ul id='list_append' x-merge="append">
-
-        # for org in page
-            {% include "views/organizations/list_item.html" %}
+    <fieldset class="col-span-2 md:col-span-1 text-center align-middle">
+      <select class="select w-full max-w-xs select-bordered" name="regions__id">
+        <option value="">{{_('Region: all')}}</option>
+        # for region in user.country.regions.all()
+          <option value="{{region.id}}">
+            {{region.name}}
+          </option>
         # endfor
+      </select>
+    </fieldset>
 
-        # if page|length and not page.has_next()
-            <li class="text-center"> {{_('End of list')}} </li>
-        # endif
+  </form>
 
-      </ul>
-    </div>
 
-    {% include 'views/_pagination.html' %}
-
+  <div id="total" x-sync x-show="!waiting" class="px-2 lg:px-4 py-2" >
+    # if page.paginator.count
+      <span class="text-content">
+        {{_('Found')}} {{page.paginator.count}} {{ngettext('organization', 'organizations', page.paginator.count)}}
+      </span>
+    # else
+      {{_('No organizations with given filter')}}
+    # endif
   </div>
+
+  ## Spinner
+  <svg x-show="waiting" class="mx-auto mb-10 mt-6 animate-spin h-5 w-5 text-primary"
+      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+  </svg>
+
+  <div id='list_replace' x-merge="replace" class="px-2 lg:px-4">
+    <ul id='list_append' x-merge="append">
+
+      # for org in page
+          {% include "views/organizations/list_item.html" %}
+      # endfor
+
+      # if page|length and not page.has_next()
+          <li class="text-center"> {{_('End of list')}} </li>
+      # endif
+
+    </ul>
+  </div>
+
+  {% include 'views/_pagination.html' %}
+
 </main>
 {% endblock %}

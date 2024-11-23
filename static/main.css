@@ -5273,6 +5273,14 @@ html {
   margin-top: 2rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .box-border {
   box-sizing: border-box;
 }
@@ -5626,6 +5634,11 @@ html {
   padding-bottom: 2rem;
 }
 
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 .pe-10 {
   padding-inline-end: 2.5rem;
 }
@@ -5636,6 +5649,10 @@ html {
 
 .pr-2 {
   padding-right: 0.5rem;
+}
+
+.pb-12 {
+  padding-bottom: 3rem;
 }
 
 .text-center {
