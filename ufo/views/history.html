@@ -1,41 +1,16 @@
 {% extends "views/base.html" %}
 
-{% block title %} Архив {% endblock %}
+{% block title %}
+  {{_('History')}}
+{% endblock %}
 
 {% block extra_head %}
   <style>
-    /*label:has(input:checked[name=complaint]) {
-      background-color: rgb(42, 45, 47);
-      color: rgb(209, 205, 199);
-    }*/
   </style>
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/base.min.css" /> -->
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css" /> -->
 
   <script defer src="https://cdn.jsdelivr.net/npm/choices.js@11.0.2/public/assets/scripts/choices.min.js"></script>
 
-<!-- <link rel="stylesheet" href="https://unpkg.com/better-nice-select@1.0.0/dist/css/better-nice-select.min.css"> -->
-<!-- <script src="https://unpkg.com/better-nice-select@1.0.0/dist/js/better-nice-select.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
-
   <script>
-   //document.addEventListener(`keypress`, handle);
-
-    // function handle(evt) {
-    //   console.log(evt.target)
-    //   const form = evt.target.closest(`form`);
-    //   if (form) {
-    //
-    //       if (evt.key === `Enter`) {
-    //         log('prevent')
-    //         evt.preventDefault();
-    //         return false;
-    //       }
-    //       return true;
-    //   }
-    // }
   </script>
     
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
@@ -47,7 +22,7 @@
 
 {% block main %}
 
-<div
+<main
   x-data="{
     query: {{filters.model_dump_json()}},
     last_submitted: null,
@@ -68,12 +43,14 @@
     history.replaceState(null, null, event.detail.response.url)
   }"
 >
+
   <form x-ref="form"
     class="grid grid-cols-2 gap-x-8 gap-y-4 px-2 lg:px-4 mb-4"
     @submit.prevent
     @change.debounce="submit()"
     @keyup.enter.debounce="submit()"
   >
+
       <fieldset class="col-span-2 md:col-span-1 text-center md:text-right align-middle">
 
         {{_('from')}} <input type="date" x-model="query.date__gt" @change.stop @blur="submit()">
@@ -101,21 +78,6 @@
         </select>
       </fieldset>
 
-<!--
-      <fieldset bp="4@lg text-center text-left@lg">
-        <div aria-label="Фильтр инцидентов" class="ui dropdown auto"
-          value='{{request.GET.priority or "any"}}'>
-          <div class="text"></div> <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" aria-label="Инцидент не важен" data-value="any">
-              Все ответы</div>
-            <div class="item" aria-label="Только инциденты" data-value="incident">
-              Все инциденты</div>
-            <div class="item" aria-label="Приоритетные инциденты" data-value="urgent">
-              Приоритетные инциденты</div>
-          </div>
-        </div>
-      </fieldset>-->
 
       <fieldset class="text-center col-span-2 md:text-right md:col-span-1 align-middle">
 
@@ -178,13 +140,16 @@
 
       </fieldset>
 
+
       <fieldset aria-label="Filter revoked"
         class="text-center col-span-2 md:text-left md:m-0 m-auto inline-flex items-center md:col-span-1 align-middle"
       >
+
         <label class="px-2 label cursor-pointer">
            <span class="label-text pr-2"> {{_('Include revoked')}} </span>
           <input type="checkbox" class="checkbox checkbox-sm" x-model="query.include_revoked"/>
         </label>
+
       </fieldset>
 
   </form>
@@ -192,18 +157,22 @@
 
   <div id="total" x-sync x-show="!waiting" class="px-2 lg:px-4 py-2" >
     # if page.paginator.count
+
       <span class="text-content">
         {{_('Found')}}: {{page.paginator.count}} {{ngettext('answer', 'answers', page.paginator.count)}}
       </span>
+
       # if user.is_authenticated
         <a href="/history/export-csv?{{request.GET.urlencode()}}" class="text-info ml-2" >
           {{_('Download')}} csv
         </a>
       # endif
+
     # else
       {{_('No answers with given filter')}}
     # endif
   </div>
+
 
   ## Spinner
   <svg x-show="waiting" class="mx-auto mb-10 mt-6 animate-spin h-5 w-5 text-primary"
@@ -211,6 +180,7 @@
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
   </svg>
+
 
   <div id='list_replace' x-merge="replace" class="px-2 lg:px-4 text-center" >
     <ul id='list_append' x-merge="append">
@@ -227,6 +197,6 @@
 
   {% include 'views/_pagination.html' %}
 
-</div>
+</main>
 
 {% endblock %}
