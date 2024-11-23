@@ -18,7 +18,10 @@
 
 
         <ul id="menu" tabindex="0"
-            @click="$refs.menu.classList.add('animate-pulse', 'cursor-wait');"
+            @click="
+                $refs.menu.classList.add('animate-pulse', 'cursor-wait');
+                $el.classList.add('animate-pulse', 'cursor-wait');
+            "
             class="menu menu-sm dropdown-content bg-base-200 rounded-box z-[1] mt-3 p-2 shadow"
         >
             <li><a href="/"> {{_('Home')}} </a></li>
@@ -79,6 +82,8 @@
             x-data="{
                 submit(lang) {
                     $refs.lang_switch.classList.add('animate-pulse', 'cursor-wait');
+                    $el.classList.add('animate-pulse', 'cursor-wait');
+
                     $ajax('/account/form', {
                         method: 'post', target: 'errors',
                         body: { language: lang }
