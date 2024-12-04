@@ -17,5 +17,6 @@
       "src": "/(.*)",
       "dest": "wsgi.py"
     }
-  ]
+  ],
+  "regions": ["fra1"]
 }
