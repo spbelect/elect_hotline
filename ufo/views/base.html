@@ -45,8 +45,9 @@
 <!--     <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 
     <script>
-      document.addEventListener('DOMContentLoaded', function(){
 
+      document.addEventListener('DOMContentLoaded', function(){
+        // alert(1)
       });
 // window.addEventListener('popstate', (e) => {
 // // log(e, e.state)
@@ -60,9 +61,19 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
-
   </head>
-  <body>
+
+
+  <body x-data="{body: {page_unloading: false}}"
+
+    ## When user goes back in history, unset page_unloading flag.
+    @pageshow.window="body.page_unloading = false;"
+
+    @click="() => {
+        ## Any click on <a href='%url%'> sets page_unloading flag.
+        if ($event.target.href) {body.page_unloading = true;}
+    }"
+  >
 
     <header x-sync x-data id="navbar" class="navbar bg-base-100" >
       <template>{% block header %} {% endblock %}</template>

@@ -24,7 +24,9 @@
 
   <section class="py-8">
     <h1 class="text-2xl font-bold">
-      <a href="/history" class="link link-primary link-hover">
+      <a href="/history" class="link link-primary link-hover"
+        :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+      >
         {{_('History')}}
       </a>
     </h1>
@@ -35,7 +37,9 @@
 
   <section class="py-10">
       <h1 class="text-2xl font-bold">
-        <a href="/organizations" class="link link-primary link-hover">
+        <a href="/organizations" class="link link-primary link-hover"
+          :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+        >
           {{_('Organizations')}}
         </a>
       </h1>

@@ -16,7 +16,7 @@
 
   <div class="text-center align-middle">
     <a class="btn ghost" href="/auth/google/start"
-      @click="$el.classList.add('animate-pulse', 'cursor-wait');"
+      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
     >
       {{_('Sign in with Google')}}
     </a>
@@ -43,7 +43,8 @@
 
         <div class="join-item">
           <button id="button"  class=" btn btn-primary join-item"
-            @click="$el.classList.add('animate-pulse', 'cursor-wait'); submit()"
+            :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+            @click="submit()"
             {{'disabled' if message else ':disabled=email.length==0'}}
           >
             {{_('Send')}}

@@ -61,13 +61,14 @@
   <div class="mt-8 flex gap-2 justify-center">
 
     <button class="btn btn-primary"
-      @click="$el.classList.add('animate-pulse', 'cursor-wait'); submit()"
+      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+      @click="body.page_unloading=true; submit()"
     >
       {{_('Save') if org else _('Create')}}
     </button>
 
     <a class="btn" href="/organizations"
-      @click="$el.classList.add('animate-pulse', 'cursor-wait');"
+      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
     >
       {{_('Cancel')}}
     </a>
