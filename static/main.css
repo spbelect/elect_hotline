@@ -3310,29 +3310,6 @@ html {
   padding-bottom: 0.5rem;
 }
 
-.hero {
-  display: grid;
-  width: 100%;
-  place-items: center;
-  background-size: cover;
-  background-position: center;
-}
-
-.hero > * {
-  grid-column-start: 1;
-  grid-row-start: 1;
-}
-
-.hero-content {
-  z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 80rem;
-  gap: 1rem;
-  padding: 1rem;
-}
-
 .indicator {
   position: relative;
   display: inline-flex;
@@ -5273,14 +5250,6 @@ html {
   margin-top: 2rem;
 }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
 .box-border {
   box-sizing: border-box;
 }
@@ -5336,6 +5305,11 @@ html {
 .size-4 {
   width: 1rem;
   height: 1rem;
+}
+
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .h-1 {
@@ -5405,11 +5379,6 @@ html {
 
 .shrink-0 {
   flex-shrink: 0;
-}
-
-.-scale-x-100 {
-  --tw-scale-x: -1;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 @keyframes pulse {
@@ -5551,11 +5520,6 @@ html {
   background-color: inherit;
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -5582,6 +5546,10 @@ html {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-0 {
@@ -5634,8 +5602,7 @@ html {
   padding-bottom: 2rem;
 }
 
-.py-12 {
-  padding-top: 3rem;
+.pb-12 {
   padding-bottom: 3rem;
 }
 
@@ -5649,10 +5616,6 @@ html {
 
 .pr-2 {
   padding-right: 0.5rem;
-}
-
-.pb-12 {
-  padding-bottom: 3rem;
 }
 
 .text-center {
@@ -5719,36 +5682,8 @@ html {
   color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
 }
 
-.text-base-300 {
-  --tw-text-opacity: 1;
-  color: var(--fallback-b3,oklch(var(--b3)/var(--tw-text-opacity)));
-}
-
-.text-base-200 {
-  --tw-text-opacity: 1;
-  color: var(--fallback-b2,oklch(var(--b2)/var(--tw-text-opacity)));
-}
-
-.text-base-100 {
-  --tw-text-opacity: 1;
-  color: var(--fallback-b1,oklch(var(--b1)/var(--tw-text-opacity)));
-}
-
-.text-base-content {
-  --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
-}
-
-.underline {
-  text-decoration-line: underline;
-}
-
 .line-through {
   text-decoration-line: line-through;
-}
-
-.decoration-dotted {
-  text-decoration-style: dotted;
 }
 
 .opacity-100 {
