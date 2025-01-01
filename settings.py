@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # 'django_jinja',
     # 'webpack_loader',
     'prettyjson',
+    'rest_framework',
     
     'ufo.apps.UfoConfig',
 ]
