@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:e9810dd31f5454c9ace4f2078fde3e009a07ed572d34c43181cd221976e82198"
+content_hash = "sha256:4cb34f1fb4d4f254a0d553ff583bdb4ba54458e8b29750ab1b76675b6898b724"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -612,6 +612,20 @@ dependencies = [
 files = [
     {file = "django-jinja-2.11.0.tar.gz", hash = "sha256:47c06d3271e6b2f27d3596278af517bfe2e19c1eb36ae1c0b1cc302d7f0259af"},
     {file = "django_jinja-2.11.0-py3-none-any.whl", hash = "sha256:cc4c72246a6e346aa0574e0c56c3e534c1a20ef47b8476f05d7287781f69a0a9"},
+]
+
+[[package]]
+name = "django-jsonform"
+version = "2.23.1"
+requires_python = ">=3.4"
+summary = "A user-friendly JSON editing form for Django admin."
+groups = ["default"]
+dependencies = [
+    "django>=2.0",
+]
+files = [
+    {file = "django_jsonform-2.23.1-py3-none-any.whl", hash = "sha256:cd5900c9f4f69d90a40b3a495aeb66bf43f562b82bfb64be40a78a51bbc04a11"},
+    {file = "django_jsonform-2.23.1.tar.gz", hash = "sha256:b75ea31263fbdde7190c1b02422587208359b19b1a9babc15ec3ed8260b26af9"},
 ]
 
 [[package]]
