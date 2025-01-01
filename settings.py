@@ -19,6 +19,7 @@ SRC_DIR = environ.Path(__file__) - 1  # ./
 
 env.read_env(SRC_DIR('env-local'))
 
+# Support for DATABASE_URL=sqlite:///{SRC_DIR}/db.sqlite
 os.environ['DATABASE_URL'] = env('DATABASE_URL').format(SRC_DIR=SRC_DIR)
 
 DEBUG = env.bool('DJANGO_DEBUG', default=False)
@@ -174,6 +175,33 @@ USE_TZ = True
 
 DATABASES = {'default': env.db('DATABASE_URL', default='')}
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+
+if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
+    DATABASES['default']['OPTIONS'] = {
+        # Transaction mode IMMEDIATE resolves
+        # django.db.utils.OperationalError: database is locked
+        "transaction_mode": "IMMEDIATE",
+
+        # "timeout": 30,
+        "init_command": ' '.join([
+            # https://www.sqlite.org/pragma.html#pragma_synchronous
+            #
+            #  EXTRA (3): like FULL with the addition that the directory containing a rollback
+            # journal is synced after that journal is unlinked to commit a transaction in
+            # DELETE mode.
+            #  FULL (2): database engine will use the xSync method of the VFS to ensure
+            # that all content is safely written to the disk surface prior to continuing.
+            #  NORMAL (1): database engine will still sync at the most critical moments, but
+            # less often than in FULL mode.
+            #  OFF (0): SQLite continues without syncing as soon as it has handed data off to
+            # the operating system.
+            # "PRAGMA synchronous=EXTRA;",
+            # "PRAGMA synchronous=NORMAL;",
+            # "PRAGMA synchronous=OFF;",
+            # "PRAGMA cache_size=2000;"
+            "PRAGMA journal_mode=WAL;"
+        ]),
+    }
 
 
 STATICFILES_DIRS = [SRC_DIR('static/'),]
