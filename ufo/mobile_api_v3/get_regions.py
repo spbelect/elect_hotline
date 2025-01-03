@@ -41,6 +41,9 @@ def get_regions(request, country):
     GET возвращает регионы заданной страны, с названиями, контактами, и диапазонами УИК всех 
     ТИКов и ИКМО каждого региона.
     """
+    regions = Region.objects.filter(country=country)\
+        .order_by('id').prefetch_related('tiks', 'munokruga')
+
     return Response({region.id: dict(
         id = region.id,
         name = region.name,
@@ -55,7 +58,7 @@ def get_regions(request, country):
             
             # Пример: [[0, 99],] или [[400, 449], [2100, 2105]]
             uik_ranges = json.loads(tik.uik_ranges or '[]'),
-        ) for tik in region.tiks.order_by('name')],
+        ) for tik in region.tiks.all()],
         
         # Мун.округа и ИКМО
         munokruga = [dict(
@@ -67,8 +70,8 @@ def get_regions(request, country):
             
             # Пример: [[0, 99],] или [[400, 449], [2100, 2105]]
             uik_ranges = json.loads(mo.uik_ranges or '[]'),
-        ) for mo in region.munokruga.order_by('name')],
+        ) for mo in region.munokruga.all()],
         
-    ) for region in Region.objects.order_by('id')})
+    ) for region in regions})
     
     
