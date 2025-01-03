@@ -1,11 +1,12 @@
 from datetime import timezone, timedelta
-# from functools import partial
-
-from django.http import HttpRequest, HttpResponse
-from django.utils import translation
+from inspect import iscoroutinefunction
+from loguru import logger
 
 import django
 from django.contrib.auth import models
+from django.http import HttpRequest, HttpResponse
+from django.utils import translation
+from django.utils.decorators import sync_and_async_middleware
 from django.utils.functional import cached_property
 
 from .models import Country
@@ -44,7 +45,7 @@ class AnonymousUser(django.contrib.auth.models.AnonymousUser):
         return Country.objects.get(id=self.country_id)
 
 
-
+@sync_and_async_middleware
 def anonymous_user_session(get_response):
     """
     Annotate AnonymousUser with persistent properties which are stored in session.
@@ -58,27 +59,36 @@ def anonymous_user_session(get_response):
         ...
     ]
     """
-    
-    def process_request(request: HttpRequest) -> HttpResponse:
-        if not request.user.is_authenticated:
-            request.session.setdefault('country_id', 'ru')
-            request.session.setdefault('utc_offset', 3)
-            request.session.setdefault('theme', 'dark')
-            request.session.setdefault(
-                'language', translation.get_language_from_request(request)
-            )
+    if iscoroutinefunction(get_response):
+        async def middleware(request: HttpRequest) -> HttpResponse:
+            process_request(request)
+            return await get_response(request)
+    else:
+        def middleware(request: HttpRequest) -> HttpResponse:
+            process_request(request)
+            return get_response(request)
 
-            # Replace with custom AnonymousUser
-            request.user = AnonymousUser(request.session)
+    return middleware
 
-        translation.activate(request.user.language)
-        # print(f'{translation.get_language_from_request(request)=}')
-        # print(f'{request.META=}')
-        # print(request.user.language)
-        return get_response(request)
 
-    return process_request
+def process_request(request: HttpRequest) -> None:
+    logger.debug(f"{request.method} {request.path}")
 
+    if not request.user.is_authenticated:
+        request.session.setdefault('country_id', 'ru')
+        request.session.setdefault('utc_offset', 3)
+        request.session.setdefault('theme', 'dark')
+        request.session.setdefault(
+            'language', translation.get_language_from_request(request)
+        )
+
+        # Replace with custom AnonymousUser
+        request.user = AnonymousUser(request.session)
+
+    translation.activate(request.user.language)
+    # print(f'{translation.get_language_from_request(request)=}')
+    # print(f'{request.META=}')
+    # print(request.user.language)
 
 
 # def get_user(request):

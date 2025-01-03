@@ -278,6 +278,13 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'ufo.middleware': {
+            # Logs all incoming requests. Logging happens before view processing, unlike
+            # django.request logger, which only logs finished requests.
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
         #'django': {
             #'handlers': ['console'],
             #'level': 'DEBUG',
