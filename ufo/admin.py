@@ -8,6 +8,7 @@ from django.db.models import JSONField
 from django.db.models import TextField
 from django.utils.safestring import mark_safe
 from prettyjson import PrettyJSONWidget
+from django_jsonform.widgets import JSONFormWidget
 
 from . import models
 from utils.admin import LinkedTabularInline
@@ -201,7 +202,10 @@ class Question_Admin(admin.ModelAdmin):
 
     formfield_overrides = {
         TextField: {'widget': Textarea(attrs={'rows': 1})},
-        JSONField: {'widget': PrettyJSONWidget(attrs={'rows': 1, 'initial': 'parsed'})}
+        JSONField: {'widget': Textarea(attrs={'rows': 1})},
+        # JSONField: {'widget': JSONFormWidget(attrs={'rows': 1, 'initial': 'parsed'}, schema={
+        #     'type': 'dict',
+        # })}
     }
     
 
