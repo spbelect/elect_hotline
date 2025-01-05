@@ -44,7 +44,7 @@
     >
       <option placeholder>{{_('Regions')}}</option>
 
-      # set selected = org.regions.all()
+      # set selected = org.regions.all() if org else []
       # for region in user.country.regions.all()
         <option value="{{region.id}}"
           # if org
