@@ -40,7 +40,7 @@
   >
 
     <fieldset class="col-span-2 md:col-span-1 text-center align-middle">
-      <select class="select w-full max-w-xs select-bordered" name="regions__id">
+      <select aria-label="Filter by region" class="select w-full max-w-xs select-bordered" name="regions__id">
         <option value="">{{_('Region: all')}}</option>
         # for region in user.country.regions.all()
           <option value="{{region.id}}">
