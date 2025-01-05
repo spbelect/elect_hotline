@@ -49,7 +49,9 @@
   </section>
 
   <section class="py-10">
-      <a href="https://github.com/spbelect/paradox/releases/download/v2.2/paradox-armeabi-v7a-debug-2.2.apk" class="badge badge-neutral py-4"
+      <a href="https://github.com/spbelect/paradox/releases/download/v2.2/paradox-armeabi-v7a-debug-2.2.apk"
+        class="badge badge-neutral py-4"
+        @click.stop   ## Prevent body.page_unloading animation
       >
         {{_('Download Android apk')}}
       </a>
