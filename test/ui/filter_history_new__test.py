@@ -156,11 +156,12 @@ def filter_history_new_scenario__test(spb, msk, live_server, page):
     # WHEN user opens answers history
     page.goto(f"{live_server}/history")
 
+    page.pause()
     # THEN All answers should be visible
-    expect(page.locator("time").filter(has_text="11 сен 2024, 00:03")).to_be_visible()
-    expect(page.locator("time").filter(has_text="11 сен 2024, 00:02")).to_be_visible()
-    expect(page.locator("time").filter(has_text="11 сен 2024, 00:01")).to_be_visible()
-    expect(page.locator("time").filter(has_text="04 апр 2016, 00:01")).to_be_visible()
+    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:03")).to_be_visible()
+    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:02")).to_be_visible()
+    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:01")).to_be_visible()
+    expect(page.locator("time").filter(has_text="04 Apr 2016, 00:01")).to_be_visible()
     # expect(page.get_by_text("Санкт-Петербург УИК 14")).to_be_visible()
     # expect(page.get_by_text("Санкт-Петербург УИК 803")).to_be_visible()
     # expect(page.get_by_text("Москва УИК 7")).to_be_visible()
