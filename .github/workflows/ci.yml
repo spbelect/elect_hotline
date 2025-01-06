@@ -58,6 +58,7 @@ jobs:
       #     file: ./coverage.xml
 
   deploy_job:
+    needs: tests_job
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
