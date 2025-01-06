@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: |
-            sudo apt-get -y install libmtdev1t64
+            sudo apt-get -y install libmtdev1t64 chromium
       - name: Setup Python Versions
         uses: actions/setup-python@v5
         with:
