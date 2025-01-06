@@ -28,10 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: |
-            sudo apt-get -y install chromium playwright libasound2t64
-      # - name: install playwright dependencies
-      #   run: |
-      #       sudo playwright install chromium
+            sudo apt-get -y install chromium libasound2t64
       - name: Setup Python Versions
         uses: actions/setup-python@v5
         with:
@@ -57,6 +54,10 @@ jobs:
           pdm install -v --group test --group uitest
           pdm run pip install -U setuptools
           pdm info
+
+      - name: install playwright dependencies
+        run: |
+            playwright install chromium
       - name: Run Tests
         run: pdm run pytest --doctest-modules -s -vv
 
