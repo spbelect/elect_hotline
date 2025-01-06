@@ -22,3 +22,4 @@ settings_vercel.py
 .env
 .config_status
 .git0/
+.vercel
