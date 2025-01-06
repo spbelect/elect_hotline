@@ -31,7 +31,7 @@ jobs:
             sudo apt-get -y install playwright chromium libasound2t64
       - name: install playwright dependencies
         run: |
-            sudo playwright install chromium --with-deps
+            sudo playwright install chromium
       - name: Setup Python Versions
         uses: actions/setup-python@v5
         with:
