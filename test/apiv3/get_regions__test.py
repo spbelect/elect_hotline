@@ -16,7 +16,7 @@ from rest_framework.serializers import ValidationError, DateTimeField
 from rest_framework.status import HTTP_200_OK
 # from nose.plugins.attrib import attr
 
-from ufo.models import Region, WebsiteUser, Tik, Munokrug
+from ufo.models import Region, WebsiteUser, Tik, Munokrug, Country
 from ..base import BaseTestCase
 
 
@@ -28,8 +28,9 @@ class GetRegionsSuccessTest(BaseTestCase):
         #make(User, app_ids=['123'])
 
         # GIVEN 2 Regions
-        lenobl = make(Region, id='ru_47', name='Лен. обл.')
-        spb = make(Region, id='ru_78', name='Spb')
+        ru = make(Country, id='ru', name="Russia")
+        lenobl = make(Region, id='ru_47', name='Лен. обл.', country=ru)
+        spb = make(Region, id='ru_78', name='Spb', country=ru)
 
         # AND munokrug
         make(Munokrug, id='123', name='mo xz gde', uik_ranges="[[1,100], [4010, 4055]]", region=lenobl,
