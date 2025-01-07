@@ -1,12 +1,8 @@
-name: Test-and-Deploy-Preview
+name: Tests
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "docs/**"
-      - "*.md"
-      - "*.toml"
+  workflow_call:
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -75,20 +71,3 @@ jobs:
       #   with:
       #     token: ${{ secrets.CODECOV_TOKEN }}
       #     file: ./coverage.xml
-
-  deploy_preview_job:
-    needs: tests_job
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Deploy preview
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          # vercel-args: '--prod' #Optional
-          vercel-args: '--yes'
-          vercel-org-id: ${{ secrets.ORG_ID}} #Required
-          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-          vercel-version: 39.2.5
-
