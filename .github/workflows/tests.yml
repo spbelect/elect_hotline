@@ -13,7 +13,7 @@ jobs:
       ADMIN_EMAIL: "someuniquename@gmail.com"
       GOOGLE_OAUTH2_CLIENT_ID: test
       GOOGLE_OAUTH2_CLIENT_SECRET: test
-    # The type of runner that the job will run on
+
     runs-on: ubuntu-24.04
 
     strategy:
