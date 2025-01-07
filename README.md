@@ -1,4 +1,4 @@
-[![Test-and-Deploy-Preview](https://github.com/Fak3/elect_hotline/actions/workflows/ci.yml/badge.svg)](https://github.com/Fak3/elect_hotline/actions/workflows/ci.yml)
+[![vercel-beta](https://github.com/Fak3/elect_hotline/actions/workflows/vercel-beta.yml/badge.svg)](https://github.com/Fak3/elect_hotline/actions/workflows/vercel-beta.yml)
 
 # Сервер сбора данных от наблюдателей
 Описание.
