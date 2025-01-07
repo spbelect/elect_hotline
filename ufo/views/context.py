@@ -53,7 +53,7 @@ def jinja_env(**kwargs) -> Environment:
         'humanize': django.contrib.humanize.templatetags.humanize,
         'int16': int16,
         'static': static,
-        'version': importlib.metadata.version("elect_hotline")
+        'version': importlib.metadata.version("elect-hotline")
 
         # 'url': reverse,
     })
