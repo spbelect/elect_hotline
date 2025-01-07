@@ -58,6 +58,11 @@ jobs:
       - name: install playwright dependencies
         run: |
             pdm run playwright install chromium
+
+      - name: collect static files
+        run: |
+            pdm run ./manage.py collectstatic --no-input
+
       - name: Run Tests
         run: pdm run pytest --doctest-modules -s -vv
 

@@ -170,7 +170,6 @@ def filter_history_new_scenario__test(spb, msk, live_server, page):
     # WHEN user clicks filter Жалоба подавалась
     page.get_by_label("Complaint Filter").get_by_label("Yes").click()
 
-    page.wait_for_timeout(1000)
     # THEN Answer 14 without complaint should be hidden
     expect(page.get_by_text("Санкт-Петербург UIK 14")).to_have_count(0)
     # AND 3 other answers with complaint should be visible
