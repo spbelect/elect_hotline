@@ -72,11 +72,12 @@ jobs:
       #     token: ${{ secrets.CODECOV_TOKEN }}
       #     file: ./coverage.xml
 
-  deploy_job:
-    needs: tests_job
+  deploy_preview_job:
+    # needs: tests_job
     runs-on: ubuntu-24.04
     steps:
-      - name: Deploy
+      - uses: actions/checkout@v2
+      - name: Deploy preview
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
