@@ -84,5 +84,5 @@ jobs:
           # vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}} #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-          vercel-version: 28.15.0
+          vercel-version: 39.2.5
 
