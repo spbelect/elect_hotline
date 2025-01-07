@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import importlib.metadata
 from datetime import datetime, timedelta, date, timezone
 # from gettext import GNUTranslations
 
@@ -18,6 +17,7 @@ from django.utils import translation
 from jinja2 import Environment
 
 import utils
+import ufo
 
 from ..models import (
     Answer, Region, WebsiteUser, Munokrug, MobileUser, Election, Campaign, int16, Contact
@@ -53,7 +53,7 @@ def jinja_env(**kwargs) -> Environment:
         'humanize': django.contrib.humanize.templatetags.humanize,
         'int16': int16,
         'static': static,
-        'version': importlib.metadata.version("elect-hotline")
+        'version': ufo.__version__
 
         # 'url': reverse,
     })

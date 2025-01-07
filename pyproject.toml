@@ -94,5 +94,5 @@ uitest = [
 ]
 
 
-[tool.pdm]
-distribution = true
+# [tool.pdm]
+# distribution = true
