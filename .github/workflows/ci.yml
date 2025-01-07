@@ -77,7 +77,7 @@ jobs:
       #     file: ./coverage.xml
 
   deploy_preview_job:
-    # needs: tests_job
+    needs: tests_job
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v2
