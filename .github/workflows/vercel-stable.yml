@@ -1,8 +1,8 @@
-name: vercel-beta
+name: vercel-stable
 
 on:
   push:
-    branches: [main]
+    branches: [stable]
     paths-ignore:
       - "docs/**"
       - "*.md"
@@ -25,11 +25,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Deploy preview
+      - name: Deploy stable
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--yes'
+          vercel-args: '--yes --prod'
           vercel-org-id: ${{ secrets.ORG_ID }}
           vercel-project-id: ${{ secrets.PROJECT_ID }}
           vercel-version: 39.2.5
