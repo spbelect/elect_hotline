@@ -57,7 +57,7 @@ jobs:
 
       - name: install playwright dependencies
         run: |
-            playwright install chromium
+            pdm run playwright install chromium
       - name: Run Tests
         run: pdm run pytest --doctest-modules -s -vv
 
