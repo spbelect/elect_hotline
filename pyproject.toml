@@ -93,3 +93,6 @@ uitest = [
     "pytest-playwright>=0.5.1",
 ]
 
+
+[tool.pdm]
+distribution = true

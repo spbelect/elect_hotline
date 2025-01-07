@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import importlib.metadata
 from datetime import datetime, timedelta, date, timezone
 # from gettext import GNUTranslations
 
@@ -52,6 +53,8 @@ def jinja_env(**kwargs) -> Environment:
         'humanize': django.contrib.humanize.templatetags.humanize,
         'int16': int16,
         'static': static,
+        'version': importlib.metadata.version("elect_hotline")
+
         # 'url': reverse,
     })
     return env
