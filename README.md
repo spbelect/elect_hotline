@@ -97,7 +97,7 @@ pytest -s -m 'not uitest' --doctest-modules -n auto --verbose
 Проверяют полноценные сценарии взимодействия с сайтом.
 ```
 pdm install --dev --group uitest
-zypper in playwright
+playwright install chromium
 ```
 
 Запустить
