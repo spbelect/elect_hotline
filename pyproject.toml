@@ -41,6 +41,7 @@ dependencies = [
     "pyjwt[crypto]>=2.9.0",
     "typer>=0.13.0",
     "django-jsonform>=2.23.1",
+    "pip>=24.3.1",
 ]
 readme = "README.md"
 license = {text = "MIT"}

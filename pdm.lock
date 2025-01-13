@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:4cb34f1fb4d4f254a0d553ff583bdb4ba54458e8b29750ab1b76675b6898b724"
+content_hash = "sha256:3a70abfd2d94965448af788998562841177448a2b9b10f25b4632e6f24b36afd"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -1213,6 +1213,17 @@ dependencies = [
 files = [
     {file = "pginit-0.6-py3-none-any.whl", hash = "sha256:0b41c207e0ce80757711aaf7ace61dd38980c25a59821c1760dbfca1ad286b37"},
     {file = "pginit-0.6.tar.gz", hash = "sha256:060b3194d9c830818c28b36c744c3c1da7a93d1b967c011b52c2e822e2fd45da"},
+]
+
+[[package]]
+name = "pip"
+version = "24.3.1"
+requires_python = ">=3.8"
+summary = "The PyPA recommended tool for installing Python packages."
+groups = ["default"]
+files = [
+    {file = "pip-24.3.1-py3-none-any.whl", hash = "sha256:3790624780082365f47549d032f3770eeb2b1e8bd1f7b2e02dace1afa361b4ed"},
+    {file = "pip-24.3.1.tar.gz", hash = "sha256:ebcb60557f2aefabc2e0f918751cd24ea0d56d8ec5445fe1807f1d2109660b99"},
 ]
 
 [[package]]
