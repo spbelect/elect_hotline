@@ -4,8 +4,9 @@ from django.http import Http404
 from django.shortcuts import render
 
 # from loguru import logger
+import pydantic
 from ninja import NinjaAPI
-from ninja.errors import ValidationError, HttpError
+import ninja.errors
 # from ninja.renderers import BaseRenderer
 
 
@@ -20,12 +21,38 @@ from ninja.errors import ValidationError, HttpError
 # api = NinjaAPI(renderer=TemplateRenderer())
 html = NinjaAPI(urls_namespace='html')
 
-@html.exception_handler(ValidationError)
-def validation_errors(request, exc):
+@html.exception_handler(ninja.errors.ValidationError)
+def ninja_validation_errors(request, exc):
     if settings.DEBUG:
         logging.exception(exc)
+    else:
+        logging.debug(exc)
     return render(
-        request, "views/validation_error.html", {'errors': exc.errors}, status=422
+        request, "views/validation_error.html", {
+            'errors': [
+                dict(
+                    err,
+                    input_name = [x for x in err['loc'] if isinstance(x, str)][-1]
+                ) for err in exc.errors
+            ]
+        }, status=422
+    )
+
+@html.exception_handler(pydantic.ValidationError)
+def pydantic_validation_errors(request, exc):
+    if settings.DEBUG:
+        logging.exception(exc)
+    else:
+        logging.debug(exc)
+    return render(
+        request, "views/validation_error.html", {
+            'errors': [
+                dict(
+                    err,
+                    input_name = [x for x in err['loc'] if isinstance(x, str)][-1]
+                ) for err in exc.errors()
+            ]
+        }, status=422
     )
 
 
@@ -39,13 +66,13 @@ def exc_error(request, exc):
     )
 
 @html.exception_handler(Http404)
-def exc_error(request, exc):
+def error_404(request, exc):
     logging.exception(exc)
     return render(
         request, "views/http_error.html", {'error': exc}, status=404
     )
 
-@html.exception_handler(HttpError)
+@html.exception_handler(ninja.errors.HttpError)
 def http_error(request, exc):
     if settings.DEBUG:
         raise exc
