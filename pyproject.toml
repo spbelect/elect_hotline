@@ -64,6 +64,8 @@ uitest = "pytest -s -m uitest --headed --tracing retain-on-failure  --verbose"
 test = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose"
 doctest = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose ufo/"
 
+makecss = "npx tailwindcss -i ./static/main.post.css -o ./static/main.css"
+
 # localization
 pre_makemessages = "pybabel extract -F locale/babel.cfg -o ./locale/django.pot ./"
 makemessages = "pybabel update -l ru -d locale/ -i locale/django.pot --domain django"

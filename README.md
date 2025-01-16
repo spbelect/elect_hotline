@@ -142,7 +142,9 @@ npm install -D @tailwindcss/typography
 
 Transpile postcss with command
 
-`npx tailwindcss -i ./static/main.post.css -o ./static/main.css`
+`npx tailwindcss -i ./static/main.post.css -o ./static/main.css` or just `pdm makecss`
+
+Use `pdm makecss --watch` to automatically transpile postcss when html file changes.
 
 
 ## Outdated packages
