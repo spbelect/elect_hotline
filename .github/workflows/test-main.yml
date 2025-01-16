@@ -1,4 +1,4 @@
-name: vercel-beta
+name: test-main
 
 on:
   push:
