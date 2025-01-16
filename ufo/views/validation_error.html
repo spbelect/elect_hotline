@@ -14,8 +14,11 @@
 {% block errors %}
   # if request.headers.get('X-Alpine-Request') == 'true'
     # for error in errors
-      <template x-teleport="fieldset:has([name={{error.loc[-1]}}])">
-          <div class="alert alert-error max-w-xs inline-block px-2 py-1">
+      ## set path = [x for x in error.loc if isinstance(x, str)]
+      <template x-teleport="fieldset:has([name={{error.input_name}}])">
+          <div class="alert alert-error max-w-xs inline-block px-2 py-1"
+            aria-label="{{error.input_name}} validation error"
+          >
             {{error.ctx.reason or error.msg}}
           </div>
       </template>
