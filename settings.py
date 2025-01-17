@@ -176,6 +176,7 @@ USE_TZ = True
 
 DATABASES = {'default': env.db('DATABASE_URL', default='')}
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES['default']['CONN_MAX_AGE'] = 0
 
 if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
     DATABASES['default']['OPTIONS'] = {
@@ -183,7 +184,7 @@ if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
         # django.db.utils.OperationalError: database is locked
         "transaction_mode": "IMMEDIATE",
 
-        # "timeout": 30,
+        "timeout": 6000,
         "init_command": ' '.join([
             # https://www.sqlite.org/pragma.html#pragma_synchronous
             #
@@ -222,106 +223,44 @@ STORAGES = {
 ### Страницы логина у нас нет. Сюда будет редирект от декратора @login_required
 LOGIN_URL = '/feed/answers/'
 
-#suppressed_warnings = [
-    #'django_tablib/admin/__init__.py:47: RemovedInDjango18Warning: Options.module_name has been deprecated in favor of model_name',
-    #'picklefield/fields.py:71: RemovedInDjango110Warning: SubfieldBase has been deprecated.'
-#]
+
+import logging
+import loguru
+import logging_to_loguru
+
+# Redirect all stdlib logging to loguru
+logging.basicConfig(handlers=[logging_to_loguru.ToLoguru()], level=0, force=True)
 
 
-#class WarningsSuppressFilter(logging.Filter):
-    #def filter(self, record):
-        #for text in suppressed_warnings:
-            #if text in record.getMessage():
-                #return False
-        #return True
+LOGGING_CONFIG = None  # Prevent django standard logging setup
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        #'verbose': {'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'},
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(name)s %(module)s.py: %(message)s',
-            'datefmt': '<%Y-%m-%d %H:%M:%S>'
-        },
-        'simple': {'format': '%(levelname)s %(name)s %(module)s.py: %(message)s'},
-    },
-    'filters': {
-        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
-        #'suppress_known_warnings': {'()': 'settings.logging.WarningsSuppressFilter'}
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        },
-        'console': {
-            'level': 'DEBUG' if DEBUG else 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-        'py.warnings': {
-            #'filters': ['suppress_known_warnings'],
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'wsgi.py': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'ufo.middleware': {
-            # Logs all incoming requests. Logging happens before view processing, unlike
-            # django.request logger, which only logs finished requests.
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        #'django': {
-            #'handlers': ['console'],
-            #'level': 'DEBUG',
-            #'propagate': False,
-        #},
-        # 'django.db': {
-        #     'handlers': ['console'],
-        #     'level': 'DEBUG',
-        #     'propagate': False,
-        # },
-        #'django.template': {
-            #'handlers': ['console'],
-            #'level': 'WARN',
-            #'propagate': False,
-        #},
-        #'django_select2.widgets': {
-            #'handlers': ['console'],
-            #'level': 'ERROR',
-            #'propagate': False,
-        #},
-        #'django.request': {
-            ##'handlers': ['mail_admins', 'console'],
-            #'handlers': ['console'],
-            #'level': 'DEBUG',
-            #'propagate': False,
-        #},
-        'selenium.webdriver.remote.remote_connection': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'parso': {'level': 'ERROR'},  # prevent flood
-        'asyncio': {'level': 'INFO'},  # prevent flood
-    }
-}
-        
+
+# Loguru settings
+loguru.logger.configure(handlers=[
+    dict(
+        sink = sys.stderr,
+        # format="[{time}] {message}",
+        level = "DEBUG",
+        colorize = True,
+        backtrace = True,
+        diagnose = True,
+        filter = {
+            "": os.environ.get("UFO_LOGLEVEL", "INFO"),
+
+            "django": os.environ.get("UFO_LOGLEVEL", "INFO"),
+            "django.db": "INFO",
+            "django.db.backends.base.schema": "INFO",
+            "django.utils.autoreload": "ERROR",
+
+            "environ.environ": "INFO",
+
+            "ufo": os.environ.get("UFO_LOGLEVEL", "INFO"),
+        }
+    ),
+    # dict(sink="file.log", enqueue=True, serialize=True),
+])
+
+
 #WEBPACK_LOADER = {
     #'DEFAULT': {
         #'BUNDLE_DIR_NAME': 'bundles/',
@@ -438,4 +377,5 @@ if env.bool('DEBUG_TOOLBAR', default=False):
         INSTALLED_APPS += ['debug_toolbar',]
         MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
         DEBUG_TOOLBAR_PATCH_SETTINGS = True
-
+else:
+    print('DEBUG_TOOLBAR is disabled')
