@@ -1,11 +1,12 @@
 ![Tests](https://github.com/Fak3/elect_hotline/actions/workflows/test-main.yml/badge.svg)
 
-# Сервер сбора данных от наблюдателей
-Описание.
 
-# Демо сайт
+Elect-hotline is a web server that receives data from [Paradox](https://github.com/spbelect/paradox) android app. It has a web frontend to browse answers history, and organizations registry for teams assisting election observers.
 
-TODO
+Beta website that follows main branch: https://elect-hotline-fak3-roman-s-projects-e5269d83.vercel.app
+
+Production website that follows stable branch: https://elect-hotline.vercel.app
+
 
 # Installation
 
