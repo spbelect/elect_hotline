@@ -92,7 +92,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_label("regions validation error")).to_have_count(0)
 
     # AND uik ranges for Moskva should be visible
-    expect(page.get_by_text("Москва UIK ranges -")).to_be_visible()
+    expect(page.get_by_text("Москва UIK ranges All")).to_be_visible()
 
     # page.wait_for_timeout(500)  # Wait for sqlite database requests to finish
 
@@ -107,7 +107,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     #########
 
     # WHEN user clicks uik ranges
-    page.get_by_text("Москва UIK ranges -").get_by_role("link", name="UIK ranges -").click()
+    page.get_by_text("Москва UIK ranges All").get_by_role("link", name="UIK ranges All").click()
 
     # THEN UIK Ranges page opens
     # AND UIK Ranges page header should be visible
