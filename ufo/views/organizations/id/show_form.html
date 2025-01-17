@@ -12,16 +12,15 @@
 
 {% block main %}
 
-<form method=post x-data="{
-    email: '',
-    submit() {
-        $ajax('', {method: 'post', target: 'errors', body: $el, sync: true})
-      }
-    }"
+<form method=post
+  id=form
+  x-target="form messages"
+  x-target.error="errors"
+  x-target.302="_self"  ## go to new url
+  x-data
   class="flex max-w-md flex-col px-2 lg:px-4 border-opacity-50 mx-auto text-center" id='form'
-  @ccchange="submit()"
-  @ajax:success="location='/organizations'"
-  @submit.prevent
+
+  @change="$el.requestSubmit()"
 >
   <input type=hidden name=id value="{{org.id}}" />
 
@@ -57,23 +56,28 @@
     </select>
 
   </fieldset>
-
-  <div class="mt-8 flex gap-2 justify-center">
-
-    <button class="btn btn-primary"
-      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
-      @click="body.page_unloading=true; submit()"
-    >
-      {{_('Save') if org else _('Create')}}
-    </button>
-
-    <a class="btn" href="/organizations"
-      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
-    >
-      {{_('Cancel')}}
-    </a>
-
-  </div>
 </form>
+
+# if org
+  <p class="mt-8 px-2 lg:px-4 max-w-md m-auto">
+    {{_('Electoral observers at the voting stations with UIK numbers given below will see your organization contacts.')}}
+  </p>
+
+  <ul x-sync id="uik_ranges" class="mt-8 px-2 lg:px-4 max-w-md m-auto">
+      # for branch in OrgBranch.objects.filter(organization=org).select_related('region')
+          <li class="card card-body bg-base-200 shadow-xl mb-4">
+              <h4> {{branch.region.name}} </h4>
+              <a href="/organizations/{{org.id}}/branches/{{branch.region.id}}">
+                  {{_('UIK ranges')}}
+                  # for start, end in branch.uik_ranges or []
+                      <span class="badge"> {{start}}-{{end}} </span>
+                  # else
+                    <span class="badge"> {{_('All')}} </span>
+                  # endfor
+              </a>
+          </li>
+      # endfor
+  </ul>
+# endif
 
 {% endblock %}

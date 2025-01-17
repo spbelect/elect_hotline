@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.translation import gettext as _
+from loguru import logger
 from ninja import ModelSchema, Query, Form, Schema
 from ninja.errors import HttpError
 from pydantic import UUID4, BaseModel, field_validator, Field
@@ -27,7 +28,7 @@ class OrgSchema(ModelSchema):
 
 @api.html.post('/organizations/{uuid:id}')
 def post_organization(request, id: UUID4, data: Form[OrgSchema]):
-    print(data)
+    """ Edit existing Organization. """
 
     org = get_object_or_404(Organization, id=data.id)
 
@@ -38,15 +39,23 @@ def post_organization(request, id: UUID4, data: Form[OrgSchema]):
     org.update(name=data.name)
     org.regions.set(data.regions)
 
+    return render(request, 'views/organizations/id/show_form.html', dict(
+        org = org
+    ))
 
 
 @api.html.post('/organizations/new')
 def post_new_organization(request, data: Form[OrgSchema]):
+    """ Create new Organization. """
+
     org = Organization.objects.create(
         name=data.name,
         creator=request.user
     )
     org.regions.set(data.regions)
+    logger.info(f'Created new Organization {org.name} {org.id} by {request.user}')
 
-    messages.info(request, _('Organization {name} successfully created.').format(name=org.name))
+    # messages.info(request, _('Organization {name} successfully created.').format(name=org.name))
+
+    return redirect(f'/organizations/{org.id}')
 

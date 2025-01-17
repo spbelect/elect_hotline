@@ -50,3 +50,4 @@ CACHES = {
         #'BACKEND': 'test.cache_backend.LocMemNoPickleCache',  # This backend can store Mock.
     #}
 }
+

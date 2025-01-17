@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-01 21:42+0500\n"
+"POT-Creation-Date: 2025-01-17 11:47+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: settings.py:153 ufo/models/websiteuser.py:101
+#: settings.py:154 ufo/models/websiteuser.py:101
 msgid "English"
 msgstr ""
 
-#: settings.py:154 ufo/models/websiteuser.py:102
+#: settings.py:155 ufo/models/websiteuser.py:102
 msgid "Russian"
 msgstr ""
 
-#: urls.py:37
+#: urls.py:40
 msgid "Page with given address does not exist"
 msgstr ""
 
-#: ufo/admin.py:255
+#: ufo/admin.py:257
 msgid "Personal info"
 msgstr ""
 
-#: ufo/admin.py:256
+#: ufo/admin.py:258
 msgid "Permissions"
 msgstr ""
 
-#: ufo/admin.py:258
+#: ufo/admin.py:260
 msgid "Important dates"
 msgstr ""
 
@@ -155,15 +155,15 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: ufo/views/_navbar.html:38 ufo/views/account.html:4 ufo/views/account.html:11
+#: ufo/views/_navbar.html:37 ufo/views/account.html:4 ufo/views/account.html:11
 msgid "Settings"
 msgstr ""
 
-#: ufo/views/_navbar.html:46
+#: ufo/views/_navbar.html:45
 msgid "Sign out"
 msgstr ""
 
-#: ufo/views/_navbar.html:129 ufo/views/auth/login.html:4
+#: ufo/views/_navbar.html:132 ufo/views/auth/login.html:4
 #: ufo/views/base.html:103
 msgid "Sign in"
 msgstr ""
@@ -226,15 +226,15 @@ msgid_plural "answers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ufo/views/history.html:170
+#: ufo/views/history.html:169
 msgid "Download"
 msgstr ""
 
-#: ufo/views/history.html:175
+#: ufo/views/history.html:174
 msgid "No answers with given filter"
 msgstr ""
 
-#: ufo/views/history.html:195 ufo/views/organizations/list.html:83
+#: ufo/views/history.html:194 ufo/views/organizations/list.html:83
 msgid "End of list"
 msgstr ""
 
@@ -296,15 +296,15 @@ msgstr ""
 msgid "Become part of a team assisting observers in real time"
 msgstr ""
 
-#: ufo/views/home.html:54
+#: ufo/views/home.html:56
 msgid "Download Android apk"
 msgstr ""
 
-#: ufo/views/home.html:57
+#: ufo/views/home.html:59
 msgid "Submit electoral transparency data"
 msgstr ""
 
-#: ufo/views/validation_error.html:37
+#: ufo/views/validation_error.html:40
 msgid "Error:"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "Join"
 msgstr ""
 
-#: ufo/views/organizations/id/edit.html:67 ufo/views/organizations/list.html:24
+#: ufo/views/organizations/list.html:24
 msgid "Create"
 msgstr ""
 
@@ -387,32 +387,71 @@ msgstr[1] ""
 msgid "No organizations with given filter"
 msgstr ""
 
-#: ufo/views/organizations/id/edit.html:4
-#: ufo/views/organizations/id/edit.html:10
-msgid "Edit organization"
-msgstr ""
-
-#: ufo/views/organizations/id/edit.html:32
-msgid "Name"
-msgstr ""
-
-#: ufo/views/organizations/id/edit.html:45
-msgid "Regions"
-msgstr ""
-
-#: ufo/views/organizations/id/edit.html:67
-msgid "Save"
-msgstr ""
-
-#: ufo/views/organizations/id/edit.html:73
-msgid "Cancel"
-msgstr ""
-
-#: ufo/views/organizations/id/edit.py:28 ufo/views/organizations/id/edit.py:65
+#: ufo/views/organizations/id/branches/post_form.py:39
+#: ufo/views/organizations/id/branches/show_form.py:25
+#: ufo/views/organizations/id/post_form.py:37
+#: ufo/views/organizations/id/show_form.py:27
 msgid "You don't have permission to edit this organization."
 msgstr ""
 
-#: ufo/views/organizations/id/edit.py:80
-msgid "Organization {name} successfully created."
+#: ufo/views/organizations/id/show_form.html:4
+#: ufo/views/organizations/id/show_form.html:10
+msgid "Edit organization"
+msgstr ""
+
+#: ufo/views/organizations/id/show_form.html:31
+msgid "Name"
+msgstr ""
+
+#: ufo/views/organizations/id/show_form.html:44
+msgid "Regions"
+msgstr ""
+
+#: ufo/views/organizations/id/show_form.html:63
+msgid ""
+"Electoral observers at the voting stations with UIK numbers given below "
+"will see your organization contacts."
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:42
+#: ufo/views/organizations/id/show_form.html:71
+msgid "UIK ranges"
+msgstr ""
+
+#: ufo/views/organizations/id/show_form.html:75
+msgid "All"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:4
+#: ufo/views/organizations/id/branches/show_form.html:21
+msgid "Edit uik ranges"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:48
+msgid "UIK Ranges"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:65
+msgid "From"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:73
+msgid "To"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:97
+msgid "Add range"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:100
+msgid "More"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:110
+msgid "Save"
+msgstr ""
+
+#: ufo/views/organizations/id/branches/show_form.html:116
+msgid "Cancel"
 msgstr ""
 

@@ -31,7 +31,7 @@ class Filters(FilterSchema):
 def get_organizations(request, filters: Query[Filters], page: Header[int] = 1):
     orgs = filters.filter(Organization.objects.prefetch_related('regions', 'members'))
 
-    paginator = Paginator(orgs, per_page=1)
+    paginator = Paginator(orgs, per_page=10)
 
     return render(request, 'views/organizations/list.html', dict(
         page = paginator.get_page(page),

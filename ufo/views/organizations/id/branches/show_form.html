@@ -1,0 +1,123 @@
+{% extends "views/base.html" %}
+
+
+{% block title %} {{_('Edit uik ranges')}} {% endblock %}
+
+{% block extra_head %}
+<style>
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type=number] {
+      -moz-appearance:textfield; /* Firefox */
+  }
+</style>
+{% endblock %}
+
+{% block header %} {{_('Edit uik ranges')}} {% endblock %}
+
+
+{% block main %}
+
+<form
+  class="px-2 lg:px-4 md:max-w-md m-auto"
+
+  x-data='{
+    ranges: [
+      # for start, end in branch.uik_ranges or [("", "")]:
+        {id: crypto.randomUUID(), start: "{{start}}", end: "{{end}}" },
+      # endfor
+    ],
+    valid: false,
+    submit() {
+      if(this.valid) {
+        $ajax("", {method: "post", target: "errors", body: $el, sync: true})
+      }
+    }
+  }'
+  aria-label="{{_('UIK ranges')}} {{branch.region.name}}"
+  x-effect='valid = [].concat(...ranges.map(x => [x.start, x.end])).every(x => (0<x && x<10000))'
+  @submit.prevent
+  @ajax:success='location="/organizations/{{branch.organization_id}}"'
+>
+
+  <h1 class="text-xl mb-4 text-center">{{_('UIK Ranges')}} {{branch.region.name}}</h1>
+
+  ## Send uik_ranges as list of lists [[1,23],[35,108]]
+  <fieldset>
+    <input name="uik_ranges" type="hidden"
+      :value="JSON.stringify(ranges.map((x) => [x.start, x.end]))"
+    />
+  </fieldset>
+
+  <template x-for="(range, index) in ranges" :key="range.id">
+    <fieldset class="flex gap-4 justify-center" aria-label="UIK Range" @keydown.enter.prevent>
+
+      <input type=number
+        x-model="range.start"
+        min="1" max="9999"
+        onwheel="this.blur()"
+        class="w-40"
+        placeholder="{{_('From')}}"
+      />
+
+      <input type=number
+        x-model="range.end"
+        min="1" max="9999"
+        onwheel="this.blur()"
+        class="w-40"
+        placeholder="{{_('To')}}"
+      />
+
+      <button class="btn btn-circle btn-sm"
+        @click="ranges.splice(index, 1)"  ## remove this range row
+        tabindex="-1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+    </fieldset>
+  </template>
+
+  <button class="btn btn-xs mt-2" type="button" aria-label="{{_('Add range')}}"
+    @click='ranges.push({id: crypto.randomUUID(), start: "", end: "" })'
+  >
+    {{_('More')}}
+  </button>
+
+  <div class="mt-8 flex gap-2 justify-center">
+
+    <button class="btn btn-primary"
+      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+      @click="submit()"
+      :disabled='!valid'
+    >
+      {{_('Save')}}
+    </button>
+
+    <a class="btn" href="/organizations/{{branch.organization.id}}"
+      :class="!body.page_unloading || 'animate-pulse cursor-wait'"
+    >
+      {{_('Cancel')}}
+    </a>
+
+  </div>
+</form>
+
+
+{% endblock %}

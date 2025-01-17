@@ -21,6 +21,8 @@ import ufo.views.home
 import ufo.views.history
 import ufo.views.organizations.id.show_form
 import ufo.views.organizations.id.post_form
+import ufo.views.organizations.id.branches.show_form
+import ufo.views.organizations.id.branches.post_form
 import ufo.views.organizations.id.join_applications
 import ufo.views.organizations.list
 
