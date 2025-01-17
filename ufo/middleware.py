@@ -72,7 +72,7 @@ def anonymous_user_session(get_response):
 
 
 def process_request(request: HttpRequest) -> None:
-    logger.debug(f"{request.method} {request.path}")
+    logger.debug(f"{request.method} {request.path} by {request.user}")
 
     if not request.user.is_authenticated:
         request.session.setdefault('country_id', 'ru')
