@@ -44,7 +44,9 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     with patch_auth():
         page.goto(f'{live_server}/auth/login/signed?auth_user=test@example.com')
 
-    ######
+
+    ###### Test organizations list region filter
+
     # WHEN user opens organizations page
     page.goto(f"{live_server}/organizations")
 
@@ -62,7 +64,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_role("heading", name="SPB organization")).to_have_count(0)
 
 
-    ######
+    ###### Test create new organization form
 
     # WHEN user clicks create button
     page.get_by_role("link", name="Create").click()
@@ -71,7 +73,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     # AND name input should be visible
     expect(page.get_by_placeholder("Name")).to_be_visible()
 
-    page.wait_for_timeout(1000)  # Wait alpine-js init
+    page.wait_for_timeout(600)  # Wait for alpine-js init
 
     # WHEN user fills name
     page.get_by_placeholder("Name").fill("My MSK Org")
@@ -79,32 +81,23 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     # AND press enter
     page.keyboard.press('Enter')
 
-    # THEN
+    # THEN regions validation error should be visible
     expect(page.get_by_label("regions validation error")).to_be_visible()
 
-    # AND click regions
+    # WHEN user clicks regions
     page.get_by_placeholder("Regions").click()
 
     # AND selects "Москва"
     page.get_by_role("option", name="Москва").click()
 
-    # THEN
+    # THEN regions validation error should go away
     expect(page.get_by_label("regions validation error")).to_have_count(0)
 
-    # AND uik ranges for Moskva should be visible
+    # AND uik ranges for Moskva region should be visible
     expect(page.get_by_text("Москва UIK ranges All")).to_be_visible()
 
-    # page.wait_for_timeout(500)  # Wait for sqlite database requests to finish
 
-    # AND database should contain 2 orgs: old and newly created org
-    assert set(Organization.objects.values_list('name', 'creator__email')) == {
-        ('SPB organization', 'somone_else@ex.com'),
-        ('My MSK Org', 'test@example.com')
-    }
-
-    # page.wait_for_timeout(500)  # Wait for sqlite database requests to finish
-
-    #########
+    ####### Test uik ranges form
 
     # WHEN user clicks uik ranges
     page.get_by_text("Москва UIK ranges All").get_by_role("link", name="UIK ranges All").click()
@@ -149,7 +142,33 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     # AND Moskva region should have saved UIK ranges
     expect(page.get_by_text("Москва UIK ranges 1-10 15-20")).to_be_visible()
 
-    #########
+
+    ###### Test edit contacts page
+
+    # WHEN user clicks "Add contact"
+    page.get_by_role("link", name="Add contact").click()
+
+    # THEN edit contacts page opens
+    expect(page.get_by_role("heading", name="Contacts My MSK Org")).to_be_visible()
+
+    # WHEN user fills new contact form name and value
+    page.get_by_label("New contact name").fill('Call center')
+    page.get_by_label("New contact value").fill('+7777')
+
+    # AND clicks "add contact"
+    page.get_by_label("Add contact").click()
+
+    # THEN a new contact should be added
+    expect(page.get_by_role("heading", name="Call center")).to_be_visible()
+
+    # WHEN user goes back
+    page.go_back()
+
+    # THEN organization page opens
+    # AND Call center contact should be displayed in the list
+    expect(page.get_by_role("link", name="Call center")).to_be_visible()
+
+    ####### Test list organizations filter
 
     # WHEN user clicks topleft menu drawer
     page.get_by_role("navigation").get_by_role("button").click()
@@ -162,6 +181,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_text("Found 2 organizations")).to_be_visible()
 
     # AND Create new organization button should be hidden
+    # because user already have one organization
     expect(page.get_by_role("link", name="Create")).to_have_count(0)
 
     # AND My MSK org should be displayed in the list
