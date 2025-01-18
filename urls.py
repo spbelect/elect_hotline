@@ -20,6 +20,9 @@ import ufo.views.auth.google
 import ufo.views.home
 import ufo.views.history
 import ufo.views.organizations.id.show_form
+import ufo.views.organizations.id.contacts.show_form
+import ufo.views.organizations.id.contacts.id.post
+import ufo.views.organizations.id.contacts.id.delete
 import ufo.views.organizations.id.post_form
 import ufo.views.organizations.id.branches.show_form
 import ufo.views.organizations.id.branches.post_form

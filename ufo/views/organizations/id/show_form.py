@@ -26,9 +26,15 @@ def show_organization_form(request, id: UUID4):
         logger.info(f'Unauthorized access from {request.user} to the Organization {org.name} owned by {org.creator}')
         raise HttpError(401, _("You don't have permission to edit this organization."))
 
-    return render(request, 'views/organizations/id/show_form.html', dict(
+    response = render(request, 'views/organizations/id/show_form.html', dict(
         org = org
     ))
+
+    # When user goes back in browser history, reload the page. So that
+    # page displays up-todate contacts which was created on the separate page.
+    response['Cache-Control'] = 'no-store, must-revalidate, max-age=0'
+
+    return response
 
 
 @api.html.get('/organizations/new')

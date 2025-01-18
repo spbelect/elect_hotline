@@ -1,0 +1,83 @@
+{% extends "views/base.html" %}
+
+
+{% block title %} {{_('Edit contacts')}} {% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block header %} {{_('Edit contacts')}} {% endblock %}
+
+
+{% block main %}
+
+<main class=" px-2 lg:px-4 md:max-w-md m-auto" x-data id="contacts">
+
+  <h1 class="text-xl mb-4 text-center">{{_('Contacts')}} {{org.name}}</h1>
+
+  <ul>
+    # for contact in org.contacts.all()
+      <li class="card card-body bg-base-200 shadow-xl mb-4">
+
+        <h4 class="text-center"> {{contact.name}} </h4>
+
+        <form x-target="messages" method=post
+          action="/organizations/{{org.id}}/contacts/{{contact.id}}"
+          @change="$el.requestSubmit()"
+        >
+          <input
+            name='value'
+            value="{{contact.value}}"
+            class="input text-center input-bordered w-full mt-2"
+            placeholder="{{_('Value')}}"
+          />
+
+        </form>
+
+        <form method="delete"
+          action="/organizations/{{org.id}}/contacts/{{contact.id}}"
+          x-target="contacts"
+        >
+          <button class="btn btn-sm btn-outline btn-error">
+            {{_('Delete')}}
+          </button>
+        </form>
+
+      </li>
+    # endfor
+  </ul>
+
+
+  <form x-target="contacts" method=post
+    action="/organizations/{{org.id}}/contacts/new"
+    class="card card-body bg-base-200 shadow-xl mb-4"
+  >
+    <input
+      name='name'
+      class="input text-center input-bordered w-full"
+      placeholder="{{_('Name')}}"
+      aria-label="New contact name"
+      required
+    />
+
+    <input
+      name='value'
+      class="input text-center input-bordered w-full"
+      placeholder="{{_('Value')}}"
+      aria-label="New contact value"
+      required
+    />
+
+    <button
+      class="btn btn-xs btn-outline btn-success"
+      aria-label="{{_('Add contact')}}"
+    >
+      {{_('Add')}}
+    </button>
+  </form>
+
+
+</main>
+
+
+{% endblock %}

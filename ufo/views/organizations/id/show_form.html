@@ -59,25 +59,43 @@
 </form>
 
 # if org
-  <p class="mt-8 px-2 lg:px-4 max-w-md m-auto">
-    {{_('Electoral observers at the voting stations with UIK numbers given below will see your organization contacts.')}}
-  </p>
+  <div class="mt-8 px-2 lg:px-4 max-w-md m-auto">
+    <h3 class="text-xl mb-4 text-center"> {{_('Contacts')}} </h3>
 
-  <ul x-sync id="uik_ranges" class="mt-8 px-2 lg:px-4 max-w-md m-auto">
-      # for branch in OrgBranch.objects.filter(organization=org).select_related('region')
-          <li class="card card-body bg-base-200 shadow-xl mb-4">
-              <h4> {{branch.region.name}} </h4>
-              <a href="/organizations/{{org.id}}/branches/{{branch.region.id}}">
-                  {{_('UIK ranges')}}
-                  # for start, end in branch.uik_ranges or []
-                      <span class="badge"> {{start}}-{{end}} </span>
-                  # else
-                    <span class="badge"> {{_('All')}} </span>
-                  # endfor
-              </a>
-          </li>
-      # endfor
-  </ul>
+    <ul id="contacts">
+        # for contact in org.contacts.all() or [{}]
+            <li class="card card-body bg-base-200 shadow-xl mb-4">
+                <a href="/organizations/{{org.id}}/contacts">
+                    # if contact
+                      {{contact.name}} {{contact.value}}
+                    # else
+                      {{_('Add contact')}}
+                    # endif
+                </a>
+            </li>
+        # endfor
+    </ul>
+
+    <p class="mt-8">
+      {{_('Electoral observers at the voting stations with UIK numbers given below will see your organization contacts.')}}
+    </p>
+
+    <ul x-sync id="uik_ranges" class="mt-8">
+        # for branch in OrgBranch.objects.filter(organization=org).select_related('region')
+            <li class="card card-body bg-base-200 shadow-xl mb-4">
+                <h4> {{branch.region.name}} </h4>
+                <a href="/organizations/{{org.id}}/branches/{{branch.region.id}}">
+                    {{_('UIK ranges')}}
+                    # for start, end in branch.uik_ranges or []
+                        <span class="badge"> {{start}}-{{end}} </span>
+                    # else
+                      <span class="badge"> {{_('All')}} </span>
+                    # endfor
+                </a>
+            </li>
+        # endfor
+    </ul>
+  </div>
 # endif
 
 {% endblock %}

@@ -25,6 +25,8 @@ class Contact(Model):
     class Meta():
         ordering = ('value',) 
         
+    update = base.update
+
     name = CharField(max_length=200)
     value = CharField(max_length=1000)
     TYPES = [
