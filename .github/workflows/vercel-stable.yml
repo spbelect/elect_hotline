@@ -19,7 +19,7 @@ jobs:
   tests_job:
     uses: ./.github/workflows/tests.yml
 
-  deploy_preview_job:
+  deploy_stable_job:
     needs: tests_job
     runs-on: ubuntu-24.04
     steps:
