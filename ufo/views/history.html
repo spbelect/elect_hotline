@@ -8,7 +8,6 @@
   <style>
   </style>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/choices.js@11.0.2/public/assets/scripts/choices.min.js"></script>
 
   <script>
   </script>
@@ -79,6 +78,8 @@
 
 
       <fieldset class="text-center col-span-2 md:text-right md:col-span-1 align-middle">
+
+        <script src="https://cdn.jsdelivr.net/npm/choices.js@11.0.2/public/assets/scripts/choices.min.js"></script>
 
         <select multiple
           x-init="$el.choices = new Choices($el, {removeItemButton: true})"
