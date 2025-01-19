@@ -6,17 +6,12 @@
 # SPDX-FileCopyrightText: 2024 u 1
 # SPDX-FileCopyrightText: 2025 u 1
 # SPDX-FileCopyrightText: 2025 u 1
-# SPDX-FileCopyrightText: 2025 u 1
-# SPDX-FileCopyrightText: 2025 u 1
-# SPDX-FileCopyrightText: 2025 u 1
-# SPDX-FileCopyrightText: 2025 u 1
-# SPDX-FileCopyrightText: 2025 u 1
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-17 11:47+0500\n"
-"PO-Revision-Date: 2025-01-17 11:57+0500\n"
+"POT-Creation-Date: 2025-01-19 23:33+0500\n"
+"PO-Revision-Date: 2025-01-19 23:35+0500\n"
 "Last-Translator: u1 <someuniquename@gmail.com>\n"
 "Language: ru\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -36,7 +31,7 @@ msgstr "Английский"
 msgid "Russian"
 msgstr "Русский"
 
-#: urls.py:40
+#: urls.py:43
 msgid "Page with given address does not exist"
 msgstr "Страницы с таким адресом не существует"
 
@@ -156,13 +151,13 @@ msgstr "Нет"
 msgid "Home"
 msgstr "Главная"
 
-#: ufo/views/_navbar.html:26 ufo/views/history.html:4 ufo/views/history.html:20
+#: ufo/views/_navbar.html:26 ufo/views/history.html:4 ufo/views/history.html:18
 #: ufo/views/home.html:30
 msgid "History"
 msgstr "История"
 
 #: ufo/views/_navbar.html:27 ufo/views/home.html:43
-#: ufo/views/organizations/list.html:4 ufo/views/organizations/list.html:10
+#: ufo/views/organizations/list.html:4 ufo/views/organizations/list.html:9
 msgid "Organizations"
 msgstr "Организации"
 
@@ -191,15 +186,15 @@ msgstr "Часовой пояс"
 msgid "Close"
 msgstr "Закрыть"
 
-#: ufo/views/history.html:56
+#: ufo/views/history.html:54
 msgid "from"
 msgstr "с"
 
-#: ufo/views/history.html:70
+#: ufo/views/history.html:68
 msgid "to"
 msgstr "по"
 
-#: ufo/views/history.html:89 ufo/views/organizations/list.html:44
+#: ufo/views/history.html:89 ufo/views/organizations/list.html:43
 msgid "Region: all"
 msgstr "Регион: все"
 
@@ -227,7 +222,7 @@ msgstr "Есть"
 msgid "Include revoked"
 msgstr "Включая отозванные"
 
-#: ufo/views/history.html:162 ufo/views/organizations/list.html:59
+#: ufo/views/history.html:162 ufo/views/organizations/list.html:58
 msgid "Found"
 msgstr "Найдено"
 
@@ -246,7 +241,7 @@ msgstr "Скачать"
 msgid "No answers with given filter"
 msgstr "Нет ответов с таким фильтром"
 
-#: ufo/views/history.html:194 ufo/views/organizations/list.html:83
+#: ufo/views/history.html:194 ufo/views/organizations/list.html:82
 msgid "End of list"
 msgstr "Конец списка"
 
@@ -323,17 +318,14 @@ msgid "Error:"
 msgstr "Ошибка:"
 
 #: ufo/views/auth/google.py:69 ufo/views/auth/google.py:74
-#, fuzzy
 msgid "Authentication failed"
 msgstr "Ошибка аутентификации"
 
 #: ufo/views/auth/google.py:88
-#, fuzzy
 msgid "Failed to obtain access token from Google."
 msgstr "Не удалось получить токен доступа от Google"
 
 #: ufo/views/auth/login.html:21
-#, fuzzy
 msgid "Sign in with Google"
 msgstr "Войти с помощью Google"
 
@@ -390,90 +382,122 @@ msgstr "Запрос на вступление отправлен"
 msgid "Join"
 msgstr "Вступить"
 
-#: ufo/views/organizations/list.html:24
+#: ufo/views/organizations/list.html:23
 msgid "Create"
 msgstr "Создать"
 
-#: ufo/views/organizations/list.html:59
+#: ufo/views/organizations/list.html:58
 msgid "organization"
 msgid_plural "organizations"
 msgstr[0] "организация"
 msgstr[1] "организации"
 msgstr[2] "организаций"
 
-#: ufo/views/organizations/list.html:62
+#: ufo/views/organizations/list.html:61
 msgid "No organizations with given filter"
 msgstr "Нет организаций с таким фильтром"
 
 #: ufo/views/organizations/id/branches/post_form.py:39
 #: ufo/views/organizations/id/branches/show_form.py:25
+#: ufo/views/organizations/id/contacts/id/delete.py:27
+#: ufo/views/organizations/id/contacts/id/post.py:38
+#: ufo/views/organizations/id/contacts/id/post.py:58
+#: ufo/views/organizations/id/contacts/show_form.py:25
 #: ufo/views/organizations/id/post_form.py:37
 #: ufo/views/organizations/id/show_form.py:27
 msgid "You don't have permission to edit this organization."
 msgstr "У вас нет прав для редактирования этой организации"
 
 #: ufo/views/organizations/id/show_form.html:4
-#: ufo/views/organizations/id/show_form.html:10
+#: ufo/views/organizations/id/show_form.html:9
 msgid "Edit organization"
 msgstr "Редактировать организацию"
 
-#: ufo/views/organizations/id/show_form.html:31
+#: ufo/views/organizations/id/contacts/show_form.html:69
+#: ufo/views/organizations/id/show_form.html:30
 msgid "Name"
 msgstr "Название"
 
-#: ufo/views/organizations/id/show_form.html:44
+#: ufo/views/organizations/id/show_form.html:45
 msgid "Regions"
 msgstr "Регионы"
 
-#: ufo/views/organizations/id/show_form.html:63
+#: ufo/views/organizations/id/contacts/show_form.html:27
+#: ufo/views/organizations/id/show_form.html:64
+msgid "Contacts"
+msgstr "Контакты"
+
+#: ufo/views/organizations/id/contacts/show_form.html:84
+#: ufo/views/organizations/id/show_form.html:73
+msgid "Add contact"
+msgstr "Добавить контакт"
+
+#: ufo/views/organizations/id/show_form.html:81
 msgid ""
 "Electoral observers at the voting stations with UIK numbers given below "
 "will see your organization contacts."
 msgstr ""
 "Наблюдатели на УИК заданных ниже будут видеть контакты вашей организации."
 
-#: ufo/views/organizations/id/branches/show_form.html:42
-#: ufo/views/organizations/id/show_form.html:71
+#: ufo/views/organizations/id/branches/show_form.html:53
+#: ufo/views/organizations/id/show_form.html:89
 msgid "UIK ranges"
 msgstr "Диапазоны УИК"
 
-#: ufo/views/organizations/id/show_form.html:75
-#, fuzzy
+#: ufo/views/organizations/id/show_form.html:93
 msgid "All"
 msgstr "Все"
 
 #: ufo/views/organizations/id/branches/show_form.html:4
-#: ufo/views/organizations/id/branches/show_form.html:21
+#: ufo/views/organizations/id/branches/show_form.html:29
 msgid "Edit uik ranges"
 msgstr "Редактировать Диапазоны УИК"
 
-#: ufo/views/organizations/id/branches/show_form.html:48
+#: ufo/views/organizations/id/branches/show_form.html:59
 msgid "UIK Ranges"
 msgstr "Диапазоны УИК"
 
-#: ufo/views/organizations/id/branches/show_form.html:65
+#: ufo/views/organizations/id/branches/show_form.html:77
 msgid "From"
 msgstr "С"
 
-#: ufo/views/organizations/id/branches/show_form.html:73
+#: ufo/views/organizations/id/branches/show_form.html:85
 msgid "To"
 msgstr "По"
 
-#: ufo/views/organizations/id/branches/show_form.html:97
+#: ufo/views/organizations/id/branches/show_form.html:110
 msgid "Add range"
 msgstr "Добавить диапазон"
 
-#: ufo/views/organizations/id/branches/show_form.html:100
+#: ufo/views/organizations/id/branches/show_form.html:113
 msgid "More"
 msgstr "Еще"
 
-#: ufo/views/organizations/id/branches/show_form.html:110
+#: ufo/views/organizations/id/branches/show_form.html:123
 msgid "Save"
 msgstr "Сохранить"
 
-#: ufo/views/organizations/id/branches/show_form.html:116
+#: ufo/views/organizations/id/branches/show_form.html:129
 msgid "Cancel"
 msgstr "Отмена"
+
+#: ufo/views/organizations/id/contacts/show_form.html:4
+#: ufo/views/organizations/id/contacts/show_form.html:17
+msgid "Edit contacts"
+msgstr "Редактировать контакты"
+
+#: ufo/views/organizations/id/contacts/show_form.html:43
+#: ufo/views/organizations/id/contacts/show_form.html:77
+msgid "Value"
+msgstr "Значение"
+
+#: ufo/views/organizations/id/contacts/show_form.html:53
+msgid "Delete"
+msgstr "Удалить"
+
+#: ufo/views/organizations/id/contacts/show_form.html:86
+msgid "Add"
+msgstr "Добавить"
 
 #~ msgid "Added by"
 #~ msgstr "Добавлено"
