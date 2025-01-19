@@ -6,7 +6,18 @@
 {% block extra_head %}
 {% endblock %}
 
-{% block header %} {{_('Edit contacts')}} {% endblock %}
+{% block header %}
+<div class="breadcrumbs text-sm">
+  <ul>
+    <li class="md:!flex !hidden">
+      <a href="/organizations/{{org.id}}">
+        {{org.name|capitalize}}
+      </a>
+    </li>
+    <li>{{_('Edit contacts')}}</li>
+  </ul>
+</div>
+{% endblock %}
 
 
 {% block main %}

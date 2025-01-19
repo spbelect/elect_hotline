@@ -18,13 +18,24 @@
 </style>
 {% endblock %}
 
-{% block header %} {{_('Edit uik ranges')}} {% endblock %}
+{% block header %}
+<div class="breadcrumbs text-sm">
+  <ul>
+    <li class="md:!flex !hidden">
+      <a href="/organizations/{{branch.organization.id}}">
+        {{branch.organization.name|capitalize}}
+      </a>
+    </li>
+    <li>{{_('Edit uik ranges')}}</li>
+  </ul>
+</div>
+{% endblock %}
 
 
 {% block main %}
 
 <form
-  class="px-2 lg:px-4 md:max-w-md m-auto"
+  class="px-2 lg:px-4 max-w-md m-auto"
 
   x-data='{
     ranges: [
