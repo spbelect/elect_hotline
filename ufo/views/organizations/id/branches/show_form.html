@@ -57,39 +57,41 @@
   <template x-for="(range, index) in ranges" :key="range.id">
     <fieldset class="flex gap-4 justify-center" aria-label="UIK Range" @keydown.enter.prevent>
 
-      <input type=number
-        x-model="range.start"
-        min="1" max="9999"
-        onwheel="this.blur()"
-        class="w-40"
-        placeholder="{{_('From')}}"
-      />
+      <div class="join">
+        <input type=number
+          x-model="range.start"
+          min="1" max="9999"
+          onwheel="this.blur()"
+          class="w-40 join-item input input-bordered"
+          placeholder="{{_('From')}}"
+        />
 
-      <input type=number
-        x-model="range.end"
-        min="1" max="9999"
-        onwheel="this.blur()"
-        class="w-40"
-        placeholder="{{_('To')}}"
-      />
+        <input type=number
+          x-model="range.end"
+          min="1" max="9999"
+          onwheel="this.blur()"
+          class="w-40 join-item input input-bordered"
+          placeholder="{{_('To')}}"
+        />
 
-      <button class="btn btn-circle btn-sm"
-        @click="ranges.splice(index, 1)"  ## remove this range row
-        tabindex="-1"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+        <button class="btn btn-circle join-item"
+          @click="ranges.splice(index, 1)"  ## remove this range row
+          tabindex="-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
     </fieldset>
   </template>
