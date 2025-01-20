@@ -23,11 +23,13 @@ logger = logging.getLogger('wsgi.py')
 
 print(f'Adding {Path(__file__).parent} to sys.path')
 
-sys.path = [Path(__file__).parent] + sys.path
+sys.path = [str(Path(__file__).parent)] + sys.path
 
 assert (Path(__file__).parent / 'settings.py').exists()
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
+
+print(f'{sys.path}')
 
 import settings
 
