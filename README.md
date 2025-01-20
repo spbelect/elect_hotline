@@ -71,19 +71,20 @@ pginit settings
 ./manage.py migrate
 ./manage.py collectstatic
 ./scripts/regions.py populatedb
-./manage.py runserver 0.0.0.0:8000
 ```
 
-## Создать учетную запись админа
-
+Create admin user:
 `./manage.py createsuperuser`
+
+Finally, run:
+`./manage.py runserver 0.0.0.0:8000`
 
 # Test
 
 Install dependencies
 
 ```
-pipenv install --dev
+pdm install --dev
 ```
 
 Run tests
