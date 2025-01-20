@@ -16,7 +16,7 @@ import traceback
 from django.core.wsgi import get_wsgi_application
 from django.conf import settings
 
-import utils.mail
+# import utils.mail
 
 
 logger = logging.getLogger('wsgi.py')
