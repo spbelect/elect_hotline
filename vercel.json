@@ -6,7 +6,7 @@
       "config": { "distDir": "src/static_collected" }
     },
     {
-      "src": "wsgi.py",
+      "src": "src/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
     }
