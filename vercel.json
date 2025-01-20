@@ -3,7 +3,7 @@
     {
       "src": "vercel_build.sh",
       "use": "@vercel/static-build",
-      "config": { "distDir": "static_collected" }
+      "config": { "distDir": "src/static_collected" }
     },
     {
       "src": "wsgi.py",
