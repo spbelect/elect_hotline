@@ -5591,12 +5591,12 @@ html {
   display: contents;
 }
 
-.hidden {
-  display: none;
-}
-
 .\!hidden {
   display: none !important;
+}
+
+.hidden {
+  display: none;
 }
 
 .size-4 {
@@ -6578,12 +6578,6 @@ html {
 .hover\:text-primary-content:hover {
   --tw-text-opacity: 1;
   color: var(--fallback-pc,oklch(var(--pc)/var(--tw-text-opacity, 1)));
-}
-
-@media (min-width: 640px) {
-  .sm\:\!hidden {
-    display: none !important;
-  }
 }
 
 @media (min-width: 768px) {

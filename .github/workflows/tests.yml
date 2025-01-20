@@ -62,7 +62,7 @@ jobs:
 
       - name: collect static files
         run: |
-            pdm run ./manage.py collectstatic --no-input
+            pdm run ./src/manage.py collectstatic --no-input
 
       - name: Run Tests
         run: pdm run pytest --doctest-modules -s -vv --cov --cov-config=pyproject.toml --cov-report=xml

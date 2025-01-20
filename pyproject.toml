@@ -59,6 +59,7 @@ build-backend = "pdm.backend"
 
 
 [tool.pdm.scripts]
+_.working_dir = "src"
 _.env_file = "env-local"
 uitest = "pytest -s -m uitest --headed --tracing retain-on-failure  --verbose"
 test = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose"

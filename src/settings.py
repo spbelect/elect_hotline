@@ -103,7 +103,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         #'BACKEND': "django_jinja.backend.Jinja2",
-        'DIRS': ['ufo/', SRC_DIR('templates')],
+        'DIRS': [SRC_DIR('ufo')],
         'APP_DIRS': True,
         'OPTIONS': {
             'line_statement_prefix': '# ',

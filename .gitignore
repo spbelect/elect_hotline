@@ -10,7 +10,7 @@ pytz
 .pytest-cache/
 .pytest_cache/
 __pycache__/
-static_collected/*
+*/static_collected/*
 .pdm-python
 db.sqlite
 test-results/
