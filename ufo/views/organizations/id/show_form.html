@@ -47,9 +47,7 @@
       # set selected = org.regions.all() if org else []
       # for region in user.country.regions.all()
         <option value="{{region.id}}"
-          # if org
           {{ 'selected' if region in selected else '' }}
-          # endif
         >
           {{region.name}}
         </option>
