@@ -45,7 +45,7 @@ echo "DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | he
 export HEROKUAPP=`git remote get-url heroku | python -c "print(input().split('/')[-1][:-4])"`
 ```
 
-Отредактировать в env-heroku DATABASE_URL и все остальные необходимые переменные окружения
+Edit env-heroku file: set DATABASE_URL and other required variables
 
 ```
 ./push_heroku_env.py env-heroku
@@ -64,7 +64,7 @@ cp env-local.example env-local
 echo "DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1`" >> env-local
 ```
 
-Отредактировать в env-local DATABASE_URL и все остальные необходимые переменные окружения.
+Edit env-local file: set DATABASE_URL and other required variables
 
 ```
 pginit settings
@@ -78,36 +78,41 @@ pginit settings
 
 `./manage.py createsuperuser`
 
-На heroku - сначала запустить удаленную консоль `heroku run bash`
-
 # Test
 
-Установить зависимости
+Install dependencies
+
 ```
 pipenv install --dev
 ```
 
-Запустить
+Run tests
+
 ```
 pytest -s -m 'not uitest' --doctest-modules -n auto --verbose
 ```
-или скрипт `pdm test`
 
-## Браузерные тесты
+Or just `pdm test`
 
-Проверяют полноценные сценарии взимодействия с сайтом.
+## Browser tests
+
+Website user interaction scenarios with playwright automation
+
 ```
 pdm install --dev --group uitest
 playwright install chromium
 ```
 
-Запустить
+Run playwright tests
+
 ```
 pytest -s -m uitest --headed --tracing retain-on-failure  --verbose
 ```
-или скрипт `pdm uitest`
 
-Трейсы проваленных тестов можно посмотреть:
+Or just `pdm uitest`
+
+Traces of failed playwright tests can be viewed:
+
 ```
 playwright show-trace test-results/test-ui-create-campaign-test-py-test-scenario-chromium/trace.zip
 ```
@@ -118,15 +123,18 @@ playwright show-trace test-results/test-ui-create-campaign-test-py-test-scenario
 ## Translation
 
 Install requirements
+
 ```
 zypper in gettext-tools
 pdm install --dev --group translate
 ```
 
 Parse all files for new messsages
+
 `pdm makemessages`
 
 Compile after making new translations
+
 `pdm compilemessages`
 
 
@@ -149,11 +157,12 @@ Use `pdm makecss --watch` to automatically transpile postcss when html file chan
 
 
 ## Outdated packages
-Чтобы узнать какие новые версии необходимых пакетов доступны для обновления, можно запустить `$ pdm outdated`
+
+To check for new versions of depndencies run `$ pdm outdated`
 
 ## Venv activation
 
-Для упрощения активации venv можно добавить в ~/.bashrc:
+To simplify virtual environment activation, add to  `~/.bashrc`:
 
 ```
 pdm() {
@@ -169,8 +178,4 @@ pdm() {
 
 ## Update required python package
 
-Чтобы обновить питоно-пакет (напр. djangorestframework), запустить `pdm update djangorestframework`.
-
-Если pyproject.toml не указано ограничений версии то скорее всего этот пакет можно обновить на последнюю версию без изменений в коде проекта. Если же в pyproject.toml указано ограничение на версию пакета вида `<2.3`, то pdm позволит обновиться только до версии 2.2.x
-
-Если нужно обновить пакет на более новую версию, чем ограничено в pyproject.toml, то необходимо сначала исправить версию в pyproject.toml, затем запустить `pdm update`
+First you need to check package version number constraints in pyproject.toml, edit constraints to match the desired new version. Then run `pdm update <package>`
