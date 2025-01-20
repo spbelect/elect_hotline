@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "wsgi.py"
+      "dest": "src/wsgi.py"
     }
   ],
   "regions": ["fra1"],
