@@ -11,10 +11,9 @@ Production website that follows stable branch: https://elect-hotline.vercel.app
 # Installation
 
 ```
-git clone https://bitbucket.org/fak3/npserver.git
-cd npserver
-mkvirtualenv -p python3 ufo
-pip install pdm
+git clone https://github.com/spbelect/elect_hotline.git
+cd elect_hotline
+pipx install pdm
 pdm sync --verbose
 ```
 
@@ -33,7 +32,7 @@ zypper in postgresql
 ```
 
 ```
-DJANGO_SETTINGS_MODULE=settings_neondb ./manage.py migrate
+DJANGO_SETTINGS_MODULE=settings_neondb ./manage.py migrate --skip-checks
 DJANGO_SETTINGS_MODULE=settings_neondb ./scripts/regions.py
 ```
 
