@@ -33,7 +33,7 @@ zypper in postgresql
 
 ```
 DJANGO_SETTINGS_MODULE=settings_neondb ./manage.py migrate --skip-checks
-DJANGO_SETTINGS_MODULE=settings_neondb ./scripts/regions.py
+DJANGO_SETTINGS_MODULE=settings_neondb ./scripts/regions.py populatedb
 ```
 
 ### Deploy to Heroku
