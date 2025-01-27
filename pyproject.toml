@@ -42,6 +42,7 @@ dependencies = [
     "django-jsonform>=2.23.1",
     "pip>=24.3.1",
     "pgwait>=0.3",
+    "uvicorn[standard]>=0.34.0",
 ]
 readme = "README.md"
 license = {text = "MIT"}
