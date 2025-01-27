@@ -1,0 +1,12 @@
+
+version: 1
+disable_existing_loggers": false
+
+handlers:
+  loguru:
+    class: logging_to_loguru.ToLoguru
+    level: DEBUG
+loggers:
+  "":
+    handlers: [loguru]
+    level: DEBUG
