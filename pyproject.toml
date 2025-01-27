@@ -27,7 +27,7 @@ dependencies = [
     "requests<3",
     "sentry-sdk<3",
     "whitenoise[brotli]>=6.7.0",
-    "Werkzeug<2",
+    "Werkzeug",
     "typing-extensions",
     "django-select2",
     "django-anymail[mailgun,sendgrid]",
