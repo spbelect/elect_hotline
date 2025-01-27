@@ -1,0 +1,133 @@
+name: ufo
+
+x-podman:
+  in_pod: false
+
+networks:
+  ufo-internal-net:
+    driver: bridge
+
+volumes:
+  # COMPOSE_PROJECT_NAME is automatically prefixed to the volume name by docker-compose
+  postgresql_data:
+
+
+# Base django service which is reused in regular web worker service "django", as
+# well as "django-migrate", "django-fixtures-*" db initialization services.
+x-django: &base-django
+  image: ufo
+
+  # ADD to your ~/.bashrc file:
+  # export USER_ID="$(id -u)"
+  # export GROUP_ID="$(id -g)"
+  userns_mode: "auto:uidmapping=9999:@${USER_ID},gidmapping=9999:@${GROUP_ID}"
+
+  # userns_mode: "auto:uidmapping=9999:@${USER_ID},gidmapping=9999:@${GROUP_ID}"
+  # userns_mode: "keep-id"
+
+  # x-podman.uidmaps:
+  #   - "9999:1001"
+  #   - "0:0"
+  # x-podman.gidmaps:
+  #   - "9999:1001"
+  #   - "0:0"
+
+  volumes:
+    - ./src:/project
+  environment:
+    - DATABASE_URL=postgresql://pguser:password@postgres:5432/pgdb
+    - GOOGLE_OAUTH2_CLIENT_ID=testid
+    - GOOGLE_OAUTH2_CLIENT_SECRET=testsecret
+    - DJANGO_SETTINGS_MODULE=settings
+  networks:
+    - ufo-internal-net
+
+
+services:
+  django:
+    <<: *base-django
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+    # container_name: ufo-django
+    depends_on:
+      - postgres
+      # - redis
+
+    # environment:
+    #   - DATABASE_URL=postgresql://pguser:password@postgres:5432/pgdb
+    #   - GOOGLE_OAUTH2_CLIENT_ID=testid
+    #   - GOOGLE_OAUTH2_CLIENT_SECRET=testsecret
+    # env_file:
+    #   - path: env-compose
+    #     required: false
+    #   - path: env-compose-local
+    #     required: false
+    ports:
+      - target: 8000 # inside container
+        published: 8000
+
+    entrypoint: ["sh", "-c", "pgwait && ./manage.py check --tag email --deploy && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
+    # command: bash
+    restart: on-failure
+
+  django-migrate:
+    <<: *base-django
+    depends_on:
+      - django
+    entrypoint: ["sh", "-c", "pgwait && ./manage.py migrate --skip-checks"]
+
+  django-fixtures-regions:
+    <<: *base-django
+    depends_on:
+      django-migrate:
+        condition: service_completed_successfully
+    entrypoint: ["sh", "-c", "pgwait && ./scripts/regions.py populatedb"]
+
+  django-fixtures-questions:
+    <<: *base-django
+    depends_on:
+      django-fixtures-regions:
+        condition: service_completed_successfully
+    entrypoint: ["sh", "-c", "pgwait && ./scripts/2020_ankety.py"]
+
+  # # needed only for local development - because on Linux you can't
+  # # access the host container in any other reliable way
+  # # And things like OA API are usually started separately
+  # docker-host:
+  #   image: qoomon/docker-host
+  #   cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+  #   restart: on-failure
+  #   networks:
+  #     - ufo-internal-net
+
+  postgres:
+    image: postgres:17.2-alpine3.21
+    userns_mode: "auto:uidmapping=70:@1001,gidmapping=70:@1001"
+    logging:
+      driver: none
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=pgdb
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=password
+    restart: on-failure
+    networks:
+      - ufo-internal-net
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - target: 5432 # inside container
+        published: 5432
+
+  # redis:
+  #   image: redis:5.0
+  #   restart: on-failure
+  #   logging:
+  #     driver: none
+  #   networks:
+  #     - ufo-internal-net
+  #   ports:
+  #     - 6379:6379
