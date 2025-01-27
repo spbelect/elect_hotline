@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:3a70abfd2d94965448af788998562841177448a2b9b10f25b4632e6f24b36afd"
+content_hash = "sha256:51b2f846fb53dde700d0eb2d8ee990338ab15ee0e30269446cd31f4bdbdc0bae"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -1213,6 +1213,16 @@ dependencies = [
 files = [
     {file = "pginit-0.6-py3-none-any.whl", hash = "sha256:0b41c207e0ce80757711aaf7ace61dd38980c25a59821c1760dbfca1ad286b37"},
     {file = "pginit-0.6.tar.gz", hash = "sha256:060b3194d9c830818c28b36c744c3c1da7a93d1b967c011b52c2e822e2fd45da"},
+]
+
+[[package]]
+name = "pgwait"
+version = "0.3"
+summary = "wait for postgres defined in django settings to be up"
+groups = ["default"]
+files = [
+    {file = "pgwait-0.3-py3-none-any.whl", hash = "sha256:f9f80ad56303710174bf0d9ed05f7dbc1b21c8c52661068a3cb2120ac44a1631"},
+    {file = "pgwait-0.3.tar.gz", hash = "sha256:53c1e777fdfb3a1b8775dbd587c693e44e6a77f39bca7c47ad03b6d48db5dce2"},
 ]
 
 [[package]]
