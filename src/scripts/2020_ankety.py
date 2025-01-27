@@ -7,12 +7,11 @@ import json
 import environ
 import sys
 
+from pathlib import Path
 
-env = environ.Env()
-SRCDIR = environ.Path(__file__).path('../..')
-sys.path.insert(0, str(SRCDIR))
-env.read_env(SRCDIR('env-local'))
-os.chdir(str(SRCDIR))
+
+SRC_DIR = Path(__file__).parent.joinpath('..').resolve()
+sys.path.insert(0, str(SRC_DIR))
 
 
 if os.path.exists('settings_local.py'):

@@ -21,10 +21,10 @@ from typing_extensions import Annotated
 app = Typer(no_args_is_help=True)
 
 
-# Context.get_usage = Context.get_help  # show full help on error
+SRC_DIR = Path(__file__).parent.joinpath('..').resolve()
+sys.path.insert(0, str(SRC_DIR))
 
-
-os.chdir(Path(__file__).joinpath('../..').resolve())  # src dir
+# os.chdir(SRC_DIR)  # src dir
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE",
     "settings_local" if Path('settings_local.py').exists() else "settings"
@@ -215,7 +215,7 @@ def populatedb(
             'utc_offset': int(tz[name]),
             'country_id': 'ru'
         })
-    print('ok')
+    print(f'[OK] {Region.objects.count()} regions in the database.')
 
 
 @app.command()
