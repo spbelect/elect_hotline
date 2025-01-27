@@ -14,7 +14,6 @@ dependencies = [
     "django-environ<1",
     "django-extensions",
     "django-prettyjson",
-    "django-webpack-loader==0.6.0",
     "djangorestframework",
     "gunicorn",
     "loguru",
