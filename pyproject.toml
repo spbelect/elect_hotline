@@ -61,9 +61,12 @@ build-backend = "pdm.backend"
 [tool.pdm.scripts]
 _.working_dir = "src"
 _.env_file = "env-local"
-uitest = "pytest -s -m uitest --headed --tracing retain-on-failure  --verbose"
-test = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose"
-doctest = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose ufo/"
+
+uitest.cmd = "pytest -s -m uitest --headed --tracing retain-on-failure  --verbose"
+uitest.working_dir = "."
+
+test.cmd = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose"
+test.working_dir = "."
 
 makecss = "npx tailwindcss -i ./static/main.post.css -o ./static/main.css"
 
