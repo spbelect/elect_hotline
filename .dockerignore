@@ -1,0 +1,10 @@
+node_modules
+.pytest_cache
+.pdm-build
+.git
+**/__pycache__
+**/*.pyc
+Dockerfile
+db.sqlite
+env-local
+x.pyc
