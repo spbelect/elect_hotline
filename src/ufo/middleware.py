@@ -3,6 +3,7 @@ from inspect import iscoroutinefunction
 from loguru import logger
 
 import django
+from asgiref.sync import sync_to_async
 from django.contrib.auth import models
 from django.http import HttpRequest, HttpResponse
 from django.utils import translation
@@ -61,7 +62,7 @@ def anonymous_user_session(get_response):
     """
     if iscoroutinefunction(get_response):
         async def middleware(request: HttpRequest) -> HttpResponse:
-            process_request(request)
+            await sync_to_async(process_request)(request)
             return await get_response(request)
     else:
         def middleware(request: HttpRequest) -> HttpResponse:
