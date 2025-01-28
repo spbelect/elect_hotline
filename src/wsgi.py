@@ -19,19 +19,9 @@ from django.conf import settings
 
 # import utils.mail
 
-logger = logging.getLogger('wsgi.py')
-
-print(f'Adding {Path(__file__).parent} to sys.path')
-
-sys.path = [str(Path(__file__).parent)] + sys.path
-
-assert (Path(__file__).parent / 'settings.py').exists()
+sys.path.insert(0, str(Path(__file__).parent))
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
-
-print(f'{sys.path}')
-
-import settings
 
 #try:
     #application = get_wsgi_application()
@@ -85,4 +75,5 @@ app = application
     #logger.exception(str(e))
     #raise
 
+logger = logging.getLogger('wsgi.py')
 logger.info("App started.")
