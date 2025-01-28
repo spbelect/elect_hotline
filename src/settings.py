@@ -250,6 +250,12 @@ loguru.logger.configure(handlers=[
             "django": os.environ.get("UFO_LOGLEVEL", "INFO"),
             "django.db": "INFO",
             "django.db.backends.base.schema": "INFO",
+
+            # TODO: report issue
+            # django-debug-toolbar floods logs with DEBUG messages
+            # from django.template.base
+            "django.template.base": "INFO",
+
             "django.utils.autoreload": "ERROR",
 
             "environ.environ": "INFO",
