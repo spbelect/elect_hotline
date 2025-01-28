@@ -44,4 +44,5 @@ COPY --chown=$UID:$GID src /project/
 ENV PYTHONUNBUFFERED 1
 
 ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-"settings"}
-CMD ["sh", "-c", "pgwait && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
+# CMD ["sh", "-c", "pgwait && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "pgwait && uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml --log-level=debug"]

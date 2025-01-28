@@ -39,6 +39,7 @@ x-django: &base-django
     - GOOGLE_OAUTH2_CLIENT_ID=testid
     - GOOGLE_OAUTH2_CLIENT_SECRET=testsecret
     - DJANGO_SETTINGS_MODULE=settings
+    - UFO_LOGLEVEL=DEBUG
   networks:
     - ufo-internal-net
 
@@ -55,10 +56,6 @@ services:
       - postgres
       # - redis
 
-    # environment:
-    #   - DATABASE_URL=postgresql://pguser:password@postgres:5432/pgdb
-    #   - GOOGLE_OAUTH2_CLIENT_ID=testid
-    #   - GOOGLE_OAUTH2_CLIENT_SECRET=testsecret
     # env_file:
     #   - path: env-compose
     #     required: false
@@ -68,7 +65,9 @@ services:
       - target: 8000 # inside container
         published: 8000
 
-    entrypoint: ["sh", "-c", "pgwait && ./manage.py check --tag email --deploy && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
+    # entrypoint: ["sh", "-c", "pgwait && ./manage.py check --tag email --deploy && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
+    entrypoint: ["sh", "-c", "pgwait && ./manage.py check --tag email --deploy && uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml --log-level=debug"]
+
     # command: bash
     restart: on-failure
 
