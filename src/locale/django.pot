@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-20 20:11+0500\n"
+"POT-Creation-Date: 2025-01-27 17:07+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,10 @@ msgstr ""
 
 #: settings.py:155 ufo/models/websiteuser.py:102
 msgid "Russian"
+msgstr ""
+
+#: urls.py:40
+msgid "Page with given address does not exist"
 msgstr ""
 
 #: ufo/admin.py:257
