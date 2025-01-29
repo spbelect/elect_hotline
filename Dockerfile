@@ -1,9 +1,9 @@
-FROM opensuse/leap:15.6 as base
+FROM opensuse/leap:15.6
 
 ARG UID
-ENV UID=${UID:-9999}
+ENV UID ${UID:-9999}
 ARG GID
-ENV GID=${GID:-9999}
+ENV GID ${GID:-9999}
 
 # We might be running as a user which already exists in this image. In that situation
 # Everything is OK and we should just continue on.
@@ -20,17 +20,17 @@ USER $UID:$GID
 RUN python3.11 -m pip install --user pipx
 RUN python3.11 -m pipx ensurepath
 
-ENV PATH="$PATH:/home/ufo_docker_user/.local/bin"
+ENV PATH "$PATH:/home/ufo_docker_user/.local/bin"
 
 RUN pipx install pdm
 
-ENV PDM_CHECK_UPDATE=false
+ENV PDM_CHECK_UPDATE false
 
 COPY --chown=$UID:$GID README.md pyproject.toml pdm.lock /tmp/
 
 WORKDIR /
 
-ENV PDM_CACHE_DIR=/tmp/ufo_pdm_cache
+ENV PDM_CACHE_DIR /tmp/ufo_pdm_cache
 RUN --mount=type=cache,mode=777,target=$PDM_CACHE_DIR,uid=$UID,gid=$GID pdm install --check --prod --no-editable --project /tmp/
 
 ENV PATH="/tmp/.venv/bin:$PATH"
@@ -43,6 +43,6 @@ COPY --chown=$UID:$GID src /project/
 # the application rather than buffering it.
 ENV PYTHONUNBUFFERED 1
 
-ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-"settings"}
+ENV DJANGO_SETTINGS_MODULE ${DJANGO_SETTINGS_MODULE:-"settings"}
 # CMD ["sh", "-c", "pgwait && gunicorn wsgi --log-file - --bind 0.0.0.0:8000"]
 CMD ["sh", "-c", "pgwait && uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml --log-level=debug"]

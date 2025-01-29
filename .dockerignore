@@ -5,6 +5,5 @@ node_modules
 **/__pycache__
 **/*.pyc
 Dockerfile
-db.sqlite
-env-local
-x.pyc
+**/db.sqlite
+**/env-local
