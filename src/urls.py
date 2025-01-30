@@ -33,7 +33,9 @@ from ufo import mobile_api_v3 as apiv3
 
 
 def handler403(request, exception):
-    return render(request, '403.html')
+    return render(request, 'views/http_error.html', {
+        'error': _("Page is not accessible")
+    })
 
 def handler404(request, exception):
     return render(request, 'views/http_error.html', {
