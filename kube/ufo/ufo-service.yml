@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ufo-service
+  namespace: ufo-ns
+spec:
+  # type: ClusterIP
+  type: NodePort
+  selector:
+    app: ufo-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000  # inside container
+
+      # Will be accessible at node ip which can be retieved with
+      # > kubectl get node -o wide
+      nodePort: 30007

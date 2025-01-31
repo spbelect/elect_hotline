@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ufo-migrations
+  namespace: ufo-ns
+spec:
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 100
+  backoffLimit: 15
+
+  template:
+    spec:
+      containers:
+      - name: ufo-migrations-container
+        image: fak3/ufo:0.4
+        imagePullPolicy: IfNotPresent
+        command: ["sh", "-c", "pgwait && ./manage.py migrate --skip-checks"]
+        # env:
+        # - name: POSTGRES_USER
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: postgres-secrets
+        #       key: user
+        # - name: POSTGRES_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: postgres-credentials
+        #       key: password
+        # - name: POSTGRES_DB
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: app-variables
+        #       key: POSTGRES_DB
+
+        envFrom:
+          - configMapRef:
+              name: ufo-config
+          - secretRef:
+              name: postgres-secrets
+          - secretRef:
+              name: ufo-secrets
+
+
+      # restartPolicy: Never
+      restartPolicy: OnFailure
