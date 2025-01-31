@@ -14,59 +14,20 @@ Production website that follows stable branch: https://elect-hotline.vercel.app
 git clone https://github.com/spbelect/elect_hotline.git
 cd elect_hotline
 pipx install pdm
-pdm sync --verbose
+pdm install
+cd src
 ```
 
-
-## Production deployment
-
-```
-python manage.py check --tag email --deploy
-python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn "wsgi:application" --access-logfile - --workers 12 --threads 12 --reload
-```
-
-## Deploy with Neondb
-
-```
-zypper in postgresql
-```
-
-```
-DJANGO_SETTINGS_MODULE=settings_neondb ./manage.py migrate --skip-checks
-DJANGO_SETTINGS_MODULE=settings_neondb ./scripts/regions.py populatedb
-```
-
-### Deploy to Heroku
-```
-git remote add heroku https://git.heroku.com/spbtest-2019.git
-cp env-local.example env-heroku
-echo "DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1`" >> env-heroku
-export HEROKUAPP=`git remote get-url heroku | python -c "print(input().split('/')[-1][:-4])"`
-```
-
-Edit env-heroku file: set DATABASE_URL and other required variables
-
-```
-./push_heroku_env.py env-heroku
-git push heroku master
-heroku run sh -c './manage.py migrate --skip-checks'
-heroku run sh -c './scripts/2020_ankety.py'
-heroku run sh -c './scripts/regions.py populatedb'
-heroku run sh -c './manage.py createsuperuser'
-```
-
-
-## Local deployment
+Edit env-local file: set DATABASE_URL and other required variables
 
 ```
 cp env-local.example env-local
 echo "DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1`" >> env-local
 ```
 
-Edit env-local file: set DATABASE_URL and other required variables
+In case you are using postgres, you can create user and database with `pginit settings`
 
 ```
-pginit settings
 ./manage.py migrate
 ./manage.py collectstatic
 ./scripts/regions.py populatedb
@@ -77,6 +38,7 @@ Create admin user:
 
 Finally, run:
 `./manage.py runserver 0.0.0.0:8000`
+
 
 # Test
 
