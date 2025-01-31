@@ -8,6 +8,10 @@ python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn 
 ```
 
 ## Kubernetes
+
+If you have kubeconfig for your cluster, enable it with
+`export KUBECONFIG=./third-space-kubeconfig.yml`
+
 ### Create namespace
 
 ```
