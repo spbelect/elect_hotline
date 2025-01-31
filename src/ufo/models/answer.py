@@ -153,6 +153,49 @@ class Answer(Model):
             
         return to, bcc
             
+
+    def send_tik_complaint(self):
+        from django.core.mail import EmailMessage
+        from django.core import validators
+        from .tik import Tik
+        try:
+            validators.validate_email(self.appuser.email)
+        except validators.ValidationError as e:
+            sentry_sdk.capture_exception(e)
+            return
+
+        tik = Tik.find(self.region, self.uik)
+        if not tik or not tik.email:
+            return
+
+        #to, bcc = self.get_email_recipients()
+        subscriptions = list(tik.subscriptions.filter(unsubscribed=False).values_list('email', flat=True))
+
+        email = EmailMessage(
+            subject = f'УИК {self.uik} Жалоба',
+            body = self.tik_complaint_text,
+            from_email = f'"{self.appuser.last_name} {self.appuser.first_name}" <{settings.DEFAULT_FROM_EMAIL}>',
+            to = [tik.email],
+            bcc = subscriptions + [self.appuser.email],
+            reply_to = [self.appuser.email],
+            #headers={'Message-ID': 'foo'},
+        )
+        for image in self.images.filter(deleted_by_user=False):
+            #url = 'https://s3.eu-central-1.amazonaws.com/ekc-uploads/433b7b0206d0d23306fcaebea1c11840Screenshot_20190112_132357_x.jpg'
+            response = get(f'https://s3.eu-central-1.amazonaws.com/ekc-uploads/{image.filename}')
+
+            #response = get(url, stream=True)
+            #email.attach(basename(url), BytesIO(response.content))
+            email.attach(image.filename, response.content)
+        email.send()
+        #email.to = self.appuser.email
+        #email.bcc =
+
+        self.update(tik_complaint_status=int16('email отправлен'))
+        logger.debug(f'Email sent to {email.to + email.bcc}')
+        #return to + bcc
+
+
     @classmethod
     def check(cls, **kwargs):
         from django.core.checks import Error

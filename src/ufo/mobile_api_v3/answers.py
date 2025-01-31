@@ -36,7 +36,6 @@ from ufo.models import (
 )
 
 import ufo
-from ufo.old_internal_api import email
 
 
 @api_view(['PATCH'])
@@ -67,7 +66,7 @@ def patch_answer(request, answerid):
     )
     
     if tik_complaint_status == 'отправляется модератору' and not settings.TIK_EMAIL_MODERATION:
-        ufo.old_internal_api.send_tik_complaint(answer)  # Отправить email сразу.
+        answer.send_tik_complaint()  # Отправить email сразу.
         
     return Response({'status': 'ok'})
     
@@ -117,7 +116,7 @@ def post_answer(request):
         logger.error(str(e))
     else:
         if tik_complaint_status == 'отправляется модератору' and not settings.TIK_EMAIL_MODERATION:
-            ufo.old_internal_api.send_tik_complaint(answer)  # Отправить email сразу.
+            answer.send_tik_complaint()  # Отправить email сразу.
     
         elections = list(Election.objects.positional(answer.region, answer.uik).current())
         if elections:
@@ -128,3 +127,4 @@ def post_answer(request):
         
     return Response({'status': 'ok'}, status=201)
     
+
