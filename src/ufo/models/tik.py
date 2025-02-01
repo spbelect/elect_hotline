@@ -36,7 +36,10 @@ class Tik(Model):
     )
     
     def __str__(self):
-        return f'RU{self.region.external_id} ТИК {self.name}'
+        if self.region:
+            return f'TIK {self.region.id} {self.name}'
+        else:
+            return f'TIK {self.name}'
 
     @staticmethod
     def find(region, uik):
