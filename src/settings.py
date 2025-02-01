@@ -175,7 +175,7 @@ USE_TZ = True
 
 
 DATABASES = {'default': env.db('DATABASE_URL', default='')}
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES['default']['ATOMIC_REQUESTS'] = False
 DATABASES['default']['CONN_MAX_AGE'] = 0
 
 if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
