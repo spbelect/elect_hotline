@@ -7,9 +7,10 @@ from django.db.models import (
     CharField, SET_NULL, CASCADE, IntegerField, DateTimeField, EmailField
 )
 from django.utils.timezone import now
+from django.utils.translation import gettext_lazy as _
+from django_pydantic_field import SchemaField
 
-from . import base 
-
+from . import base
 
 
 
@@ -25,9 +26,14 @@ class Tik(Model):
     phone = TextField(null=True, blank=True)
     address = TextField(null=True, blank=True)
     
-    # Seriazlised JSON list of lists
-    # Пример: [[0, 99],] или [[400, 449], [2100, 2105]]
-    uik_ranges = TextField()
+    # Example: [[0, 99]] or [[400, 449], [2100, 2105]]
+    # TODO: conlist/conint is not supported yet
+    # https://github.com/surenkov/django-pydantic-field/issues/72
+    uik_ranges: list[list[int]] = SchemaField(
+        null=True, blank=True,
+        verbose_name=_("Subordinate UIK ranges"),
+        help_text=_("List of ranges.")
+    )
     
     def __str__(self):
         return f'RU{self.region.external_id} ТИК {self.name}'
@@ -36,7 +42,7 @@ class Tik(Model):
     def find(region, uik):
         """ Найти ТИК по номеру УИК """
         for tik in Tik.objects.filter(region=region, uik_ranges__isnull=False):
-            for first, last in json.loads(tik.uik_ranges):
+            for first, last in tik.uik_ranges:
                 if first <= int(uik) <= last:
                     return tik
         return None

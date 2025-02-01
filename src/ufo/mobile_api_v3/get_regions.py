@@ -57,7 +57,7 @@ def get_regions(request, country):
             name = tik.name,
             
             # Пример: [[0, 99],] или [[400, 449], [2100, 2105]]
-            uik_ranges = json.loads(tik.uik_ranges or '[]'),
+            uik_ranges = tik.uik_ranges,
         ) for tik in region.tiks.all()],
         
         # Мун.округа и ИКМО
