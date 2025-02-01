@@ -1,24 +1,22 @@
-# -*- coding: utf-8 -*-
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminMixin
 #from django.urls import reverse
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 #from django.contrib.postgres.forms import JSONField
 from django.db.models import JSONField
 from django.db.models import TextField
+from django.forms import Field, Widget, Textarea, TextInput
 from django.utils.safestring import mark_safe
-from prettyjson import PrettyJSONWidget
-from django_jsonform.widgets import JSONFormWidget
 
-from . import models
+from django_jsonform.widgets import JSONFormWidget
+from django_pydantic_field.v2.fields import PydanticSchemaField
+from prettyjson import PrettyJSONWidget
+
 from utils.admin import LinkedTabularInline
 
-from .models import Organization
+from . import models
 
-
-from django.forms import Field, Widget, Textarea, TextInput
-from django import forms
-import json
 #from django.forms.field import Widget
 
 class BaseAdmin(admin.ModelAdmin):
@@ -187,7 +185,7 @@ class Organization_Admin(BaseAdmin, admin.ModelAdmin):
         #stacked('OrganizationPhone'),
     ]
 
-    def qregions(self, org: Organization):
+    def qregions(self, org: models.Organization):
         return mark_safe(', '.join(org.regions.values_list('name', flat=True)))
 
 
@@ -227,7 +225,10 @@ class Tik_Admin(BaseAdmin):
     list_filter = ('region', )
     #ordering = ('-timestamp',)
     inlines = [stacked('TikSubscription')]
-    
+
+    formfield_overrides = {
+        PydanticSchemaField: {"widget": JSONFormWidget},
+    }
     
 class TikSubscription_Admin(BaseAdmin):
     list_display = ('id', 'tik', 'email', 'organization')
