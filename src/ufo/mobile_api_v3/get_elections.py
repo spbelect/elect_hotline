@@ -60,10 +60,10 @@ def get_elections(request, region):
         coordinators = [{
             'org_id': camp.organization.id,
             'org_name': camp.organization.name,
-            'contacts': list(camp.organization.get_contacts().values('name', 'value', 'type')),
+            'contacts': list(camp.organization.contacts.values('name', 'value', 'type')),
             'campaign': {
                 'id': camp.id,
-                'contacts': list(camp.contacts.values('name', 'value', 'type')),
+                'contacts': [],  # Deprecated
                 'uik_ranges': camp.uik_ranges
             }
         } for camp in elec.campaigns.all()]

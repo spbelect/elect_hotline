@@ -57,13 +57,19 @@ class GetElectionsSuccessTest(BaseTestCase):
             date = date.today() + timedelta(days=10),
         )
         
-        # AND organization with telegram channel
+        # AND organization with phone and telegram channel
         org = make(Organization, id='organization-id1', name='Наблюдатели петербурга')
         make(Contact, 
             organization_id='organization-id1', 
             name='общийчат1', 
             value='http://t.me/obs',
             type='tg'
+        )
+        make(Contact,
+            organization_id='organization-id1',
+            name='Коллц',
+            value='8666',
+            type='ph'
         )
         
         # AND 2 org branches
@@ -82,20 +88,6 @@ class GetElectionsSuccessTest(BaseTestCase):
             id='campaign-id-actual', 
             organization_id='organization-id1', 
             election=spb_election
-        )
-        make(Contact, 
-            organization_id='organization-id1', 
-            campaign=camp,
-            name='Коллц', 
-            value='8666', 
-            type='ph'
-        )
-        make(Contact, 
-            organization_id='organization-id1', 
-            campaign=camp,
-            name='чат1', 
-            value='http://t.me/chat1',
-            type='tg'
         )
         
         # AND old regional campaign
@@ -131,13 +123,13 @@ class GetElectionsSuccessTest(BaseTestCase):
                     'org_id': 'organization-id1',
                     'org_name': 'Наблюдатели петербурга',
                     'contacts': [
-                        {'name': 'общийчат1', 'type': 'tg', 'value': 'http://t.me/obs'}
+                        {'name': 'Коллц', 'type': 'ph', 'value': '8666'},
+                        {'name': 'общийчат1', 'type': 'tg', 'value': 'http://t.me/obs'},
                     ],
                     'campaign': {
                         'id': 'campaign-id-actual',
                         'contacts': [
-                            {'name': 'Коллц', 'type': 'ph', 'value': '8666'},
-                            {'name': 'чат1', 'type': 'tg', 'value': 'http://t.me/chat1'}
+                            # {'name': 'чат1', 'type': 'tg', 'value': 'http://t.me/chat1'}
                         ],
                         'uik_ranges': [[1,100], [1305, 1310]]
                     }

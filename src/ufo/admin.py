@@ -113,9 +113,9 @@ class Answer_Admin(admin.ModelAdmin):
 
 
 class Campaign_Admin(BaseAdmin):
-    list_display = ('election', 'id')
+    list_display = ('election', 'id', 'organization')
     inlines = [
-        stacked('Contact'), 
+        # stacked('Contact'),
         #stacked('CampaignPhone'), 
         #stacked('TikSubscription')
     ]

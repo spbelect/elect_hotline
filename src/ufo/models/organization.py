@@ -63,9 +63,7 @@ class Organization(Model):
         related_name='organizations'
     )
     
-    def get_contacts(self, **kw):
-        return self.contacts.filter(campaign__isnull=True, **kw)
-    
+
     def uik_ranges(self, region):
         try:
             branch = self.branches.get(region=region)

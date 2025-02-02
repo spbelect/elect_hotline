@@ -40,8 +40,7 @@ class Contact(Model):
     type = CharField(max_length=3, choices=TYPES)
     
     organization = FK('Organization', on_delete=CASCADE, related_name='contacts')
-    campaign = FK('Campaign', on_delete=CASCADE, related_name='contacts')
-    
+
     @property
     def icon(self):
         return dict({
