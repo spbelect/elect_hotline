@@ -46,8 +46,9 @@ class GetElectionsSuccessTest(BaseTestCase):
             id='election-id-fed-actual', 
             name='Федеральные Выборы', 
             date = date.today() + timedelta(days=10),
+            country = ru
         )
-        
+
         # AND actual regional Election
         spb_election = make(Election, 
             id='election-id-spb-actual', 

@@ -53,13 +53,7 @@ class Election(Model):
     #)
     
     #uiks = ArrayField(PositiveSmallIntegerField(), null=True, blank=True)
-    COUNTRIES = [
-        ('ru', 'Россия'),
-        ('ua', 'Украина'),
-        ('bg', 'Беларусь'),
-        ('kz', 'Казахстан'),
-    ]
-    country = CharField(max_length=2, choices=COUNTRIES, default='ru')
+    country = ForeignKey('Country', related_name='elections', null=True, blank=True, on_delete=SET_NULL)
     region = ForeignKey('Region', on_delete=SET_NULL, null=True, blank=True, related_name='elections')
     munokrug = ForeignKey('Munokrug', on_delete=SET_NULL, null=True, blank=True)
     name = TextField()
@@ -70,7 +64,7 @@ class Election(Model):
     )
     
     def __str__(self):
-        return '%s %s' % (self.date, self.name)
+        return f"{self.date} {self.name} {self.country_id} {self.region_id}"
 
     #@classmethod
     #def check(cls, **kwargs):
