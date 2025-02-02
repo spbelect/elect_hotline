@@ -182,7 +182,7 @@ class Organization_Admin(BaseAdmin, admin.ModelAdmin):
     inlines = [
         stacked('Campaign'), 
         stacked('Contact'), 
-        #stacked('OrganizationPhone'),
+        stacked('OrgBranch'),
     ]
 
     def qregions(self, org: models.Organization):
