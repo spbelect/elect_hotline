@@ -26,7 +26,7 @@ django.setup()
 from ufo.models import Question, QuizTopic, TopicQuestions, Election
 
 
-doc = csv.reader(open('scripts/ankety2019.csv'))
+doc = csv.reader(open(SRC_DIR / 'scripts/ankety2019.csv'))
 next(doc, None)  # skip CSV header
 
 TopicQuestions.objects.all().delete()
@@ -39,7 +39,10 @@ for n, row in enumerate(doc):
     if row[0].isupper():
         print(n, row)
         #curform = row[0]
-        topic, _ = QuizTopic.objects.update_or_create(name=row[0], defaults={'sortorder': n})
+        topic, _ = QuizTopic.objects.update_or_create(name=row[0], defaults={
+            'sortorder': n,
+            'country_id': 'ru'
+        })
         continue
 
     #print(row[0])
