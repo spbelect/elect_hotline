@@ -4,13 +4,11 @@ from uuid import uuid4
 from django.core import checks
 from django.db.models import (
     Model, ForeignKey, DateTimeField, BooleanField, CharField, ManyToManyField,
-    TextField, PositiveSmallIntegerField, CASCADE)
+    TextField, PositiveSmallIntegerField, CASCADE, SET_NULL)
 from django.db.models import JSONField
 from django.utils.timezone import now
 
-from . import base 
-
-
+from . import base
 
 
 class TopicQuestions(Model):
@@ -42,6 +40,7 @@ class QuizTopic(Model):
 
     name = TextField()
 
+    country = ForeignKey('Country', related_name='quiztopics', null=True, blank=True, on_delete=SET_NULL)
     questions = ManyToManyField('Question', through=TopicQuestions, blank=True, related_name='topics')
     #elections = ForeignKey('Election', on_delete=CASCADE, null=True, blank=True)
 
