@@ -26,7 +26,7 @@ from ufo.models import (
     Region, Country, WebsiteUser, Election, Campaign, Organization, Contact, OrgBranch,
     WebsiteUser
 )
-from ..base import BaseTestCase, MSK, ru, spb, msk
+from .. import base, MSK, ru, spb, msk
 
 
 @pytest.mark.uitest

@@ -4,9 +4,9 @@ from os import remove
 from os.path import basename, dirname, join
 from subprocess import call
 
+import django.test
 from django.conf import settings
 from django.urls import reverse
-from django.test import TestCase
 from django.test import override_settings
 from unittest.mock import Mock, patch, ANY
 from model_bakery.baker import make
@@ -17,10 +17,8 @@ from rest_framework.status import HTTP_201_CREATED
 
 from ufo.models import Answer, MobileUser
 
-from ..base import BaseTestCase
 
-
-class PostProfileEventSuccessTest(BaseTestCase):
+class PostProfileEventSuccessTest(django.test.TestCase):
     # При получении валидного события, оно должно быть сохранено в БД.
 
     def setUp(self):
@@ -36,7 +34,7 @@ class PostProfileEventSuccessTest(BaseTestCase):
             phone = '567',
             email = 'x@ya.ru',
             telegram = 'ttt',
-        ))
+        ), content_type='application/json')
 
         # THEN response status should be 200
         self.assertEqual(response.status_code, 200)

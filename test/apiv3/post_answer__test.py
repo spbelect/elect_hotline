@@ -5,9 +5,9 @@ from os import remove
 from os.path import basename, dirname, join
 from subprocess import call
 
+import django.test
 from django.conf import settings
 from django.urls import reverse
-from django.test import TestCase
 from django.test import override_settings
 from unittest.mock import Mock, patch, ANY
 from model_bakery.baker import make
@@ -21,10 +21,8 @@ from ufo.models import (
     ElectionMobileUsers
 )
 
-from ..base import BaseTestCase
 
-
-class PostAnswerSuccessTest(BaseTestCase):
+class PostAnswerSuccessTest(django.test.TestCase):
     # При получении валидного ответа, оно должно быть сохранено в БД.
 
     def setUp(self):
@@ -65,7 +63,7 @@ class PostAnswerSuccessTest(BaseTestCase):
             'uik_complaint_status': 'отказ принять жалобу',
             'tik_complaint_status': 'отправляется модератору',
             'tik_complaint_text': '123',
-            'region': 'ru_78'})
+            'region': 'ru_78'}, content_type='application/json')
 
         # THEN response status should be HTTP_201_CREATED
         self.assertEqual(response.status_code, HTTP_201_CREATED)

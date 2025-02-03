@@ -25,7 +25,9 @@ from ufo.models import (
     Region, Country, WebsiteUser, Election, Campaign, Organization, Contact, OrgBranch,
     WebsiteUser, QuizTopic, Question, Answer, MobileUser
 )
-from ..base import BaseTestCase, patch_auth, MSK, ru, spb, msk
+
+from .. import base
+from ..base import MSK, ru, spb, msk
 
 
 @pytest.mark.uitest
@@ -41,7 +43,7 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     page.wait_for_timeout(500)  # Wait for sqlite database requests to finish
 
     # AND current user is logged in as test@example.com
-    with patch_auth():
+    with base.patch_auth():
         page.goto(f'{live_server}/auth/login/signed?auth_user=test@example.com')
 
 

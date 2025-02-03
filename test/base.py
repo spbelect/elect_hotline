@@ -90,8 +90,8 @@ class login():
         return decorated
 
 
-
-class BaseTestCase(APITestCase):
+# NOTE: Not used
+class DRFTestCase(APITestCase):
     def _pre_setup(self):
         """
         Mock requests and redis.

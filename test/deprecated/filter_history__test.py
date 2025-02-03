@@ -27,7 +27,7 @@ from ufo.models import (
     Region, Country, WebsiteUser, Election, Campaign, Organization, Contact, OrgBranch,
     WebsiteUser, QuizTopic, Question, Answer, MobileUser
 )
-from ..base import BaseTestCase, patch_auth, MSK, ru, spb, msk
+from .. import base, patch_auth, MSK, ru, spb, msk
 
 
 

@@ -4,10 +4,10 @@ from os import remove
 from os.path import basename, dirname, join
 from subprocess import call
 
+import django.test
 from django.core import mail
 from django.conf import settings
 from django.urls import reverse
-from django.test import TestCase
 from django.test import override_settings
 from django.utils.timezone import now
 from unittest.mock import Mock, patch, ANY
@@ -22,11 +22,13 @@ from ufo.models import (
     TikSubscription, Campaign, Tik, int16
 )
 
-from ..base import BaseTestCase
 
-
-@override_settings(TIK_EMAIL_MODERATION=False, FAKE_TIK_EMAILS=False, ADMIN_EMAIL='admin@example.com')
-class PatchAnswerSuccessTest(BaseTestCase):
+@override_settings(
+    TIK_EMAIL_MODERATION=False,
+    FAKE_TIK_EMAILS=False,
+    ADMIN_EMAIL='admin@example.com'
+)
+class PatchAnswerSuccessTest(django.test.TestCase):
     # При получении запроса обновления (PATCH) ответа, оно должно быть обновлено в БД.
 
     def setUp(self):
@@ -73,7 +75,7 @@ class PatchAnswerSuccessTest(BaseTestCase):
             'uik_complaint_status': 'получено неудовлетворительное решение',
             'tik_complaint_status': 'отправляется модератору',
             'tik_complaint_text': 'жалоба'
-        })
+        }, content_type='application/json')
 
         # THEN response status should be 200
         self.assertEqual(response.status_code, 200)

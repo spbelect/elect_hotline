@@ -3,10 +3,10 @@
 from datetime import datetime, date, timedelta
 from collections import OrderedDict
 
+import django.test
 import pendulum
 from django.conf import settings
 from django.urls import reverse
-from django.test import TestCase
 from django.test import override_settings
 from django.utils.timezone import localtime, now
 from unittest.mock import Mock, patch, ANY
@@ -20,10 +20,9 @@ from rest_framework.status import HTTP_200_OK
 from ufo.models import (
     Region, Country, WebsiteUser, Election, Campaign, Organization, Contact, OrgBranch
 )
-from ..base import BaseTestCase
 
 
-class GetElectionsSuccessTest(BaseTestCase):
+class GetElectionsSuccessTest(django.test.TestCase):
     # При запросе выборов должен возвращаться JSON с выборами, координаторами, кампаниями
 
     def setUp(self):

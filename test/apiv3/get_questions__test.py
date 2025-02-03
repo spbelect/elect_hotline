@@ -3,9 +3,9 @@
 from datetime import datetime
 from collections import OrderedDict
 
+import django.test
 from django.conf import settings
 from django.urls import reverse
-from django.test import TestCase
 from django.test import override_settings
 from django.utils.timezone import localtime, now
 from unittest.mock import Mock, patch, ANY
@@ -17,10 +17,9 @@ from rest_framework.status import HTTP_200_OK
 # from nose.plugins.attrib import attr
 
 from ufo.models import Region, WebsiteUser, QuizTopic, Question, TopicQuestions
-from ..base import BaseTestCase
 
 
-class GetQuestionsSuccessTest(BaseTestCase):
+class GetQuestionsSuccessTest(django.test.TestCase):
     # При запросе вопросов заданной страны должен возвращаться JSON список тематических
     # секций анкеты, содержащих список вопросов, отсортированных в порядке возрастания
     # значения sortorder в бд.
