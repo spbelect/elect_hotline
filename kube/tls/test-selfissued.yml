@@ -1,0 +1,23 @@
+# apiVersion: cert-manager.io/v1
+# kind: Issuer
+# metadata:
+#   name: test-selfsigned
+#   # namespace: cert-manager-test
+#   namespace: ufo-ns
+# spec:
+#   selfSigned: {}
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: self-cert
+#   namespace: ufo-ns
+# spec:
+#   dnsNames:
+#     - vybory.live
+#   issuerRef:
+#     name: test-selfsigned
+#
+#   # This secret must be referenced by Gateway ufo-gateway to
+#   # test with self-issued Certificate
+#   secretName: self-cert-secret
