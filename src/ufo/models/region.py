@@ -3,6 +3,7 @@ import json
 
 from uuid import uuid4
 from datetime import timezone, timedelta
+from typing import Literal
 
 from django.conf import settings
 from django.core import checks
@@ -66,16 +67,20 @@ class Region(Model):
         return errors
 
 
+with open(settings.SRC_DIR('countries.json')) as data:
+    countries = {x['code'].lower(): x for x in json.load(data)}
+
 
 class Country(Model):
+    ID = Literal['ru', 'ua', 'bg', 'kz']
+
     id = CharField(max_length=10, primary_key=True)
     name = TextField()
 
     @property
     def flag(self):
-        return self.flags[self.id]['emoji']
+        return countries[self.id]['emoji']
 
-    flags = {x['code'].lower(): x for x in json.load(open(settings.SRC_DIR('countries.json')))}
 
     @classmethod
     def check(cls, **kwargs):

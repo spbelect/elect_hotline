@@ -12,6 +12,12 @@ import ufo
 from ufo import api
 from ufo import views
 
+# Mobile api v4
+import ufo.mobile_api_v4.country.get_regions
+import ufo.mobile_api_v4.country.get_questions
+import ufo.mobile_api_v4.region.get_elections
+import ufo.mobile_api_v4.region.get_organizations
+
 # Ninja html views
 import ufo.views.account
 import ufo.views.auth.login
@@ -46,16 +52,19 @@ def handler404(request, exception):
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # HTML web pages
     path('', ufo.api.html.urls),
 
-    
-    # API для мобильного приложения.
+    # Moblie API v4
+    path('api/v4/', ufo.api.v4.urls),
+
+    # Mobile API v3
     path('api/v3/', include([path(*x) for x in (
         # GET
         ('<str:country>/regions/', apiv3.get_regions),
         ('<str:region>/elections/', apiv3.get_elections),
         ('<str:country>/questions/', apiv3.get_questions),
-        ('<str:country>/questions/<str:id>/', apiv3.get_question),  # Не используется
+        ('<str:country>/questions/<str:id>/', apiv3.get_question),  # Not used
         
         # POST/PATCH
         ('userprofile/', apiv3.post_userprofile),

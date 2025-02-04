@@ -5,7 +5,8 @@ from django.shortcuts import render
 
 # from loguru import logger
 import pydantic
-from ninja import NinjaAPI
+# from ninja import Router
+from ninja import NinjaAPI, Redoc
 import ninja.errors
 # from ninja.renderers import BaseRenderer
 
@@ -17,6 +18,10 @@ import ninja.errors
 #         return django.shortcuts.render(request, f'http_error.html', data)
 
 
+v4 = NinjaAPI(
+    urls_namespace='v4',
+    # docs=Redoc()
+)
 
 # api = NinjaAPI(renderer=TemplateRenderer())
 html = NinjaAPI(urls_namespace='html')
