@@ -40,7 +40,6 @@ async def get_questions(request, country: Country.ID):
     """
     Get quiz topics with questions.
     """
-    # TODO: filter by country
     topics = QuizTopic.objects.filter(country=country).prefetch_related('questions')
 
     return [x async for x in topics]
