@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-  lang="{{ LANGUAGE_CODE }}"
-  xml:lang="{{ LANGUAGE_CODE }}"
+  lang="{{ user.language }}"
+  xml:lang="{{ user.language }}"
   {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}
 
   data-theme="{{user.theme}}"  ## Daisyui theme
