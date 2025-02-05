@@ -6,6 +6,17 @@ metadata:
 spec:
   gatewayClassName: nginx
   listeners:
-  - name: http
+  - protocol: HTTP
+    name: ufo-http
     port: 80
-    protocol: HTTP
+  - protocol: HTTPS
+    name: ufo-https
+    port: 443
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        # name: self-cert-secret
+        # name: lets-staging-cert-secret
+        name: lets-cert-secret
