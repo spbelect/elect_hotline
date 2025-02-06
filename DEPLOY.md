@@ -49,9 +49,9 @@ kubectl delete secret sendgrid-secrets --ignore-not-found && read -p "SENDGRID_A
 
 `cp src/env-local.example env-kube`
 
-Edit `env-kube` file to set required variables. And then apply:
+Edit `env-kube` file to set required environment variables. Then apply:
 
-`kubectl create configmap ufo-config --from-env-file env-kube -o yaml --dry-run | kubectl apply -f -`
+`kubectl create configmap ufo-config --from-env-file env-kube -o yaml --dry-run='client' | kubectl apply -f -`
 
 You can edit `env-kube` file and then reapply configmap with the above command. Remember to restart deployment pods with `kubectl rollout restart deployment/ufo-deployment` to apply new configmap.
 
