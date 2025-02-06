@@ -29,3 +29,6 @@ spec:
               name: ufo-secrets
           - secretRef:
               name: ufo-secret-key
+          - secretRef:
+              name: sendgrid-secrets
+              optional: true
