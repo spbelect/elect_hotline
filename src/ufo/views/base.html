@@ -16,7 +16,10 @@
     </style>
 
     <title>
-      {% block title %} {{ title }} {% endblock %} | uik.info
+      {% block title %} {{ title }} {% endblock %}
+      # if settings.DOMAIN_NAME and not settings.DOMAIN_NAME == '*'
+        | {{ settings.DOMAIN_NAME }}
+      # endif
     </title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

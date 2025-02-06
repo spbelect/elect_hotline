@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, date, timezone
 
 import django
 from django.apps import apps
+from django.conf import settings
 from django.contrib.messages.constants import DEFAULT_LEVELS
 from django.contrib.messages.api import get_messages
 from django.contrib.humanize.templatetags import humanize
@@ -53,8 +54,8 @@ def jinja_env(**kwargs) -> Environment:
         'humanize': django.contrib.humanize.templatetags.humanize,
         'int16': int16,
         'static': static,
-        'version': ufo.__version__
-
+        'version': ufo.__version__,
+        'settings': settings
         # 'url': reverse,
     })
     return env
