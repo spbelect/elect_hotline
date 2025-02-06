@@ -113,3 +113,10 @@ heroku run sh -c './scripts/2020_ankety.py'
 heroku run sh -c './scripts/regions.py populatedb'
 heroku run sh -c './manage.py createsuperuser'
 ```
+
+### Build and publish docker image
+
+```
+docker build --tag fak3/ufo:0.5 .
+docker push fak3/ufo:0.5
+```
