@@ -41,6 +41,8 @@ kubectl create secret generic ufo-secret-key --namespace "ufo-ns" --from-literal
 
 kubectl delete secret ufo-secrets --ignore-not-found && read -p "GOOGLE_OAUTH2_CLIENT_SECRET: " google_secret && kubectl create secret generic ufo-secrets --namespace "ufo-ns" --from-literal GOOGLE_OAUTH2_CLIENT_SECRET="$google_secret"
 
+kubectl delete secret sendgrid-secrets --ignore-not-found && read -p "SENDGRID_API_KEY: " sendgrid_api_key && kubectl create secret generic sendgrid-secrets --namespace "ufo-ns" --from-literal SENDGRID_API_KEY="$sendgrid_api_key"
+
 ```
 
 ### Create env configmap
@@ -64,12 +66,14 @@ kubectl apply -f kube/ufo/
 
 `kubectl edit configmaps ufo-config`
 
-### Ingest database fixtures
+### Ingest database fixtures and superuser
+
+`kubectl exec --stdin --tty deployments/ufo-deployment -- /bin/bash`
 
 ```
-kubectl exec --stdin --tty ufo-deployment-XX -- /bin/bash`
 $ ./scripts/regions.py populatedb
 $ ./scripts/2020_ankety.py
+$ ./manage.py createsuperuser
 ```
 
 
