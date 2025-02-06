@@ -43,6 +43,14 @@ kubectl delete secret ufo-secrets --ignore-not-found && read -p "GOOGLE_OAUTH2_C
 
 ```
 
+### Create env configmap
+
+`cp src/env-local.example env-kube`
+
+Edit env-kube to set required variables. And then apply:
+
+`kubectl create configmap ufo-config --from-env-file env-kube -o yaml --dry-run | kubectl apply -f -`
+
 
 ### Apply manifests
 

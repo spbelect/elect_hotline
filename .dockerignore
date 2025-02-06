@@ -7,3 +7,4 @@ node_modules
 Dockerfile
 **/db.sqlite
 **/env-local
+**/env-kube

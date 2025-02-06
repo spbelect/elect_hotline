@@ -5,6 +5,7 @@ settings_local.py
 .*~
 .~*
 env-local
+env-kube
 pytz
 *.kate-swp
 .pytest-cache/
