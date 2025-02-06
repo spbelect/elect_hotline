@@ -23,6 +23,12 @@ spec:
               name: postgres-secrets
           - secretRef:
               name: ufo-secrets
+          - secretRef:
+              name: ufo-secret-key
+          - secretRef:
+              name: sendgrid-secrets
+              optional: true
+
 
 
       # restartPolicy: Never
