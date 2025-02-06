@@ -76,6 +76,11 @@ if 'SENTRY_DSN' in os.environ:
     )
 
 
+# These settings are required for build_absolute_uri() to correctly
+# work behind nginx reverse proxy
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
