@@ -37,7 +37,10 @@ kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v1
 ```
 read -p "postgres password: " password && kubectl create secret generic postgres-secrets --namespace "ufo-ns" --from-literal POSTGRES_PASSWORD="$password" --from-literal DATABASE_URL="postgresql://pguser:$password@postgres:5432/pgdb"
 
-read -p "GOOGLE_OAUTH2_CLIENT_SECRET: " google_secret && kubectl create secret generic ufo-secrets --namespace "ufo-ns" --from-literal DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1` --from-literal GOOGLE_OAUTH2_CLIENT_SECRET="$google_secret"
+kubectl create secret generic ufo-secret-key --namespace "ufo-ns" --from-literal DJANGO_SECRET_KEY=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1`
+
+kubectl delete secret ufo-secrets --ignore-not-found && read -p "GOOGLE_OAUTH2_CLIENT_SECRET: " google_secret && kubectl create secret generic ufo-secrets --namespace "ufo-ns" --from-literal GOOGLE_OAUTH2_CLIENT_SECRET="$google_secret"
+
 ```
 
 
@@ -48,6 +51,9 @@ kubectl apply -f kube/postgres/
 kubectl apply -f kube/ufo/
 ```
 
+### Edit environment variables
+
+`kubectl edit configmaps ufo-config`
 
 ### Ingest database fixtures
 

@@ -13,14 +13,13 @@ spec:
       labels:
         app: ufo-app
     spec:
-      hostNetwork: true
+      hostNetwork: false
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: ufo-app
         image: fak3/ufo:0.4
         ports:
         - containerPort: 8000
-          hostPort: 8000
         envFrom:
           - configMapRef:
               name: ufo-config
@@ -28,3 +27,5 @@ spec:
               name: postgres-secrets
           - secretRef:
               name: ufo-secrets
+          - secretRef:
+              name: ufo-secret-key
