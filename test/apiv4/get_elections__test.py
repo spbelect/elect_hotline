@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, date, timedelta
+from datetime import datetime, date, timedelta, timezone
 from collections import OrderedDict
 from unittest.mock import Mock, patch, ANY
 
 import ninja.testing
 import django.test
 import pendulum
+import time_machine
 
 from django.conf import settings
 from django.urls import reverse
 from django.test import override_settings
 from django.utils.timezone import localtime, now
-from freezegun import freeze_time
 from model_bakery.baker import make
 from ninja.testing import TestClient
 
@@ -28,7 +28,7 @@ from ufo.models import (
 from .. import base
 
 
-@freeze_time('2024-09-11T00:00:00.000000+03:00')
+@time_machine.travel(datetime(2024, 9, 11, 0, 0, tzinfo=timezone.utc))
 class GetElectionsSuccessTest(django.test.TestCase):
     # Upon request of elections in given region, JSON should be returned, including
     # municipal, regional and federal elections.

@@ -18,6 +18,7 @@ from ufo.models import (
     MobileUser, Election, ClientError, Campaign, Organization, Contact, Country
 )
 
+
 @api.v4.get(
     '{str:country}/regions/{int:region}/elections/',
     response = list[create_schema(
