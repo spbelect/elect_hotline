@@ -80,19 +80,6 @@ compilemessages = "pybabel compile -d locale/ --domain django"
 translate = [
     "Babel>=2.16.0",
 ]
-test = [
-    "pytest>=8.3.2",
-    "beautifulsoup4",
-    "pytest-django",
-    "pytest-env",
-    "pytest-pythonpath",
-    "pytest-cov",
-    "requests-toolbelt==0.8.0",
-    "responses==0.10.12",
-    "model-bakery>=1.19.5",
-    "pytest-xdist>=3.6.1",
-    "freezegun>=1.5.1",
-]
 debug = [
     "ipdb>=0.13.13",
 ]
@@ -104,3 +91,34 @@ uitest = [
 
 # [tool.pdm]
 # distribution = true
+
+[dependency-groups]
+test = [
+    "pytest>=8.3.2",
+    "beautifulsoup4",
+    "pytest-django",
+    "pytest-env",
+    "pytest-pythonpath",
+    "pytest-cov",
+    "requests-toolbelt==0.8.0",
+    "responses==0.10.12",
+    "model-bakery>=1.19.5",
+    "pytest-xdist>=3.6.1",
+
+    # freezegun does not work well with pydantc
+    # https://github.com/spulec/freezegun/issues/551
+    "freezegun>=1.5.1",
+
+    # TODO: use instead of freezegun in tests
+    "time-machine>=2.16.0",
+]
+translate = [
+    "Babel>=2.16.0",
+]
+debug = [
+    "ipdb>=0.13.13",
+]
+uitest = [
+    "playwright>=1.46.0",
+    "pytest-playwright>=0.5.1",
+]

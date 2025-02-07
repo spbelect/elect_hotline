@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:59e98329daa08fa1b71f5f1ea84d5516608908607490b08820183eeb62060fef"
+content_hash = "sha256:b66427b92591df474c1ca7ffc6dc57c9efd7fe602d955bcd902ba4d15e1eb3ea"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -1938,8 +1938,7 @@ name = "time-machine"
 version = "2.16.0"
 requires_python = ">=3.9"
 summary = "Travel through time in your tests."
-groups = ["default"]
-marker = "implementation_name != \"pypy\""
+groups = ["default", "test"]
 dependencies = [
     "python-dateutil",
 ]
