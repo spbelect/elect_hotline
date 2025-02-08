@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+import json
 from uuid import uuid4
 
 from django.db.models import (
