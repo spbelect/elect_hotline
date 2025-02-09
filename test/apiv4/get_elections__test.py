@@ -16,11 +16,6 @@ from django.utils.timezone import localtime, now
 from model_bakery.baker import make
 from ninja.testing import TestClient
 
-from rest_framework.serializers import ValidationError, DateTimeField
-#from rest_framework.settings import api_settings
-from rest_framework.status import HTTP_200_OK
-# from nose.plugins.attrib import attr
-
 import ufo.api
 from ufo.models import (
     Region, Country, WebsiteUser, Election, Campaign, Organization, Contact, OrgBranch
@@ -63,32 +58,6 @@ class GetElectionsSuccessTest(django.test.TestCase):
             region=spb,
             date = date(2024, 9, 21),
         )
-        
-#         # AND organization with phone and telegram channel
-#         org = make(Organization, id='organization-id1', name='Наблюдатели петербурга')
-#         make(Contact,
-#             organization_id='organization-id1',
-#             name='общийчат1',
-#             value='http://t.me/obs',
-#             type='tg'
-#         )
-#         make(Contact,
-#             organization_id='organization-id1',
-#             name='Коллц',
-#             value='8666',
-#             type='ph'
-#         )
-#
-#         # AND 2 org branches
-#         make(OrgBranch,
-#              organization=org,
-#              region=spb,
-#              uik_ranges=[[1,100], [1305, 1310]]
-#         )
-#         make(OrgBranch,
-#              organization=org,
-#              region=msk,
-#         )
 
 
     def test_get_elections_success(self):
@@ -96,7 +65,7 @@ class GetElectionsSuccessTest(django.test.TestCase):
         response = self.client.get('/api/v4/ru/regions/78/elections/')
 
         # THEN response status should be HTTP_200_OK
-        self.assertEqual(response.status_code, HTTP_200_OK)
+        assert response.status_code is 200
 
         # AND campaigns, organizations and elections should be returned
         assert response.json() == [
