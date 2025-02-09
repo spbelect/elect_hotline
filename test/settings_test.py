@@ -8,6 +8,7 @@ env.read_env(SRC_DIR('env-localtest'))  # overrides env-local
 from settings import *
 #from utils.basic import update
 
+RAISE_404 = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
