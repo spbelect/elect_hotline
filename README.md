@@ -39,7 +39,7 @@ Finally, run:
 
 # Deployment
 
-See [DEPLOY.md]
+See [DEPLOY.md](DEPLOY.md)
 
 
 # Test
