@@ -62,6 +62,15 @@ kubectl apply -f kube/postgres/
 kubectl apply -f kube/ufo/
 ```
 
+### Obtain TLS certificate
+
+Install cert-manager with `kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.1/cert-manager.yaml`
+
+Test with self-signed certificate: `kubectl apply -f kube/tls/test-selfissued.yml`
+Test with staging letsencrypt certificate: `kubectl apply -f kube/tls/test-staging.yml`
+
+Finally, obtain production letsencrypt certificate: `kubectl apply -f kube/tls/prod.yml`
+
 ### Edit environment variables
 
 `kubectl edit configmaps ufo-config`
