@@ -37,6 +37,10 @@ Create admin user:
 Finally, run:
 `./manage.py runserver 0.0.0.0:8000`
 
+# Deployment
+
+See [DEPLOY.md]
+
 
 # Test
 
