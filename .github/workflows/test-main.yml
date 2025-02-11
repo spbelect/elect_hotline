@@ -34,12 +34,10 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID }}
           vercel-version: 39.2.5
 
-  ping_preview_job:
+  wait_200_preview_job:
     needs: deploy_preview_job
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v2
-
       - name: curl
-        run: curl --fail https://elect-hotline-fak3-roman-s-projects-e5269d83.vercel.app/
+        run: curl --fail -H "x-vercel-protection-bypass:11111111111111111111111111111111" https://elect-hotline-fak3-roman-s-projects-e5269d83.vercel.app/
 
