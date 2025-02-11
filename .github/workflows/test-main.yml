@@ -41,5 +41,5 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: curl
-        run: curl https://elect-hotline-fak3-roman-s-projects-e5269d8.vercel.app/
+        run: curl --fail https://elect-hotline-fak3-roman-s-projects-e5269d83.vercel.app/
 
