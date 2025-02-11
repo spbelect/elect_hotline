@@ -34,3 +34,12 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID }}
           vercel-version: 39.2.5
 
+  ping_preview_job:
+    needs: deploy_preview_job
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: curl
+        run: curl https://elect-hotline-fak3-roman-s-projects-e5269d8.vercel.app/
+
