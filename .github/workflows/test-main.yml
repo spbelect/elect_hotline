@@ -39,5 +39,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: curl
+        # The preview url is protected from automation and curl returns 401.
+        # To bypass, set "x-vercel-protection-bypass" header:
+        # https://vercel.com/docs/security/deployment-protection/methods-to-bypass-deployment-protection#protection-bypass-for-automation
         run: curl --fail -H "x-vercel-protection-bypass:11111111111111111111111111111111" https://elect-hotline-fak3-roman-s-projects-e5269d83.vercel.app/
 
