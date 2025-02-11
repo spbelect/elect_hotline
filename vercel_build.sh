@@ -1,6 +1,6 @@
 #python -m pip install -U pip
 pip3.12 install pdm
-python3.12 -m pdm export > requirements.txt
+python3.12 -m pdm export --prod > requirements.txt
 pip3.12 install -r requirements.txt
 #pip3.12 install .
 #python3.12 -c "from importlib import metadata; print(metadata.version('elect-hotline'))"
