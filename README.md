@@ -1,6 +1,6 @@
 ![Tests](https://github.com/Fak3/elect_hotline/actions/workflows/test-main.yml/badge.svg)
 [![codecov](https://codecov.io/gh/spbelect/elect_hotline/graph/badge.svg?token=K9145KKJHE)](https://codecov.io/gh/spbelect/elect_hotline)
-[![swagger-editor](https://img.shields.io/badge/open--API-in--editor-brightgreen.svg?style=flat&label=client%20open-api-v3)](https://spbelect.github.io/elect_hotline/mobile_api_v4.html)
+[![OpenAPI](https://img.shields.io/badge/OpenAPI-V3.1-blue)](https://spbelect.github.io/elect_hotline/mobile_api_v4.html)
 
 Elect-hotline is a web server that receives data from [Paradox](https://github.com/spbelect/paradox) android app. It has a web frontend to browse answers history, and organizations registry for teams assisting election observers.
 
