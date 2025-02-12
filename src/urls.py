@@ -18,6 +18,7 @@ import ufo.mobile_api_v4.country.get_regions
 import ufo.mobile_api_v4.country.get_questions
 import ufo.mobile_api_v4.region.get_elections
 import ufo.mobile_api_v4.region.get_organizations
+import ufo.mobile_api_v4.answers
 
 # Ninja html views
 import ufo.views.account
