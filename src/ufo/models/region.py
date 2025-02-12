@@ -17,14 +17,12 @@ from django.utils.timezone import now
 from . import base 
 
 
-class Region(Model):
+class Region(base.Model):
     """
     """
     class Meta():
         ordering = ['id']
         
-    update = base.update
-    
     id = CharField(max_length=10, primary_key=True)
     time_created = DateTimeField(default=now, verbose_name='Время создания записи в БД на сервере')
     name = TextField()

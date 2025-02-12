@@ -17,7 +17,7 @@ from .websiteuser import WebsiteUser
 # TODO: record user ip to ban
 #IPV4 = 'xxx.xxx.xxx.xxx'
 
-class Answer(Model):
+class Answer(base.Model):
     """
     Answer описывает ответ данный юзером на вопрос в анкете.
     """
@@ -38,8 +38,6 @@ class Answer(Model):
         ]
 
         
-    update = base.update
-    
     id = CharField(max_length=40, default=uuid4, primary_key=True)
     time_created = DateTimeField(default=now, verbose_name='Время создания записи в БД на сервере')
 
@@ -256,7 +254,7 @@ class Answer(Model):
         #ordering = ('timestamp',)
 
 
-class AnswerImage(Model):
+class AnswerImage(base.Model):
     created = DateTimeField(default=now)
     answer = FK('Answer', related_name='images')
     TYPES = [

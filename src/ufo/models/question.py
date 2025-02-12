@@ -15,12 +15,11 @@ from django.utils.timezone import now
 from . import base
 
 
-class Question(Model):
+class Question(base.Model):
     """
     Вопрос а анкете. Имеет уникальный id, label, и текст в помощь
     наблюдателю. type - тип ответа на этот вопрос (bool\текст\число)
     """
-    update = base.update
     
     id = CharField(max_length=50, default=uuid4, primary_key=True)
     time_created = DateTimeField(default=now, verbose_name='Время создания записи в БД на сервере')
