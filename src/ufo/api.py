@@ -20,6 +20,9 @@ import ninja.errors
 
 v4 = NinjaAPI(
     urls_namespace='v4',
+    title="Mobile API",
+    version='v4',
+    description="API for mobile app. Allows to retrieve list of elections, questions, and to submit answers."
     # docs=Redoc()
 )
 
