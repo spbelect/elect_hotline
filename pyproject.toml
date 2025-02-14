@@ -43,6 +43,7 @@ dependencies = [
     "pip>=24.3.1",
     "pgwait>=0.3",
     "uvicorn[standard]>=0.34.0",
+    "django-prometheus>=2.3.1",
 ]
 readme = "README.md"
 license = {text = "MIT"}

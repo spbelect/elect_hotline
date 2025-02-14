@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     # 'webpack_loader',
     'prettyjson',
     'rest_framework',
+    'django_prometheus',
     
     'ufo.apps.UfoConfig',
 ]
@@ -83,6 +84,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
     # The WhiteNoise middleware should be placed directly after the
@@ -100,6 +102,7 @@ MIDDLEWARE = [
 
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'

@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:b66427b92591df474c1ca7ffc6dc57c9efd7fe602d955bcd902ba4d15e1eb3ea"
+content_hash = "sha256:24fc85a9e1b3dbbd2a960c28ea31085c2ea4e825e09f4042e455d55a5a367610"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -667,6 +667,19 @@ files = [
 ]
 
 [[package]]
+name = "django-prometheus"
+version = "2.3.1"
+summary = "Django middlewares to monitor your application with Prometheus.io."
+groups = ["default"]
+dependencies = [
+    "prometheus-client>=0.7",
+]
+files = [
+    {file = "django-prometheus-2.3.1.tar.gz", hash = "sha256:f9c8b6c780c9419ea01043c63a437d79db2c33353451347894408184ad9c3e1e"},
+    {file = "django_prometheus-2.3.1-py2.py3-none-any.whl", hash = "sha256:cf9b26f7ba2e4568f08f8f91480a2882023f5908579681bcf06a4d2465f12168"},
+]
+
+[[package]]
 name = "django-pydantic-field"
 version = "0.3.11"
 requires_python = ">=3.7"
@@ -1286,6 +1299,17 @@ groups = ["test", "uitest"]
 files = [
     {file = "pluggy-1.5.0-py3-none-any.whl", hash = "sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669"},
     {file = "pluggy-1.5.0.tar.gz", hash = "sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1"},
+]
+
+[[package]]
+name = "prometheus-client"
+version = "0.21.1"
+requires_python = ">=3.8"
+summary = "Python client for the Prometheus monitoring system."
+groups = ["default"]
+files = [
+    {file = "prometheus_client-0.21.1-py3-none-any.whl", hash = "sha256:594b45c410d6f4f8888940fe80b5cc2521b305a1fafe1c58609ef715a001f301"},
+    {file = "prometheus_client-0.21.1.tar.gz", hash = "sha256:252505a722ac04b0456be05c05f75f45d760c2911ffc45f2a06bcaed9f3ae3fb"},
 ]
 
 [[package]]

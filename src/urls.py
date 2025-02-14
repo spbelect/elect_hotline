@@ -83,6 +83,7 @@ urlpatterns = [
         ('errors/', apiv3.post_errors),
     )])),
 
+    path('', include('django_prometheus.urls')),
 ]
 
 if 'test' not in sys.argv:
