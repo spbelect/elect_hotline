@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: ufo-service
   namespace: ufo-ns
+  labels:
+    app: ufo-app
+    # ufo-prometheus-discovery: 'true'
 spec:
   # type: ClusterIP
   type: NodePort
@@ -10,6 +13,7 @@ spec:
     app: ufo-app
   ports:
     - protocol: TCP
+      name: http
       port: 80
       targetPort: 8000  # inside container
 
