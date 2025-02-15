@@ -127,5 +127,14 @@ heroku run sh -c './manage.py createsuperuser'
 
 ```
 docker build --tag fak3/ufo:0.5 .
+```
+
+To test, push image into kind-cluster
+```
+kind load docker-image fak3/ufo:0.5 --name kind-cluster
+```
+
+Finally, push to dockerhub
+```
 docker push fak3/ufo:0.5
 ```
