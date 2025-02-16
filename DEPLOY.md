@@ -13,6 +13,8 @@ python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn 
 If you have kubeconfig for your cluster, enable it with
 `export KUBECONFIG=./third-space-kubeconfig.yml`
 
+Then list contexts with `kubectl config get-contexts` and choose one with `kubectl config use-context myorg-third-oidc`
+
 
 ### Create namespace
 
