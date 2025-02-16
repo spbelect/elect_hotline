@@ -96,6 +96,32 @@ $ ./manage.py createsuperuser
 kubectl port-forward services/nginx-gateway 8080:80 --namespace nginx-gateway
 ```
 
+### Metrics monitoring
+
+#### Prometheus operator
+
+Install Prometheus Operator Custom Resource Definitions
+
+```
+kubectl apply --server-side -f https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.80.0/bundle.yaml
+```
+
+Create prometheus instance: `kubectl apply -f metrics/ufo-prometheus.yaml`
+
+Check prometheus is running. Start port-forwarding: `kubectl port-forward  prometheus-ufo-prometheus-0 9000:9090`. Access it via http://127.0.0.1:9000/.
+
+Note: port 9090 on localhost might be taken by your local kind cluster, so port 9000 is used instead in the forwarding command above.
+
+#### ServiceMonitor
+
+Create Prometheus ServiceMonitor for ufo django backend: `kubectl apply -f metrics/ufo-servicemon.yml`
+
+Check that ServiceMonitor is up and active. Start port forwarding and go to http://127.0.0.1:9000/targets.
+
+#### Grafana
+
+Install grafana `kubectl apply -f metrics/grafana.yml`
+
 
 ## Deploy with Vercel / Neondb
 
