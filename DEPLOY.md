@@ -47,6 +47,8 @@ kubectl delete secret sendgrid-secrets --ignore-not-found && read -p "SENDGRID_A
 
 ```
 
+If you need to print the secret value later, use `kubectl get secrets/postgres-secrets --template={{.data.DATABASE_URL}} | base64 -d`
+
 ### Create env configmap
 
 `cp src/env-local.example env-kube`
