@@ -6,8 +6,8 @@ metadata:
 spec:
   parentRefs:
   - name: ufo-gateway
-  # hostnames:
-  # - "example.com"
+  hostnames:
+  - "vybory.live"
   rules:
   - matches:
     - path:
