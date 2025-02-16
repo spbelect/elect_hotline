@@ -49,22 +49,22 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  namespace: ufo-ns
+  # PV is a cluster-wide resource, meaning they do not belong to any specific namespace
   name: postgres-pv
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: 200M # total capacity for this persistent volume
+    storage: 200M  # total capacity for this persistent volume
   accessModes:
     - ReadWriteOnce
-  hostPath: # where pesistent volume is created on the kubernetes node (needs to be /data for minikube)
+  hostPath:  # where pesistent volume is created on the kubernetes node (needs to be /data for minikube)
     path: "/data"
 
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim #claim a portion of persistent volume
+kind: PersistentVolumeClaim  # claim a portion of persistent volume
 metadata:
   namespace: ufo-ns
   name: postgres-pvc
@@ -73,7 +73,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteOnce # mount as read-write by a single node
+    - ReadWriteOnce  # mount as read-write by a single node
   resources:
     requests:
-      storage: 100M # storage capacity cons
+      storage: 100M  # storage capacity cons
