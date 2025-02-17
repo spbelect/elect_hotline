@@ -31,7 +31,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: prometheus
+  name: prometheus-role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -47,14 +47,20 @@ metadata:
   name: ufo-prometheus
 spec:
   serviceAccountName: prometheus-sa
+
   serviceMonitorNamespaceSelector: {}  # auto discover accross all namespaces
-  # serviceMonitorNamespaceSelector:
   #   matchLabels:
   #     name: ufo
   serviceMonitorSelector: {}  # auto discover all service monitors
   #   matchLabels:
   #     env: staging
+
+  podMonitorNamespaceSelector: {}   # auto discover accross all namespaces
   podMonitorSelector: {}  # auto discover all pod monitors
+
+  ruleNamespaceSelector: {}  # auto discover accross all namespaces
+  ruleSelector: {}  # auto discover all rules
+
   resources:
     requests:
       memory: 300Mi
