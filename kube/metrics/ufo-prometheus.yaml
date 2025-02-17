@@ -25,7 +25,9 @@ rules:
   resources:
   - ingresses
   verbs: ["get", "list", "watch"]
-- nonResourceURLs: ["/metrics"]
+- nonResourceURLs:
+  - /metrics
+  - /metrics/slis
   verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
