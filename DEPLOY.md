@@ -106,6 +106,9 @@ Install Prometheus Operator Custom Resource Definitions
 kubectl apply --server-side -f https://github.com/prometheus-operator/prometheus-operator/releases/download/v0.80.0/bundle.yaml
 ```
 
+Prometheus config-reloader has only 10m cpu by default and being constantly throttled. To avoid this, override the args in the prometheus operator deployment: `kubectl apply -f kube/metrics/prom-operator-deployment.yml`. See https://github.com/prometheus-operator/prometheus-operator/issues/5446#issuecomment-1596664300 and https://github.com/prometheus-operator/kube-prometheus/issues/2333
+
+####
 Create prometheus instance: `kubectl apply -f metrics/ufo-prometheus.yaml`
 
 Check prometheus is running. Start port-forwarding: `kubectl port-forward  prometheus-ufo-prometheus-0 9000:9090`. Access it via http://127.0.0.1:9000/.
