@@ -110,21 +110,39 @@ Prometheus config-reloader has only 10m cpu by default and being constantly thro
 
 #### Prometheus
 
-Create prometheus instance: `kubectl apply -f metrics/ufo-prometheus.yaml`
+Create prometheus instance: `kubectl apply -f kube/metrics/ufo-prometheus.yaml`
 
 Check prometheus is running. Start port-forwarding: `kubectl port-forward  prometheus-ufo-prometheus-0 9000:9090`. Access it via http://127.0.0.1:9000/.
 
 Note: port 9090 on localhost might be taken by your local kind cluster, so port 9000 is used instead in the forwarding command above.
 
-#### ServiceMonitor
+#### Kubernetes system and node metrics
 
-Create Prometheus ServiceMonitor for ufo django backend: `kubectl apply -f metrics/ufo-servicemon.yml`
+Create ServiceMonitor rules for kubernetes system metrics:
+```
+kubectl apply -f kube/metrics/kube-sys/kube-apiserver-servicemon.yml
+kubectl apply -f kube/metrics/kube-sys/kubelet-servicemon.yml
+```
+
+Create Node exporter and its ServiceMonitor:
+```
+kubectl apply -f kube/metrics/kube-sys/node-monitor.yml
+```
+
+Create alert rules:
+```
+kubectl apply -f kube/metrics/kube-sys/kube-alert-rules.yml
+```
+
+#### Django ServiceMonitor
+
+Create Prometheus ServiceMonitor for ufo django backend: `kubectl apply -f kube/metrics/ufo-servicemon.yml`
 
 Check that ServiceMonitor is up and active. Start port forwarding and go to http://127.0.0.1:9000/targets.
 
 #### Grafana
 
-Install grafana `kubectl apply -f metrics/grafana.yml`
+Install grafana `kubectl apply -f kube/metrics/grafana.yml`
 
 
 ## Deploy with Vercel / Neondb
