@@ -16,6 +16,8 @@ If you have kubeconfig for your cluster, enable it with
 
 Then list contexts with `kubectl config get-contexts` and choose one with `kubectl config use-context myorg-third-oidc`
 
+To make the context always available, add to ~/.bashrc:
+`export KUBECONFIG="/home/z/pproj/elect_hotline/kube/third-kubeconfig.yaml:/home/u1/.kube/config"`
 
 ### Create namespace
 
