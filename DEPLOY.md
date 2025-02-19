@@ -145,9 +145,51 @@ Check that ServiceMonitor is up and active. Start port forwarding and go to http
 
 #### Grafana
 
-Install grafana `kubectl apply -f kube/metrics/grafana.yml`
+Install grafana `kubectl apply -k kube/metrics/grafana/`
+
+### Utils
+
+#### Krew
+
+Allows installation of kubectl plugins
+
+```
+(   set -x; cd "$(mktemp -d)" &&   OS="$(uname | tr '[:upper:]' '[:lower:]')" &&   ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&   KREW="krew-${OS}_${ARCH}" &&   curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&   tar zxvf "${KREW}.tar.gz" &&   ./"${KREW}" install krew; )
+```
+
+Print all installed plugins with `kubectl krew list`
+
+#### OIDC-login
+
+`kubectl krew install oidc-login`
+
+#### resource-capacity
+
+`kubectl krew install resource-capacity`
+
+Print all resource requests and limits for all pods: `kubectl resource-capacity --pods`
+
+#### ctx / ns
+
+Easier switch context / namespace
+
+```
+sudo zypper install fzf
+kubectl krew install ctx
+kubectl krew install ns
+```
+
+Add to bashrc alias for kubectl:
+```
+alias kk="kubectl"
+__load_completion kubectl
+complete -o default -F __start_kubectl kk
+```
+
+Now you can switch with `kk ctx` or `kk ns`
 
 
+####
 ## Deploy with Vercel / Neondb
 
 ```
