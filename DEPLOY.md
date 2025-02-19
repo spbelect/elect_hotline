@@ -4,8 +4,9 @@ System checks can help to detect common configuration tasks:
 
 ```
 python manage.py check --tag email --deploy
-python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn "wsgi:application" --access-logfile - --workers 12 --threads 12 --reload
 ```
+
+Checks can be preformed before the web server starts: `python manage.py check --deploy --fail-level=WARNING && DJANGO_DEBUG=0 gunicorn "wsgi:application" --access-logfile - --workers 12 --threads 12 --reload`
 
 
 ## Kubernetes
