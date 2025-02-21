@@ -19,6 +19,11 @@ Then list contexts with `kubectl config get-contexts` and choose one with `kubec
 To make the context always available, add to ~/.bashrc:
 `export KUBECONFIG="/home/z/pproj/elect_hotline/kube/third-kubeconfig.yaml:/home/u1/.kube/config"`
 
+Recommended to install kubie for context and namespace management: `zypper in kubie`
+
+To allow kubie discover your kubeconfig file, copy it to `~/.kube` directory.
+
+
 ### Create namespace
 
 ```
@@ -169,21 +174,32 @@ Print all installed plugins with `kubectl krew list`
 
 Print all resource requests and limits for all pods: `kubectl resource-capacity --pods`
 
-#### ctx / ns
-
-Easier switch context / namespace
-
-```
-sudo zypper install fzf
-kubectl krew install ctx
-kubectl krew install ns
-```
+#### Kubectl alias
 
 Add to bashrc alias for kubectl:
 ```
 alias kk="kubectl"
 __load_completion kubectl
 complete -o default -F __start_kubectl kk
+```
+
+##### Kubie
+
+Recommended context and namespace manager tool.
+
+Install: `sudo zypper install fzf kubie`
+
+To allow kubie discover your kubeconfig file, copy it to `~/.kube` directory.
+
+
+##### Kubectx
+
+Can be used to switch context or namespace globally. It is less convenient than Kubie, which allows to switch context for currently opened shell session.
+
+```
+sudo zypper install fzf
+kubectl krew install ctx
+kubectl krew install ns
 ```
 
 Now you can switch with `kk ctx` or `kk ns`
