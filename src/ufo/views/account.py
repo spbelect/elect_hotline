@@ -29,23 +29,7 @@ def get_form(request):
 
 @api.html.post('/account/form')
 def post_form(request, data: Form[UserSchema]):
-    # if request.user.is_authenticated:
-    print(data)
-    # import ipdb; ipdb.sset_trace()
-    print(request.body)
-    # data = data.dict(exclude_unset=True)
-    # print(data)
-
-    # request.user.update(**data)
-    print(data.model_dump(exclude_unset=True))
     request.user.update(**data.model_dump(by_alias=True, exclude_unset=True))
-
     translation.activate(request.user.language)
-    # else:
-    #     request.session['utc_offset'] = data.utc_offset
-    #     request.session['country_id'] = data.country
-
-    # messages.add_message(request, messages.INFO, 'Настройки сохранены.')
-
     return render(request, 'views/account.html')
 
