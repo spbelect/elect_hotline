@@ -152,6 +152,20 @@ Check that ServiceMonitor is up and active. Start port forwarding and go to http
 
 Install grafana `kubectl apply -k kube/metrics/grafana/`
 
+
+#### ArgoCD
+
+```
+zypper in argocd-cli
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.14.2/manifests/install.yaml
+```
+
+Print admin password: `argocd admin initial-password -n argocd`
+
+Start port forwarding: `kubectl port-forward service/argocd-server -n argocd 8080:443`
+
+
 ### Utils
 
 #### Krew
