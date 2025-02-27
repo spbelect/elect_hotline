@@ -40,7 +40,7 @@ Finally, run:
 
 # Deployment
 
-See [DEPLOY.md](DEPLOY.md)
+See https://github.com/spbelect/elect_hotline_deploy
 
 
 # Test
