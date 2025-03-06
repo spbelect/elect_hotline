@@ -246,7 +246,7 @@ class WebsiteUser_Admin(UserAdmin):
     ordering = ('email',)
 
     search_fields = ('first_name', 'last_name', 'email')
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('email', 'date_joined', 'last_login')
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
