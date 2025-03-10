@@ -101,7 +101,7 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
         en = 'en', _("English")
         ru = 'ru', _("Russian")
 
-    language = CharField(_('Language'), max_length=2, default=Languages.en)
+    language = CharField(_('Language'), max_length=2, choices=Languages, default=Languages.en)
 
     country = ForeignKey('Country', null=True, on_delete=SET_NULL)
     utc_offset = SmallIntegerField(default=3)
