@@ -10,7 +10,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db.models import (
     Model, ForeignKey, DateField, BooleanField, PositiveSmallIntegerField, TextField,
     CharField, SET_NULL, CASCADE, IntegerField, DateTimeField, EmailField, Q, SmallIntegerField,
-    JSONField, TextChoices
+    JSONField, TextChoices, PositiveIntegerField
 )
 from django.utils.functional import cached_property
 from django.utils.timezone import now
@@ -110,6 +110,8 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
 
     #app_ids = ArrayField(CharField(max_length=20), null=True, blank=True)
     
+    num_login_emails_sent = PositiveIntegerField(default=0)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
