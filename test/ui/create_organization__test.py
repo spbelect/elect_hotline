@@ -6,6 +6,7 @@ from collections import OrderedDict
 
 import pendulum
 import pytest
+import time_machine
 
 from django.conf import settings
 from django.core import mail
@@ -14,7 +15,6 @@ from django.urls import reverse
 from django.test import TestCase
 from django.test import override_settings
 from django.utils.timezone import localtime, now
-from freezegun import freeze_time
 from loguru import logger
 from model_bakery.baker import make
 from playwright.sync_api import Playwright, Page, expect
@@ -31,7 +31,7 @@ from ..base import MSK, ru, spb, msk
 
 
 @pytest.mark.uitest
-@freeze_time('2024-09-11T00:00:00.000000+03:00')
+@time_machine.travel(datetime(2024, 9, 16, tzinfo=MSK), tick=False)
 def create_organization_scenario__test(live_server, spb, msk, page):
 
     # GIVEN existing SPB organization

@@ -6,6 +6,7 @@ from collections import OrderedDict
 
 import pendulum
 import pytest
+import time_machine
 
 from django.conf import settings
 from django.core import mail
@@ -13,7 +14,6 @@ from django.urls import reverse
 from django.test import TestCase
 from django.test import override_settings
 from django.utils.timezone import localtime, now
-from freezegun import freeze_time
 from model_bakery.baker import make
 from playwright.sync_api import Playwright, Page, expect
 from unittest.mock import Mock, patch, ANY
@@ -29,7 +29,7 @@ from ..base import MSK, ru, spb, msk
 
 
 @pytest.mark.uitest
-@freeze_time('2024-09-11T00:00:00.000000+03:00')
+@time_machine.travel(datetime(2024, 9, 16, tzinfo=MSK), tick=False)
 def filter_history_new_scenario__test(live_server, spb, msk, page):
     # GIVEN current user is logged in as test@example.com
     with base.patch_auth():
@@ -99,7 +99,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     make(Answer, **{
         'appuser': appuser,
         'id': 'vam_spb_incident',
-        'timestamp': datetime(2024, 9, 11, 0, 1, tzinfo=MSK),
+        'timestamp': datetime(2024, 9, 16, 0, 1, tzinfo=MSK),
         'question_id': 'vam_predostavili',
         'value_bool': False,
         'is_incident': True,
@@ -116,7 +116,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     make(Answer, **{
         'appuser': appuser,
         'id': 'vam_spb_ok',
-        'timestamp': datetime(2024, 9, 11, 0, 2, tzinfo=MSK),
+        'timestamp': datetime(2024, 9, 16, 0, 2, tzinfo=MSK),
         'question_id': 'vam_predostavili',
         'value_bool': True,
         'is_incident': False,
@@ -133,7 +133,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     make(Answer, **{
         'appuser': appuser,
         'id': 'vbros_a',
-        'timestamp': datetime(2024, 9, 11, 0, 3, tzinfo=MSK),
+        'timestamp': datetime(2024, 9, 16, 0, 3, tzinfo=MSK),
         'question_id': 'vbros',
         'value_bool': True,
         'is_incident': False,
@@ -152,9 +152,9 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     page.goto(f"{live_server}/history")
 
     # THEN All answers should be visible
-    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:03")).to_be_visible()
-    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:02")).to_be_visible()
-    expect(page.locator("time").filter(has_text="11 Sep 2024, 00:01")).to_be_visible()
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:03")).to_be_visible()
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:02")).to_be_visible()
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:01")).to_be_visible()
     expect(page.locator("time").filter(has_text="04 Apr 2016, 00:01")).to_be_visible()
 
     ######
