@@ -1,15 +1,16 @@
 import logging
-import django.http
 
 from django.conf import settings
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 # from loguru import logger
+import django.http
+import ninja.errors
 import pydantic
+import sentry_sdk
 # from ninja import Router
 from ninja import NinjaAPI, Redoc
-import ninja.errors
 # from ninja.renderers import BaseRenderer
 
 
@@ -88,6 +89,8 @@ def exc_error(request, exc: Exception):
     """
     Exception raised in a view.
     """
+    sentry_sdk.capture_exception(exc)
+
     if settings.DEBUG and not request.headers.get('X-Alpine-Request') == 'true':
         raise exc
     logging.exception(exc)
@@ -112,7 +115,12 @@ def error_404(request, exc: django.http.Http404):
 def http_error(request, exc: ninja.errors.HttpError):
     """
     HttpError raised in a view.
+    TODO: Currently this includes Unauthorized error 401. Should we create separate
+    HttpError subclass for it?
     """
+
+    sentry_sdk.capture_exception(exc)
+
     if settings.DEBUG:
         raise exc
     logging.exception(exc)
