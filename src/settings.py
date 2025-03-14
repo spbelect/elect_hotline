@@ -68,13 +68,50 @@ INSTALLED_APPS = [
 
 
 if 'SENTRY_DSN' in os.environ:
+    import django.db.models.signals
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 
+    print("Sentry is enabled.")
+
     sentry_sdk.init(
         dsn=env('SENTRY_DSN'),
-        integrations=[DjangoIntegration()]
+        send_default_pii=True,
+        integrations=[
+            DjangoIntegration(
+                # transaction_style:
+                # How to name transactions that show up in Sentry tracing.
+                #     "/myproject/myview/<foo>" if you set transaction_style="url".
+                #     "myproject.myview" if you set transaction_style="function_name".
+                transaction_style='url',
+
+                # Create spans and track performance of all middleware in your Django project. Set to False to disable.
+                middleware_spans=True,
+
+                # Create spans and track performance of all synchronous Django signals receiver functions in your Django project. Set to False to disable.
+                signals_spans=True,
+
+                # A list of signals to exclude from performance tracking. No spans will be created for these.
+                signals_denylist=[
+                    django.db.models.signals.pre_init,
+                    django.db.models.signals.post_init,
+                ],
+
+                # Create spans and track performance of all read operations to configured caches. The spans also include information if the cache access was a hit or a miss. Set to True to enable.
+                cache_spans=False,
+
+                # http_methods_to_capture:
+                # A tuple containing all the HTTP methods that should create a transaction in Sentry.
+                #
+                # The default is ("CONNECT", "DELETE", "GET", "PATCH", "POST", "PUT", "TRACE",).
+                #
+                # (Note that OPTIONS and HEAD are missing by default.)
+                # http_methods_to_capture=("GET",),
+            ),
+        ]
     )
+else:
+    print("Sentry is disabled. Provide SENTRY_DSN env variable to enable it.")
 
 
 # These settings are required for build_absolute_uri() to correctly
