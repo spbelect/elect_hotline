@@ -1,7 +1,9 @@
 import logging
+import django.http
+
 from django.conf import settings
-from django.http import Http404
 from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 
 # from loguru import logger
 import pydantic
@@ -47,7 +49,10 @@ def ninja_validation_errors(request, exc):
     )
 
 @html.exception_handler(pydantic.ValidationError)
-def pydantic_validation_errors(request, exc):
+def pydantic_validation_errors(request, exc: pydantic.ValidationError):
+    """
+    ValidationError raised in a view.
+    """
     if settings.DEBUG:
         logging.exception(exc)
     else:
@@ -65,23 +70,35 @@ def pydantic_validation_errors(request, exc):
 
 
 @html.exception_handler(Exception)
-def exc_error(request, exc):
-    if settings.DEBUG:
+def exc_error(request, exc: Exception):
+    """
+    Exception raised in a view.
+    """
+    if settings.DEBUG and not request.headers.get('X-Alpine-Request') == 'true':
         raise exc
     logging.exception(exc)
     return render(
-        request, "views/http_error.html", {'error': exc}, status=500
+        request,
+        "views/http_error.html",
+        {'error': exc if settings.DEBUG else _('Server error occured')},
+        status=500
     )
 
-@html.exception_handler(Http404)
-def error_404(request, exc):
+@html.exception_handler(django.http.Http404)
+def error_404(request, exc: django.http.Http404):
+    """
+    Http404 raised in a view.
+    """
     logging.exception(exc)
     return render(
         request, "views/http_error.html", {'error': exc}, status=404
     )
 
 @html.exception_handler(ninja.errors.HttpError)
-def http_error(request, exc):
+def http_error(request, exc: ninja.errors.HttpError):
+    """
+    HttpError raised in a view.
+    """
     if settings.DEBUG:
         raise exc
     logging.exception(exc)
