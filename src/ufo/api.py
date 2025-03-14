@@ -33,6 +33,12 @@ html = NinjaAPI(urls_namespace='html')
 
 @html.exception_handler(ninja.errors.ValidationError)
 def ninja_validation_errors(request, exc):
+    """
+    Ninja ValidationError raised in a view.
+
+    ninja.errors.ValidationError has attribure `errors` which is a list of dicts.
+    Unlike pydantic.ValidationError, which has `errors() -> list[dict]` method.
+    """
     if settings.DEBUG:
         logging.exception(exc)
     else:
@@ -51,7 +57,15 @@ def ninja_validation_errors(request, exc):
 @html.exception_handler(pydantic.ValidationError)
 def pydantic_validation_errors(request, exc: pydantic.ValidationError):
     """
-    ValidationError raised in a view.
+    Pydantic ValidationError raised in a view.
+
+    Most of the time we let Ninja validate input data. But for types which ninja doesn't
+    support, (e.g. Json, conlist) we Create Pydantic model and validate it inside a view.
+    For example, see /ufo/views/organizations/id/branches/post_form.py
+    In this case pydantic.ValidationError is raised instead of ninja.errors.ValidationError.
+
+    ninja.errors.ValidationError has attribure `errors` which is a list of dicts.
+    Unlike pydantic.ValidationError, which has `errors() -> list[dict]` method.
     """
     if settings.DEBUG:
         logging.exception(exc)
