@@ -23,7 +23,8 @@ DJANGO_AWS_ACCESS_KEY=13357357257247
 
 
 # Fake sending emails
-#EMAIL_BACKEND=django.core.mail.backends.locmem.EmailBackend
+# EMAIL_BACKEND=django.core.mail.backends.locmem.EmailBackend
+# EMAIL_BACKEND=anymail.backends.test.EmailBackend
 
 # If you use regular smtp server to send emails, uncomment following two lines, and
 # set your EMAIL_HOST_PASSWORD variable.
@@ -44,3 +45,6 @@ ADMIN_EMAIL="someuniquename@gmail.com"
 # Set this to the domain of the server
 #
 #DOMAIN_NAME='uik-info.herokuapp.com'
+
+
+# SENTRY_DSN=https://1234.ingest.us.sentry.io/5678
