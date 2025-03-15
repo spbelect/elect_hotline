@@ -46,7 +46,11 @@
           <button id="button"  class=" btn btn-primary join-item"
             :class="!body.page_unloading || 'animate-pulse cursor-wait'"
             @click="submit()"
-            {{'disabled' if message else ':disabled=email.length==0'}}
+            # if message
+              disabled
+            # else
+              :disabled=!/^[a-zA-Z\-0-9]+@[a-zA-Z\-0-9]+\.[a-zA-Z\-0-9]+$/g.exec(email)
+            # endif
           >
             {{_('Send')}}
           </button>
