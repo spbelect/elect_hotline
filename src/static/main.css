@@ -6573,6 +6573,17 @@ html {
   opacity: 0.5;
 }
 
+input:invalid {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+}
+
+input:invalid:focus,input:invalid:focus-within {
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-er,oklch(var(--er)/var(--tw-border-opacity)));
+  outline-color: var(--fallback-er,oklch(var(--er)/1));
+}
+
 @media (min-width: 640px) {
   .sm\:modal-middle {
     place-items: center;

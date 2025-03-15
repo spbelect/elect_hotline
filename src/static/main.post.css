@@ -1,1 +1,5 @@
-@import "choices.post.css"
+@import "choices.post.css";
+
+input:invalid {
+    @apply input-error;
+}
