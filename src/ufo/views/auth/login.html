@@ -34,14 +34,14 @@
     >
 <!--     <label class="block"> {{_('Sign in with Email')}}</label> -->
 
-      <fieldset class="join" >
-        <input type=email name="email" x-model=email rules="email"
-          class="join-item input input-bordered"
-          {{ 'disabled' if message else '' }}
-          autocomplete="email" placeholder="{{_('Enter email address')}}"
-        />
+      <fieldset>
+        <div class="join" >
+          <input type=email name="email" x-model=email rules="email"
+            class="join-item input input-bordered"
+            {{ 'disabled' if message else '' }}
+            autocomplete="email" placeholder="{{_('Enter email address')}}"
+          />
 
-        <div class="join-item">
           <button id="button"  class=" btn btn-primary join-item"
             :class="!body.page_unloading || 'animate-pulse cursor-wait'"
             @click="submit()"
