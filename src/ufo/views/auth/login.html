@@ -26,9 +26,10 @@
 
   <div class="text-center align-middle">
     <form id=form
+      x-sync
       x-data="{
         email: '',
-        submit() { $ajax('', {method: 'post', target: 'form errors', body: $el, sync: true}) }
+        submit() { $ajax('', {method: 'post', target: 'errors', body: $el, sync: true}) }
       }"
       @submit.prevent
     >
