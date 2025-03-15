@@ -33,6 +33,7 @@ from ..base import MSK, ru, spb, msk
 @pytest.mark.uitest
 @time_machine.travel(datetime(2024, 9, 16, tzinfo=MSK), tick=False)
 def create_organization_scenario__test(live_server, spb, msk, page):
+    """ User creates new organization, confirms that it is visible on the all orgs page. """
 
     # GIVEN existing SPB organization
     spb_org = make(Organization,
@@ -47,7 +48,8 @@ def create_organization_scenario__test(live_server, spb, msk, page):
         page.goto(f'{live_server}/auth/login/signed?auth_user=test@example.com')
 
 
-    ###### Test organizations list region filter
+    ###### On the "All organizations list" page, selecting the region filter should
+    ###### hide organizations from other regions.
 
     # WHEN user opens organizations page
     page.goto(f"{live_server}/organizations")
@@ -66,7 +68,8 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_role("heading", name="SPB organization")).to_have_count(0)
 
 
-    ###### Test create new organization form
+    ###### On the "Create new organization" page, when the form is invalid, error
+    ###### message should be visible.
 
     # WHEN user clicks create button
     page.get_by_role("link", name="Create").click()
@@ -99,7 +102,8 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_text("Москва UIK ranges All")).to_be_visible()
 
 
-    ####### Test uik ranges form
+    ####### On the "UIK ranges" page, multiple ranges form inputs should be validated,
+    ####### and "Save" button should be disabled if any input is invalid.
 
     # WHEN user clicks uik ranges
     page.get_by_text("Москва UIK ranges All").get_by_role("link", name="UIK ranges All").click()
@@ -145,7 +149,8 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_text("Москва UIK ranges 1-10 15-20")).to_be_visible()
 
 
-    ###### Test edit contacts page
+    ###### On the "Edit contacts" page, new contact can be added, and then displayed on
+    ###### the "Edit organization" page.
 
     # WHEN user clicks "Add contact"
     page.get_by_role("link", name="Add contact").click()
@@ -170,7 +175,9 @@ def create_organization_scenario__test(live_server, spb, msk, page):
     # AND Call center contact should be displayed in the list
     expect(page.get_by_role("link", name="Call center")).to_be_visible()
 
-    ####### Test list organizations filter
+
+    ####### On the "All organizations list" page, previuosly created organization should
+    ####### be visible when region filter matches that organization regions.
 
     # WHEN user clicks topleft menu drawer
     page.get_by_role("navigation").get_by_role("button").click()
