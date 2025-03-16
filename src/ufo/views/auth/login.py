@@ -57,6 +57,9 @@ def post_form(request, email: Form[EmailStr]):
     )
     message.send()
 
+    if user := WebsiteUser.objects.filter(email=email).first():
+        user.update(num_login_emails_sent = user.num_login_emails_sent + 1)
+
     return render(request, 'views/auth/login.html', {'message': _('Login link sent')})
 
 
