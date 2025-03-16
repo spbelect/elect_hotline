@@ -24,3 +24,4 @@ settings_vercel.py
 .config_status
 .git0/
 .vercel
+.terraform/
