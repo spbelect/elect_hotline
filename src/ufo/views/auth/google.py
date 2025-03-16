@@ -113,8 +113,10 @@ def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
 
     user, created = WebsiteUser.objects.get_or_create(email=token['email'])
 
-    if created:
-        user.init(request)
+    if not user.last_login:
+        # Copy user preferences from current request session's AnonymousUser to
+        # the WebsiteUser on first login.
+        user.init_from_session(request)
 
     django.contrib.auth.login(request, user)
 

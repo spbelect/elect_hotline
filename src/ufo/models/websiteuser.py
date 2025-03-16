@@ -14,7 +14,7 @@ from django.db.models import (
 )
 from django.utils.functional import cached_property
 from django.utils.timezone import now
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 
 from . import base 
 from .region import Country
@@ -63,9 +63,11 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
 
     update = base.update
     
-    # `password` and `last_login` are defined in AbstractBaseUser 
-    #password = models.CharField(_('password'), max_length=128)
-    #last_login = models.DateTimeField(_('last login'), blank=True, null=True)
+    # NOTE: Following two fields - `password` and `last_login` are inherited from the
+    # base model: django.contrib.auth.base_user.AbstractBaseUser
+    #   password = models.CharField(_('password'), max_length=128)
+    #   last_login = models.DateTimeField(_('last login'), blank=True, null=True)
+
 
     first_name = CharField(_('first name'), max_length=30, blank=True)
     last_name = CharField(_('last name'), max_length=30, blank=True)
@@ -121,6 +123,11 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
     def tz(self):
         return timezone(timedelta(hours=self.utc_offset))
 
+
+    def __init__(self, *a, **kw):
+        super().__init__(*a, **kw)
+        self._previous_last_login = self.last_login
+
     def save(self, **kw):
         if self.country is None:
             self.country = Country.objects.get(id='ru')
@@ -130,10 +137,29 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
 
         super().save(**kw)
         
-        
-    def init(self, request):
+        if self._previous_last_login is None and self.last_login is not None:
+            # This is the first user login. User was previously created likely when
+            # she was invited.
+
+            from .organization import OrgMembership
+            # Update organization memberships from invited to actual role.
+            for membership in OrgMembership.objects.filter(user=self, role='invited'):
+                membership.update(role='operator')
+
+                # Notify org owner about new user joined.
+                membership.organization.creator.unread_notifications.append(
+                    gettext('Пользователь {user.email} присоединился к организации'
+                    ' {org.name}'.format(user=self, org=membership.organization))
+                )
+                membership.organization.creator.save()
+
+                # Delete join request if exist.
+                membership.organization.join_requests.filter(user=self).delete()
+
+
+    def init_from_session(self, request):
         """
-        Triggered from auth view when user is created.
+        Called from auth login view when user is logged in first time.
         """
 
         # Copy settings from session.
@@ -143,20 +169,6 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
             utc_offset=request.user.utc_offset,
             theme=request.user.theme
         )
-
-        # Update organization memberships from invited to actual role.
-        for invitation in self.orgmembership_set.filter(role='invited'):
-            invitation.update(role='operator')
-
-            # Notify org owner about new user joined.
-            invitation.organization.creator.unread_notifications.append(
-                _('Пользователь {user.email} присоединился к организации'
-                  ' {org.name}'.format(user=self, org=invitation.organization))
-            )
-            invitation.organization.creator.save()
-
-            # Delete join request if exist.
-            invitation.organization.join_requests.filter(user=self).delete()
 
 
     def get_full_name(self):
