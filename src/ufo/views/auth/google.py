@@ -12,7 +12,7 @@ import jwt
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from ninja import ModelSchema, Query, Form, Schema
@@ -24,9 +24,10 @@ from ufo.models import WebsiteUser
 
 
 @api.html.get('/auth/google/start')
-def google_start(request):
+def google_start(request) -> HttpResponseRedirect:
     """
-    Step 1: Store secret number in session and redirect user to the google auth page.
+    ### Step 1
+    Store secret number in session and redirect user to the google auth page.
     """
     request.session["google_oauth2_state"] = ''.join(
         secrets.choice(ascii_letters + digits) for i in range(30)
@@ -60,9 +61,10 @@ class AccessCode(Schema):
 
 
 @api.html.get('/auth/google/success')
-def google_callback(request, data: Query[AccessCode]):
+def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
     """
-    Step 2: Oauth2 callback that google redirects to after the user grants access.
+    ### Step 2
+    Oauth2 callback that google redirects to after the user grants access.
     """
     if data.error:
         logging.error(f'{data.error}')
@@ -75,7 +77,8 @@ def google_callback(request, data: Query[AccessCode]):
 
     del request.session["google_oauth2_state"]
 
-    # Step 3: Fetch JWT token which has actual user email and name.
+    ### Step 3
+    # Fetch JWT token which has actual user email and name.
     response = httpx.post('https://oauth2.googleapis.com/token', params={
         "code": data.code,
         "client_id": settings.GOOGLE_OAUTH2_CLIENT_ID,
