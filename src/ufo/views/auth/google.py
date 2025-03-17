@@ -29,7 +29,7 @@ def google_start(request) -> HttpResponseRedirect:
     ### Step 1
     Store secret number in session and redirect user to the google auth page.
     """
-    request.session["google_oauth2_state"] = ''.join(
+    request.session["google_oauth2_state_secret"] = ''.join(
         secrets.choice(ascii_letters + digits) for i in range(30)
     )
 
@@ -42,7 +42,7 @@ def google_start(request) -> HttpResponseRedirect:
             "https://www.googleapis.com/auth/userinfo.profile",
             "openid",
         ]),
-        "state": request.session["google_oauth2_state"],
+        "state": request.session["google_oauth2_state_secret"],
         "access_type": "offline",
         "include_granted_scopes": "true",
         "prompt": "select_account",
@@ -71,11 +71,11 @@ def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
         raise Exception(_('Authentication failed'))
 
     # Check AccessCode.state to be equal to the secret number previously stored at Step 1.
-    if data.state != request.session.get("google_oauth2_state"):
-        logging.error(f'{data.state=} != {request.session.get("google_oauth2_state")}')
+    if data.state != request.session.get("google_oauth2_state_secret"):
+        logging.error(f'{data.state=} != {request.session.get("google_oauth2_state_secret")}')
         raise Exception(_('Authentication failed'))
 
-    del request.session["google_oauth2_state"]
+    del request.session["google_oauth2_state_secret"]
 
     ### Step 3
     # Fetch JWT token which has actual user email and name.
