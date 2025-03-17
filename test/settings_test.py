@@ -10,7 +10,11 @@ from settings import *
 
 RAISE_404 = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+# This setting does nothing. Django test runner overrides email backend
+# So we currently change it only on selected tests with
+# django.test.override_settings() decorator.
+# EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+EMAIL_BACKEND = 'anymail.backends.test.EmailBackend'
 
 #EMAIL_BACKEND = 'eml_email_backend.EmailBackend'
 ##EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
