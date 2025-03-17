@@ -70,3 +70,20 @@ def email_login_success__test(client: django.test.Client, ru):
 
     # AND user email is user@example.com
     assert user.email == 'user@example.com'
+
+    # AND django_emails_sent_total prometheus counter is updated
+    metrics = dict(x.split()
+        for x in client.get('/metrics').content.decode().split('\n')
+        if x and not x.startswith('#')
+    )
+
+    assert metrics['django_emails_sent_total{destination="user@example.com"}'] == '1.0'
+    assert 'django_emails_sent_created{destination="user@example.com"}' in metrics
+
+
+    # from prometheus_client.parser import text_string_to_metric_families
+    # response = client.get('/metrics').content.decode()
+    # metrics{x.name: x for x in text_string_to_metric_families(response)}
+
+    # assert metrics['django_emails_sent'].samples[0].value == 1.0
+
