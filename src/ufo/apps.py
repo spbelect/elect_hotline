@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.apps import AppConfig
+from django.apps import apps, AppConfig
 from django.conf import settings
 from django.core import checks
 from django.core.mail import EmailMessage
@@ -41,6 +41,6 @@ class UfoConfig(AppConfig):
     name = 'ufo'
     default_auto_field = 'django.db.models.AutoField'
 
-    #def ready(self):
-        #from .models import Answer
-        
+    def ready(self):
+        # from .models import Answer
+        from . import signals
