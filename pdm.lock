@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:24fc85a9e1b3dbbd2a960c28ea31085c2ea4e825e09f4042e455d55a5a367610"
+content_hash = "sha256:49c1f64d39bb0e3e26975a152cc911f4b639198dea8bb55eca0d5a3bc2991436"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -29,7 +29,7 @@ name = "anyio"
 version = "4.8.0"
 requires_python = ">=3.9"
 summary = "High level compatibility layer for multiple asynchronous event loop implementations"
-groups = ["default"]
+groups = ["default", "test"]
 dependencies = [
     "exceptiongroup>=1.0.2; python_version < \"3.11\"",
     "idna>=2.8",
@@ -852,7 +852,7 @@ name = "h11"
 version = "0.14.0"
 requires_python = ">=3.7"
 summary = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
-groups = ["default"]
+groups = ["default", "test"]
 dependencies = [
     "typing-extensions; python_version < \"3.8\"",
 ]
@@ -866,7 +866,7 @@ name = "httpcore"
 version = "1.0.7"
 requires_python = ">=3.8"
 summary = "A minimal low-level HTTP client."
-groups = ["default"]
+groups = ["default", "test"]
 dependencies = [
     "certifi",
     "h11<0.15,>=0.13",
@@ -912,7 +912,7 @@ name = "httpx"
 version = "0.28.1"
 requires_python = ">=3.8"
 summary = "The next generation HTTP client."
-groups = ["default"]
+groups = ["default", "test"]
 dependencies = [
     "anyio",
     "certifi",
@@ -1812,6 +1812,20 @@ files = [
 ]
 
 [[package]]
+name = "respx"
+version = "0.22.0"
+requires_python = ">=3.8"
+summary = "A utility for mocking out the Python HTTPX and HTTP Core libraries."
+groups = ["test"]
+dependencies = [
+    "httpx>=0.25.0",
+]
+files = [
+    {file = "respx-0.22.0-py2.py3-none-any.whl", hash = "sha256:631128d4c9aba15e56903fb5f66fb1eff412ce28dd387ca3a81339e52dbd3ad0"},
+    {file = "respx-0.22.0.tar.gz", hash = "sha256:3c8924caa2a50bd71aefc07aa812f2466ff489f1848c96e954a5362d17095d91"},
+]
+
+[[package]]
 name = "rich"
 version = "13.9.4"
 requires_python = ">=3.8.0"
@@ -1893,7 +1907,7 @@ name = "sniffio"
 version = "1.3.1"
 requires_python = ">=3.7"
 summary = "Sniff out which async library your code is running under"
-groups = ["default"]
+groups = ["default", "test"]
 files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
@@ -2048,7 +2062,7 @@ name = "typing-extensions"
 version = "4.12.2"
 requires_python = ">=3.8"
 summary = "Backported and Experimental Type Hints for Python 3.8+"
-groups = ["default", "debug", "uitest"]
+groups = ["default", "debug", "test", "uitest"]
 files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},

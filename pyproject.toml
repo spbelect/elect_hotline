@@ -94,6 +94,11 @@ uitest = [
 # distribution = true
 
 [dependency-groups]
+
+# freezegun does not work well with pydantc
+# https://github.com/spulec/freezegun/issues/551
+# TODO: migrate to time-machine
+
 test = [
     "pytest>=8.3.2",
     "beautifulsoup4",
@@ -105,13 +110,9 @@ test = [
     "responses==0.10.12",
     "model-bakery>=1.19.5",
     "pytest-xdist>=3.6.1",
-
-    # freezegun does not work well with pydantc
-    # https://github.com/spulec/freezegun/issues/551
     "freezegun>=1.5.1",
-
-    # TODO: use instead of freezegun in tests
     "time-machine>=2.16.0",
+    "respx>=0.22.0",
 ]
 translate = [
     "Babel>=2.16.0",
