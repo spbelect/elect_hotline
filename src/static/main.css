@@ -5764,6 +5764,19 @@ html {
   row-gap: 1rem;
 }
 
+.gap-x-1 {
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
+}
+
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+
+.gap-y-2 {
+  row-gap: 0.5rem;
+}
+
 .overflow-auto {
   overflow: auto;
 }
@@ -6603,6 +6616,132 @@ input:invalid:focus,input:invalid:focus-within {
   }
 }
 
+@media (min-width: 768px) {
+  .md\:join {
+    display: inline-flex;
+    align-items: stretch;
+    border-radius: var(--rounded-btn, 0.5rem);
+  }
+
+  .md\:join :where(.join-item) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+  }
+
+  .md\:join .join-item:not(:first-child):not(:last-child),.md\:join *:not(:first-child):not(:last-child) .join-item {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+  }
+
+  .md\:join .join-item:first-child:not(:last-child),.md\:join *:first-child:not(:last-child) .join-item {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .md\:join .dropdown .join-item:first-child:not(:last-child),.md\:join *:first-child:not(:last-child) .dropdown .join-item {
+    border-start-end-radius: inherit;
+    border-end-end-radius: inherit;
+  }
+
+  .md\:join :where(.join-item:first-child:not(:last-child)),.md\:join :where(*:first-child:not(:last-child) .join-item) {
+    border-end-start-radius: inherit;
+    border-start-start-radius: inherit;
+  }
+
+  .md\:join .join-item:last-child:not(:first-child),.md\:join *:last-child:not(:first-child) .join-item {
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+  }
+
+  .md\:join :where(.join-item:last-child:not(:first-child)),.md\:join :where(*:last-child:not(:first-child) .join-item) {
+    border-start-end-radius: inherit;
+    border-end-end-radius: inherit;
+  }
+
+  @supports not selector(:has(*)) {
+    :where(.md\:join *) {
+      border-radius: inherit;
+    }
+  }
+
+  @supports selector(:has(*)) {
+    :where(.md\:join *:has(.join-item)) {
+      border-radius: inherit;
+    }
+  }
+
+  .md\:join > :where(*:not(:first-child)) {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-inline-start: -1px;
+  }
+
+  .md\:join > :where(*:not(:first-child)):is(.btn) {
+    margin-inline-start: calc(var(--border-btn) * -1);
+  }
+
+  .md\:join.join-vertical {
+    flex-direction: column;
+  }
+
+  .md\:join.join-vertical .join-item:first-child:not(:last-child),.md\:join.join-vertical *:first-child:not(:last-child) .join-item {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+    border-start-start-radius: inherit;
+    border-start-end-radius: inherit;
+  }
+
+  .md\:join.join-vertical .join-item:last-child:not(:first-child),.md\:join.join-vertical *:last-child:not(:first-child) .join-item {
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+    border-end-start-radius: inherit;
+    border-end-end-radius: inherit;
+  }
+
+  .md\:join.join-horizontal {
+    flex-direction: row;
+  }
+
+  .md\:join.join-horizontal .join-item:first-child:not(:last-child),.md\:join.join-horizontal *:first-child:not(:last-child) .join-item {
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
+    border-end-start-radius: inherit;
+    border-start-start-radius: inherit;
+  }
+
+  .md\:join.join-horizontal .join-item:last-child:not(:first-child),.md\:join.join-horizontal *:last-child:not(:first-child) .join-item {
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+    border-end-end-radius: inherit;
+    border-start-end-radius: inherit;
+  }
+
+  .md\:join.join-vertical > :where(*:not(:first-child)) {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: -1px;
+  }
+
+  .md\:join.join-vertical > :where(*:not(:first-child)):is(.btn) {
+    margin-top: calc(var(--border-btn) * -1);
+  }
+
+  .md\:join.join-horizontal > :where(*:not(:first-child)) {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-inline-start: -1px;
+  }
+
+  .md\:join.join-horizontal > :where(*:not(:first-child)):is(.btn) {
+    margin-inline-start: calc(var(--border-btn) * -1);
+    margin-top: 0px;
+  }
+}
+
 .hover\:bg-primary:hover {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity, 1)));
@@ -6644,6 +6783,14 @@ input:invalid:focus,input:invalid:focus-within {
 
   .md\:max-w-md {
     max-width: 28rem;
+  }
+
+  .md\:max-w-sm {
+    max-width: 24rem;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:flex-nowrap {
