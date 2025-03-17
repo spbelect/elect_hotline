@@ -37,10 +37,12 @@
 
       <fieldset>
         <div class="join" >
-          <input type=email name="email" x-model=email rules="email"
+          <input type=email name="email" x-model=email rules="email" x-ref=email
             class="join-item input input-bordered"
             {{ 'disabled' if message else '' }}
-            autocomplete="email" placeholder="{{_('Enter email address')}}"
+            autocomplete="email"
+            placeholder="{{_('Enter email address')}}"
+            pattern='[a-zA-Z\-0-9]+@[a-zA-Z\-0-9]+\.[a-zA-Z\-0-9]+'
           />
 
           <button id="button"  class=" btn btn-primary join-item"
@@ -49,7 +51,7 @@
             # if message
               disabled
             # else
-              :disabled=!/^[a-zA-Z\-0-9]+@[a-zA-Z\-0-9]+\.[a-zA-Z\-0-9]+$/g.exec(email)
+              :disabled="!RegExp($refs.email.pattern).exec(email)"
             # endif
           >
             {{_('Send')}}
