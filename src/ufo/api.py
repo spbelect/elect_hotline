@@ -32,6 +32,7 @@ v4 = NinjaAPI(
 # api = NinjaAPI(renderer=TemplateRenderer())
 html = NinjaAPI(urls_namespace='html')
 
+
 @html.exception_handler(ninja.errors.ValidationError)
 def ninja_validation_errors(request, exc):
     """
@@ -54,6 +55,7 @@ def ninja_validation_errors(request, exc):
             ]
         }, status=422
     )
+
 
 @html.exception_handler(pydantic.ValidationError)
 def pydantic_validation_errors(request, exc: pydantic.ValidationError):
@@ -101,6 +103,7 @@ def exc_error(request, exc: Exception):
         status=500
     )
 
+
 @html.exception_handler(django.http.Http404)
 def error_404(request, exc: django.http.Http404):
     """
@@ -110,6 +113,7 @@ def error_404(request, exc: django.http.Http404):
     return render(
         request, "views/http_error.html", {'error': exc}, status=404
     )
+
 
 @html.exception_handler(ninja.errors.HttpError)
 def http_error(request, exc: ninja.errors.HttpError):
