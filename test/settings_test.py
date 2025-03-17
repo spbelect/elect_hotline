@@ -52,3 +52,6 @@ CACHES = {
     #}
 }
 
+
+GOOGLE_OAUTH2_CLIENT_ID = 'test_google_oauth_client_id'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'test_google_oauth_client_secret'
