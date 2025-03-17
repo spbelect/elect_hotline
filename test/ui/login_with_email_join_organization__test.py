@@ -130,6 +130,9 @@ def login_with_email_join_organization_scenario__test(live_server, spb, msk, pag
         ]
     )
 
+    # AND WebsiteUser.num_login_emails_sent should be incremented by 1
+    assert WebsiteUser.objects.get(email='user@example.com').num_login_emails_sent == 1
+
     # AND organization creator should receive new member join notification
     assert (
         WebsiteUser.objects.get(id=spb_org.creator_id).unread_notifications
