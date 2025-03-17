@@ -246,7 +246,7 @@ class WebsiteUser_Admin(UserAdmin):
     ordering = ('email',)
 
     search_fields = ('first_name', 'last_name', 'email')
-    list_display = ('email', 'date_joined', 'last_login')
+    list_display = ('email', 'date_joined', 'last_login', 'num_login_emails_sent')
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -259,7 +259,7 @@ class WebsiteUser_Admin(UserAdmin):
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-        (None, {'fields': ('unread_notifications', 'utc_offset',)}),
+        (None, {'fields': ('unread_notifications', 'utc_offset', 'num_login_emails_sent')}),
     )
 
     inlines = [
