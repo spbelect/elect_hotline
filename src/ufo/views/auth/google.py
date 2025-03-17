@@ -29,8 +29,9 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from ninja import ModelSchema, Query, Form, Schema
+from ninja.errors import HttpError
 from pydantic import UUID4, BaseModel, EmailStr
 
 from ufo import api
@@ -92,49 +93,54 @@ def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
     """
     if data.error:
         logging.error(f'{data.error}')
-        raise Exception(_('Authentication failed'))
+        raise HttpError(401, _("Authentication failed"))
 
     # Check AccessCode.state to be equal to the secret number previously stored at Step 1.
     if data.state != request.session.get("google_oauth2_state_secret"):
         logging.error(f'{data.state=} != {request.session.get("google_oauth2_state_secret")}')
-        raise Exception(_('Authentication failed'))
+        raise HttpError(401, _('Authentication failed'))
 
     del request.session["google_oauth2_state_secret"]
 
     #### Step 3 ###
 
-    # Fetch JWT token which has actual user email and name.
-    response = httpx.post('https://oauth2.googleapis.com/token', params={
-        "code": data.code,
-        "client_id": settings.GOOGLE_OAUTH2_CLIENT_ID,
-        "client_secret": settings.GOOGLE_OAUTH2_CLIENT_SECRET,
-        "redirect_uri": f'{request.build_absolute_uri("/auth/google/success")}',
-        "grant_type": "authorization_code",
-    })
+    try:
+        # Fetch JWT token which has actual user email and name.
+        response = httpx.post('https://oauth2.googleapis.com/token', params={
+            "code": data.code,
+            "client_id": settings.GOOGLE_OAUTH2_CLIENT_ID,
+            "client_secret": settings.GOOGLE_OAUTH2_CLIENT_SECRET,
+            "redirect_uri": f'{request.build_absolute_uri("/auth/google/success")}',
+            "grant_type": "authorization_code",
+        })
 
-    if not response.is_success:
-        raise Exception(_("Failed to obtain access token from Google."))
+        if not response.is_success:
+            raise Exception(_("Failed to obtain access token from Google."))
 
-    id_token = response.json()["id_token"]
+        id_token = response.json()["id_token"]
 
-    token = jwt.decode(jwt=id_token, options={"verify_signature": False})
+        token = jwt.decode(jwt=id_token, options={"verify_signature": False})
 
-    # JWT joken sample
-    # {
-    #     'iss': 'https://accounts.google.com',
-    #     'azp': '123456-1h6j26k46k36k6.apps.googleusercontent.com',
-    #     'aud': '97934603-h36j37k8j2k.apps.googleusercontent.com',
-    #     'sub': '12334567890',
-    #     'email': 'john@gmail.com',
-    #     'email_verified': True,
-    #     'at_hash': 'D7mk4jhklglt-63',
-    #     'name': 'John Doe',
-    #     'picture': 'https://lh3.googleusercontent.com/a/HKJ35k_52Jfh=s96-c',
-    #     'given_name': 'John',
-    #     'family_name': 'Doe',
-    #     'iat': 1730758614,
-    #     'exp': 1730762214
-    # }
+        # JWT joken sample
+        # {
+        #     'iss': 'https://accounts.google.com',
+        #     'azp': '123456-1h6j26k46k36k6.apps.googleusercontent.com',
+        #     'aud': '97934603-h36j37k8j2k.apps.googleusercontent.com',
+        #     'sub': '12334567890',
+        #     'email': 'john@gmail.com',
+        #     'email_verified': True,
+        #     'at_hash': 'D7mk4jhklglt-63',
+        #     'name': 'John Doe',
+        #     'picture': 'https://lh3.googleusercontent.com/a/HKJ35k_52Jfh=s96-c',
+        #     'given_name': 'John',
+        #     'family_name': 'Doe',
+        #     'iat': 1730758614,
+        #     'exp': 1730762214
+        # }
+
+    except Exception as err:
+        raise HttpError(401, _('Authentication failed')) from err
+
 
     user, created = WebsiteUser.objects.get_or_create(email=token['email'])
 
