@@ -1,3 +1,18 @@
+"""
+OAUTH2 flow:
+1. User clicks "Sign in" link which sends
+    GET /auth/google/start
+    Backend generates and stores session secret num and redirects to external auth page
+    GET https://accounts.google.com/o/oauth2/auth
+
+2. Google auth page redirects to
+    GET /auth/google/success?code={code}&state={secret}&error={error}
+    Backend checks secret and errors query parameers
+
+3. Backend fetches JWT token via sending POST request to
+    POST https://oauth2.googleapis.com/token?code={code}&client_id={client_id}&...
+    Backend logs in WebsiteUser wich has email equal to token['email']
+"""
 import secrets
 from datetime import datetime
 from string import ascii_letters, digits
@@ -22,48 +37,57 @@ from ufo import api
 from ufo.models import WebsiteUser
 
 
-
 @api.html.get('/auth/google/start')
 def google_start(request) -> HttpResponseRedirect:
     """
-    ### Step 1
-    Store secret number in session and redirect user to the google auth page.
+    ### Step 1 ###
+
+    Store secret number in request.session on the server, and redirect user to
+    the google account authentication page.
     """
     request.session["google_oauth2_state_secret"] = ''.join(
         secrets.choice(ascii_letters + digits) for i in range(30)
     )
 
-    params = {
-        "response_type": "code",
-        "client_id": settings.GOOGLE_OAUTH2_CLIENT_ID,
-        "redirect_uri": f'{request.build_absolute_uri("/auth/google/success")}',
-        "scope": " ".join([
-            "https://www.googleapis.com/auth/userinfo.email",
-            "https://www.googleapis.com/auth/userinfo.profile",
-            "openid",
-        ]),
-        "state": request.session["google_oauth2_state_secret"],
-        "access_type": "offline",
-        "include_granted_scopes": "true",
-        "prompt": "select_account",
-    }
-
-    return redirect(f"https://accounts.google.com/o/oauth2/auth?{urlencode(params)}")
+    return redirect("https://accounts.google.com/o/oauth2/auth?{params}".format(
+        params = urlencode({
+            "response_type": "code",
+            "client_id": settings.GOOGLE_OAUTH2_CLIENT_ID,
+            "redirect_uri": f'{request.build_absolute_uri("/auth/google/success")}',
+            "scope": " ".join([
+                "https://www.googleapis.com/auth/userinfo.email",
+                "https://www.googleapis.com/auth/userinfo.profile",
+                "openid",
+            ]),
+            "state": request.session["google_oauth2_state_secret"],
+            "access_type": "offline",
+            "include_granted_scopes": "true",
+            "prompt": "select_account",
+        })
+    ))
 
 
 class AccessCode(Schema):
     """
-    Structure returned by google to Step 2: google_callback()
+    Parameters returned by google to Step 2 in GET request query to google_callback():
+    /auth/google/success?code=..&state=..&error=...
     """
-    code: str | None = None  # Must be exchanged for JWT token at Step 2
-    state: str | None = None  # Secret number stored in session at Step 1
+    # Code that must be provided in a POST request to fetch JWT token at Step 3.
+    code: str | None = None
+
+    # State parameter is a string which must be checked to match the secret number stored
+    # previously in the user session at Step 1.
+    state: str | None = None
+
+    # Any error occured during user authentication on google side.
     error: str | None = None
 
 
 @api.html.get('/auth/google/success')
 def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
     """
-    ### Step 2
+    ### Step 2 ###
+
     Oauth2 callback that google redirects to after the user grants access.
     """
     if data.error:
@@ -77,7 +101,8 @@ def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
 
     del request.session["google_oauth2_state_secret"]
 
-    ### Step 3
+    #### Step 3 ###
+
     # Fetch JWT token which has actual user email and name.
     response = httpx.post('https://oauth2.googleapis.com/token', params={
         "code": data.code,
