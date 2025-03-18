@@ -36,7 +36,7 @@
 <!--     <label class="block"> {{_('Sign in with Email')}}</label> -->
 
       <fieldset>
-        <div class="flex flex-col md:flex-row gap-y-2 md:join" >
+        <div class="flex flex-col md:flex-row gap-y-2 md:join w-full" >
           <input type=email name="email" x-model=email rules="email" x-ref=email
             class="input input-bordered join-item text-center md:text-left"
             {{ 'disabled' if message else '' }}
@@ -45,7 +45,7 @@
             pattern='[a-zA-Z\-0-9]+@[a-zA-Z\-0-9]+\.[a-zA-Z\-0-9]+'
           />
 
-          <button id="button"  class=" btn btn-primary join-item"
+          <button id="button"  class="grow btn btn-primary join-item"
             :class="!body.page_unloading || 'animate-pulse cursor-wait'"
             @click="submit()"
             # if message
