@@ -48,3 +48,7 @@ ADMIN_EMAIL="someuniquename@gmail.com"
 
 
 # SENTRY_DSN=https://1234.ingest.us.sentry.io/5678
+
+
+## Cookies only sent under HTTPS
+# SESSION_COOKIE_SECURE=True

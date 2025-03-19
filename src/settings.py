@@ -119,6 +119,14 @@ else:
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# SECURE_SSL_REDIRECT instructs SecurityMiddleware to issue 301 Permanent
+# Redirect. Permanent redirects are cached in the browser, which might
+# complicate debugging and initial configuration of https.
+# SECURE_SSL_REDIRECT = False
+
+# Cookies only sent under HTTPS
+SESSION_COOKIE_SECURE = env('SESSION_COOKIE_SECURE', default=not DEBUG)
+
 
 MIDDLEWARE = [
     'django_prometheus.middleware.PrometheusBeforeMiddleware',
