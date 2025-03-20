@@ -50,11 +50,13 @@
   >
 
       <fieldset class="col-span-2 md:col-span-1 text-center md:text-right align-middle">
-        <label class="inline-block w-4">
+        <label class="inline-block w-4" for=start-date>
           {{_('from')}}
         </label>
 
-        <input type="date" class="input" x-model="query.date__gt" @change.stop @blur="submit()">
+        <input type="date" class="input" x-model="query.date__gt" id="start-date"
+            @change.stop @blur="submit()"
+        >
 
         <select name="time__gt" class="select" x-model="query.time__gt">
           # for hour in range(24)
@@ -67,11 +69,13 @@
 
 
       <fieldset class="col-span-2 md:col-span-1 text-center md:text-left align-middle">
-        <label class="inline-block w-4">
+        <label class="inline-block w-4" for=end-date>
           {{_('to')}}
         </label>
 
-        <input class="input" type="date" x-model="query.date__lt" @change.stop @blur="submit()">
+        <input class="input" type="date" x-model="query.date__lt" id="end-date"
+          @change.stop @blur="submit()"
+        >
 
         <select name="time__lt" class="select" value="{{filters.time__lt}}">
           # for hour in range(24)
