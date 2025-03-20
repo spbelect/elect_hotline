@@ -1,5 +1,5 @@
 from datetime import datetime, date, time, timezone, timedelta
-from typing import Literal, Any, Optional
+from typing import Literal, Any, Optional, Annotated
 from collections.abc import Iterator
 import csv
 
@@ -13,10 +13,10 @@ from django.http import HttpResponse
 from django.http import StreamingHttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.translation import gettext as _
-from ninja import FilterSchema, Field, Query, Header
+from ninja import FilterSchema, Query, Header
 from ninja.errors import HttpError
 from pendulum import now
-from pydantic import UUID4, BaseModel, field_validator, computed_field
+from pydantic import UUID4, BaseModel, field_validator, computed_field, Field
 from pydantic import conint, conlist, constr, Json
 
 from ufo import api
@@ -41,11 +41,18 @@ class Filters(FilterSchema):
     <Q: (AND: )>
     """
 
-    date__gt: date | Literal["null", ""] | None = Field(None, q=Exclude())
-    time__gt: time | Literal["null", ""] | None = Field(time(0,0), q=Exclude())
+    date__gt: Annotated[date | Literal["null", ""] | None, Field(None, q=Exclude())]
+    time__gt: Annotated[time | Literal["null", ""] | None, Field(time(0,0), q=Exclude())]
 
-    date__lt: date | Literal["null", ""] | None = Field(None, q=Exclude())
-    time__lt: time | Literal["null", ""] | None = Field(time(0,0), q=Exclude())
+    date__lt: Annotated[date | Literal["null", ""] | None, Field(None, q=Exclude())]
+    time__lt: Annotated[time | Literal["null", ""] | None, Field(time(0,0), q=Exclude())]
+
+    @field_validator('date__gt', 'date__lt', mode='after')
+    @classmethod
+    def minmax_date(cls, value: str) -> str:
+        if value and value < date(1970, 1, 1):
+            raise ValueError('Date must be greater than 1970-01-01')
+        return value
 
     def __call__(self, request):
         q = self._connect_fields()
@@ -96,7 +103,7 @@ class Filters(FilterSchema):
             return Q(revoked=False)
         return Q()
 
-    @field_validator('*')
+    @field_validator('*', mode='before')
     def coerce_none(cls, v):
         """
         Treat region_id=["null"] in url query as None. So that field does not appear in

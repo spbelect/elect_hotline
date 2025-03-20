@@ -55,6 +55,7 @@
         </label>
 
         <input type="date" class="input" x-model="query.date__gt" id="start-date"
+            name="date__gt"
             @change.stop @blur="submit()"
         >
 
@@ -74,6 +75,7 @@
         </label>
 
         <input class="input" type="date" x-model="query.date__lt" id="end-date"
+          name="date__lt"
           @change.stop @blur="submit()"
         >
 
@@ -165,7 +167,7 @@
   </form>
   
 
-  <div id="total" x-sync x-show="!waiting" class="px-2 lg:px-4 py-2" >
+  <div id="total" x-sync x-show="!waiting" class="px-2 text-center lg:px-4 py-2" >
     # if page.paginator.count
 
       <span class="text-content">
