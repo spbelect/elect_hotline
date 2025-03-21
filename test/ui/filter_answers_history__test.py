@@ -157,6 +157,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     expect(page.locator("time").filter(has_text="16 Sep 2024, 00:01")).to_be_visible()
     expect(page.locator("time").filter(has_text="04 Apr 2016, 00:01")).to_be_visible()
 
+
     ######
     # WHEN user clicks filter "complaint: yes"
     page.get_by_label("Complaint Filter").get_by_label("Yes").click()
@@ -167,6 +168,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     expect(page.get_by_text("Санкт-Петербург UIK 803")).to_be_visible()
     expect(page.get_by_text("Москва UIK 7")).to_be_visible()
     expect(page.get_by_text("Санкт-Петербург UIK 9004")).to_be_visible()
+
 
     #######
     # WHEN user clicks filter "Include revoked"
@@ -179,6 +181,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     # AND two other which have complaint but are revoked are hidden
     expect(page.get_by_text("Санкт-Петербург UIK 803")).to_have_count(0)
     expect(page.get_by_text("Санкт-Петербург UIK 9004")).to_have_count(0)
+
 
     ########
     # WHEN user clicks regions filter
@@ -194,3 +197,31 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
     # AND two other which have complaint but are revoked are hidden
     expect(page.get_by_text("Санкт-Петербург UIK 803")).to_have_count(0)
     expect(page.get_by_text("Санкт-Петербург UIK 9004")).to_have_count(0)
+
+
+    #####
+    # WHEN user resets history filter
+    page.goto(f"{live_server}/history")
+
+    # WHEN user fills invalid date input
+    page.get_by_label("from").fill('0001-01-01')
+
+    # AND defocus date input
+    page.get_by_label("from").blur()
+
+    # THEN validation error should be visible
+    expect(page.get_by_label("date__gt validation error")).to_be_visible()
+
+    # WHEN user fills valid date input
+    page.get_by_label("from").fill('2024-09-15')
+
+    # AND defocus date input
+    page.get_by_label("from").blur()
+
+    # THEN 3 newest answers should be visible
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:03")).to_be_visible()
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:02")).to_be_visible()
+    expect(page.locator("time").filter(has_text="16 Sep 2024, 00:01")).to_be_visible()
+
+    # AND one old answer is hidden
+    expect(page.locator("time").filter(has_text="04 Apr 2016, 00:01")).to_have_count(0)
