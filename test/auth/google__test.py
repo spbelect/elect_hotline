@@ -89,8 +89,8 @@ def google_login_success__test(client: django.test.Client, ru, respx_mock):
     # THEN response satatus code should be 301 redirect
     assert response.status_code == 302
 
-    # AND it should redirect to /history
-    assert response.url == '/history'
+    # AND it should redirect to /answers/history
+    assert response.url == '/answers/history'
 
     user = django.contrib.auth.get_user(client)
 

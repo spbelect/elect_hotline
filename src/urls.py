@@ -21,12 +21,10 @@ import ufo.mobile_api_v4.region.get_organizations
 import ufo.mobile_api_v4.answers
 
 # Ninja html views
-import ufo.views.account
+import ufo.views.answers.history
 import ufo.views.auth.login
 import ufo.views.auth.logout
 import ufo.views.auth.google
-import ufo.views.home
-import ufo.views.history
 import ufo.views.organizations.id.show_form
 import ufo.views.organizations.id.contacts.show_form
 import ufo.views.organizations.id.contacts.id.post
@@ -36,6 +34,8 @@ import ufo.views.organizations.id.branches.show_form
 import ufo.views.organizations.id.branches.post_form
 import ufo.views.organizations.id.join_applications
 import ufo.views.organizations.list
+import ufo.views.account
+import ufo.views.home
 
 from ufo import mobile_api_v3 as apiv3
 

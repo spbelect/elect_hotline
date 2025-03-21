@@ -194,7 +194,7 @@ def filter_history_scenario__test(spb, msk, live_server, page):
 
     ######
     # WHEN user opens answers history
-    page.goto(f"{live_server}/history/")
+    page.goto(f"{live_server}/answers/history/")
 
     # THEN all 4 answers should be visible
     expect(page.get_by_text("Санкт-Петербург УИК 14")).to_be_visible()

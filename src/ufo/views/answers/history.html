@@ -175,7 +175,7 @@
       </span>
 
       # if user.is_authenticated
-        <a href="/history/export-csv?{{request.GET.urlencode()}}" class="text-info ml-2"
+        <a href="/answers/history/export-csv?{{request.GET.urlencode()}}" class="text-info ml-2"
           @click.stop   ## Prevent body.page_unloading animation
         >
           {{_('Download')}} csv

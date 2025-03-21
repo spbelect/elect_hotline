@@ -149,7 +149,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
 
     ######
     # WHEN user opens answers history
-    page.goto(f"{live_server}/history")
+    page.goto(f"{live_server}/answers/history")
 
     # THEN All answers should be visible
     expect(page.locator("time").filter(has_text="16 Sep 2024, 00:03")).to_be_visible()
@@ -201,7 +201,7 @@ def filter_history_new_scenario__test(live_server, spb, msk, page):
 
     #####
     # WHEN user resets history filter
-    page.goto(f"{live_server}/history")
+    page.goto(f"{live_server}/answers/history")
 
     # WHEN user fills invalid date input
     page.get_by_label("from").fill('0001-01-01')

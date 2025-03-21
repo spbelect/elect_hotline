@@ -151,5 +151,5 @@ def google_callback(request, data: Query[AccessCode]) -> HttpResponseRedirect:
 
     django.contrib.auth.login(request, user)
 
-    return redirect('/history')
+    return redirect('/answers/history')
 

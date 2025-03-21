@@ -112,10 +112,10 @@ class Filters(FilterSchema):
         return None if v in ('null', ['null'], [], '') else v
 
 
-@api.html.get('/history')
+@api.html.get('/answers/history')
 def answers_history(request, filters: Query[Filters], page: Header[int] = 1):
     paginator = Paginator(filters(request), per_page=10)
-    return render(request, 'views/history.html', dict(
+    return render(request, 'views/answers/history.html', dict(
         page = paginator.get_page(page),
         filters = filters,
         regions = request.user.country.regions.annotate(num_answers=Count('answer'))
@@ -128,7 +128,7 @@ class DummyStreamWriter():
         return row   # Will be consequently returned by writer.writerow()
 
 
-@api.html.get('/history/export-csv')
+@api.html.get('/answers/history/export-csv')
 def export_csv(request, filters: Query[Filters]):
     if not request.user.is_active:
         # Unauthorized
