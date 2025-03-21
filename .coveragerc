@@ -1,0 +1,7 @@
+# this file does not seem to affect anything
+[run]
+omit = *.py
+debug = config
+
+[report]
+omit = *.py
