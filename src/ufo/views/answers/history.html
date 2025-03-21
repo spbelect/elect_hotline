@@ -199,7 +199,7 @@
   <div id='list_replace' x-merge="replace" class="px-2 lg:px-4 text-center" >
     <ul id='list_append' x-merge="append">
       # for answer in page
-          {% include "views/_answer.html" %}
+          {% include "views/answers/_answer.html" %}
       # endfor
 
       # if page|length and not page.has_next()
