@@ -27,9 +27,11 @@
     Operates in Russia, Kazakhstan, Ukraine, Belarus.">
     <meta name="viewport" content="width=device-width" />
     
-    <link rel="icon" type="image/webp" href="/static/favicon.webp" />
+    <link rel="icon" type="image/webp" href="/static/icons/favicon.webp" />
 
-<!--     <link rel="stylesheet" type="text/css" href="/static/ufo/base.css" /> -->
+    ## PWA manifest
+    <link rel="manifest" href="/static/manifest.json" />
+
     {% if LANGUAGE_BIDI %}
       <link rel="stylesheet" type="text/css" href="{{ static('admin/css/rtl.css') }}" />
     {% endif %}

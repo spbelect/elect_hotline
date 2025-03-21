@@ -1,0 +1,17 @@
+{
+    "name": "Election Hotline",
+    "icons": [
+        {
+            "src": "icons/favicon-512.webp",
+            "type": "image/webp",
+            "sizes": "512x512"
+        },
+        {
+            "src": "icons/favicon-192.webp",
+            "type": "image/webp",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+}
