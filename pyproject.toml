@@ -64,18 +64,23 @@ build-backend = "pdm.backend"
 _.working_dir = "src"
 _.env_file = "env-local"
 
+### Tests
 uitest.cmd = "pytest -s -m uitest --headed --tracing retain-on-failure  --verbose"
 uitest.working_dir = "."
 
 test.cmd = "pytest -s -m 'not uitest' --doctest-modules -n auto --verbose"
 test.working_dir = "."
 
+### CSS
 makecss = "npx tailwindcss -i ./static/main.post.css -o ./static/main.css"
 
-# localization
+### Localization
 pre_makemessages = "pybabel extract -F locale/babel.cfg -o ./locale/django.pot ./"
 makemessages = "pybabel update -l ru -d locale/ -i locale/django.pot --domain django"
 compilemessages = "pybabel compile -d locale/ --domain django"
+
+### Run
+asgi = "uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml"
 
 [tool.pdm.dev-dependencies]
 translate = [
