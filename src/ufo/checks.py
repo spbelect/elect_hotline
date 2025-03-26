@@ -34,3 +34,22 @@ def email_check(app_configs, **kwargs):
         ))
     return messages
 
+
+
+@checks.register('settings')
+def debug_check(app_configs, **kwargs):
+    messages = []
+
+    if settings.DEBUG:
+        messages.append(checks.Warning(
+            f'settings.DEBUG is True',
+            id="Ufo.debug.W001"
+        ))
+
+    if 'debug_toolbar.middleware.DebugToolbarMiddleware' in settings.MIDDLEWARE:
+        messages.append(checks.Warning(
+            f'DEBUG_TOOLBAR is enabled',
+            id="Ufo.debug.W002"
+        ))
+
+    return messages
