@@ -4,18 +4,15 @@ from datetime import datetime, timedelta, date, timezone
 # from gettext import GNUTranslations
 
 import django
-from django.apps import apps
+
 from django.conf import settings
 from django.contrib.messages.constants import DEFAULT_LEVELS
 from django.contrib.messages.api import get_messages
-from django.contrib.humanize.templatetags import humanize
 from django.core.checks import register, Tags
 from django.db.models import Max, Q
 # from django.shortcuts import render
-from django.templatetags.static import static
 from django.urls import reverse
 from django.utils import translation
-from jinja2 import Environment
 
 import utils
 import ufo
@@ -23,42 +20,6 @@ import ufo
 from ..models import (
     Answer, Region, WebsiteUser, Munokrug, MobileUser, Election, Campaign, int16, Contact
 )
-from utils.templatetags.utils import plural
-
-
-
-
-def jinja_env(**kwargs) -> Environment:
-    """
-    Static context variables independent of request
-
-    Add it to TEMPLATES in settings.py:
-
-    TEMPLATES = [{
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'OPTIONS': {
-            'environment': 'ufo.views.conext.jinja_env',
-        }
-    }]
-    """
-
-    env = Environment(**kwargs)
-    env.install_gettext_translations(django.utils.translation)
-    # env.add_extension(LanguageExtension)
-
-    # Populate context with Model classes
-    env.globals.update({m.__name__: m for m in apps.all_models['ufo'].values()})
-
-    env.globals.update({
-        "plural": utils.templatetags.utils.plural,
-        'humanize': django.contrib.humanize.templatetags.humanize,
-        'int16': int16,
-        'static': static,
-        'version': ufo.__version__,
-        'settings': settings
-        # 'url': reverse,
-    })
-    return env
 
 
 def context_processor(request) -> dict:

@@ -153,9 +153,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
+    # Jinja is the default template engine.
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        #'BACKEND': "django_jinja.backend.Jinja2",
         'DIRS': [SRC_DIR('ufo')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -164,24 +164,26 @@ TEMPLATES = [
             #"match_extension": ".html",
             'undefined': jinja2.ChainableUndefined,
 
-            # Environment has global context variables independent of request.
-            'environment': 'ufo.views.context.jinja_env',
+            # Environment defines global constants and functions used
+            # in templates. For example it populates context with each
+            # orm Model class, as well as static(), humanize module, etc.
+            'environment': 'ufo.jinja.Environment',
+
             'extensions': [
                 'jinja2.ext.i18n',
-                'ufo.jinja_extensions.LanguageExtension',
-                #'jdj_tags.extensions.DjangoStatic',
-                # 'jdj_tags.extensions.DjangoI18n',
-                # 'jdj_tags.extensions.DjangoL10n',
+                'ufo.jinja.LanguageExtension',
             ],
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # Sets context variables depending on request.
+                # Function which sets template context variables depending on
+                # request.
                 'ufo.views.context.context_processor'
             ],
         }
     },
+    # DjangoTemplates are used in django admin.
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [SRC_DIR('templates')],
@@ -406,7 +408,7 @@ INTERNAL_IPS = [
 ]
 
 if env.bool('DEBUG_TOOLBAR', default=False):
-    print('DEBUG_TOOLBAR is enabled')
+    # print('DEBUG_TOOLBAR is enabled')
 
     DEBUG_TOOLBAR_CONFIG = {
         #'SHOW_TOOLBAR_CALLBACK': lambda request: False,
@@ -436,5 +438,5 @@ if env.bool('DEBUG_TOOLBAR', default=False):
         INSTALLED_APPS += ['debug_toolbar',]
         MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
         DEBUG_TOOLBAR_PATCH_SETTINGS = True
-else:
-    print('DEBUG_TOOLBAR is disabled')
+# else:
+#     print('DEBUG_TOOLBAR is disabled')
