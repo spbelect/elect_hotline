@@ -41,7 +41,7 @@ class Answer(base.Model):
     id = CharField(max_length=40, default=uuid4, primary_key=True)
     time_created = DateTimeField(default=now, verbose_name='Время создания записи в БД на сервере')
 
-    question = FK('Question')
+    question = ForeignKey('Question', on_delete=CASCADE)
     
     # Время когда событие произошло.
     timestamp = DateTimeField(verbose_name='Когда пользователь ввел ответ')
