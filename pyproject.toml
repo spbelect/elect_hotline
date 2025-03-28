@@ -80,7 +80,7 @@ makemessages = "pybabel update -l ru -d locale/ -i locale/django.pot --domain dj
 compilemessages = "pybabel compile -d locale/ --domain django"
 
 ### Run
-asgi = "uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml"
+asgi = {shell = "./manage.py check && uvicorn asgi:application --host 0.0.0.0 --port 8000 --log-config=uvicorn_log_config.yml"}
 
 [tool.pdm.dev-dependencies]
 translate = [
