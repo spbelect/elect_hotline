@@ -29,6 +29,11 @@ def get_form(request):
 
 @api.html.post('/account/form')
 def post_form(request, data: Form[UserSchema]):
+    """
+    For authenticated user, save preferences in the databese.
+    For anonymous user, save preferences in the session.
+    """
+    # request.user is an instance of WebsiteUser or ufo.middleware.AnonymousUser
     request.user.update(**data.model_dump(by_alias=True, exclude_unset=True))
     translation.activate(request.user.language)
     return render(request, 'views/account.html')
