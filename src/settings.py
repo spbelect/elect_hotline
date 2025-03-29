@@ -152,39 +152,50 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'urls'
 
+
+JINJA2 = {
+    'line_statement_prefix': '# ',
+    'line_comment_prefix': '##',
+    #"match_extension": ".html",
+    'undefined': jinja2.ChainableUndefined,
+
+    # Environment defines global constants and functions used
+    # in templates. For example it populates context with each
+    # orm Model class, as well as static(), humanize module, etc.
+    'environment': 'ufo.jinja.Environment',
+
+    'extensions': [
+        'jinja2.ext.i18n',
+        'ufo.jinja.LanguageExtension',
+    ],
+    'context_processors': [
+        'django.contrib.auth.context_processors.auth',
+        'django.contrib.messages.context_processors.messages',
+
+        # Function which sets template context variables depending on
+        # request.
+        'ufo.views.context.context_processor'
+    ],
+}
+
+
 TEMPLATES = [
-    # Jinja is the default template engine.
     {
+        # Jinja is the default template engine.
+        'NAME': 'jinja2',
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [SRC_DIR('ufo')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'line_statement_prefix': '# ',
-            'line_comment_prefix': '##',
-            #"match_extension": ".html",
-            'undefined': jinja2.ChainableUndefined,
-
-            # Environment defines global constants and functions used
-            # in templates. For example it populates context with each
-            # orm Model class, as well as static(), humanize module, etc.
-            'environment': 'ufo.jinja.Environment',
-
-            'extensions': [
-                'jinja2.ext.i18n',
-                'ufo.jinja.LanguageExtension',
-            ],
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-
-                # Function which sets template context variables depending on
-                # request.
-                'ufo.views.context.context_processor'
-            ],
-        }
+        'OPTIONS': JINJA2,
     },
-    # DjangoTemplates are used in django admin.
     {
+        # Async Jinja backend. Must be used with async ufo.jinja.render() function.
+        'NAME': 'jinja2_async',
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [SRC_DIR('ufo')],
+        'OPTIONS': dict(JINJA2, enable_async=True)
+    },
+    {
+        # DjangoTemplates are used in django admin.
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [SRC_DIR('templates')],
         'APP_DIRS': True,
