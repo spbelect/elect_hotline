@@ -6,9 +6,13 @@ from base64 import b64encode
 from binascii import unhexlify
 from datetime import datetime, timedelta, timezone as tz
 
+
+import django.core.exceptions
+import ninja.errors
+
 from botocore.client import Config
 from dateutil.parser import parse as dtparse
-from django.core import validators 
+from django.core import validators
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.db.models import Max, Q
@@ -121,6 +125,10 @@ def post_answer(request, data: AnswerSchema):
 
     try:
         answer.save()
+    except django.core.exceptions.ValidationError as err:
+        # TODO: when answer with the same id exists, return status 409 "Conflict" instead
+        # of 422 "Unprocessable Content"?
+        raise ninja.errors.ValidationError(str(err))
     except Exception as err:
         if 'test ' in ' '.join(sys.argv):
             raise err

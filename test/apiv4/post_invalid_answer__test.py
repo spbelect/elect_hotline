@@ -27,7 +27,7 @@ class PostInvalidAnswerTest(django.test.TestCase):
 
     def setUp(self):
         # GIVEN App user with app_id
-        make(MobileUser, app_id='123', id=1)
+        self.mobileuser = make(MobileUser, app_id='123', id=1)
 
         # AND region spb
         spb = make(Region, id='ru_78', name='Sankt-Peterburg')
@@ -59,6 +59,57 @@ class PostInvalidAnswerTest(django.test.TestCase):
         make(Election, date=date(2007, 1, 1), region=spb)
         
 
+    def test_post_answer_existing(self):
+        # GIVEN existing answer with id 456
+        make(Answer,
+             id='456',
+             appuser=self.mobileuser,
+             region_id='ru_78',
+             question_id='question_id1',
+             tik_complaint_status=int16('не подавалась'),
+             uik=1,
+             value_bool=False
+        )
+
+        # WHEN user POSTs new answer with existing id 456
+        response = self.client.post('/api/v4/answers/', data={
+            'app_id': '123',
+            'id': '456',
+            'timestamp': '2016-12-30T23:59:00Z',
+            'question_id': 'question_id1',
+            'value': True,
+            'is_incident': True,
+            'revoked': False,
+            'uik': 803,
+            'role': 'psg',
+            'uik_complaint_status': 'отказ принять жалобу',
+            'tik_complaint_status': 'отправляется модератору',
+            'tik_complaint_text': '123',
+            'region_id': 'ru_78'}, content_type='application/json')
+
+        # THEN response status should be 422 Unprocessable Content
+        # TODO: perhaps change to 409 Conflict?
+        assert response.status_code == 422
+
+        # AND reponse body has error message
+        assert response.json() == {
+            'detail': "{'id': ['Answer with this Id already exists.']}",
+        }
+
+        # AND no new answer should get created, only one existing before
+        assert list(Answer.objects.values('id', 'uik', 'value_bool')) == [
+            {
+                'id': '456',
+                'uik': 1,
+                'value_bool': False,
+            },
+        ]
+
+        # AND mobile user should not be added to active election.
+        streamers = ElectionMobileUsers.objects.order_by('election')
+        assert list(streamers.values('mobileuser', 'election__name', 'election__region')) == []
+
+
     def test_post_answer_invalid(self):
         # WHEN user POSTs invalid answer
         response = self.client.post('/api/v4/answers/', data={
@@ -76,7 +127,7 @@ class PostInvalidAnswerTest(django.test.TestCase):
             'tik_complaint_text': '123',
             'region_id': 'ru_78'}, content_type='application/json')
 
-        # THEN response status should be 422
+        # THEN response status should be 422 Unprocessable Content
         assert response.status_code == 422
 
         # AND reponse body has error message
