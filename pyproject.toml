@@ -44,6 +44,7 @@ dependencies = [
     "pgwait>=0.3",
     "uvicorn[standard]>=0.34.0",
     "django-prometheus>=2.3.1",
+    "pytest-asyncio>=0.26.0",
 ]
 readme = "README.md"
 license = {text = "MIT"}
