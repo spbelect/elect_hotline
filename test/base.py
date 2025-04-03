@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-#from os import remove
+import multiprocessing
+import time
 
 from collections.abc import Callable
+from contextlib import suppress
 from os.path import basename, join
 from contextlib import contextmanager
 from functools import wraps
@@ -13,8 +15,10 @@ from unittest.mock import patch, Mock
 from urllib.parse import parse_qs
 from zoneinfo import ZoneInfo
 
+import httpx
 import pytest
 import responses
+import uvicorn
 
 from django.conf import settings
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -47,6 +51,37 @@ def spb(ru):
 @pytest.fixture()
 def msk(ru):
     return make(Region, id='ru_11', name='Москва', country=ru, utc_offset=3)
+
+
+@pytest.fixture
+def uvicorn_server():
+    """
+    Uvicorn server fixture can be used instead of live_server.
+    As it uses asgi, it allows to test sse streaming.
+    """
+    port = 27901
+    multiprocessing.set_start_method('spawn')
+
+    proc = multiprocessing.Process(
+        target=uvicorn.run,
+        args=('asgi:application',),
+        kwargs={'port': port},
+        daemon=True
+    )
+    proc.start()
+
+    # Wait for HTTP 200 response
+    while True:
+        with suppress(httpx.ConnectError):
+            response = httpx.get(f"http://127.0.0.1:{port}")
+            if response.status_code is 200:
+                print('Uvicorn: connected successfully')
+                break
+        time.sleep(0.2)
+
+    yield f"http://127.0.0.1:{port}"
+
+    proc.kill()  # Cleanup after test
 
 
 @contextmanager
