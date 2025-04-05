@@ -3,7 +3,7 @@
 
 [metadata]
 groups = ["default", "debug", "test", "translate", "uitest"]
-strategy = []
+strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
 content_hash = "sha256:ce631d8671813df20671817b7b274f6f70a7112d4c0c81c6c2e9355018b37bcc"
 
@@ -15,6 +15,7 @@ name = "annotated-types"
 version = "0.7.0"
 requires_python = ">=3.8"
 summary = "Reusable constraint types to use with typing.Annotated"
+groups = ["default"]
 dependencies = [
     "typing-extensions>=4.0.0; python_version < \"3.9\"",
 ]
@@ -28,6 +29,7 @@ name = "anyio"
 version = "4.9.0"
 requires_python = ">=3.9"
 summary = "High level compatibility layer for multiple asynchronous event loop implementations"
+groups = ["default", "test"]
 dependencies = [
     "exceptiongroup>=1.0.2; python_version < \"3.11\"",
     "idna>=2.8",
@@ -44,6 +46,7 @@ name = "arrow"
 version = "1.3.0"
 requires_python = ">=3.8"
 summary = "Better dates & times for Python"
+groups = ["default"]
 dependencies = [
     "python-dateutil>=2.7.0",
     "types-python-dateutil>=2.8.10",
@@ -58,6 +61,7 @@ name = "asgiref"
 version = "3.8.1"
 requires_python = ">=3.8"
 summary = "ASGI specs, helper code, and adapters"
+groups = ["default", "test"]
 dependencies = [
     "typing-extensions>=4; python_version < \"3.11\"",
 ]
@@ -71,6 +75,8 @@ name = "asttokens"
 version = "3.0.0"
 requires_python = ">=3.8"
 summary = "Annotate AST trees with source code positions"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "asttokens-3.0.0-py3-none-any.whl", hash = "sha256:e3078351a059199dd5138cb1c706e6430c05eff2ff136af5eb4790f9d28932e2"},
     {file = "asttokens-3.0.0.tar.gz", hash = "sha256:0dcd8baa8d62b0c1d118b399b2ddba3c4aff271d0d7a9e0d4c1681c79035bbc7"},
@@ -81,6 +87,7 @@ name = "babel"
 version = "2.17.0"
 requires_python = ">=3.8"
 summary = "Internationalization utilities"
+groups = ["translate"]
 dependencies = [
     "pytz>=2015.7; python_version < \"3.9\"",
 ]
@@ -94,6 +101,7 @@ name = "beautifulsoup4"
 version = "4.13.3"
 requires_python = ">=3.7.0"
 summary = "Screen-scraping library"
+groups = ["test"]
 dependencies = [
     "soupsieve>1.2",
     "typing-extensions>=4.0.0",
@@ -108,6 +116,7 @@ name = "boto3"
 version = "1.37.28"
 requires_python = ">=3.8"
 summary = "The AWS SDK for Python"
+groups = ["default"]
 dependencies = [
     "botocore<1.38.0,>=1.37.28",
     "jmespath<2.0.0,>=0.7.1",
@@ -123,6 +132,7 @@ name = "botocore"
 version = "1.37.28"
 requires_python = ">=3.8"
 summary = "Low-level, data-driven core of boto 3."
+groups = ["default"]
 dependencies = [
     "jmespath<2.0.0,>=0.7.1",
     "python-dateutil<3.0.0,>=2.1",
@@ -138,6 +148,7 @@ files = [
 name = "brotli"
 version = "1.1.0"
 summary = "Python bindings for the Brotli compression library"
+groups = ["default"]
 files = [
     {file = "Brotli-1.1.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:a3daabb76a78f829cafc365531c972016e4aa8d5b4bf60660ad8ecee19df7ccc"},
     {file = "Brotli-1.1.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c8146669223164fc87a7e3de9f81e9423c67a79d6b3447994dfb9c95da16e2d6"},
@@ -193,6 +204,7 @@ name = "certifi"
 version = "2025.1.31"
 requires_python = ">=3.6"
 summary = "Python package for providing Mozilla's CA Bundle."
+groups = ["default", "test", "uitest"]
 files = [
     {file = "certifi-2025.1.31-py3-none-any.whl", hash = "sha256:ca78db4565a652026a4db2bcdf68f2fb589ea80d0be70e03929ed730746b84fe"},
     {file = "certifi-2025.1.31.tar.gz", hash = "sha256:3d5da6925056f6f18f119200434a4780a94263f10d1c21d032a6f6b2baa20651"},
@@ -203,6 +215,8 @@ name = "cffi"
 version = "1.17.1"
 requires_python = ">=3.8"
 summary = "Foreign Function Interface for Python calling C code."
+groups = ["default"]
+marker = "platform_python_implementation != \"PyPy\""
 dependencies = [
     "pycparser",
 ]
@@ -249,6 +263,7 @@ name = "charset-normalizer"
 version = "3.4.1"
 requires_python = ">=3.7"
 summary = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+groups = ["default", "test", "uitest"]
 files = [
     {file = "charset_normalizer-3.4.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:8bfa33f4f2672964266e940dd22a195989ba31669bd84629f05fab3ef4e2d125"},
     {file = "charset_normalizer-3.4.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:28bf57629c75e810b6ae989f03c0828d64d6b26a5e205535585f96093e405ed1"},
@@ -298,6 +313,7 @@ name = "click"
 version = "8.1.8"
 requires_python = ">=3.7"
 summary = "Composable command line interface toolkit"
+groups = ["default"]
 dependencies = [
     "colorama; platform_system == \"Windows\"",
     "importlib-metadata; python_version < \"3.8\"",
@@ -312,6 +328,8 @@ name = "colorama"
 version = "0.4.6"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 summary = "Cross-platform colored terminal text."
+groups = ["default", "debug", "test", "uitest"]
+marker = "sys_platform == \"win32\" or platform_system == \"Windows\""
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
@@ -322,6 +340,7 @@ name = "coverage"
 version = "7.8.0"
 requires_python = ">=3.9"
 summary = "Code coverage measurement for Python"
+groups = ["test"]
 files = [
     {file = "coverage-7.8.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:e7ac22a0bb2c7c49f441f7a6d46c9c80d96e56f5a8bc6972529ed43c8b694e27"},
     {file = "coverage-7.8.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:bf13d564d310c156d1c8e53877baf2993fb3073b2fc9f69790ca6a732eb4bfea"},
@@ -374,6 +393,7 @@ version = "7.8.0"
 extras = ["toml"]
 requires_python = ">=3.9"
 summary = "Code coverage measurement for Python"
+groups = ["test"]
 dependencies = [
     "coverage==7.8.0",
     "tomli; python_full_version <= \"3.11.0a6\"",
@@ -429,6 +449,7 @@ name = "cryptography"
 version = "44.0.2"
 requires_python = "!=3.9.0,!=3.9.1,>=3.7"
 summary = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
+groups = ["default"]
 dependencies = [
     "cffi>=1.12; platform_python_implementation != \"PyPy\"",
 ]
@@ -469,6 +490,8 @@ name = "decorator"
 version = "5.2.1"
 requires_python = ">=3.8"
 summary = "Decorators for Humans"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "decorator-5.2.1-py3-none-any.whl", hash = "sha256:d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a"},
     {file = "decorator-5.2.1.tar.gz", hash = "sha256:65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360"},
@@ -479,6 +502,7 @@ name = "django"
 version = "5.2"
 requires_python = ">=3.10"
 summary = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
+groups = ["default", "test"]
 dependencies = [
     "asgiref>=3.8.1",
     "sqlparse>=0.3.1",
@@ -493,6 +517,7 @@ files = [
 name = "django-admin-sortable2"
 version = "2.2.6"
 summary = "Generic drag-and-drop sorting for the List, the Stacked- and the Tabular-Inlines Views in the Django Admin"
+groups = ["default"]
 dependencies = [
     "Django>=4.2",
 ]
@@ -506,6 +531,7 @@ name = "django-anymail"
 version = "13.0"
 requires_python = ">=3.8"
 summary = "Django email backends and webhooks for Amazon SES, Brevo,  MailerSend, Mailgun, Mailjet, Mandrill, Postal, Postmark, Resend,  SendGrid, SparkPost and Unisender Go  (EmailBackend, transactional email tracking and inbound email signals)"
+groups = ["default"]
 dependencies = [
     "django>=4.0",
     "requests>=2.4.3",
@@ -522,6 +548,7 @@ version = "13.0"
 extras = ["mailgun", "sendgrid"]
 requires_python = ">=3.8"
 summary = "Django email backends and webhooks for Amazon SES, Brevo,  MailerSend, Mailgun, Mailjet, Mandrill, Postal, Postmark, Resend,  SendGrid, SparkPost and Unisender Go  (EmailBackend, transactional email tracking and inbound email signals)"
+groups = ["default"]
 dependencies = [
     "django-anymail==13.0",
 ]
@@ -535,6 +562,7 @@ name = "django-appconf"
 version = "1.1.0"
 requires_python = ">=3.9"
 summary = "A helper class for handling configuration defaults of packaged apps gracefully."
+groups = ["default"]
 dependencies = [
     "django",
 ]
@@ -548,6 +576,7 @@ name = "django-debug-toolbar"
 version = "5.1.0"
 requires_python = ">=3.9"
 summary = "A configurable set of panels that display various debug information about the current request/response."
+groups = ["default"]
 dependencies = [
     "django>=4.2.9",
     "sqlparse>=0.2",
@@ -561,6 +590,7 @@ files = [
 name = "django-eml-email-backend"
 version = "0.1"
 summary = "Django email backend that saves emails to .eml files. Such files can be opened directly in Outlook or Mail.app. "
+groups = ["default"]
 files = [
     {file = "django-eml-email-backend-0.1.tar.gz", hash = "sha256:9dbd4d7f73455f9a7961670595bc88e85b429dfda88b007f47158712389649c3"},
 ]
@@ -570,6 +600,7 @@ name = "django-environ"
 version = "0.12.0"
 requires_python = "<4,>=3.9"
 summary = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
+groups = ["default"]
 files = [
     {file = "django_environ-0.12.0-py2.py3-none-any.whl", hash = "sha256:92fb346a158abda07ffe6eb23135ce92843af06ecf8753f43adf9d2366dcc0ca"},
     {file = "django_environ-0.12.0.tar.gz", hash = "sha256:227dc891453dd5bde769c3449cf4a74b6f2ee8f7ab2361c93a07068f4179041a"},
@@ -580,6 +611,7 @@ name = "django-extensions"
 version = "3.2.3"
 requires_python = ">=3.6"
 summary = "Extensions for Django"
+groups = ["default"]
 dependencies = [
     "Django>=3.2",
 ]
@@ -593,6 +625,7 @@ name = "django-jinja"
 version = "2.11.0"
 requires_python = ">=3.8"
 summary = "Jinja2 templating language integrated in Django."
+groups = ["default"]
 dependencies = [
     "django>=3.2",
     "jinja2>=3",
@@ -607,6 +640,7 @@ name = "django-jsonform"
 version = "2.23.2"
 requires_python = ">=3.4"
 summary = "A user-friendly JSON editing form for Django admin."
+groups = ["default"]
 dependencies = [
     "django>=2.0",
 ]
@@ -620,6 +654,7 @@ name = "django-ninja"
 version = "1.4.0"
 requires_python = ">=3.7"
 summary = "Django Ninja - Fast Django REST framework"
+groups = ["default"]
 dependencies = [
     "Django>=3.1",
     "pydantic<3.0.0,>=2.0",
@@ -633,6 +668,7 @@ files = [
 name = "django-prettyjson"
 version = "0.4.1"
 summary = "Enables pretty JSON viewer in Django forms, admin, or templates"
+groups = ["default"]
 dependencies = [
     "django>=1.8",
     "six>=1.10.0",
@@ -647,6 +683,7 @@ files = [
 name = "django-prometheus"
 version = "2.3.1"
 summary = "Django middlewares to monitor your application with Prometheus.io."
+groups = ["default"]
 dependencies = [
     "prometheus-client>=0.7",
 ]
@@ -660,6 +697,7 @@ name = "django-pydantic-field"
 version = "0.3.12"
 requires_python = ">=3.8"
 summary = "Django JSONField with Pydantic models as a Schema"
+groups = ["default"]
 dependencies = [
     "django<6,>=3.1",
     "pydantic<3,>=1.10",
@@ -675,6 +713,7 @@ name = "django-select2"
 version = "8.4.0"
 requires_python = ">=3.10"
 summary = "This is a Django_ integration of Select2_."
+groups = ["default"]
 dependencies = [
     "django-appconf>=0.6.0",
     "django>=4.2",
@@ -689,6 +728,7 @@ name = "djangorestframework"
 version = "3.16.0"
 requires_python = ">=3.9"
 summary = "Web APIs for Django, made easy."
+groups = ["default"]
 dependencies = [
     "backports-zoneinfo; python_version < \"3.9\"",
     "django>=4.2",
@@ -703,6 +743,7 @@ name = "dnspython"
 version = "2.7.0"
 requires_python = ">=3.9"
 summary = "DNS toolkit"
+groups = ["default"]
 files = [
     {file = "dnspython-2.7.0-py3-none-any.whl", hash = "sha256:b4c34b7d10b51bcc3a5071e7b8dee77939f1e878477eeecc965e9835f63c6c86"},
     {file = "dnspython-2.7.0.tar.gz", hash = "sha256:ce9c432eda0dc91cf618a5cedf1a4e142651196bbcd2c80e89ed5a907e5cfaf1"},
@@ -713,6 +754,7 @@ name = "email-validator"
 version = "2.2.0"
 requires_python = ">=3.8"
 summary = "A robust email address syntax and deliverability validation library."
+groups = ["default"]
 dependencies = [
     "dnspython>=2.0.0",
     "idna>=2.0.0",
@@ -727,6 +769,7 @@ name = "execnet"
 version = "2.1.1"
 requires_python = ">=3.8"
 summary = "execnet: rapid multi-Python deployment"
+groups = ["test"]
 files = [
     {file = "execnet-2.1.1-py3-none-any.whl", hash = "sha256:26dee51f1b80cebd6d0ca8e74dd8745419761d3bef34163928cbebbdc4749fdc"},
     {file = "execnet-2.1.1.tar.gz", hash = "sha256:5189b52c6121c24feae288166ab41b32549c7e2348652736540b9e6e7d4e72e3"},
@@ -737,6 +780,8 @@ name = "executing"
 version = "2.2.0"
 requires_python = ">=3.8"
 summary = "Get the currently executing AST node of a frame, and other information"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "executing-2.2.0-py2.py3-none-any.whl", hash = "sha256:11387150cad388d62750327a53d3339fad4888b39a6fe233c3afbb54ecffd3aa"},
     {file = "executing-2.2.0.tar.gz", hash = "sha256:5d108c028108fe2551d1a7b2e8b713341e2cb4fc0aa7dcf966fa4327a5226755"},
@@ -747,6 +792,7 @@ name = "freezegun"
 version = "1.5.1"
 requires_python = ">=3.7"
 summary = "Let your Python tests travel through time"
+groups = ["test"]
 dependencies = [
     "python-dateutil>=2.7",
 ]
@@ -760,6 +806,7 @@ name = "greenlet"
 version = "3.1.1"
 requires_python = ">=3.7"
 summary = "Lightweight in-process concurrent programming"
+groups = ["uitest"]
 files = [
     {file = "greenlet-3.1.1-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:e4d333e558953648ca09d64f13e6d8f0523fa705f51cae3f03b5983489958c70"},
     {file = "greenlet-3.1.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:09fc016b73c94e98e29af67ab7b9a879c307c6731a2c9da0db5a7d9b7edd1159"},
@@ -803,6 +850,7 @@ name = "gunicorn"
 version = "23.0.0"
 requires_python = ">=3.7"
 summary = "WSGI HTTP Server for UNIX"
+groups = ["default"]
 dependencies = [
     "importlib-metadata; python_version < \"3.8\"",
     "packaging",
@@ -817,6 +865,7 @@ name = "h11"
 version = "0.14.0"
 requires_python = ">=3.7"
 summary = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
+groups = ["default", "test"]
 dependencies = [
     "typing-extensions; python_version < \"3.8\"",
 ]
@@ -830,6 +879,7 @@ name = "httpcore"
 version = "1.0.7"
 requires_python = ">=3.8"
 summary = "A minimal low-level HTTP client."
+groups = ["default", "test"]
 dependencies = [
     "certifi",
     "h11<0.15,>=0.13",
@@ -844,6 +894,7 @@ name = "httptools"
 version = "0.6.4"
 requires_python = ">=3.8.0"
 summary = "A collection of framework independent HTTP protocol utils."
+groups = ["default"]
 files = [
     {file = "httptools-0.6.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:f47f8ed67cc0ff862b84a1189831d1d33c963fb3ce1ee0c65d3b0cbe7b711069"},
     {file = "httptools-0.6.4-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:0614154d5454c21b6410fdf5262b4a3ddb0f53f1e1721cfd59d55f32138c578a"},
@@ -874,6 +925,7 @@ name = "httpx"
 version = "0.28.1"
 requires_python = ">=3.8"
 summary = "The next generation HTTP client."
+groups = ["default", "test"]
 dependencies = [
     "anyio",
     "certifi",
@@ -890,6 +942,7 @@ name = "idna"
 version = "3.10"
 requires_python = ">=3.6"
 summary = "Internationalized Domain Names in Applications (IDNA)"
+groups = ["default", "test", "uitest"]
 files = [
     {file = "idna-3.10-py3-none-any.whl", hash = "sha256:946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3"},
     {file = "idna-3.10.tar.gz", hash = "sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"},
@@ -900,6 +953,7 @@ name = "iniconfig"
 version = "2.1.0"
 requires_python = ">=3.8"
 summary = "brain-dead simple config-ini parsing"
+groups = ["default", "test", "uitest"]
 files = [
     {file = "iniconfig-2.1.0-py3-none-any.whl", hash = "sha256:9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760"},
     {file = "iniconfig-2.1.0.tar.gz", hash = "sha256:3abbd2e30b36733fee78f9c7f7308f2d0050e88f0087fd25c2645f63c773e1c7"},
@@ -910,6 +964,7 @@ name = "ipdb"
 version = "0.13.13"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 summary = "IPython-enabled pdb"
+groups = ["debug"]
 dependencies = [
     "decorator; python_version == \"3.5\"",
     "decorator; python_version == \"3.6\"",
@@ -940,6 +995,8 @@ name = "ipython"
 version = "9.0.2"
 requires_python = ">=3.11"
 summary = "IPython: Productive Interactive Computing"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "colorama; sys_platform == \"win32\"",
     "decorator",
@@ -963,6 +1020,8 @@ name = "ipython-pygments-lexers"
 version = "1.1.1"
 requires_python = ">=3.8"
 summary = "Defines a variety of Pygments lexers for highlighting IPython code."
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "pygments",
 ]
@@ -976,6 +1035,8 @@ name = "jedi"
 version = "0.19.2"
 requires_python = ">=3.6"
 summary = "An autocompletion tool for Python that can be used for text editors."
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "parso<0.9.0,>=0.8.4",
 ]
@@ -989,6 +1050,7 @@ name = "jinja2"
 version = "3.1.6"
 requires_python = ">=3.7"
 summary = "A very fast and expressive template engine."
+groups = ["default"]
 dependencies = [
     "MarkupSafe>=2.0",
 ]
@@ -1002,6 +1064,7 @@ name = "jmespath"
 version = "1.0.1"
 requires_python = ">=3.7"
 summary = "JSON Matching Expressions"
+groups = ["default"]
 files = [
     {file = "jmespath-1.0.1-py3-none-any.whl", hash = "sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980"},
     {file = "jmespath-1.0.1.tar.gz", hash = "sha256:90261b206d6defd58fdd5e85f478bf633a2901798906be2ad389150c5c60edbe"},
@@ -1012,6 +1075,7 @@ name = "loguru"
 version = "0.7.3"
 requires_python = "<4.0,>=3.5"
 summary = "Python logging made (stupidly) simple"
+groups = ["default"]
 dependencies = [
     "aiocontextvars>=0.2.0; python_version < \"3.7\"",
     "colorama>=0.3.4; sys_platform == \"win32\"",
@@ -1027,6 +1091,7 @@ name = "markdown-it-py"
 version = "3.0.0"
 requires_python = ">=3.8"
 summary = "Python port of markdown-it. Markdown parsing, done right!"
+groups = ["default"]
 dependencies = [
     "mdurl~=0.1",
 ]
@@ -1040,6 +1105,7 @@ name = "markupsafe"
 version = "3.0.2"
 requires_python = ">=3.9"
 summary = "Safely add untrusted strings to HTML/XML markup."
+groups = ["default"]
 files = [
     {file = "MarkupSafe-3.0.2-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:9025b4018f3a1314059769c7bf15441064b2207cb3f065e6ea1e7359cb46db9d"},
     {file = "MarkupSafe-3.0.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:93335ca3812df2f366e80509ae119189886b0f3c2b81325d39efdb84a1e2ae93"},
@@ -1089,6 +1155,8 @@ name = "matplotlib-inline"
 version = "0.1.7"
 requires_python = ">=3.8"
 summary = "Inline Matplotlib backend for Jupyter"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "traitlets",
 ]
@@ -1102,6 +1170,7 @@ name = "mdurl"
 version = "0.1.2"
 requires_python = ">=3.7"
 summary = "Markdown URL utilities"
+groups = ["default"]
 files = [
     {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
     {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
@@ -1112,6 +1181,7 @@ name = "model-bakery"
 version = "1.20.4"
 requires_python = ">=3.8"
 summary = "Smart object creation facility for Django."
+groups = ["test"]
 dependencies = [
     "django>=4.2",
 ]
@@ -1125,6 +1195,7 @@ name = "packaging"
 version = "24.2"
 requires_python = ">=3.8"
 summary = "Core utilities for Python packages"
+groups = ["default", "test", "uitest"]
 files = [
     {file = "packaging-24.2-py3-none-any.whl", hash = "sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759"},
     {file = "packaging-24.2.tar.gz", hash = "sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"},
@@ -1135,6 +1206,8 @@ name = "parso"
 version = "0.8.4"
 requires_python = ">=3.6"
 summary = "A Python Parser"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "parso-0.8.4-py2.py3-none-any.whl", hash = "sha256:a418670a20291dacd2dddc80c377c5c3791378ee1e8d12bffc35420643d43f18"},
     {file = "parso-0.8.4.tar.gz", hash = "sha256:eb3a7b58240fb99099a345571deecc0f9540ea5f4dd2fe14c2a99d6b281ab92d"},
@@ -1145,6 +1218,7 @@ name = "pendulum"
 version = "3.0.0"
 requires_python = ">=3.8"
 summary = "Python datetimes made easy"
+groups = ["default"]
 dependencies = [
     "backports-zoneinfo>=0.2.1; python_version < \"3.9\"",
     "importlib-resources>=5.9.0; python_version < \"3.9\"",
@@ -1180,6 +1254,8 @@ files = [
 name = "pexpect"
 version = "4.9.0"
 summary = "Pexpect allows easy control of interactive console applications."
+groups = ["debug"]
+marker = "(sys_platform != \"win32\" and sys_platform != \"emscripten\") and python_version >= \"3.11\""
 dependencies = [
     "ptyprocess>=0.5",
 ]
@@ -1192,6 +1268,7 @@ files = [
 name = "pginit"
 version = "0.6"
 summary = "initialize postgres for django project"
+groups = ["default"]
 dependencies = [
     "six",
 ]
@@ -1205,6 +1282,7 @@ name = "pgwait"
 version = "0.4"
 requires_python = ">=3.9"
 summary = "wait for postgres defined in django settings to be up"
+groups = ["default"]
 files = [
     {file = "pgwait-0.4-py3-none-any.whl", hash = "sha256:016fe3c8cf60f96422bd792190ce607c21d0ed8b625870f995cd9e747c719b5f"},
     {file = "pgwait-0.4.tar.gz", hash = "sha256:e963f5bf8aa81f01edac3082c6790cc81464504066902d6e33e2d99e5f0a5148"},
@@ -1215,6 +1293,7 @@ name = "pip"
 version = "25.0.1"
 requires_python = ">=3.8"
 summary = "The PyPA recommended tool for installing Python packages."
+groups = ["default"]
 files = [
     {file = "pip-25.0.1-py3-none-any.whl", hash = "sha256:c46efd13b6aa8279f33f2864459c8ce587ea6a1a59ee20de055868d8f7688f7f"},
     {file = "pip-25.0.1.tar.gz", hash = "sha256:88f96547ea48b940a3a385494e181e29fb8637898f88d88737c5049780f196ea"},
@@ -1225,6 +1304,7 @@ name = "playwright"
 version = "1.51.0"
 requires_python = ">=3.9"
 summary = "A high-level API to automate web browsers"
+groups = ["uitest"]
 dependencies = [
     "greenlet<4.0.0,>=3.1.1",
     "pyee<13,>=12",
@@ -1244,6 +1324,7 @@ name = "pluggy"
 version = "1.5.0"
 requires_python = ">=3.8"
 summary = "plugin and hook calling mechanisms for python"
+groups = ["default", "test", "uitest"]
 files = [
     {file = "pluggy-1.5.0-py3-none-any.whl", hash = "sha256:44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669"},
     {file = "pluggy-1.5.0.tar.gz", hash = "sha256:2cffa88e94fdc978c4c574f15f9e59b7f4201d439195c3715ca9e2486f1d0cf1"},
@@ -1254,6 +1335,7 @@ name = "prometheus-client"
 version = "0.21.1"
 requires_python = ">=3.8"
 summary = "Python client for the Prometheus monitoring system."
+groups = ["default"]
 files = [
     {file = "prometheus_client-0.21.1-py3-none-any.whl", hash = "sha256:594b45c410d6f4f8888940fe80b5cc2521b305a1fafe1c58609ef715a001f301"},
     {file = "prometheus_client-0.21.1.tar.gz", hash = "sha256:252505a722ac04b0456be05c05f75f45d760c2911ffc45f2a06bcaed9f3ae3fb"},
@@ -1264,6 +1346,8 @@ name = "prompt-toolkit"
 version = "3.0.50"
 requires_python = ">=3.8.0"
 summary = "Library for building powerful interactive command lines in Python"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "wcwidth",
 ]
@@ -1277,6 +1361,7 @@ name = "psycopg2-binary"
 version = "2.9.10"
 requires_python = ">=3.8"
 summary = "psycopg2 - Python-PostgreSQL Database Adapter"
+groups = ["default"]
 files = [
     {file = "psycopg2-binary-2.9.10.tar.gz", hash = "sha256:4b3df0e6990aa98acda57d983942eff13d824135fe2250e6522edaa782a06de2"},
     {file = "psycopg2_binary-2.9.10-cp311-cp311-macosx_12_0_x86_64.whl", hash = "sha256:04392983d0bb89a8717772a193cfaac58871321e3ec69514e1c4e0d4957b5aff"},
@@ -1320,6 +1405,8 @@ files = [
 name = "ptyprocess"
 version = "0.7.0"
 summary = "Run a subprocess in a pseudo terminal"
+groups = ["debug"]
+marker = "(sys_platform != \"win32\" and sys_platform != \"emscripten\") and python_version >= \"3.11\""
 files = [
     {file = "ptyprocess-0.7.0-py2.py3-none-any.whl", hash = "sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35"},
     {file = "ptyprocess-0.7.0.tar.gz", hash = "sha256:5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220"},
@@ -1329,6 +1416,8 @@ files = [
 name = "pure-eval"
 version = "0.2.3"
 summary = "Safely evaluate AST nodes without side effects"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "pure_eval-0.2.3-py3-none-any.whl", hash = "sha256:1db8e35b67b3d218d818ae653e27f06c3aa420901fa7b081ca98cbedc874e0d0"},
     {file = "pure_eval-0.2.3.tar.gz", hash = "sha256:5f4e983f40564c576c7c8635ae88db5956bb2229d7e9237d03b3c0b0190eaf42"},
@@ -1339,6 +1428,8 @@ name = "pycparser"
 version = "2.22"
 requires_python = ">=3.8"
 summary = "C parser in Python"
+groups = ["default"]
+marker = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc"},
     {file = "pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6"},
@@ -1349,6 +1440,7 @@ name = "pydantic"
 version = "2.11.2"
 requires_python = ">=3.9"
 summary = "Data validation using Python type hints"
+groups = ["default"]
 dependencies = [
     "annotated-types>=0.6.0",
     "pydantic-core==2.33.1",
@@ -1365,6 +1457,7 @@ name = "pydantic-core"
 version = "2.33.1"
 requires_python = ">=3.9"
 summary = "Core functionality for Pydantic validation and serialization"
+groups = ["default"]
 dependencies = [
     "typing-extensions!=4.7.0,>=4.6.0",
 ]
@@ -1432,6 +1525,7 @@ version = "2.11.2"
 extras = ["email"]
 requires_python = ">=3.9"
 summary = "Data validation using Python type hints"
+groups = ["default"]
 dependencies = [
     "email-validator>=2.0.0",
     "pydantic==2.11.2",
@@ -1446,6 +1540,7 @@ name = "pyee"
 version = "12.1.1"
 requires_python = ">=3.8"
 summary = "A rough port of Node.js's EventEmitter to Python with a few tricks of its own"
+groups = ["uitest"]
 dependencies = [
     "typing-extensions",
 ]
@@ -1459,6 +1554,7 @@ name = "pygments"
 version = "2.19.1"
 requires_python = ">=3.8"
 summary = "Pygments is a syntax highlighting package written in Python."
+groups = ["default", "debug"]
 files = [
     {file = "pygments-2.19.1-py3-none-any.whl", hash = "sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c"},
     {file = "pygments-2.19.1.tar.gz", hash = "sha256:61c16d2a8576dc0649d9f39e089b5f02bcd27fba10d8fb4dcc28173f7a45151f"},
@@ -1469,6 +1565,7 @@ name = "pyjwt"
 version = "2.10.1"
 requires_python = ">=3.9"
 summary = "JSON Web Token implementation in Python"
+groups = ["default"]
 files = [
     {file = "PyJWT-2.10.1-py3-none-any.whl", hash = "sha256:dcdd193e30abefd5debf142f9adfcdd2b58004e644f25406ffaebd50bd98dacb"},
     {file = "pyjwt-2.10.1.tar.gz", hash = "sha256:3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953"},
@@ -1480,6 +1577,7 @@ version = "2.10.1"
 extras = ["crypto"]
 requires_python = ">=3.9"
 summary = "JSON Web Token implementation in Python"
+groups = ["default"]
 dependencies = [
     "cryptography>=3.4.0",
     "pyjwt==2.10.1",
@@ -1494,6 +1592,7 @@ name = "pytest"
 version = "8.3.5"
 requires_python = ">=3.8"
 summary = "pytest: simple powerful testing with Python"
+groups = ["default", "test", "uitest"]
 dependencies = [
     "colorama; sys_platform == \"win32\"",
     "exceptiongroup>=1.0.0rc8; python_version < \"3.11\"",
@@ -1512,6 +1611,7 @@ name = "pytest-asyncio"
 version = "0.26.0"
 requires_python = ">=3.9"
 summary = "Pytest support for asyncio"
+groups = ["default"]
 dependencies = [
     "pytest<9,>=8.2",
     "typing-extensions>=4.12; python_version < \"3.10\"",
@@ -1526,6 +1626,7 @@ name = "pytest-base-url"
 version = "2.1.0"
 requires_python = ">=3.8"
 summary = "pytest plugin for URL based testing"
+groups = ["uitest"]
 dependencies = [
     "pytest>=7.0.0",
     "requests>=2.9",
@@ -1540,6 +1641,7 @@ name = "pytest-cov"
 version = "6.1.0"
 requires_python = ">=3.9"
 summary = "Pytest plugin for measuring coverage."
+groups = ["test"]
 dependencies = [
     "coverage[toml]>=7.5",
     "pytest>=4.6",
@@ -1554,6 +1656,7 @@ name = "pytest-django"
 version = "4.11.1"
 requires_python = ">=3.8"
 summary = "A Django plugin for pytest."
+groups = ["test"]
 dependencies = [
     "pytest>=7.0.0",
 ]
@@ -1567,6 +1670,7 @@ name = "pytest-env"
 version = "1.1.5"
 requires_python = ">=3.8"
 summary = "pytest plugin that allows you to add environment variables."
+groups = ["test"]
 dependencies = [
     "pytest>=8.3.3",
     "tomli>=2.0.1; python_version < \"3.11\"",
@@ -1581,6 +1685,7 @@ name = "pytest-playwright"
 version = "0.7.0"
 requires_python = ">=3.9"
 summary = "A pytest wrapper with fixtures for Playwright to automate web browsers"
+groups = ["uitest"]
 dependencies = [
     "playwright>=1.18",
     "pytest-base-url<3.0.0,>=1.0.0",
@@ -1597,6 +1702,7 @@ name = "pytest-pythonpath"
 version = "0.7.3"
 requires_python = ">=2.6, <4"
 summary = "pytest plugin for adding to the PYTHONPATH from command line or configs."
+groups = ["test"]
 dependencies = [
     "pytest>=2.5.2",
 ]
@@ -1609,6 +1715,7 @@ name = "pytest-xdist"
 version = "3.6.1"
 requires_python = ">=3.8"
 summary = "pytest xdist plugin for distributed testing, most importantly across multiple CPUs"
+groups = ["test"]
 dependencies = [
     "execnet>=2.1",
     "pytest>=7.0.0",
@@ -1623,6 +1730,7 @@ name = "python-dateutil"
 version = "2.8.1"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 summary = "Extensions to the standard Python datetime module"
+groups = ["default", "test"]
 dependencies = [
     "six>=1.5",
 ]
@@ -1636,6 +1744,7 @@ name = "python-dotenv"
 version = "1.1.0"
 requires_python = ">=3.9"
 summary = "Read key-value pairs from a .env file and set them as environment variables"
+groups = ["default"]
 files = [
     {file = "python_dotenv-1.1.0-py3-none-any.whl", hash = "sha256:d7c01d9e2293916c18baf562d95698754b0dbbb5e74d457c45d4f6561fb9d55d"},
     {file = "python_dotenv-1.1.0.tar.gz", hash = "sha256:41f90bc6f5f177fb41f53e87666db362025010eb28f60a01c9143bfa33a2b2d5"},
@@ -1646,6 +1755,7 @@ name = "python-slugify"
 version = "8.0.4"
 requires_python = ">=3.7"
 summary = "A Python slugify application that also handles Unicode"
+groups = ["uitest"]
 dependencies = [
     "text-unidecode>=1.3",
 ]
@@ -1658,6 +1768,7 @@ files = [
 name = "pytz"
 version = "2025.2"
 summary = "World timezone definitions, modern and historical"
+groups = ["default"]
 files = [
     {file = "pytz-2025.2-py2.py3-none-any.whl", hash = "sha256:5ddf76296dd8c44c26eb8f4b6f35488f3ccbf6fbbd7adee0b7262d43f0ec2f00"},
     {file = "pytz-2025.2.tar.gz", hash = "sha256:360b9e3dbb49a209c21ad61809c7fb453643e048b38924c765813546746e81c3"},
@@ -1668,6 +1779,7 @@ name = "pyyaml"
 version = "6.0.2"
 requires_python = ">=3.8"
 summary = "YAML parser and emitter for Python"
+groups = ["default"]
 files = [
     {file = "PyYAML-6.0.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:cc1c1159b3d456576af7a3e4d1ba7e6924cb39de8f67111c735f6fc832082774"},
     {file = "PyYAML-6.0.2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:1e2120ef853f59c7419231f3bf4e7021f1b936f6ebd222406c3b60212205d2ee"},
@@ -1703,6 +1815,7 @@ files = [
 name = "redis"
 version = "2.10.6"
 summary = "Python client for Redis key-value store"
+groups = ["default"]
 files = [
     {file = "redis-2.10.6-py2.py3-none-any.whl", hash = "sha256:8a1900a9f2a0a44ecf6e8b5eb3e967a9909dfed219ad66df094f27f7d6f330fb"},
     {file = "redis-2.10.6.tar.gz", hash = "sha256:a22ca993cea2962dbb588f9f30d0015ac4afcc45bee27d3978c0dbe9e97c6c0f"},
@@ -1713,6 +1826,7 @@ name = "requests"
 version = "2.32.3"
 requires_python = ">=3.8"
 summary = "Python HTTP for Humans."
+groups = ["default", "test", "uitest"]
 dependencies = [
     "certifi>=2017.4.17",
     "charset-normalizer<4,>=2",
@@ -1728,6 +1842,7 @@ files = [
 name = "requests-toolbelt"
 version = "0.8.0"
 summary = "A utility belt for advanced users of python-requests"
+groups = ["test"]
 dependencies = [
     "requests<3.0.0,>=2.0.1",
 ]
@@ -1741,6 +1856,7 @@ name = "responses"
 version = "0.10.12"
 requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 summary = "A utility library for mocking out the `requests` Python library."
+groups = ["test"]
 dependencies = [
     "cookies; python_version < \"3.4\"",
     "mock; python_version < \"3.3\"",
@@ -1757,6 +1873,7 @@ name = "respx"
 version = "0.22.0"
 requires_python = ">=3.8"
 summary = "A utility for mocking out the Python HTTPX and HTTP Core libraries."
+groups = ["test"]
 dependencies = [
     "httpx>=0.25.0",
 ]
@@ -1770,6 +1887,7 @@ name = "rich"
 version = "14.0.0"
 requires_python = ">=3.8.0"
 summary = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
+groups = ["default"]
 dependencies = [
     "markdown-it-py>=2.2.0",
     "pygments<3.0.0,>=2.13.0",
@@ -1785,6 +1903,7 @@ name = "s3transfer"
 version = "0.11.4"
 requires_python = ">=3.8"
 summary = "An Amazon S3 Transfer Manager"
+groups = ["default"]
 dependencies = [
     "botocore<2.0a.0,>=1.37.4",
 ]
@@ -1798,6 +1917,7 @@ name = "sentry-sdk"
 version = "2.25.1"
 requires_python = ">=3.6"
 summary = "Python client for Sentry (https://sentry.io)"
+groups = ["default"]
 dependencies = [
     "certifi",
     "urllib3>=1.26.11",
@@ -1812,6 +1932,7 @@ name = "shellingham"
 version = "1.5.4"
 requires_python = ">=3.7"
 summary = "Tool to Detect Surrounding Shell"
+groups = ["default"]
 files = [
     {file = "shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686"},
     {file = "shellingham-1.5.4.tar.gz", hash = "sha256:8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de"},
@@ -1822,6 +1943,7 @@ name = "six"
 version = "1.17.0"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 summary = "Python 2 and 3 compatibility utilities"
+groups = ["default", "test"]
 files = [
     {file = "six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"},
     {file = "six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"},
@@ -1831,6 +1953,7 @@ files = [
 name = "ska"
 version = "1.10"
 summary = "Sign- and validate- data (dictionaries, strings) using symmetric-key algorithm."
+groups = ["default"]
 files = [
     {file = "ska-1.10-py2.py3-none-any.whl", hash = "sha256:c92194ccaec0eb92b393a8d27a1efb7ab9dd62afadbb489f176a7eb64b351b1a"},
     {file = "ska-1.10.tar.gz", hash = "sha256:7ac0be5d5dde47e60e01d6e375cd3b351280f97d2a49aeb8aac8320a94854e4e"},
@@ -1841,6 +1964,7 @@ name = "sniffio"
 version = "1.3.1"
 requires_python = ">=3.7"
 summary = "Sniff out which async library your code is running under"
+groups = ["default", "test"]
 files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
@@ -1851,6 +1975,7 @@ name = "soupsieve"
 version = "2.6"
 requires_python = ">=3.8"
 summary = "A modern CSS selector implementation for Beautiful Soup."
+groups = ["test"]
 files = [
     {file = "soupsieve-2.6-py3-none-any.whl", hash = "sha256:e72c4ff06e4fb6e4b5a9f0f55fe6e81514581fca1515028625d0f299c602ccc9"},
     {file = "soupsieve-2.6.tar.gz", hash = "sha256:e2e68417777af359ec65daac1057404a3c8a5455bb8abc36f1a9866ab1a51abb"},
@@ -1861,6 +1986,7 @@ name = "sqlparse"
 version = "0.5.3"
 requires_python = ">=3.8"
 summary = "A non-validating SQL parser."
+groups = ["default", "test"]
 files = [
     {file = "sqlparse-0.5.3-py3-none-any.whl", hash = "sha256:cf2196ed3418f3ba5de6af7e82c694a9fbdbfecccdfc72e281548517081f16ca"},
     {file = "sqlparse-0.5.3.tar.gz", hash = "sha256:09f67787f56a0b16ecdbde1bfc7f5d9c3371ca683cfeaa8e6ff60b4807ec9272"},
@@ -1870,6 +1996,8 @@ files = [
 name = "stack-data"
 version = "0.6.3"
 summary = "Extract data from python stack frames and tracebacks for informative displays"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "asttokens>=2.1.0",
     "executing>=1.2.0",
@@ -1884,6 +2012,7 @@ files = [
 name = "standardjson"
 version = "0.3.1"
 summary = "JSON encoder that aims to be fully compliant with specifications ECMA-262 and ECMA-404."
+groups = ["default"]
 files = [
     {file = "standardjson-0.3.1-py2.py3-none-any.whl", hash = "sha256:69e79b090d3f7dd887ae4a9db226ea79cd3fd3d7cfa8491d23ec6b06126e24b0"},
     {file = "standardjson-0.3.1.tar.gz", hash = "sha256:71b7b0a649d5e3bd343a02737e752c054c218242dcaa739abab98086e537fbab"},
@@ -1893,6 +2022,7 @@ files = [
 name = "text-unidecode"
 version = "1.3"
 summary = "The most basic Text::Unidecode port"
+groups = ["uitest"]
 files = [
     {file = "text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
     {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
@@ -1903,6 +2033,7 @@ name = "time-machine"
 version = "2.16.0"
 requires_python = ">=3.9"
 summary = "Travel through time in your tests."
+groups = ["default", "test"]
 dependencies = [
     "python-dateutil",
 ]
@@ -1948,6 +2079,8 @@ name = "traitlets"
 version = "5.14.3"
 requires_python = ">=3.8"
 summary = "Traitlets Python configuration system"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 files = [
     {file = "traitlets-5.14.3-py3-none-any.whl", hash = "sha256:b74e89e397b1ed28cc831db7aea759ba6640cb3de13090ca145426688ff1ac4f"},
     {file = "traitlets-5.14.3.tar.gz", hash = "sha256:9ed0579d3502c94b4b3732ac120375cda96f923114522847de4b3bb98b96b6b7"},
@@ -1958,6 +2091,7 @@ name = "typer"
 version = "0.15.2"
 requires_python = ">=3.7"
 summary = "Typer, build great CLIs. Easy to code. Based on Python type hints."
+groups = ["default"]
 dependencies = [
     "click>=8.0.0",
     "rich>=10.11.0",
@@ -1974,6 +2108,7 @@ name = "types-python-dateutil"
 version = "2.9.0.20241206"
 requires_python = ">=3.8"
 summary = "Typing stubs for python-dateutil"
+groups = ["default"]
 files = [
     {file = "types_python_dateutil-2.9.0.20241206-py3-none-any.whl", hash = "sha256:e248a4bc70a486d3e3ec84d0dc30eec3a5f979d6e7ee4123ae043eedbb987f53"},
     {file = "types_python_dateutil-2.9.0.20241206.tar.gz", hash = "sha256:18f493414c26ffba692a72369fea7a154c502646301ebfe3d56a04b3767284cb"},
@@ -1984,6 +2119,7 @@ name = "typing-extensions"
 version = "4.13.1"
 requires_python = ">=3.8"
 summary = "Backported and Experimental Type Hints for Python 3.8+"
+groups = ["default", "debug", "test", "uitest"]
 files = [
     {file = "typing_extensions-4.13.1-py3-none-any.whl", hash = "sha256:4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69"},
     {file = "typing_extensions-4.13.1.tar.gz", hash = "sha256:98795af00fb9640edec5b8e31fc647597b4691f099ad75f469a2616be1a76dff"},
@@ -1994,6 +2130,7 @@ name = "typing-inspection"
 version = "0.4.0"
 requires_python = ">=3.9"
 summary = "Runtime typing introspection tools"
+groups = ["default"]
 dependencies = [
     "typing-extensions>=4.12.0",
 ]
@@ -2007,6 +2144,7 @@ name = "tzdata"
 version = "2025.2"
 requires_python = ">=2"
 summary = "Provider of IANA time zone data"
+groups = ["default", "test"]
 files = [
     {file = "tzdata-2025.2-py2.py3-none-any.whl", hash = "sha256:1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8"},
     {file = "tzdata-2025.2.tar.gz", hash = "sha256:b60a638fcc0daffadf82fe0f57e53d06bdec2f36c4df66280ae79bce6bd6f2b9"},
@@ -2017,6 +2155,7 @@ name = "urllib3"
 version = "2.3.0"
 requires_python = ">=3.9"
 summary = "HTTP library with thread-safe connection pooling, file post, and more."
+groups = ["default", "test", "uitest"]
 files = [
     {file = "urllib3-2.3.0-py3-none-any.whl", hash = "sha256:1cee9ad369867bfdbbb48b7dd50374c0967a0bb7710050facf0dd6911440e3df"},
     {file = "urllib3-2.3.0.tar.gz", hash = "sha256:f8c5449b3cf0861679ce7e0503c7b44b5ec981bec0d1d3795a07f1ba96f0204d"},
@@ -2027,6 +2166,7 @@ name = "uvicorn"
 version = "0.34.0"
 requires_python = ">=3.9"
 summary = "The lightning-fast ASGI server."
+groups = ["default"]
 dependencies = [
     "click>=7.0",
     "h11>=0.8",
@@ -2043,6 +2183,7 @@ version = "0.34.0"
 extras = ["standard"]
 requires_python = ">=3.9"
 summary = "The lightning-fast ASGI server."
+groups = ["default"]
 dependencies = [
     "colorama>=0.4; sys_platform == \"win32\"",
     "httptools>=0.6.3",
@@ -2063,6 +2204,8 @@ name = "uvloop"
 version = "0.21.0"
 requires_python = ">=3.8.0"
 summary = "Fast implementation of asyncio event loop on top of libuv"
+groups = ["default"]
+marker = "(sys_platform != \"cygwin\" and sys_platform != \"win32\") and platform_python_implementation != \"PyPy\""
 files = [
     {file = "uvloop-0.21.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:c0f3fa6200b3108919f8bdabb9a7f87f20e7097ea3c543754cabc7d717d95cf8"},
     {file = "uvloop-0.21.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:0878c2640cf341b269b7e128b1a5fed890adc4455513ca710d77d5e93aa6d6a0"},
@@ -2090,6 +2233,7 @@ name = "watchfiles"
 version = "1.0.4"
 requires_python = ">=3.9"
 summary = "Simple, modern and high performance file watching and code reload in python."
+groups = ["default"]
 dependencies = [
     "anyio>=3.0.0",
 ]
@@ -2139,6 +2283,8 @@ files = [
 name = "wcwidth"
 version = "0.2.13"
 summary = "Measures the displayed width of unicode strings in a terminal"
+groups = ["debug"]
+marker = "python_version >= \"3.11\""
 dependencies = [
     "backports-functools-lru-cache>=1.2.1; python_version < \"3.2\"",
 ]
@@ -2152,6 +2298,7 @@ name = "websockets"
 version = "15.0.1"
 requires_python = ">=3.9"
 summary = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
+groups = ["default"]
 files = [
     {file = "websockets-15.0.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:823c248b690b2fd9303ba00c4f66cd5e2d8c3ba4aa968b2779be9532a4dad431"},
     {file = "websockets-15.0.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:678999709e68425ae2593acf2e3ebcbcf2e69885a5ee78f9eb80e6e371f1bf57"},
@@ -2195,6 +2342,7 @@ name = "werkzeug"
 version = "3.1.3"
 requires_python = ">=3.9"
 summary = "The comprehensive WSGI web application library."
+groups = ["default"]
 dependencies = [
     "MarkupSafe>=2.1.1",
 ]
@@ -2208,6 +2356,7 @@ name = "whitenoise"
 version = "6.9.0"
 requires_python = ">=3.9"
 summary = "Radically simplified static file serving for WSGI applications"
+groups = ["default"]
 files = [
     {file = "whitenoise-6.9.0-py3-none-any.whl", hash = "sha256:c8a489049b7ee9889617bb4c274a153f3d979e8f51d2efd0f5b403caf41c57df"},
     {file = "whitenoise-6.9.0.tar.gz", hash = "sha256:8c4a7c9d384694990c26f3047e118c691557481d624f069b7f7752a2f735d609"},
@@ -2219,6 +2368,7 @@ version = "6.9.0"
 extras = ["brotli"]
 requires_python = ">=3.9"
 summary = "Radically simplified static file serving for WSGI applications"
+groups = ["default"]
 dependencies = [
     "brotli",
     "whitenoise==6.9.0",
@@ -2233,6 +2383,8 @@ name = "win32-setctime"
 version = "1.2.0"
 requires_python = ">=3.5"
 summary = "A small Python utility to set file creation time on Windows"
+groups = ["default"]
+marker = "sys_platform == \"win32\""
 files = [
     {file = "win32_setctime-1.2.0-py3-none-any.whl", hash = "sha256:95d644c4e708aba81dc3704a116d8cbc974d70b3bdb8be1d150e36be6e9d1390"},
     {file = "win32_setctime-1.2.0.tar.gz", hash = "sha256:ae1fdf948f5640aae05c511ade119313fb6a30d7eabe25fef9764dca5873c4c0"},
