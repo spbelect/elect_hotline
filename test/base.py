@@ -81,7 +81,8 @@ def uvicorn_server():
 
     yield f"http://127.0.0.1:{port}"
 
-    proc.kill()  # Cleanup after test
+    proc.terminate()
+    proc.join()  # blocks until the process terminates
 
 
 @contextmanager
