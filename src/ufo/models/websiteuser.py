@@ -119,6 +119,9 @@ class WebsiteUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     #REQUIRED_FIELDS = ['email']
 
+    async def acountry(self):
+        return await Country.objects.aget(id=self.country_id)
+
     @cached_property
     def tz(self):
         return timezone(timedelta(hours=self.utc_offset))

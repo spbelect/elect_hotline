@@ -45,6 +45,9 @@ class AnonymousUser(django.contrib.auth.models.AnonymousUser):
     def country(self):
         return Country.objects.get(id=self.country_id)
 
+    async def acountry(self):
+        return await Country.objects.aget(id=self.country_id)
+
 
 @sync_and_async_middleware
 def anonymous_user_session(get_response):
