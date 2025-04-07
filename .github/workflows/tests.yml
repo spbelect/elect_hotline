@@ -65,7 +65,7 @@ jobs:
             pdm run python3 manage.py collectstatic --no-input
 
       - name: Run Tests
-        run: pdm run pytest ../test/ --doctest-modules -s -vv --cov=ufo --cov-report=xml
+        run: pdm run pytest ../test/ --doctest-modules -s -vv --cov=ufo --cov-report=xml --cov-config=.coveragerc
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4

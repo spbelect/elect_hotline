@@ -1,7 +1,6 @@
 # this file does not seem to affect anything
 [run]
-omit = *.py
-debug = config
+concurrency = multiprocessing
+parallel = true
+sigterm = true
 
-[report]
-omit = *.py
