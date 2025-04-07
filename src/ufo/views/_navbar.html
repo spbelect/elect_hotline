@@ -4,17 +4,8 @@
         <button tabindex="0" class="btn btn-ghost btn-circle" x-ref=menu
         :class="!body.page_unloading || 'animate-pulse cursor-wait'"
         aria-label="Navigation Menu">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
             </svg>
         </button>
 
@@ -25,11 +16,12 @@
         >
             <li><a href="/"> {{_('Home')}} </a></li>
             <li><a href="/answers/history"> {{_('History')}} </a></li>
+            <li><a href="/answers/stream"> {{_('Stream')}} </a></li>
             <li><a href="/organizations"> {{_('Organizations')}} </a></li>
 
             # for org in user.managed_orgs
                 <li><a href="/organizations/{{org.id}}">
-                {{org.name.capitalize()}}
+                    {{org.name.capitalize()}}
                 </a></li>
             # endfor
 

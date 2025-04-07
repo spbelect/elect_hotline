@@ -52,3 +52,18 @@ ADMIN_EMAIL="someuniquename@gmail.com"
 
 ## Cookies only sent under HTTPS
 # SESSION_COOKIE_SECURE=True
+
+
+UFO_LOGLEVEL=INFO
+#UFO_LOGLEVEL=DEBUG
+
+
+# Used in SSE streaming. Possible values are:
+# views.answers.sse.poll_database
+# views.answers.sse.redis_pubsub (TODO: Not implemented yet)
+# views.answers.sse.postgres_pubsub (TODO: Not implemented yet)
+ANSWERS_SSE_ENGINE=views.answers.sse.poll_database
+
+# When poll_database SSE engine is used, set the delay between
+# the db queries in seconds.
+ANSWERS_SSE_POLL_DB_DELAY=5.0

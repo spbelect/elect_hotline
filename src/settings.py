@@ -381,6 +381,16 @@ SUBMIT_GOOGLE_PROTO = env.bool('SUBMIT_GOOGLE_PROTO', default=False)
 AWS_SECRET_KEY = env('DJANGO_AWS_SECRET_KEY', default='')
 AWS_ACCESS_KEY = env('DJANGO_AWS_ACCESS_KEY', default='')
 
+# Used in SSE streaming. Possible values are:
+# views.answers.sse.poll_database
+# views.answers.sse.redis_pubsub (TODO: Not implemented yet)
+# views.answers.sse.postgres_pubsub (TODO: Not implemented yet)
+ANSWERS_SSE_ENGINE = env('ANSWERS_SSE_ENGINE', default='views.answers.sse.poll_database')
+
+# When poll_database SSE engine is used, set the delay between
+# the db queries in seconds.
+ANSWERS_SSE_POLL_DB_DELAY = env.float('ANSWERS_SSE_POLL_DB_DELAY', default=5.0)
+
 
 from loguru import logger
 import pydantic

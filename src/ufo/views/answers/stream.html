@@ -1,0 +1,156 @@
+{% extends "views/base.html" %}
+
+{% block title %}
+  {{_('Stream')}}
+{% endblock %}
+
+{% block extra_head %}
+  <style>
+  </style>
+
+
+  <script>
+//     document.addEventListener('DOMContentLoaded', function(){
+//         stream.onmessage = (event) => {}
+//     })
+    window.onbeforeunload = function () {
+        window.stream.close();
+    };
+  </script>
+    
+{% endblock %}
+
+{% block header %}
+  {{_('Stream')}}
+{% endblock %}
+
+{% block main %}
+
+<main
+  class="pb-8"
+
+  x-data="{
+    query: {{filters.model_dump_json()}},
+    connected: true,
+    # if answers
+      last_fetched_time: '{{answers[0].time_created.isoformat()}}',
+    # else
+      last_fetched_time: '{{now().isoformat()}}',
+    # endif
+    connect() {
+        // Request answers created after the most recently received answer.
+        window.stream = new EventSource(
+            `/answers/stream/sse?{{request.GET.urlencode()}}&time_created__gt=${encodeURIComponent($data.last_fetched_time)}`
+        );
+
+        stream.addEventListener('answer', function(event) {
+            $refs.answers.insertAdjacentHTML('beforeend', event.data);
+            $data.last_fetched_time = $refs.answers.lastElementChild.dataset.time_created;
+        })
+
+        stream.addEventListener('start', function(event) {
+          $data.connected = true;
+        })
+    }
+  }"
+
+  x-init="() => {
+    connect();
+
+    setInterval(() => {
+      // Possible stream.readyState values:
+      const CONNECTING=0, OPEN=1, CLOSED=2;
+
+      if(connected && window.stream.readyState != OPEN) {
+        // Disconnected. Insert a visual marker to the answers list.
+        $refs.answers.insertAdjacentHTML('beforeend',
+          `<li class='badge m-auto my-4'> ... </li>`
+        );
+      }
+
+      connected = (window.stream.readyState == OPEN);
+
+      if (!connected) {
+        window.stream.close();
+        connect();
+      }
+    }, 5000)
+
+  }"
+>
+
+  <form x-ref="form"
+    class="grid grid-cols-2 gap-x-8 gap-y-4 px-2 lg:px-4 mb-4"
+    @change.debounce="$el.submit()"
+    @keyup.enter.debounce="$el.submit()"
+  >
+
+      <fieldset class="text-center col-span-2 align-middle">
+
+        <script src="https://cdn.jsdelivr.net/npm/choices.js@11.0.2/public/assets/scripts/choices.min.js"></script>
+
+        <select multiple
+          name="region_id__in"
+          x-init="$el.choices = new Choices($el, {removeItemButton: true})"
+          class="select hidden w-full max-w-xs"
+        >
+            <option placeholder>{{_('Region: all')}}</option>
+
+            # for region in regions.annotate(num_answers=Count('answer')).filter(num_answers__gte=1)
+                <option value="{{region.id}}"
+                  {{ 'selected' if region.id in (filters.region_id__in or []) else '' }}
+                >
+                    {{region.name}}
+                    {{region.num_answers or ''}}
+                </option>
+            # endfor
+        </select>
+
+      </fieldset>
+
+<!--
+      <fieldset aria-label="Complaint Filter"
+        class="col-span-2 flex text-center flex-wrap md:flex-nowrap m-auto items-center align-middle"
+      >
+
+        <span class="px-2 text-center w-full md:w-auto">{{_('Complaint')}}</span>
+
+        <div class="join flex items-center justify-center md:w-auto w-full">
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="no"
+            aria-label="{{_('No')}}" name="complaint" />
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="any"
+            aria-label="{{_('Any')}}" name="complaint" />
+          <input class="btn join-item btn-xs" type="radio" x-model="query.complaint" value="yes"
+            aria-label="{{_('Yes')}}" name="complaint" />
+        </div>
+
+      </fieldset>-->
+
+  </form>
+
+  <!--<span x-show="waiting" class="loading loading-spinner loading-md text-primary block mx-auto mb-10 mt-6"></span>-->
+
+  <div id="total" x-sync x-show="false" class="px-2 text-center lg:px-4 py-2" >
+      {{_('No answers with given filter')}}
+  </div>
+
+  <ul x-ref="answers" class="px-2 lg:px-4 text-center" >
+    # for answer in answers|reverse
+        {% include "views/answers/_answer.html" %}
+    # endfor
+  </ul>
+
+  <div x-show="!connected"
+    class="badge badge-outline badge-error flex m-auto my-4">
+    <span class="loading loading-spinner loading-xs"></span>
+    Reconnecting
+  </div>
+
+  <div x-show="connected"
+    class="badge badge-outline badge-success flex m-auto my-4">
+    Connected. Waiting for new answers
+  </div>
+
+</main>
+
+{% endblock %}

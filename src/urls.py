@@ -22,6 +22,7 @@ import ufo.mobile_api_v4.answers
 
 # Ninja html views
 import ufo.views.answers.history
+import ufo.views.answers.stream
 import ufo.views.auth.login
 import ufo.views.auth.logout
 import ufo.views.auth.google

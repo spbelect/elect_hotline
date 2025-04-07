@@ -6,7 +6,25 @@ SRC_DIR = environ.Path(__file__) - 1  # src/
 env.read_env(SRC_DIR('env-localtest'))  # overrides env-local
 
 from settings import *
-#from utils.basic import update
+
+# Simple guard that we are using test database
+assert 'test' in DATABASES['default']["NAME"]
+
+DATABASES['default'].update({
+    "TEST": {
+        # Set the test database name explicitly. Otherwise django will
+        # prepend "test_" to the name. Some tests use external live uvicorn
+        # server which will fail to connect to the database, because it
+        # uses DATABASES['default']["NAME"] without "test_" prefix.
+        "NAME": DATABASES['default']["NAME"]
+    },
+})
+
+ANSWERS_SSE_ENGINE = 'views.answers.sse.poll_database'
+
+# Speed up sse polling
+ANSWERS_SSE_POLL_DB_DELAY = 0.1
+
 
 RAISE_404 = True
 

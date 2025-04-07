@@ -33,8 +33,6 @@ class Exclude(list):
         return True
 
 
-# class TimeFilters(FilterSchema):
-
 class Filters(FilterSchema):
     """
     >>> Filters(date__gt='2018-11-13', time__gt='08:00').get_filter_expression()
