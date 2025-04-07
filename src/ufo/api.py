@@ -1,25 +1,23 @@
 import logging
 
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 # from loguru import logger
 import django.http
 import ninja.errors
+import ninja.renderers
 import pydantic
 import sentry_sdk
 # from ninja import Router
 from ninja import NinjaAPI, Redoc
-# from ninja.renderers import BaseRenderer
 
 
-# class TemplateRenderer(BaseRenderer):
-#     media_type = "text/html"
-#
-#     def render(self, request: HttpRequest, data: Any, *, response_status: int) -> Any:
-#         return django.shortcuts.render(request, f'http_error.html', data)
-
+###
+### Mobile app api
+###
 
 v4 = NinjaAPI(
     urls_namespace='v4',
@@ -29,8 +27,20 @@ v4 = NinjaAPI(
     # docs=Redoc()
 )
 
-# api = NinjaAPI(renderer=TemplateRenderer())
-html = NinjaAPI(urls_namespace='html')
+
+###
+### HTML frontend api
+###
+
+class StringToHttpResponse(ninja.renderers.BaseRenderer):
+    """ When the view returns a string, convert it to HttpResponse. """
+    media_type = "text/html"
+
+    def render(self, request, data: str, *, response_status: int) -> HttpResponse:
+        return HttpResponse(data)
+
+
+html = NinjaAPI(urls_namespace='html', renderer=StringToHttpResponse())
 
 
 @html.exception_handler(ninja.errors.ValidationError)
