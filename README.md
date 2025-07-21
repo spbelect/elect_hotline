@@ -4,7 +4,7 @@
 
 Elect-hotline is a web server that receives data from [Paradox](https://github.com/spbelect/paradox) android app. It has a web frontend to browse answers history, and organizations registry for teams assisting election observers.
 
-Production website that follows stable branch: https://vybory.live
+Production website that follows stable branch: https://elect-hotline.vercel.app/
 
 
 # Installation
