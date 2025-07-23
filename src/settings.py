@@ -360,8 +360,11 @@ DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
 EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
 
 #EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+#EMAIL_BACKEND = "anymail.backends.brevo.EmailBackend"
+
 ANYMAIL = {
     "SENDGRID_API_KEY": env.str('SENDGRID_API_KEY', default=None),
+    "BREVO_API_KEY": env.str('BREVO_API_KEY', default=None),
 }
 
 ADMIN_EMAIL = env.str('ADMIN_EMAIL')

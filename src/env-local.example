@@ -22,6 +22,13 @@ DJANGO_AWS_ACCESS_KEY=13357357257247
 #SENDGRID_API_KEY="68248246824682468"
 
 
+# If you use brevo to send emails, uncomment following two lines, and
+# set your BREVO_API_KEY variable.
+#
+#EMAIL_BACKEND=anymail.backends.brevo.EmailBackend
+#BREVO_API_KEY="68248246824682468"
+
+
 # Fake sending emails
 # EMAIL_BACKEND=django.core.mail.backends.locmem.EmailBackend
 # EMAIL_BACKEND=anymail.backends.test.EmailBackend
@@ -34,7 +41,8 @@ DJANGO_AWS_ACCESS_KEY=13357357257247
 
 
 # EMAIL_HOST_USER is default email source address
-EMAIL_HOST_USER=noreply@uik.info
+# EMAIL_HOST_USER=noreply@uik.info
+EMAIL_HOST_USER=noreply@vybory.live
 
 
 TIK_EMAIL_MODERATION=1
