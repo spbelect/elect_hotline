@@ -34,13 +34,22 @@ from .. import base
 from ..base import MSK, ru, spb, msk
 
 
+@respx.mock(assert_all_mocked=True)
 @pytest.mark.django_db
-@override_settings(EMAIL_BACKEND='anymail.backends.test.EmailBackend')
-def email_login_success__test(client: django.test.Client, ru):
+@override_settings(
+    EMAIL_BACKEND='anymail.backends.test.EmailBackend',
+    TURNSTILE_SITE_KEY='123'
+)
+def email_login_success__test(client: django.test.Client, ru, respx_mock):
     """ User should succesfully login with email """
 
+    # GIVEN turnstile server that always returns success
+    turnstile_server = respx_mock.post(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+    ).respond(json={'success': True})
+
     # WHEN user submits email login form
-    response = client.post('/auth/login', dict(email='user@example.com'))
+    response = client.post('/auth/login', dict(email='user@example.com', turnstile_token="123"))
 
     # THEN response status is 200 (Success)
     assert response.status_code == 200

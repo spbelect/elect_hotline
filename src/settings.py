@@ -371,6 +371,9 @@ ADMIN_EMAIL = env.str('ADMIN_EMAIL')
 FAKE_TIK_EMAILS = env.bool('FAKE_TIK_EMAILS', default=True)
 TIK_EMAIL_MODERATION = env.bool('TIK_EMAIL_MODERATION', default=True)
 
+TURNSTILE_SITE_KEY = env.str('TURNSTILE_SITE_KEY')
+TURNSTILE_SECRET_KEY = env.str('TURNSTILE_SECRET_KEY', default=None)
+
 ### The 'EMAIL_SUBJECT_PREFIX' is used by django.core.mail.mail_admins()
 ### and django.core.mail.mail_managers()
 ### Guess server urls from 'ALLOWED_HOSTS'

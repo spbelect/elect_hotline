@@ -50,6 +50,9 @@ SEND_TIK_EMAILS=0
 ADMIN_EMAIL="someuniquename@gmail.com"
 
 
+TURNSTILE_SITE_KEY="123"
+TURNSTILE_SECRET_KEY="456"
+
 # Set this to the domain of the server
 #
 #DOMAIN_NAME='uik-info.herokuapp.com'

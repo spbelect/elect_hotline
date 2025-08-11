@@ -25,6 +25,8 @@ ANSWERS_SSE_ENGINE = 'views.answers.sse.poll_database'
 # Speed up sse polling
 ANSWERS_SSE_POLL_DB_DELAY = 0.1
 
+# Disable turnstile - it does not work under playwright
+TURNSTILE_SITE_KEY=""
 
 RAISE_404 = True
 
