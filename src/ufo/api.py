@@ -14,6 +14,7 @@ import sentry_sdk
 # from ninja import Router
 from ninja import NinjaAPI, Redoc
 
+from . import errors
 
 ###
 ### Mobile app api
@@ -96,10 +97,29 @@ def pydantic_validation_errors(request, exc: pydantic.ValidationError):
     )
 
 
+@html.exception_handler(errors.HumanVerificationError)
+def exc_error(request, exc: errors.HumanVerificationError):
+    """
+    Exception raised during turnstile human verification. Return HTTP status 422.
+    """
+    sentry_sdk.capture_exception(exc)
+
+    if settings.DEBUG:
+        logging.exception(exc)
+    else:
+        logging.debug(exc)
+    return render(
+        request,
+        "views/http_error.html",
+        {'error': exc},
+        status=422
+    )
+
+
 @html.exception_handler(Exception)
 def exc_error(request, exc: Exception):
     """
-    Exception raised in a view.
+    Exception raised in a view. Return page with message and HTTP status 500.
     """
     sentry_sdk.capture_exception(exc)
 

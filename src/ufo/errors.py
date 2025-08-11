@@ -1,0 +1,3 @@
+
+class HumanVerificationError(Exception):
+    pass
