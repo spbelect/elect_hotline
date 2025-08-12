@@ -35,6 +35,17 @@ def email_check(app_configs, **kwargs):
     return messages
 
 
+@checks.register("settings")
+def settings_check(app_configs, **kwargs):
+    messages = []
+
+    if not settings.TURNSTILE_SITE_KEY:
+        messages.append(checks.Warning(
+            f'TURNSTILE_SITE_KEY env variable is invalid',
+            id="Ufo.settings.TURNSTILE_SITE_KEY.invalid"
+        ))
+    return messages
+
 
 @checks.register('settings')
 def debug_check(app_configs, **kwargs):
