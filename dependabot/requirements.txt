@@ -249,9 +249,6 @@ django-admin-sortable2==2.2.6 \
 django-anymail[mailgun,sendgrid]==13.0 \
     --hash=sha256:6da4465eff18f679955f74332501a3a4299e34079015d91e1fce9c049d784d6c \
     --hash=sha256:87f42d9ff12a9a029d5e88edaaf62a4b880aa9a6a7ef937042b7e96579e6db07
-django-appconf==1.1.0 \
-    --hash=sha256:7abd5a163ff57557f216e84d3ce9dac36c37ffce1ab9a044d3d53b7c943dd10f \
-    --hash=sha256:9fcead372f82a0f21ee189434e7ae9c007cbb29af1118c18251720f3d06243e4
 django-debug-toolbar==5.1.0 \
     --hash=sha256:8a3b9da4aeab8d384a366e20304bd939a451f0242523c5b7b402248ad474eed2 \
     --hash=sha256:c0591e338ee9603bdfce5aebf8d18ca7341fdbb69595e2b0b34869be5857180e
@@ -281,9 +278,6 @@ django-prometheus==2.3.1 \
 django-pydantic-field==0.3.12 \
     --hash=sha256:510af19d2813c32a2529234a70eb6b6bd8e75fcc4f53baee520f797cba3420d0 \
     --hash=sha256:57aeb055583e7ae82732cfaa36afd01166c7000a67502a9922dca1ce9b3e76a5
-django-select2==8.4.0 \
-    --hash=sha256:25eb56a6c024750898ea45cb90d24164c42b85c4673f5052612ce39042d81151 \
-    --hash=sha256:769429f4300db9a24d029e2e2f90fceb825eef6c012d772af90d12a318fb2438
 djangorestframework==3.16.0 \
     --hash=sha256:bea7e9f6b96a8584c5224bfb2e4348dfb3f8b5e34edbecb98da258e892089361 \
     --hash=sha256:f022ff46613584de994c0c6a4aebbace5fd700555fbe9d33b865ebf173eba6c9

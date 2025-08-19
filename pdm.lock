@@ -5,7 +5,7 @@
 groups = ["default", "debug", "test", "translate", "uitest"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:ce631d8671813df20671817b7b274f6f70a7112d4c0c81c6c2e9355018b37bcc"
+content_hash = "sha256:1a9b4afb429ef451042a8988cbc43010dc43cf9be60a00861fdafb9a09479b8a"
 
 [[metadata.targets]]
 requires_python = ">=3.11"
@@ -558,20 +558,6 @@ files = [
 ]
 
 [[package]]
-name = "django-appconf"
-version = "1.1.0"
-requires_python = ">=3.9"
-summary = "A helper class for handling configuration defaults of packaged apps gracefully."
-groups = ["default"]
-dependencies = [
-    "django",
-]
-files = [
-    {file = "django-appconf-1.1.0.tar.gz", hash = "sha256:9fcead372f82a0f21ee189434e7ae9c007cbb29af1118c18251720f3d06243e4"},
-    {file = "django_appconf-1.1.0-py3-none-any.whl", hash = "sha256:7abd5a163ff57557f216e84d3ce9dac36c37ffce1ab9a044d3d53b7c943dd10f"},
-]
-
-[[package]]
 name = "django-debug-toolbar"
 version = "5.1.0"
 requires_python = ">=3.9"
@@ -706,21 +692,6 @@ dependencies = [
 files = [
     {file = "django_pydantic_field-0.3.12-py3-none-any.whl", hash = "sha256:57aeb055583e7ae82732cfaa36afd01166c7000a67502a9922dca1ce9b3e76a5"},
     {file = "django_pydantic_field-0.3.12.tar.gz", hash = "sha256:510af19d2813c32a2529234a70eb6b6bd8e75fcc4f53baee520f797cba3420d0"},
-]
-
-[[package]]
-name = "django-select2"
-version = "8.4.0"
-requires_python = ">=3.10"
-summary = "This is a Django_ integration of Select2_."
-groups = ["default"]
-dependencies = [
-    "django-appconf>=0.6.0",
-    "django>=4.2",
-]
-files = [
-    {file = "django_select2-8.4.0-py3-none-any.whl", hash = "sha256:769429f4300db9a24d029e2e2f90fceb825eef6c012d772af90d12a318fb2438"},
-    {file = "django_select2-8.4.0.tar.gz", hash = "sha256:25eb56a6c024750898ea45cb90d24164c42b85c4673f5052612ce39042d81151"},
 ]
 
 [[package]]

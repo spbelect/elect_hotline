@@ -28,7 +28,6 @@ dependencies = [
     "whitenoise[brotli]>=6.7.0",
     "Werkzeug",
     "typing-extensions",
-    "django-select2",
     "django-anymail[mailgun,sendgrid]",
     "pendulum",
     "jinja2",

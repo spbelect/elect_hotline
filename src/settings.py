@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
     'adminsortable2',
     'django_extensions',
-    'django_select2',
+    # 'django_select2',
     'django_jsonform',
     # 'django_jinja',
     # 'webpack_loader',
