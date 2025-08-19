@@ -29,6 +29,14 @@ DJANGO_AWS_ACCESS_KEY=13357357257247
 #BREVO_API_KEY="68248246824682468"
 
 
+# If you use Amazon Simple Email Service to send emails, uncomment following two
+# lines, and set your secret and access key variables.
+#
+#EMAIL_BACKEND=anymail.backends.amazon_ses.EmailBackend
+#AWS_SECRET_KEY_FOR_ANYMAIL_SES=14124124
+#AWS_ACCESS_KEY_FOR_ANYMAIL_SES=2747
+
+
 # Fake sending emails
 # EMAIL_BACKEND=django.core.mail.backends.locmem.EmailBackend
 # EMAIL_BACKEND=anymail.backends.test.EmailBackend

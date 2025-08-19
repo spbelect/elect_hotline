@@ -365,7 +365,20 @@ EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='django.core.mail.backends.smtp
 ANYMAIL = {
     "SENDGRID_API_KEY": env.str('SENDGRID_API_KEY', default=None),
     "BREVO_API_KEY": env.str('BREVO_API_KEY', default=None),
+
+    "AMAZON_SES_CLIENT_PARAMS": {
+        # example: override normal Boto credentials specifically for Anymail
+        "aws_access_key_id": env.str("AWS_ACCESS_KEY_FOR_ANYMAIL_SES", default=None),
+        "aws_secret_access_key": env.str("AWS_SECRET_KEY_FOR_ANYMAIL_SES", default=None),
+        "region_name": "us-east-1",
+        # override other default options
+        "config": {
+            "connect_timeout": 30,
+            "read_timeout": 30,
+        }
+    },
 }
+
 
 ADMIN_EMAIL = env.str('ADMIN_EMAIL')
 FAKE_TIK_EMAILS = env.bool('FAKE_TIK_EMAILS', default=True)
