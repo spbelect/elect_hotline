@@ -1,3 +1,4 @@
+# This workflow runs on push to stable branch and deploys to vercel production environment.
 name: vercel-stable
 
 on:
@@ -16,6 +17,7 @@ concurrency:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # Call ./tests.yml workflow
   tests_job:
     uses: ./.github/workflows/tests.yml
 

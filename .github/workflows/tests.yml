@@ -1,7 +1,11 @@
+# This workflow is reused in other workflows
 name: Tests
 
 on:
+  # Allow call from other workflows
   workflow_call:
+
+  # Allow manual start on github page
   workflow_dispatch:
 
 
