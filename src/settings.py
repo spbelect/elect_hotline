@@ -387,9 +387,10 @@ TIK_EMAIL_MODERATION = env.bool('TIK_EMAIL_MODERATION', default=True)
 TURNSTILE_SITE_KEY = env.str('TURNSTILE_SITE_KEY', default=None)
 TURNSTILE_SECRET_KEY = env.str('TURNSTILE_SECRET_KEY', default=None)
 
-### The 'EMAIL_SUBJECT_PREFIX' is used by django.core.mail.mail_admins()
-### and django.core.mail.mail_managers()
-### Guess server urls from 'ALLOWED_HOSTS'
+### The `EMAIL_SUBJECT_PREFIX` setting is used by django.core.mail.mail_admins()
+### and django.core.mail.mail_managers().
+### Here we guess server urls from `ALLOWED_HOSTS` and populate `EMAIL_SUBJECT_PREFIX`
+### with these.
 server_urls = ' / '.join(x for x in ALLOWED_HOSTS if x not in ['127.0.0.1', '*'])
 if server_urls:
     EMAIL_SUBJECT_PREFIX = server_urls + ' '
