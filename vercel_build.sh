@@ -1,5 +1,6 @@
 #python -m pip install -U pip
 pip3.12 install pdm
+python3.12 -m pdm config lock.format pylock
 python3.12 -m pdm export --prod > requirements.txt
 pip3.12 install -r requirements.txt
 #pip3.12 install .
