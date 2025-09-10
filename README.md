@@ -13,6 +13,7 @@ Production website that follows stable branch: https://elect-hotline.vercel.app/
 git clone https://github.com/spbelect/elect_hotline.git
 cd elect_hotline
 pipx install pdm
+pdm config lock.format pylock
 pdm install
 cd src
 ```
